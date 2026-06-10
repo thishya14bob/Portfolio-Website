@@ -522,10 +522,16 @@
     font-weight:800;
     font-size:clamp(2.2rem, 7vw, 4.5rem);
     line-height:1.1;
-    transition: color 0.35s ease;
+    letter-spacing:0;
+    word-spacing:0.25em;
+    transition: color 0.35s ease, word-spacing 0.5s cubic-bezier(.22,1,.36,1), letter-spacing 0.5s cubic-bezier(.22,1,.36,1);
     cursor:default;
   }
-  .contact-headline:hover{ color:var(--accent); }
+  .contact-headline:hover{
+    color:var(--accent);
+    word-spacing:-0.05em;
+    letter-spacing:-0.02em;
+  }
 
   .contact-reach{
     margin-top:32px;
