@@ -302,6 +302,27 @@
     background: radial-gradient(circle, rgba(61,124,255,0.5), transparent 70%);
   }
 
+  /* Glass break effect */
+  .glass-crack{
+    position:absolute;
+    inset:0;
+    width:100%; height:100%;
+    z-index:2;
+    pointer-events:none;
+    opacity:0;
+  }
+  .glass-crack path{
+    fill:none;
+    stroke:rgba(26,26,26,0.35);
+    stroke-width:0.15;
+    vector-effect:non-scaling-stroke;
+  }
+  .glass-crack .shard{
+    transform-box:fill-box;
+    transform-origin:50% 50%;
+    transition: transform 0.1s linear;
+  }
+
   .hero-card{
     position:relative;
     z-index:1;
@@ -657,6 +678,17 @@
     <div class="liquid-glass" aria-hidden="true">
       <span></span><span></span><span></span>
     </div>
+    <svg class="glass-crack" id="glassCrack" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+      <g class="shard" data-depth="0.6">
+        <path d="M50,50 L20,10 M50,50 L80,5 M50,50 L8,55 M50,50 L92,60 M50,50 L40,98 M50,50 L65,95"/>
+      </g>
+      <g class="shard" data-depth="1">
+        <path d="M50,50 L30,30 M50,50 L70,28 M50,50 L25,70 M50,50 L75,72 M50,50 L50,15 M50,50 L50,90"/>
+      </g>
+      <g class="shard" data-depth="1.4">
+        <path d="M20,10 L8,55 M80,5 L92,60 M40,98 L65,95 M30,30 L25,70 M70,28 L75,72"/>
+      </g>
+    </svg>
     <div class="hero-card" id="heroCard">
       <h1 class="hero-headline">
         <span class="static-line">ALRIGHT.</span>
@@ -813,6 +845,33 @@
       setTimeout(() => current.classList.remove('exit'), 600);
       heroIndex = next;
     }, 2200);
+
+    /* ============================= */
+    /* GLASS BREAK ON SCROLL          */
+    /* ============================= */
+    const heroSection = document.getElementById('hero');
+    const glassCrack = document.getElementById('glassCrack');
+    const heroCardEl = document.getElementById('heroCard');
+    const shards = glassCrack.querySelectorAll('.shard');
+
+    function updateGlassBreak(){
+      const heroHeight = heroSection.offsetHeight;
+      const progress = Math.min(Math.max(window.scrollY / heroHeight, 0), 1);
+
+      glassCrack.style.opacity = progress;
+      shards.forEach(shard => {
+        const depth = parseFloat(shard.dataset.depth);
+        const shift = progress * 6 * depth;
+        const rotate = progress * 1.5 * depth;
+        shard.style.transform = `translate(${shift}px, ${shift * 0.6}px) rotate(${rotate}deg)`;
+      });
+
+      heroCardEl.style.opacity = 1 - progress * 0.8;
+      heroCardEl.style.filter = `blur(${progress * 4}px)`;
+    }
+
+    window.addEventListener('scroll', updateGlassBreak, { passive: true });
+    updateGlassBreak();
 
     /* ============================= */
     /* NAV SCROLL STATE               */
