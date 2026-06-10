@@ -133,8 +133,8 @@
   .logo{
     font-family:var(--display);
     font-weight:800;
-    font-size:1.2rem;
-    letter-spacing:0.04em;
+    font-size:0.95rem;
+    letter-spacing:0.06em;
   }
   nav ul{
     list-style:none;
@@ -237,14 +237,63 @@
     align-items:center;
     justify-content:center;
     padding-top:0;
+    position:relative;
+    overflow:hidden;
     background-image:
       radial-gradient(circle, var(--border) 1px, transparent 1px);
     background-size: 28px 28px;
     background-position: center;
   }
 
+  /* Liquid glass background */
+  .liquid-glass{
+    position:absolute;
+    inset:0;
+    z-index:0;
+    pointer-events:none;
+    overflow:hidden;
+  }
+  .liquid-glass span{
+    position:absolute;
+    border-radius:50%;
+    filter: blur(70px);
+    opacity:0.35;
+    mix-blend-mode:multiply;
+  }
+  .liquid-glass span:nth-child(1){
+    width:420px; height:420px;
+    background: radial-gradient(circle, rgba(7,77,224,0.18), transparent 70%);
+    top:-120px; left:-100px;
+    animation: drift1 22s ease-in-out infinite;
+  }
+  .liquid-glass span:nth-child(2){
+    width:360px; height:360px;
+    background: radial-gradient(circle, rgba(255,255,255,0.9), transparent 70%);
+    bottom:-100px; right:5%;
+    animation: drift2 26s ease-in-out infinite;
+  }
+  .liquid-glass span:nth-child(3){
+    width:300px; height:300px;
+    background: radial-gradient(circle, rgba(7,77,224,0.1), transparent 70%);
+    top:30%; right:15%;
+    animation: drift3 30s ease-in-out infinite;
+  }
+  @keyframes drift1{
+    0%,100%{ transform:translate(0,0) scale(1); }
+    50%{ transform:translate(80px,60px) scale(1.15); }
+  }
+  @keyframes drift2{
+    0%,100%{ transform:translate(0,0) scale(1); }
+    50%{ transform:translate(-60px,-50px) scale(1.1); }
+  }
+  @keyframes drift3{
+    0%,100%{ transform:translate(0,0) scale(1); }
+    50%{ transform:translate(-40px,70px) scale(1.2); }
+  }
+
   .hero-card{
     position:relative;
+    z-index:1;
     width:min(1100px, 92vw);
     padding:24px;
     text-align:center;
@@ -269,6 +318,7 @@
     position:relative;
     height:1.1em;
     overflow:hidden;
+    margin-top:0.2em;
   }
 
   .hero-cycle .word{
@@ -293,29 +343,6 @@
     font-size:1rem;
     color:var(--muted);
     line-height:1.6;
-  }
-
-  .scroll-badge{
-    position:absolute;
-    bottom:-70px;
-    left:50%;
-    transform:translateX(-50%);
-    width:120px; height:120px;
-    pointer-events:none;
-  }
-  .scroll-badge svg{
-    width:100%; height:100%;
-    animation: spin 14s linear infinite;
-  }
-  .scroll-badge text{
-    font-family:var(--body);
-    font-weight:500;
-    font-size:9.5px;
-    letter-spacing:2px;
-    fill:var(--muted);
-  }
-  @keyframes spin{
-    to{ transform:rotate(360deg); }
   }
 
   /* ============================= */
@@ -568,7 +595,7 @@
   <!-- NAVIGATION                     -->
   <!-- ============================= -->
   <header id="header">
-    <a href="#hero" class="logo">MT</a>
+    <a href="#hero" class="logo">MANNUR THISHYA</a>
     <nav>
       <ul>
         <li><a href="#work">Work</a></li>
@@ -594,29 +621,21 @@
   <!-- HERO                           -->
   <!-- ============================= -->
   <section id="hero">
+    <div class="liquid-glass" aria-hidden="true">
+      <span></span><span></span><span></span>
+    </div>
     <div class="hero-card" id="heroCard">
       <h1 class="hero-headline">
         <span class="static-line">ALRIGHT.</span>
+        <span class="static-line">KEEP SCROLLING.</span>
         <span class="hero-cycle" id="heroCycle">
-          <span class="word active">KEEP SCROLLING.</span>
-          <span class="word">USER EXPERIENCE.</span>
+          <span class="word active">USER EXPERIENCE.</span>
           <span class="word">USER INTERFACE.</span>
           <span class="word">INTERACTION DESIGN.</span>
           <span class="word">PRODUCT THINKING.</span>
         </span>
       </h1>
-      <p class="hero-sub">Mannur Thishya — Interaction Designer<br>building products, identities and experiences.</p>
-
-      <div class="scroll-badge">
-        <svg viewBox="0 0 100 100">
-          <defs>
-            <path id="circlePath" d="M 50,50 m -38,0 a 38,38 0 1,1 76,0 a 38,38 0 1,1 -76,0"/>
-          </defs>
-          <text>
-            <textPath href="#circlePath">SCROLL · SCROLL · SCROLL ·</textPath>
-          </text>
-        </svg>
-      </div>
+      <p class="hero-sub">Hi! I'm Thishya,<br>building products, identities and experiences.</p>
     </div>
   </section>
 
@@ -626,7 +645,7 @@
   <section id="about">
     <div class="about-grid">
       <div class="about-left reveal">
-        <h2 class="about-statement">"Design is how something works. Not how it looks."</h2>
+        <h2 class="about-statement">"If you think about it... every great interface is just a really good lie about how simple things are."</h2>
         <p class="about-aside">— or at least, that's what I tell myself.</p>
       </div>
       <div class="about-bio reveal">
