@@ -75,12 +75,6 @@
     background:rgba(7,77,224,0.08);
     border:1.5px solid var(--accent);
   }
-  .cursor-dot.hover-fill{
-    width:60px; height:60px;
-    background:var(--accent);
-    border:1.5px solid var(--accent);
-    mix-blend-mode:normal;
-  }
 
   @media (max-width: 860px){
     body{ cursor:auto; }
@@ -363,6 +357,10 @@
 
   .hero-headline .static-line{
     display:block;
+    transition: filter 0.4s ease;
+  }
+  .hero-headline .static-line:hover{
+    filter: url(#water-distort);
   }
 
   .hero-cycle{
@@ -385,7 +383,10 @@
     color:var(--accent);
     opacity:0;
     transform:translateY(40%);
-    transition: opacity 0.5s cubic-bezier(.22,1,.36,1), transform 0.6s cubic-bezier(.22,1,.36,1);
+    transition: opacity 0.5s cubic-bezier(.22,1,.36,1), transform 0.6s cubic-bezier(.22,1,.36,1), filter 0.4s ease;
+  }
+  .hero-cycle .word:hover{
+    filter: url(#water-distort);
   }
   .hero-cycle .word.active{
     opacity:1;
@@ -698,6 +699,14 @@
   <!-- HERO                           -->
   <!-- ============================= -->
   <section id="hero">
+    <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+      <filter id="water-distort">
+        <feTurbulence type="turbulence" numOctaves="2" seed="3" result="noise">
+          <animate attributeName="baseFrequency" dur="6s" values="0.01 0.04;0.02 0.07;0.01 0.04" repeatCount="indefinite"/>
+        </feTurbulence>
+        <feDisplacementMap in="SourceGraphic" in2="noise" scale="14" xChannelSelector="R" yChannelSelector="G"/>
+      </filter>
+    </svg>
     <div class="liquid-glass" aria-hidden="true">
       <span></span><span></span><span></span>
     </div>
@@ -987,11 +996,6 @@
       document.querySelectorAll(interactiveSelector).forEach(el => {
         el.addEventListener('mouseenter', () => cursorDot.classList.add('hover'));
         el.addEventListener('mouseleave', () => cursorDot.classList.remove('hover'));
-      });
-
-      document.querySelectorAll('.hero-headline .static-line').forEach(el => {
-        el.addEventListener('mouseenter', () => cursorDot.classList.add('hover-fill'));
-        el.addEventListener('mouseleave', () => cursorDot.classList.remove('hover-fill'));
       });
 
       /* Pixel scatter on hero */
