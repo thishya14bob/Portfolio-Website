@@ -75,6 +75,12 @@
     background:rgba(7,77,224,0.08);
     border:1.5px solid var(--accent);
   }
+  .cursor-dot.hover-fill{
+    width:60px; height:60px;
+    background:var(--accent);
+    border:1.5px solid var(--accent);
+    mix-blend-mode:normal;
+  }
 
   @media (max-width: 860px){
     body{ cursor:auto; }
@@ -228,8 +234,9 @@
     position:relative;
     overflow:hidden;
     background-image:
-      radial-gradient(circle, var(--border) 1px, transparent 1px);
-    background-size: 28px 28px;
+      radial-gradient(circle, var(--border) 1px, transparent 1px),
+      linear-gradient(160deg, #f7f7f5 0%, var(--bg) 45%, #ececea 100%);
+    background-size: 28px 28px, 100% 100%;
     background-position: center;
   }
 
@@ -980,6 +987,11 @@
       document.querySelectorAll(interactiveSelector).forEach(el => {
         el.addEventListener('mouseenter', () => cursorDot.classList.add('hover'));
         el.addEventListener('mouseleave', () => cursorDot.classList.remove('hover'));
+      });
+
+      document.querySelectorAll('.hero-headline .static-line').forEach(el => {
+        el.addEventListener('mouseenter', () => cursorDot.classList.add('hover-fill'));
+        el.addEventListener('mouseleave', () => cursorDot.classList.remove('hover-fill'));
       });
 
       /* Pixel scatter on hero */
