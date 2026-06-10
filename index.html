@@ -245,14 +245,8 @@
 
   .hero-card{
     position:relative;
-    width:min(720px, 90vw);
-    padding:64px 48px;
-    border-radius:24px;
-    background:rgba(255,255,255,0.35);
-    border:1px solid rgba(255,255,255,0.6);
-    backdrop-filter: blur(18px);
-    -webkit-backdrop-filter: blur(18px);
-    box-shadow: 0 20px 60px rgba(0,0,0,0.06);
+    width:min(1100px, 92vw);
+    padding:24px;
     text-align:center;
     overflow:hidden;
   }
@@ -260,21 +254,50 @@
   .hero-headline{
     font-family:var(--display);
     font-weight:800;
-    font-size:clamp(2.6rem, 8vw, 5.2rem);
+    font-size:clamp(3rem, 10vw, 7.5rem);
     line-height:1.05;
-    letter-spacing:-0.01em;
+    letter-spacing:-0.02em;
+    color:var(--text);
+  }
+
+  .hero-headline .static-line{
+    display:block;
+  }
+
+  .hero-cycle{
+    display:block;
+    position:relative;
+    height:1.1em;
+    overflow:hidden;
+  }
+
+  .hero-cycle .word{
+    position:absolute;
+    inset:0;
+    color:var(--accent);
+    opacity:0;
+    transform:translateY(40%);
+    transition: opacity 0.5s cubic-bezier(.22,1,.36,1), transform 0.6s cubic-bezier(.22,1,.36,1);
+  }
+  .hero-cycle .word.active{
+    opacity:1;
+    transform:translateY(0);
+  }
+  .hero-cycle .word.exit{
+    opacity:0;
+    transform:translateY(-40%);
   }
 
   .hero-sub{
-    margin-top:24px;
-    font-size:0.95rem;
+    margin-top:32px;
+    font-size:1rem;
     color:var(--muted);
     line-height:1.6;
   }
 
   .scroll-badge{
     position:absolute;
-    bottom:-90px;
+    bottom:-70px;
     left:50%;
     transform:translateX(-50%);
     width:120px; height:120px;
@@ -572,7 +595,16 @@
   <!-- ============================= -->
   <section id="hero">
     <div class="hero-card" id="heroCard">
-      <h1 class="hero-headline">ALRIGHT.<br>KEEP SCROLLING.</h1>
+      <h1 class="hero-headline">
+        <span class="static-line">ALRIGHT.</span>
+        <span class="hero-cycle" id="heroCycle">
+          <span class="word active">KEEP SCROLLING.</span>
+          <span class="word">USER EXPERIENCE.</span>
+          <span class="word">USER INTERFACE.</span>
+          <span class="word">INTERACTION DESIGN.</span>
+          <span class="word">PRODUCT THINKING.</span>
+        </span>
+      </h1>
       <p class="hero-sub">Mannur Thishya — Interaction Designer<br>building products, identities and experiences.</p>
 
       <div class="scroll-badge">
@@ -584,6 +616,27 @@
             <textPath href="#circlePath">SCROLL · SCROLL · SCROLL ·</textPath>
           </text>
         </svg>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================= -->
+  <!-- ABOUT                          -->
+  <!-- ============================= -->
+  <section id="about">
+    <div class="about-grid">
+      <div class="about-left reveal">
+        <h2 class="about-statement">"Design is how something works. Not how it looks."</h2>
+        <p class="about-aside">— or at least, that's what I tell myself.</p>
+      </div>
+      <div class="about-bio reveal">
+        <p>Hi, I'm Mannur — an Interaction Designer who believes the best interfaces are the ones people don't have to think about.</p>
+        <p>I obsess over the gap between what users expect and what they actually experience. Turning that gap into something seamless — that's the work.</p>
+        <p>Currently open to select projects and collaborations.</p>
+        <div class="about-buttons">
+          <a href="#contact" class="pill">Get In Touch</a>
+          <a href="#" class="pill">View Resume</a>
+        </div>
       </div>
     </div>
   </section>
@@ -623,27 +676,6 @@
         </div>
       </a>
 
-    </div>
-  </section>
-
-  <!-- ============================= -->
-  <!-- ABOUT                          -->
-  <!-- ============================= -->
-  <section id="about">
-    <div class="about-grid">
-      <div class="about-left reveal">
-        <h2 class="about-statement">"Design is how something works. Not how it looks."</h2>
-        <p class="about-aside">— or at least, that's what I tell myself.</p>
-      </div>
-      <div class="about-bio reveal">
-        <p>Hi, I'm Mannur — an Interaction Designer who believes the best interfaces are the ones people don't have to think about.</p>
-        <p>I obsess over the gap between what users expect and what they actually experience. Turning that gap into something seamless — that's the work.</p>
-        <p>Currently open to select projects and collaborations.</p>
-        <div class="about-buttons">
-          <a href="#contact" class="pill">Get In Touch</a>
-          <a href="#" class="pill">View Resume</a>
-        </div>
-      </div>
     </div>
   </section>
 
@@ -714,6 +746,21 @@
         setTimeout(() => loader.remove(), 1000);
       }, 1500);
     });
+
+    /* ============================= */
+    /* HERO WORD CYCLE                */
+    /* ============================= */
+    const heroWords = document.querySelectorAll('#heroCycle .word');
+    let heroIndex = 0;
+    setInterval(() => {
+      const current = heroWords[heroIndex];
+      const next = (heroIndex + 1) % heroWords.length;
+      current.classList.remove('active');
+      current.classList.add('exit');
+      heroWords[next].classList.add('active');
+      setTimeout(() => current.classList.remove('exit'), 600);
+      heroIndex = next;
+    }, 2200);
 
     /* ============================= */
     /* NAV SCROLL STATE               */
