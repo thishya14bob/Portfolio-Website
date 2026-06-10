@@ -358,17 +358,22 @@
   }
 
   .hero-cycle{
-    display:block;
+    display:flex;
+    align-items:center;
+    justify-content:center;
     position:relative;
-    height:0.75em;
+    height:0.45em;
     overflow:hidden;
-    margin-top:0.4em;
-    font-size:0.5em;
+    margin-top:0.5em;
   }
 
   .hero-cycle .word{
     position:absolute;
     inset:0;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:0.4em;
     color:var(--accent);
     opacity:0;
     transform:translateY(40%);
