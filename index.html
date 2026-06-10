@@ -455,6 +455,81 @@
   }
   .work-card-link:hover .corner-pixels{ opacity:1; }
 
+  /* Biometric case study banner */
+  .work-image--biometric{
+    background:#F3F3F1;
+    justify-content:flex-start;
+    padding:0 6%;
+  }
+  .biometric-banner{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    width:100%;
+    gap:5%;
+  }
+  .biometric-headline{
+    font-family:var(--display);
+    font-weight:800;
+    font-size:clamp(1.1rem, 2.6vw, 2.1rem);
+    line-height:1.2;
+    color:var(--text);
+    opacity:1;
+    text-align:left;
+  }
+  .biometric-headline span{
+    color:var(--accent);
+    opacity:1;
+    font-size:inherit;
+    letter-spacing:normal;
+  }
+  .biometric-device{
+    position:relative;
+    flex-shrink:0;
+    width:38%;
+    max-width:160px;
+    aspect-ratio: 4 / 3;
+  }
+  .biometric-device__top{
+    position:relative;
+    width:100%; height:78%;
+    background:#fff;
+    border:1.5px solid var(--accent);
+    border-radius:10px;
+    box-shadow: 6px 8px 0 -2px rgba(7,77,224,0.08);
+  }
+  .biometric-device__led{
+    position:absolute;
+    top:18%; left:10%;
+    width:18%; height:14%;
+    background: linear-gradient(135deg, #b8f0d8, #5fd8a6);
+    border:1px solid rgba(7,77,224,0.4);
+    border-radius:2px;
+  }
+  .biometric-device__scanner{
+    position:absolute;
+    top:14%; right:8%;
+    width:42%; height:60%;
+    background: linear-gradient(135deg, var(--accent), #1a2e6e);
+    border:1px solid var(--accent-hover);
+    border-radius:6px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:rgba(255,255,255,0.85);
+  }
+  .biometric-device__scanner svg{
+    width:55%; height:55%;
+  }
+  .biometric-device__cable{
+    position:absolute;
+    bottom:-10%; left:8%;
+    width:30%; height:14px;
+    border:1.5px solid var(--accent);
+    border-top:none;
+    border-radius:0 0 8px 8px;
+  }
+
   .work-meta{
     display:flex;
     align-items:center;
@@ -738,17 +813,33 @@
     <h2 class="section-heading reveal">Selected work</h2>
     <div class="work-grid">
 
-      <a href="#" class="work-card-link reveal">
-        <div class="work-image">
-          <span>Case Study Uploading Soon</span>
+      <a href="assets/A UX Case Study on Biometric Verification.pdf" target="_blank" rel="noopener" class="work-card-link reveal">
+        <div class="work-image work-image--biometric">
+          <div class="biometric-banner">
+            <h3 class="biometric-headline">A System<br>That <span>Doesn't</span><br><span>Speak Back?</span></h3>
+            <div class="biometric-device">
+              <div class="biometric-device__top">
+                <div class="biometric-device__led"></div>
+                <div class="biometric-device__scanner">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4">
+                    <path d="M7 12a5 5 0 0 1 10 0v2a5 5 0 0 1-1 3"/>
+                    <path d="M9 12a3 3 0 0 1 6 0v1.5"/>
+                    <path d="M12 12v3a3 3 0 0 1-1 2.2"/>
+                    <path d="M5 9.5A7 7 0 0 1 19 9.5"/>
+                  </svg>
+                </div>
+              </div>
+              <div class="biometric-device__cable"></div>
+            </div>
+          </div>
           <div class="corner-pixels"><i></i><i></i><i></i><i></i></div>
         </div>
         <div class="work-meta">
           <div class="left">
             <span class="work-number">01</span>
-            <span class="work-title">Project Name</span>
+            <span class="work-title">A UX Case Study on Biometric Verification</span>
           </div>
-          <span class="tag">Product Design</span>
+          <span class="tag">UX Research</span>
         </div>
       </a>
 
