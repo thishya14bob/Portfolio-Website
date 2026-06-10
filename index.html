@@ -1,0 +1,833 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mannur Thishya — Interaction Designer</title>
+
+<!-- Fonts -->
+<link rel="preconnect" href="https://api.fontshare.com">
+<link href="https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@800&display=swap" rel="stylesheet">
+<link href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --bg:#F3F3F1;
+    --text:#1A1A1A;
+    --muted:#6F6F73;
+    --border:#D9D9DD;
+    --accent:#074DE0;
+    --accent-hover:#3D7CFF;
+
+    --display: 'Cabinet Grotesk', sans-serif;
+    --body: 'Satoshi', sans-serif;
+  }
+
+  *{ margin:0; padding:0; box-sizing:border-box; }
+
+  html{ scroll-behavior:smooth; }
+
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:var(--body);
+    font-weight:400;
+    overflow-x:hidden;
+    cursor:none;
+  }
+
+  a{ color:inherit; text-decoration:none; }
+
+  ::selection{ background:var(--accent); color:#fff; }
+
+  /* ============================= */
+  /* PAGE LOAD OVERLAY              */
+  /* ============================= */
+  #loader{
+    position:fixed; inset:0;
+    background:#1A1A1A;
+    z-index:9999;
+    display:flex; align-items:center; justify-content:center;
+    transition: transform 0.9s cubic-bezier(.76,0,.24,1);
+  }
+  #loader span{
+    font-family:var(--display);
+    font-weight:800;
+    color:#fff;
+    font-size:clamp(1.5rem, 5vw, 3rem);
+    letter-spacing:0.08em;
+    opacity:0;
+    transform:translateY(16px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  #loader.show-text span{
+    opacity:1;
+    transform:translateY(0);
+  }
+  #loader.slide-up{
+    transform:translateY(-100%);
+  }
+
+  /* ============================= */
+  /* CUSTOM CURSOR                  */
+  /* ============================= */
+  .cursor-dot{
+    position:fixed;
+    top:0; left:0;
+    width:8px; height:8px;
+    border-radius:50%;
+    background:var(--text);
+    pointer-events:none;
+    z-index:9000;
+    transform:translate(-50%,-50%);
+    transition: width 0.25s ease, height 0.25s ease, background 0.25s ease, border 0.25s ease;
+    will-change: transform;
+  }
+  .cursor-dot.hover{
+    width:44px; height:44px;
+    background:rgba(7,77,224,0.08);
+    border:1.5px solid var(--accent);
+  }
+
+  @media (max-width: 860px){
+    body{ cursor:auto; }
+    .cursor-dot{ display:none; }
+  }
+
+  /* pixel scatter particles */
+  .pixel{
+    position:fixed;
+    width:4px; height:4px;
+    background:var(--accent);
+    pointer-events:none;
+    z-index:8999;
+    opacity:0.9;
+    border-radius:1px;
+    animation: pixel-fade 0.6s ease-out forwards;
+  }
+  @keyframes pixel-fade{
+    to{ opacity:0; transform:translateY(-10px) scale(0.4); }
+  }
+
+  /* ============================= */
+  /* NAVIGATION                     */
+  /* ============================= */
+  header{
+    position:fixed;
+    top:0; left:0; right:0;
+    z-index:500;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:24px 6vw;
+    background:transparent;
+    transition: background 0.4s ease, backdrop-filter 0.4s ease, border-color 0.4s ease;
+    border-bottom:1px solid transparent;
+  }
+  header.scrolled{
+    background:rgba(243,243,241,0.6);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border-bottom:1px solid var(--border);
+  }
+  .logo{
+    font-family:var(--display);
+    font-weight:800;
+    font-size:1.2rem;
+    letter-spacing:0.04em;
+  }
+  nav ul{
+    list-style:none;
+    display:flex;
+    gap:36px;
+  }
+  nav a{
+    font-size:0.95rem;
+    font-weight:500;
+    color:var(--text);
+    transition: color 0.25s ease;
+  }
+  nav a:hover{ color:var(--muted); }
+
+  .menu-toggle{
+    display:none;
+    flex-direction:column;
+    gap:5px;
+    cursor:pointer;
+    background:none;
+    border:none;
+    z-index:600;
+  }
+  .menu-toggle span{
+    display:block;
+    width:24px; height:2px;
+    background:var(--text);
+    transition: transform 0.3s ease, opacity 0.3s ease;
+  }
+
+  .mobile-menu{
+    position:fixed;
+    inset:0;
+    background:var(--bg);
+    z-index:550;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    gap:32px;
+    transform:translateY(-100%);
+    transition: transform 0.5s cubic-bezier(.76,0,.24,1);
+  }
+  .mobile-menu.open{ transform:translateY(0); }
+  .mobile-menu a{
+    font-family:var(--display);
+    font-weight:800;
+    font-size:2rem;
+  }
+
+  @media (max-width: 860px){
+    nav{ display:none; }
+    .menu-toggle{ display:flex; }
+  }
+
+  /* ============================= */
+  /* SHARED                         */
+  /* ============================= */
+  section{
+    padding:140px 6vw;
+    position:relative;
+  }
+
+  .reveal{
+    opacity:0;
+    transform:translateY(28px);
+    transition: opacity 0.8s cubic-bezier(.22,1,.36,1), transform 0.8s cubic-bezier(.22,1,.36,1);
+  }
+  .reveal.in{
+    opacity:1;
+    transform:translateY(0);
+  }
+
+  .pill{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    padding:14px 28px;
+    border:1px solid var(--text);
+    border-radius:999px;
+    font-size:0.9rem;
+    font-weight:500;
+    color:var(--text);
+    background:transparent;
+    transition: background 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+    cursor:pointer;
+  }
+  .pill:hover{
+    background:var(--accent);
+    border-color:var(--accent);
+    color:#fff;
+  }
+
+  /* ============================= */
+  /* HERO                           */
+  /* ============================= */
+  #hero{
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding-top:0;
+    background-image:
+      radial-gradient(circle, var(--border) 1px, transparent 1px);
+    background-size: 28px 28px;
+    background-position: center;
+  }
+
+  .hero-card{
+    position:relative;
+    width:min(720px, 90vw);
+    padding:64px 48px;
+    border-radius:24px;
+    background:rgba(255,255,255,0.35);
+    border:1px solid rgba(255,255,255,0.6);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    box-shadow: 0 20px 60px rgba(0,0,0,0.06);
+    text-align:center;
+    overflow:hidden;
+  }
+
+  .hero-headline{
+    font-family:var(--display);
+    font-weight:800;
+    font-size:clamp(2.6rem, 8vw, 5.2rem);
+    line-height:1.05;
+    letter-spacing:-0.01em;
+  }
+
+  .hero-sub{
+    margin-top:24px;
+    font-size:0.95rem;
+    color:var(--muted);
+    line-height:1.6;
+  }
+
+  .scroll-badge{
+    position:absolute;
+    bottom:-90px;
+    left:50%;
+    transform:translateX(-50%);
+    width:120px; height:120px;
+    pointer-events:none;
+  }
+  .scroll-badge svg{
+    width:100%; height:100%;
+    animation: spin 14s linear infinite;
+  }
+  .scroll-badge text{
+    font-family:var(--body);
+    font-weight:500;
+    font-size:9.5px;
+    letter-spacing:2px;
+    fill:var(--muted);
+  }
+  @keyframes spin{
+    to{ transform:rotate(360deg); }
+  }
+
+  /* ============================= */
+  /* WORK SECTION                   */
+  /* ============================= */
+  .section-heading{
+    font-family:var(--display);
+    font-weight:800;
+    font-size:clamp(1.8rem, 4vw, 2.6rem);
+    margin-bottom:56px;
+  }
+
+  .work-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:32px;
+  }
+
+  .work-card-link{ display:block; }
+
+  .work-image{
+    position:relative;
+    aspect-ratio: 4 / 3;
+    border-radius:18px;
+    border:1px solid var(--border);
+    background: linear-gradient(135deg, #e4e4e1, #f6f6f4 50%, #e9e9e6);
+    overflow:hidden;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    transition: transform 0.5s cubic-bezier(.22,1,.36,1), border-color 0.4s ease;
+  }
+  .work-image span{
+    font-size:0.85rem;
+    color:var(--muted);
+    opacity:0.6;
+    letter-spacing:0.02em;
+  }
+  .work-image .corner-pixels{
+    position:absolute;
+    bottom:14px; right:14px;
+    display:grid;
+    grid-template-columns:repeat(2,6px);
+    grid-template-rows:repeat(2,6px);
+    gap:3px;
+    opacity:0;
+    transition: opacity 0.4s ease;
+  }
+  .work-image .corner-pixels i{
+    width:6px; height:6px;
+    background:var(--accent);
+    display:block;
+    border-radius:1px;
+  }
+
+  .work-card-link:hover .work-image{
+    transform:scale(1.015);
+    border-color:var(--accent);
+  }
+  .work-card-link:hover .corner-pixels{ opacity:1; }
+
+  .work-meta{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    margin-top:18px;
+  }
+  .work-meta .left{
+    display:flex;
+    align-items:baseline;
+    gap:14px;
+  }
+  .work-number{
+    font-size:0.85rem;
+    color:var(--muted);
+  }
+  .work-title{
+    font-family:var(--display);
+    font-weight:800;
+    font-size:1.15rem;
+  }
+  .tag{
+    font-size:0.78rem;
+    font-weight:500;
+    padding:6px 14px;
+    border:1px solid var(--border);
+    border-radius:999px;
+    color:var(--muted);
+  }
+
+  @media (max-width: 860px){
+    .work-grid{ grid-template-columns:1fr; }
+  }
+
+  /* ============================= */
+  /* ABOUT SECTION                  */
+  /* ============================= */
+  .about-grid{
+    display:grid;
+    grid-template-columns:1.1fr 1fr;
+    gap:80px;
+    align-items:start;
+  }
+  .about-statement{
+    font-family:var(--display);
+    font-weight:800;
+    font-size:clamp(1.8rem, 4.4vw, 3rem);
+    line-height:1.25;
+  }
+  .about-aside{
+    margin-top:18px;
+    font-style:italic;
+    color:var(--muted);
+    font-size:0.95rem;
+  }
+  .about-bio p{
+    font-size:1.05rem;
+    line-height:1.8;
+    color:var(--text);
+    margin-bottom:22px;
+  }
+  .about-buttons{
+    display:flex;
+    gap:16px;
+    margin-top:8px;
+    flex-wrap:wrap;
+  }
+
+  @media (max-width: 860px){
+    .about-grid{ grid-template-columns:1fr; gap:48px; }
+  }
+
+  /* ============================= */
+  /* GLIMPSES SECTION                */
+  /* ============================= */
+  .glimpses-strip{
+    display:flex;
+    gap:24px;
+    overflow-x:auto;
+    cursor:grab;
+    scrollbar-width:none;
+    padding-bottom:8px;
+    -webkit-overflow-scrolling:touch;
+  }
+  .glimpses-strip::-webkit-scrollbar{ display:none; }
+  .glimpses-strip.dragging{ cursor:grabbing; }
+
+  .glimpse-card{
+    flex:0 0 auto;
+    width:220px;
+  }
+  .glimpse-img{
+    width:220px;
+    height:300px;
+    border-radius:16px;
+    border:1px solid var(--border);
+    background: linear-gradient(160deg, #eaeae7, #f7f7f5 55%, #e3e3e0);
+    transition: transform 0.5s cubic-bezier(.22,1,.36,1);
+  }
+  .glimpse-card:nth-child(odd):hover .glimpse-img{ transform:rotate(2deg); }
+  .glimpse-card:nth-child(even):hover .glimpse-img{ transform:rotate(-2deg); }
+
+  .glimpse-caption{
+    margin-top:12px;
+    font-size:0.85rem;
+    color:var(--muted);
+  }
+
+  /* ============================= */
+  /* CONTACT SECTION                */
+  /* ============================= */
+  #contact{
+    text-align:center;
+  }
+  .contact-headline{
+    font-family:var(--display);
+    font-weight:800;
+    font-size:clamp(2.2rem, 7vw, 4.5rem);
+    line-height:1.1;
+    transition: color 0.35s ease;
+    cursor:default;
+  }
+  .contact-headline:hover{ color:var(--accent); }
+
+  .contact-reach{
+    margin-top:32px;
+    font-size:0.95rem;
+    color:var(--muted);
+  }
+  .contact-email{
+    display:inline-block;
+    margin-top:6px;
+    font-size:1.2rem;
+    font-weight:500;
+    color:var(--accent);
+    transition: color 0.25s ease;
+  }
+  .contact-email:hover{ color:var(--accent-hover); }
+
+  .contact-buttons{
+    display:flex;
+    justify-content:center;
+    gap:16px;
+    margin-top:40px;
+    flex-wrap:wrap;
+  }
+
+  /* ============================= */
+  /* FOOTER                         */
+  /* ============================= */
+  footer{
+    border-top:1px solid var(--border);
+    padding:28px 6vw;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    font-size:0.9rem;
+  }
+  footer .logo{ font-size:1rem; }
+  footer .footer-email{ color:var(--muted); transition:color 0.25s ease; }
+  footer .footer-email:hover{ color:var(--text); }
+  footer .back-to-top{
+    color:var(--muted);
+    transition:color 0.25s ease;
+  }
+  footer .back-to-top:hover{ color:var(--text); }
+
+  @media (max-width: 600px){
+    footer{
+      flex-direction:column;
+      gap:14px;
+      text-align:center;
+    }
+  }
+</style>
+</head>
+<body>
+
+  <!-- ============================= -->
+  <!-- PAGE LOAD OVERLAY              -->
+  <!-- ============================= -->
+  <div id="loader">
+    <span>MANNUR THISHYA</span>
+  </div>
+
+  <!-- Custom cursor -->
+  <div class="cursor-dot" id="cursorDot"></div>
+
+  <!-- ============================= -->
+  <!-- NAVIGATION                     -->
+  <!-- ============================= -->
+  <header id="header">
+    <a href="#hero" class="logo">MT</a>
+    <nav>
+      <ul>
+        <li><a href="#work">Work</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#contact">Resume</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+    <button class="menu-toggle" id="menuToggle" aria-label="Open menu">
+      <span></span>
+      <span></span>
+    </button>
+  </header>
+
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#work">Work</a>
+    <a href="#about">About</a>
+    <a href="#contact">Resume</a>
+    <a href="#contact">Contact</a>
+  </div>
+
+  <!-- ============================= -->
+  <!-- HERO                           -->
+  <!-- ============================= -->
+  <section id="hero">
+    <div class="hero-card" id="heroCard">
+      <h1 class="hero-headline">ALRIGHT.<br>KEEP SCROLLING.</h1>
+      <p class="hero-sub">Mannur Thishya — Interaction Designer<br>building products, identities and experiences.</p>
+
+      <div class="scroll-badge">
+        <svg viewBox="0 0 100 100">
+          <defs>
+            <path id="circlePath" d="M 50,50 m -38,0 a 38,38 0 1,1 76,0 a 38,38 0 1,1 -76,0"/>
+          </defs>
+          <text>
+            <textPath href="#circlePath">SCROLL · SCROLL · SCROLL ·</textPath>
+          </text>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================= -->
+  <!-- SELECTED WORK                  -->
+  <!-- ============================= -->
+  <section id="work">
+    <h2 class="section-heading reveal">Selected work</h2>
+    <div class="work-grid">
+
+      <a href="#" class="work-card-link reveal">
+        <div class="work-image">
+          <span>Case Study Uploading Soon</span>
+          <div class="corner-pixels"><i></i><i></i><i></i><i></i></div>
+        </div>
+        <div class="work-meta">
+          <div class="left">
+            <span class="work-number">01</span>
+            <span class="work-title">Project Name</span>
+          </div>
+          <span class="tag">Product Design</span>
+        </div>
+      </a>
+
+      <a href="#" class="work-card-link reveal">
+        <div class="work-image">
+          <span>Case Study Uploading Soon</span>
+          <div class="corner-pixels"><i></i><i></i><i></i><i></i></div>
+        </div>
+        <div class="work-meta">
+          <div class="left">
+            <span class="work-number">02</span>
+            <span class="work-title">Project Name</span>
+          </div>
+          <span class="tag">Brand Identity</span>
+        </div>
+      </a>
+
+    </div>
+  </section>
+
+  <!-- ============================= -->
+  <!-- ABOUT                          -->
+  <!-- ============================= -->
+  <section id="about">
+    <div class="about-grid">
+      <div class="about-left reveal">
+        <h2 class="about-statement">"Design is how something works. Not how it looks."</h2>
+        <p class="about-aside">— or at least, that's what I tell myself.</p>
+      </div>
+      <div class="about-bio reveal">
+        <p>Hi, I'm Mannur — an Interaction Designer who believes the best interfaces are the ones people don't have to think about.</p>
+        <p>I obsess over the gap between what users expect and what they actually experience. Turning that gap into something seamless — that's the work.</p>
+        <p>Currently open to select projects and collaborations.</p>
+        <div class="about-buttons">
+          <a href="#contact" class="pill">Get In Touch</a>
+          <a href="#" class="pill">View Resume</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================= -->
+  <!-- GLIMPSES                       -->
+  <!-- ============================= -->
+  <section id="glimpses">
+    <h2 class="section-heading reveal">Glimpses</h2>
+    <div class="glimpses-strip" id="glimpsesStrip">
+      <div class="glimpse-card reveal">
+        <div class="glimpse-img"></div>
+        <p class="glimpse-caption">somewhere good</p>
+      </div>
+      <div class="glimpse-card reveal">
+        <div class="glimpse-img"></div>
+        <p class="glimpse-caption">a random tuesday</p>
+      </div>
+      <div class="glimpse-card reveal">
+        <div class="glimpse-img"></div>
+        <p class="glimpse-caption">yes this matters</p>
+      </div>
+      <div class="glimpse-card reveal">
+        <div class="glimpse-img"></div>
+        <p class="glimpse-caption">not working promise</p>
+      </div>
+      <div class="glimpse-card reveal">
+        <div class="glimpse-img"></div>
+        <p class="glimpse-caption">golden hour</p>
+      </div>
+      <div class="glimpse-card reveal">
+        <div class="glimpse-img"></div>
+        <p class="glimpse-caption">caffeinated</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================= -->
+  <!-- CONTACT                        -->
+  <!-- ============================= -->
+  <section id="contact">
+    <h2 class="contact-headline reveal">INTERESTED IN<br>WORKING TOGETHER?</h2>
+    <p class="contact-reach reveal">Reach me at:</p>
+    <a href="mailto:thishya14@gmail.com" class="contact-email reveal">thishya14@gmail.com</a>
+    <div class="contact-buttons reveal">
+      <a href="#" class="pill" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="#" class="pill" target="_blank" rel="noopener">Resume</a>
+    </div>
+  </section>
+
+  <!-- ============================= -->
+  <!-- FOOTER                         -->
+  <!-- ============================= -->
+  <footer>
+    <a href="#hero" class="logo">MT</a>
+    <a href="mailto:thishya14@gmail.com" class="footer-email">thishya14@gmail.com</a>
+    <a href="#hero" class="back-to-top">Back to top ↑</a>
+  </footer>
+
+  <script>
+    /* ============================= */
+    /* PAGE LOAD ANIMATION            */
+    /* ============================= */
+    const loader = document.getElementById('loader');
+    window.addEventListener('load', () => {
+      requestAnimationFrame(() => loader.classList.add('show-text'));
+      setTimeout(() => {
+        loader.classList.add('slide-up');
+        setTimeout(() => loader.remove(), 1000);
+      }, 1500);
+    });
+
+    /* ============================= */
+    /* NAV SCROLL STATE               */
+    /* ============================= */
+    const header = document.getElementById('header');
+    window.addEventListener('scroll', () => {
+      header.classList.toggle('scrolled', window.scrollY > 40);
+    });
+
+    /* ============================= */
+    /* MOBILE MENU                    */
+    /* ============================= */
+    const menuToggle = document.getElementById('menuToggle');
+    const mobileMenu = document.getElementById('mobileMenu');
+    menuToggle.addEventListener('click', () => {
+      mobileMenu.classList.toggle('open');
+    });
+    mobileMenu.querySelectorAll('a').forEach(a => {
+      a.addEventListener('click', () => mobileMenu.classList.remove('open'));
+    });
+
+    /* ============================= */
+    /* CUSTOM CURSOR                  */
+    /* ============================= */
+    const isDesktop = window.matchMedia('(min-width: 861px)').matches;
+    const cursorDot = document.getElementById('cursorDot');
+
+    if (isDesktop) {
+      let mouseX = 0, mouseY = 0;
+      window.addEventListener('mousemove', (e) => {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+        cursorDot.style.transform = `translate(${mouseX}px, ${mouseY}px) translate(-50%, -50%)`;
+      });
+
+      const interactiveSelector = 'a, button, .pill, .work-card-link, .glimpse-card, .hero-card';
+      document.querySelectorAll(interactiveSelector).forEach(el => {
+        el.addEventListener('mouseenter', () => cursorDot.classList.add('hover'));
+        el.addEventListener('mouseleave', () => cursorDot.classList.remove('hover'));
+      });
+
+      /* Pixel scatter on hero */
+      const heroCard = document.getElementById('heroCard');
+      let pixelCount = 0;
+      const MAX_PIXELS = 6;
+
+      function spawnPixel(x, y) {
+        if (pixelCount >= MAX_PIXELS) return;
+        pixelCount++;
+        const px = document.createElement('div');
+        px.className = 'pixel';
+        px.style.left = (x + (Math.random() * 16 - 8)) + 'px';
+        px.style.top = (y + (Math.random() * 16 - 8)) + 'px';
+        document.body.appendChild(px);
+        setTimeout(() => {
+          px.remove();
+          pixelCount--;
+        }, 600);
+      }
+
+      let lastSpawn = 0;
+      heroCard.addEventListener('mousemove', (e) => {
+        const now = Date.now();
+        if (now - lastSpawn > 90) {
+          spawnPixel(e.clientX, e.clientY);
+          lastSpawn = now;
+        }
+      });
+    }
+
+    /* ============================= */
+    /* SCROLL REVEAL                  */
+    /* ============================= */
+    const revealEls = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry, i) => {
+        if (entry.isIntersecting) {
+          setTimeout(() => entry.target.classList.add('in'), i * 80);
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15 });
+
+    revealEls.forEach(el => observer.observe(el));
+
+    /* ============================= */
+    /* GLIMPSES DRAG SCROLL           */
+    /* ============================= */
+    const strip = document.getElementById('glimpsesStrip');
+    let isDown = false;
+    let startX, scrollLeft;
+
+    strip.addEventListener('mousedown', (e) => {
+      isDown = true;
+      strip.classList.add('dragging');
+      startX = e.pageX - strip.offsetLeft;
+      scrollLeft = strip.scrollLeft;
+    });
+    strip.addEventListener('mouseleave', () => {
+      isDown = false;
+      strip.classList.remove('dragging');
+    });
+    strip.addEventListener('mouseup', () => {
+      isDown = false;
+      strip.classList.remove('dragging');
+    });
+    strip.addEventListener('mousemove', (e) => {
+      if (!isDown) return;
+      e.preventDefault();
+      const x = e.pageX - strip.offsetLeft;
+      const walk = (x - startX) * 1.2;
+      strip.scrollLeft = scrollLeft - walk;
+    });
+  </script>
+
+</body>
+</html>
