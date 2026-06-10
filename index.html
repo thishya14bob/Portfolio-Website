@@ -70,16 +70,6 @@
     transform:scale(1.4);
     transition: opacity 0.5s ease, transform 0.7s cubic-bezier(.22,1,.36,1);
   }
-  .loader-mark span{
-    font-family:var(--display);
-    font-weight:800;
-    color:#fff;
-    font-size:1.4rem;
-    letter-spacing:0.04em;
-    opacity:0;
-    transform:translateY(8px);
-    transition: opacity 0.5s ease, transform 0.5s ease;
-  }
   #loader.show-text .loader-mark{
     opacity:1;
     transform:scale(1);
@@ -87,11 +77,6 @@
   #loader.show-text .loader-mark::before{
     opacity:1;
     transform:scale(1);
-  }
-  #loader.show-text .loader-mark span{
-    opacity:1;
-    transform:translateY(0);
-    transition-delay:0.2s;
   }
   #loader.slide-up{
     transform:translateY(-100%);
@@ -624,9 +609,7 @@
   <!-- PAGE LOAD OVERLAY              -->
   <!-- ============================= -->
   <div id="loader">
-    <div class="loader-mark">
-      <span>MT</span>
-    </div>
+    <div class="loader-mark"></div>
   </div>
 
   <!-- Custom cursor -->
