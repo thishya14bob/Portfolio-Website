@@ -414,10 +414,21 @@
     margin-bottom:56px;
   }
 
+  .section--compact{
+    padding-top:80px;
+    padding-bottom:80px;
+  }
+
+  .section-heading--center{
+    text-align:center;
+  }
+
   .work-grid{
     display:grid;
     grid-template-columns:1fr 1fr;
-    gap:32px;
+    gap:24px;
+    max-width:880px;
+    margin:0 auto;
   }
 
   .work-card-link{ display:block; }
@@ -761,8 +772,8 @@
   <!-- ============================= -->
   <!-- SELECTED WORK                  -->
   <!-- ============================= -->
-  <section id="work">
-    <h2 class="section-heading reveal">Selected work</h2>
+  <section id="work" class="section--compact">
+    <h2 class="section-heading reveal section-heading--center">Selected work</h2>
     <div class="work-grid">
 
       <a href="assets/A UX Case Study on Biometric Verification.pdf" target="_blank" rel="noopener" class="work-card-link reveal">
