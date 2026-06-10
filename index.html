@@ -357,10 +357,18 @@
 
   .hero-headline .static-line{
     display:block;
-    transition: filter 0.4s ease;
   }
-  .hero-headline .static-line:hover{
-    filter: url(#water-distort);
+
+  .hero-headline-wrap{
+    position:relative;
+  }
+
+  .hero-headline--tint{
+    position:absolute;
+    inset:0;
+    color:var(--accent);
+    pointer-events:none;
+    clip-path: circle(0px at -9999px -9999px);
   }
 
   .hero-cycle{
@@ -383,10 +391,7 @@
     color:var(--accent);
     opacity:0;
     transform:translateY(40%);
-    transition: opacity 0.5s cubic-bezier(.22,1,.36,1), transform 0.6s cubic-bezier(.22,1,.36,1), filter 0.4s ease;
-  }
-  .hero-cycle .word:hover{
-    filter: url(#water-distort);
+    transition: opacity 0.5s cubic-bezier(.22,1,.36,1), transform 0.6s cubic-bezier(.22,1,.36,1);
   }
   .hero-cycle .word.active{
     opacity:1;
@@ -710,14 +715,6 @@
   <!-- HERO                           -->
   <!-- ============================= -->
   <section id="hero">
-    <svg width="0" height="0" style="position:absolute" aria-hidden="true">
-      <filter id="water-distort">
-        <feTurbulence type="turbulence" numOctaves="2" seed="3" result="noise">
-          <animate attributeName="baseFrequency" dur="6s" values="0.01 0.04;0.02 0.07;0.01 0.04" repeatCount="indefinite"/>
-        </feTurbulence>
-        <feDisplacementMap in="SourceGraphic" in2="noise" scale="3" xChannelSelector="R" yChannelSelector="G"/>
-      </filter>
-    </svg>
     <div class="liquid-glass" aria-hidden="true">
       <span></span><span></span><span></span>
     </div>
@@ -734,16 +731,28 @@
     </svg>
     <div class="hero-card" id="heroCard">
       <canvas class="ripple-canvas" id="rippleCanvas"></canvas>
-      <h1 class="hero-headline">
-        <span class="static-line">ALRIGHT.</span>
-        <span class="static-line">KEEP SCROLLING.</span>
-        <span class="hero-cycle" id="heroCycle">
-          <span class="word active">USER EXPERIENCE.</span>
-          <span class="word">USER INTERFACE.</span>
-          <span class="word">INTERACTION DESIGN.</span>
-          <span class="word">PRODUCT THINKING.</span>
-        </span>
-      </h1>
+      <div class="hero-headline-wrap">
+        <h1 class="hero-headline">
+          <span class="static-line">ALRIGHT.</span>
+          <span class="static-line">KEEP SCROLLING.</span>
+          <span class="hero-cycle" id="heroCycle">
+            <span class="word active">USER EXPERIENCE.</span>
+            <span class="word">USER INTERFACE.</span>
+            <span class="word">INTERACTION DESIGN.</span>
+            <span class="word">PRODUCT THINKING.</span>
+          </span>
+        </h1>
+        <h1 class="hero-headline hero-headline--tint" id="heroHeadlineTint" aria-hidden="true">
+          <span class="static-line">ALRIGHT.</span>
+          <span class="static-line">KEEP SCROLLING.</span>
+          <span class="hero-cycle" id="heroCycleTint">
+            <span class="word active">USER EXPERIENCE.</span>
+            <span class="word">USER INTERFACE.</span>
+            <span class="word">INTERACTION DESIGN.</span>
+            <span class="word">PRODUCT THINKING.</span>
+          </span>
+        </h1>
+      </div>
       <p class="hero-sub">Hi! I'm Thishya,<br>building products, identities and experiences.</p>
     </div>
   </section>
@@ -879,16 +888,43 @@
     /* HERO WORD CYCLE                */
     /* ============================= */
     const heroWords = document.querySelectorAll('#heroCycle .word');
+    const heroWordsTint = document.querySelectorAll('#heroCycleTint .word');
     let heroIndex = 0;
     setInterval(() => {
       const current = heroWords[heroIndex];
+      const currentTint = heroWordsTint[heroIndex];
       const next = (heroIndex + 1) % heroWords.length;
       current.classList.remove('active');
       current.classList.add('exit');
+      currentTint.classList.remove('active');
+      currentTint.classList.add('exit');
       heroWords[next].classList.add('active');
-      setTimeout(() => current.classList.remove('exit'), 600);
+      heroWordsTint[next].classList.add('active');
+      setTimeout(() => {
+        current.classList.remove('exit');
+        currentTint.classList.remove('exit');
+      }, 600);
       heroIndex = next;
     }, 2200);
+
+    /* ============================= */
+    /* CURSOR TEXT TINT REVEAL         */
+    /* ============================= */
+    (() => {
+      const wrap = document.querySelector('.hero-headline-wrap');
+      const tint = document.getElementById('heroHeadlineTint');
+      if(!wrap || !tint) return;
+      const radius = 70;
+      wrap.addEventListener('mousemove', (e) => {
+        const rect = wrap.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        tint.style.clipPath = `circle(${radius}px at ${x}px ${y}px)`;
+      });
+      wrap.addEventListener('mouseleave', () => {
+        tint.style.clipPath = 'circle(0px at -9999px -9999px)';
+      });
+    })();
 
     /* ============================= */
     /* WATER RIPPLE EFFECT            */
