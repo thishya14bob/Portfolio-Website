@@ -48,8 +48,10 @@
     background:#1A1A1A;
     z-index:9999;
     display:flex; align-items:center; justify-content:center;
+    overflow:hidden;
     transition: transform 0.9s cubic-bezier(.76,0,.24,1);
   }
+  .loader-mark{ z-index:1; }
   .loader-mark{
     position:relative;
     width:64px; height:64px;
@@ -306,6 +308,20 @@
   @keyframes drift3{
     0%,100%{ transform:translate(0,0) scale(1); }
     50%{ transform:translate(-40px,70px) scale(1.2); }
+  }
+
+  .liquid-glass--loader span{
+    opacity:0.8;
+    filter: blur(80px);
+  }
+  .liquid-glass--loader span:nth-child(1){
+    background: radial-gradient(circle, rgba(7,77,224,0.55), transparent 70%);
+  }
+  .liquid-glass--loader span:nth-child(2){
+    background: radial-gradient(circle, rgba(7,77,224,0.4), transparent 70%);
+  }
+  .liquid-glass--loader span:nth-child(3){
+    background: radial-gradient(circle, rgba(61,124,255,0.5), transparent 70%);
   }
 
   .hero-card{
@@ -608,6 +624,9 @@
   <!-- PAGE LOAD OVERLAY              -->
   <!-- ============================= -->
   <div id="loader">
+    <div class="liquid-glass liquid-glass--loader" aria-hidden="true">
+      <span></span><span></span><span></span>
+    </div>
     <div class="loader-mark"></div>
   </div>
 
