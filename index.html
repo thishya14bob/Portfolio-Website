@@ -332,58 +332,16 @@
     text-align:center;
     overflow:hidden;
     border:1px solid transparent;
-    backdrop-filter: blur(0px) saturate(100%);
-    -webkit-backdrop-filter: blur(0px) saturate(100%);
-    box-shadow: 0 0 0 rgba(0,0,0,0);
-    transition: border-color 0.6s ease, backdrop-filter 0.6s ease, -webkit-backdrop-filter 0.6s ease, box-shadow 0.6s ease;
   }
-  .hero-card::before{
-    content:'';
+
+  /* Water ripple canvas */
+  .ripple-canvas{
     position:absolute;
     inset:0;
     z-index:-1;
-    opacity:0;
-    background:
-      repeating-linear-gradient(100deg,
-        rgba(7,77,224,0.05) 0px,
-        rgba(7,77,224,0.05) 2px,
-        transparent 2px,
-        transparent 6px),
-      rgba(7,77,224,0.03);
-    transition: opacity 0.6s ease;
-  }
-  /* Liquid glass specular highlight */
-  .hero-card::after{
-    content:'';
-    position:absolute;
-    inset:0;
-    z-index:-1;
-    opacity:0;
-    border-radius:inherit;
-    background:
-      linear-gradient(135deg,
-        rgba(255,255,255,0.55) 0%,
-        rgba(255,255,255,0.12) 22%,
-        rgba(255,255,255,0) 45%,
-        rgba(255,255,255,0) 70%,
-        rgba(255,255,255,0.18) 100%);
-    box-shadow:
-      inset 0 1px 1px rgba(255,255,255,0.6),
-      inset 0 -1px 1px rgba(255,255,255,0.15);
-    mix-blend-mode:overlay;
-    transition: opacity 0.6s ease;
-  }
-  .hero-card:hover{
-    border-color:rgba(255,255,255,0.5);
-    backdrop-filter: blur(20px) saturate(160%);
-    -webkit-backdrop-filter: blur(20px) saturate(160%);
-    box-shadow:
-      0 20px 60px rgba(7,77,224,0.08),
-      0 1px 0 rgba(255,255,255,0.4) inset;
-  }
-  .hero-card:hover::before,
-  .hero-card:hover::after{
-    opacity:1;
+    width:100%;
+    height:100%;
+    pointer-events:none;
   }
 
   .hero-headline{
@@ -730,6 +688,7 @@
       </g>
     </svg>
     <div class="hero-card" id="heroCard">
+      <canvas class="ripple-canvas" id="rippleCanvas"></canvas>
       <h1 class="hero-headline">
         <span class="static-line">ALRIGHT.</span>
         <span class="static-line">KEEP SCROLLING.</span>
@@ -885,6 +844,58 @@
       setTimeout(() => current.classList.remove('exit'), 600);
       heroIndex = next;
     }, 2200);
+
+    /* ============================= */
+    /* WATER RIPPLE EFFECT            */
+    /* ============================= */
+    (() => {
+      const canvas = document.getElementById('rippleCanvas');
+      const card = document.getElementById('heroCard');
+      const ctx = canvas.getContext('2d');
+      let ripples = [];
+      let dpr = window.devicePixelRatio || 1;
+
+      function resize(){
+        dpr = window.devicePixelRatio || 1;
+        canvas.width = card.clientWidth * dpr;
+        canvas.height = card.clientHeight * dpr;
+        canvas.style.width = card.clientWidth + 'px';
+        canvas.style.height = card.clientHeight + 'px';
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      }
+      resize();
+      window.addEventListener('resize', resize);
+
+      function addRipple(x, y){
+        ripples.push({ x, y, radius: 0, alpha: 0.35 });
+        if (ripples.length > 14) ripples.shift();
+      }
+
+      let lastTime = 0;
+      card.addEventListener('mousemove', (e) => {
+        const now = Date.now();
+        if (now - lastTime < 60) return;
+        lastTime = now;
+        const rect = card.getBoundingClientRect();
+        addRipple(e.clientX - rect.left, e.clientY - rect.top);
+      });
+
+      function animate(){
+        ctx.clearRect(0, 0, card.clientWidth, card.clientHeight);
+        ripples.forEach(r => {
+          r.radius += 2.2;
+          r.alpha *= 0.965;
+          ctx.beginPath();
+          ctx.arc(r.x, r.y, r.radius, 0, Math.PI * 2);
+          ctx.strokeStyle = `rgba(7,77,224,${r.alpha})`;
+          ctx.lineWidth = 1.5;
+          ctx.stroke();
+        });
+        ripples = ripples.filter(r => r.alpha > 0.01);
+        requestAnimationFrame(animate);
+      }
+      animate();
+    })();
 
     /* ============================= */
     /* GLASS BREAK ON SCROLL          */
