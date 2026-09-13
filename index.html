@@ -215,50 +215,36 @@
     overflow: hidden;
   }
 
-  .hero-pill-sticker {
-    width: 40px;
-    height: 40px;
-    background: #a2e048;
-    border-radius: 16px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 20px;
-    box-shadow: 0 1px 1px rgba(0,0,0,.05);
-    margin-bottom: 4px;
-  }
-
   .hero-title {
     font-family: 'DM Sans', sans-serif;
     font-weight: 300;
-    font-size: clamp(40px, 7vw, 72px);
-    letter-spacing: -1.8px;
+    font-size: clamp(36px, 5.5vw, 60px);
+    letter-spacing: -1.5px;
     color: #1c1917;
     text-align: center;
-    line-height: 1;
+    line-height: 1.05;
   }
 
   .hero-mission {
     font-family: 'DM Sans', sans-serif;
-    font-weight: 500;
+    font-weight: 400;
     font-size: 13px;
-    letter-spacing: 1.4px;
-    text-transform: uppercase;
+    letter-spacing: 0.6px;
     color: #1c1917;
     text-align: center;
-    max-width: 600px;
+    max-width: 560px;
   }
-  .hero-mission .accent { color: #2200ff; }
+  .hero-mission .accent { color: #2200ff; font-weight: 600; }
 
   .hero-status {
     font-family: 'Inter', sans-serif;
     font-weight: 300;
     font-size: 10px;
-    letter-spacing: 1.2px;
+    letter-spacing: 1.4px;
     text-transform: uppercase;
     color: #78716c;
     text-align: center;
-    max-width: 500px;
+    max-width: 480px;
     margin-top: 2px;
   }
 
@@ -750,7 +736,6 @@
     </div>
 
     <!-- content -->
-    <div class="hero-pill-sticker">😊</div>
     <h1 class="hero-title">Hi, i'm Thishya</h1>
     <p class="hero-mission">
       "Right now I'm building <span class="accent">Prruf</span> and co-founding <span class="accent">Wasabie Studios</span>."
@@ -986,42 +971,55 @@
 
     const photos = Array.from(ring.querySelectorAll('.orbit-photo'));
     const N = photos.length;
-    const DUR = 28000; // ms for full revolution
-    /* Ellipse: rx wider than ry to spread photos left/right around text.
-       Center offset: slightly above hero center so orbit wraps around title */
-    const RX = 340;   // horizontal radius
-    const RY = 130;   // vertical radius (flat ellipse)
-    const CY_OFFSET = -30; // shift orbit center up relative to hero center
+    const DUR = 30000; // ms per revolution
+
+    /* Ellipse dimensions — wide and relatively flat so photos hover
+       well above and to the sides of the title text */
+    const RX = 360;   // horizontal radius
+    const RY = 160;   // vertical radius — pushes photos higher above text
+    /* Shift orbit center upward so the top arc sits clearly above the
+       title and the bottom arc disappears into the projects boundary */
+    const CY_OFFSET = -80;
 
     let start = null;
 
     function tick(ts) {
       if (!start) start = ts;
       const elapsed = ts - start;
-      const heroW = hero.offsetWidth;
       const heroH = hero.offsetHeight;
+      const heroW = hero.offsetWidth;
       const cx = heroW / 2;
       const cy = heroH / 2 + CY_OFFSET;
 
       photos.forEach((el, i) => {
-        const angle = ((elapsed / DUR) * Math.PI * 2) + (i / N) * Math.PI * 2;
+        /* Start at top (-π/2) so first photo appears above title on load */
+        const angle = -Math.PI / 2 + ((elapsed / DUR) * Math.PI * 2) + (i / N) * Math.PI * 2;
         const x = cx + RX * Math.cos(angle);
         const y = cy + RY * Math.sin(angle);
 
-        /* Fade out as photo descends below orbit center — smooth disappear at bottom */
-        const sinVal = Math.sin(angle); // -1=top, +1=bottom
-        const opacity = sinVal > 0
-          ? Math.max(0, 1 - sinVal * 1.4)  // fades to 0 before fully at bottom
-          : 1;
+        /* sinVal: -1 = top of ellipse, +1 = bottom.
+           Fade starts when photo descends past the center (sin > 0.1),
+           fully invisible by sin = 0.7 — this aligns fade with the
+           hero/projects boundary line */
+        const sinVal = Math.sin(angle);
+        let opacity;
+        if (sinVal <= 0.1) {
+          opacity = 1;
+        } else if (sinVal >= 0.7) {
+          opacity = 0;
+        } else {
+          opacity = 1 - (sinVal - 0.1) / 0.6;
+        }
 
-        /* Scale slightly smaller at top (depth illusion) */
-        const scale = 0.78 + 0.22 * ((sinVal + 1) / 2);
+        /* Subtle depth scale: slightly smaller at top */
+        const scale = 0.82 + 0.18 * ((sinVal + 1) / 2);
 
         el.style.left = x + 'px';
         el.style.top  = y + 'px';
         el.style.opacity = opacity;
         el.style.transform = `translate(-50%, -50%) scale(${scale})`;
-        el.style.zIndex = sinVal < 0 ? 2 : 0; // above text when in front (top arc)
+        /* Photos on upper arc render above text; lower arc go behind */
+        el.style.zIndex = sinVal < 0.1 ? 2 : 0;
       });
 
       requestAnimationFrame(tick);
