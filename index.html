@@ -248,14 +248,14 @@
   /* physics apostrophe ball */
   #apos-ball {
     position: absolute;
-    width: 7px;
-    height: 7px;
-    background: #1c1917;
+    width: 11px;
+    height: 11px;
+    background: #064e3b;
     border-radius: 50%;
     pointer-events: none;
     z-index: 4;
     transform: translate(-50%, -50%);
-    box-shadow: 0 1px 3px rgba(0,0,0,.25);
+    box-shadow: 0 2px 8px rgba(6,78,59,.35);
   }
   /* hide the real apostrophe */
   .hero-title .apos-hidden {
@@ -1096,35 +1096,38 @@
     const h1    = document.querySelector('.hero-title');
     if (!hero || !ball || !h1) return;
 
-    /* Find the apostrophe span and hide it, placing ball at its position */
+    /* Hide the apostrophe; find the lowercase "i" in "i'm" to drop from its dot */
     const spans = Array.from(h1.querySelectorAll('.mag-letter'));
     const apostropheSpan = spans.find(s => s.textContent === "'");
     if (apostropheSpan) apostropheSpan.classList.add('apos-hidden');
 
-    const RADIUS  = 3.5;   // ball radius px
-    const GRAVITY = 0.18;
-    const BOUNCE  = 0.55;  // energy kept on bounce
-    const FRICTION = 0.985; // horizontal roll friction
-    const CURSOR_PUSH = 80; // push radius from cursor
+    /* The lowercase "i" in "i'm" — second "i" in the title */
+    const allI = spans.filter(s => s.textContent === 'i');
+    const dotI = allI[1] || allI[0]; /* "i" from "i'm" */
+
+    const RADIUS  = 5.5;   // ball radius px
+    const GRAVITY = 0.22;
+    const BOUNCE  = 0.52;
+    const FRICTION = 0.984;
+    const CURSOR_PUSH = 90;
 
     let bx, by, vx = 0, vy = 0;
     let mx = -9999, my = -9999;
     let initialized = false;
 
     function init() {
-      if (!apostropheSpan) {
-        /* fallback: start at hero center */
-        const hr = hero.getBoundingClientRect();
-        bx = hr.width / 2;
-        by = hr.height / 2;
+      const hr = hero.getBoundingClientRect();
+      if (dotI) {
+        /* Start at the top of the "i" — where the dot sits */
+        const r = dotI.getBoundingClientRect();
+        bx = r.left - hr.left + r.width / 2;
+        by = r.top  - hr.top  - RADIUS; /* just above the letter top = the dot */
       } else {
-        const r   = apostropheSpan.getBoundingClientRect();
-        const hr  = hero.getBoundingClientRect();
-        bx = r.left - hr.left + r.width  / 2;
-        by = r.top  - hr.top  + r.height / 2;
+        bx = hr.width / 2;
+        by = hr.height * 0.3;
       }
-      vx = (Math.random() - 0.5) * 2;
-      vy = -1;
+      vx = 0;
+      vy = 0; /* starts still, gravity pulls it down — looks like the dot falls */
       initialized = true;
     }
 
