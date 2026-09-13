@@ -375,10 +375,7 @@
     font-size: 28px;
   }
 
-  /* Three arms, offset 120° each */
-  .orbit-arm:nth-child(1) { --start-angle: 0deg; }
-  .orbit-arm:nth-child(2) { --start-angle: 120deg; }
-  .orbit-arm:nth-child(3) { --start-angle: 240deg; }
+  /* Start angles are set per-arm via inline style */
 
   @media (prefers-reduced-motion: reduce) {
     .orbit-arm, .orbit-photo { animation: none; }
@@ -747,27 +744,42 @@
 
   <!-- HERO -->
   <section id="hero">
-    <!-- orbiting photo stickers -->
-    <div class="orbit-ring" style="--orbit-r:220px; --orbit-dur:20s; --photo-w:100px; --photo-h:88px; margin-top:-20px;">
-      <!-- Photo 1: Thishya in forest -->
-      <div class="orbit-arm">
+    <!-- orbiting photo stickers — 6 photos, 60° apart, 25s loop -->
+    <div class="orbit-ring" style="--orbit-r:240px; --orbit-dur:25s; --photo-w:96px; --photo-h:84px; margin-top:-20px;">
+      <div class="orbit-arm" style="--start-angle:0deg">
         <div class="orbit-photo">
           <img src="assets/thishya.jpg" alt="Thishya" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
           <div class="orbit-photo-fallback" style="display:none">🌿</div>
         </div>
       </div>
-      <!-- Photo 2: Horse -->
-      <div class="orbit-arm">
+      <div class="orbit-arm" style="--start-angle:60deg">
         <div class="orbit-photo">
           <img src="assets/horse.jpg" alt="Horse" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
           <div class="orbit-photo-fallback" style="display:none">🐴</div>
         </div>
       </div>
-      <!-- Photo 3: Breakfast bowl -->
-      <div class="orbit-arm">
+      <div class="orbit-arm" style="--start-angle:120deg">
         <div class="orbit-photo">
           <img src="assets/breakfast.jpg" alt="Breakfast" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
           <div class="orbit-photo-fallback" style="display:none">🥣</div>
+        </div>
+      </div>
+      <div class="orbit-arm" style="--start-angle:180deg">
+        <div class="orbit-photo">
+          <img src="assets/cake.jpg" alt="Cake" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="orbit-photo-fallback" style="display:none">🍰</div>
+        </div>
+      </div>
+      <div class="orbit-arm" style="--start-angle:240deg">
+        <div class="orbit-photo">
+          <img src="assets/ocean.jpg" alt="Ocean" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="orbit-photo-fallback" style="display:none">🌊</div>
+        </div>
+      </div>
+      <div class="orbit-arm" style="--start-angle:300deg">
+        <div class="orbit-photo">
+          <img src="assets/flowers.jpg" alt="Flowers" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="orbit-photo-fallback" style="display:none">🌻</div>
         </div>
       </div>
     </div>
