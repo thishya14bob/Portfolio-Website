@@ -204,13 +204,14 @@
   /* ── HERO ── */
   #hero {
     width: 100%;
-    min-height: 453px;
+    min-height: 500px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     gap: 12px;
-    padding: 96px 24px;
+    /* Extra top padding so orbit photos on the top arc are never clipped */
+    padding: 180px 24px 100px;
     position: relative;
     overflow: visible;
   }
@@ -976,10 +977,10 @@
     /* Ellipse dimensions — wide and relatively flat so photos hover
        well above and to the sides of the title text */
     const RX = 360;   // horizontal radius
-    const RY = 160;   // vertical radius — pushes photos higher above text
-    /* Shift orbit center upward so the top arc sits clearly above the
-       title and the bottom arc disappears into the projects boundary */
-    const CY_OFFSET = -80;
+    const RY = 150;   // vertical radius
+    /* Center sits at hero midpoint; with 180px top padding the top arc
+       (cy - RY) is well within the hero bounds and never clipped */
+    const CY_OFFSET = 0;
 
     let start = null;
 
