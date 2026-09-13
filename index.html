@@ -245,6 +245,24 @@
     pointer-events: none;
     z-index: 3;
   }
+  /* physics apostrophe ball */
+  #apos-ball {
+    position: absolute;
+    width: 7px;
+    height: 7px;
+    background: #1c1917;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 4;
+    transform: translate(-50%, -50%);
+    box-shadow: 0 1px 3px rgba(0,0,0,.25);
+  }
+  /* hide the real apostrophe */
+  .hero-title .apos-hidden {
+    opacity: 0;
+    display: inline-block;
+    width: 0.18em;
+  }
 
   .hero-mission {
     font-family: 'DM Sans', sans-serif;
@@ -757,6 +775,7 @@
     </div>
 
     <canvas id="particle-canvas"></canvas>
+    <div id="apos-ball"></div>
     <!-- content -->
     <h1 class="hero-title">Hi, i'm Thishya</h1>
     <p class="hero-mission">
@@ -1068,6 +1087,99 @@
       requestAnimationFrame(loop);
     }
     requestAnimationFrame(loop);
+  })();
+
+  /* ── APOSTROPHE PHYSICS BALL ── */
+  (function() {
+    const hero  = document.getElementById('hero');
+    const ball  = document.getElementById('apos-ball');
+    const h1    = document.querySelector('.hero-title');
+    if (!hero || !ball || !h1) return;
+
+    /* Find the apostrophe span and hide it, placing ball at its position */
+    const spans = Array.from(h1.querySelectorAll('.mag-letter'));
+    const apostropheSpan = spans.find(s => s.textContent === "'");
+    if (apostropheSpan) apostropheSpan.classList.add('apos-hidden');
+
+    const RADIUS  = 3.5;   // ball radius px
+    const GRAVITY = 0.18;
+    const BOUNCE  = 0.55;  // energy kept on bounce
+    const FRICTION = 0.985; // horizontal roll friction
+    const CURSOR_PUSH = 80; // push radius from cursor
+
+    let bx, by, vx = 0, vy = 0;
+    let mx = -9999, my = -9999;
+    let initialized = false;
+
+    function init() {
+      if (!apostropheSpan) {
+        /* fallback: start at hero center */
+        const hr = hero.getBoundingClientRect();
+        bx = hr.width / 2;
+        by = hr.height / 2;
+      } else {
+        const r   = apostropheSpan.getBoundingClientRect();
+        const hr  = hero.getBoundingClientRect();
+        bx = r.left - hr.left + r.width  / 2;
+        by = r.top  - hr.top  + r.height / 2;
+      }
+      vx = (Math.random() - 0.5) * 2;
+      vy = -1;
+      initialized = true;
+    }
+
+    window.addEventListener('mousemove', e => {
+      const hr = hero.getBoundingClientRect();
+      mx = e.clientX - hr.left;
+      my = e.clientY - hr.top;
+    });
+
+    function tick() {
+      if (!initialized) { init(); }
+
+      const heroW = hero.offsetWidth;
+      const heroH = hero.offsetHeight;
+
+      /* Cursor push */
+      const dx = bx - mx, dy = by - my;
+      const dist = Math.sqrt(dx*dx + dy*dy);
+      if (dist < CURSOR_PUSH && dist > 0) {
+        const force = (1 - dist / CURSOR_PUSH) * 0.6;
+        vx += (dx / dist) * force;
+        vy += (dy / dist) * force;
+      }
+
+      /* Gravity */
+      vy += GRAVITY;
+
+      /* Friction */
+      vx *= FRICTION;
+
+      bx += vx;
+      by += vy;
+
+      /* Floor bounce */
+      if (by + RADIUS > heroH) {
+        by = heroH - RADIUS;
+        vy *= -BOUNCE;
+        vx *= 0.9;
+        /* tiny random nudge so it doesn't just sit still */
+        if (Math.abs(vy) < 0.5) vy = -0.5 - Math.random() * 0.5;
+      }
+      /* Ceiling */
+      if (by - RADIUS < 0) { by = RADIUS; vy *= -BOUNCE; }
+      /* Walls */
+      if (bx - RADIUS < 0)       { bx = RADIUS;        vx *= -BOUNCE; }
+      if (bx + RADIUS > heroW)   { bx = heroW - RADIUS; vx *= -BOUNCE; }
+
+      ball.style.left = bx + 'px';
+      ball.style.top  = by + 'px';
+
+      requestAnimationFrame(tick);
+    }
+
+    /* Wait one frame so hero has laid out */
+    requestAnimationFrame(() => requestAnimationFrame(tick));
   })();
 
   /* ── ORBIT ANIMATION ── */
