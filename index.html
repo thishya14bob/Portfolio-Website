@@ -321,46 +321,25 @@
   }
 
   /* ── ORBITING PHOTO STICKERS ── */
-  /* Orbit system: 3 photos rotate around the hero center on a shared ellipse.
-     Each photo counter-rotates so it stays upright. */
+  /* JS drives x/y position on an ellipse; CSS handles square crop + style */
   .orbit-ring {
     position: absolute;
-    /* Center the ring on the hero */
-    top: 50%; left: 50%;
-    width: 0; height: 0;
-    pointer-events: none;
-  }
-  @keyframes orbit-cw {
-    from { transform: rotate(var(--start-angle)); }
-    to   { transform: rotate(calc(var(--start-angle) + 360deg)); }
-  }
-  @keyframes counter-cw {
-    from { transform: translateX(var(--orbit-r)) rotate(calc(-1 * var(--start-angle))); }
-    to   { transform: translateX(var(--orbit-r)) rotate(calc(-1 * var(--start-angle) - 360deg)); }
-  }
-
-  .orbit-arm {
-    position: absolute;
     top: 0; left: 0;
-    width: 0; height: 0;
-    animation: orbit-cw var(--orbit-dur, 18s) linear infinite;
-    transform-origin: 0 0;
+    width: 100%; height: 100%;
+    pointer-events: none;
+    z-index: 0;
   }
   .orbit-photo {
     position: absolute;
-    top: 0; left: var(--orbit-r, 200px);
-    transform: translateX(var(--orbit-r, 200px)) rotate(calc(-1 * var(--start-angle)));
-    animation: counter-cw var(--orbit-dur, 18s) linear infinite;
-    transform-origin: calc(-1 * var(--orbit-r, 200px)) 0;
-    width: var(--photo-w, 90px);
-    height: var(--photo-h, 80px);
-    margin-top: calc(var(--photo-h, 80px) / -2);
-    margin-left: calc(-1 * var(--photo-w, 90px) / 2);
-    border-radius: 14px;
+    width: 96px;
+    height: 96px;
+    border-radius: 16px;
     overflow: hidden;
     border: 3px solid #fff;
-    box-shadow: 0 8px 24px rgba(0,0,0,.15);
+    box-shadow: 0 8px 28px rgba(0,0,0,.18);
     background: #e8dfd4;
+    will-change: transform, opacity;
+    transform: translate(-50%, -50%);
   }
   .orbit-photo img {
     width: 100%; height: 100%;
@@ -375,10 +354,8 @@
     font-size: 28px;
   }
 
-  /* Start angles are set per-arm via inline style */
-
   @media (prefers-reduced-motion: reduce) {
-    .orbit-arm, .orbit-photo { animation: none; }
+    .orbit-photo { display: none; }
   }
 
   /* ── PROJECTS ── */
@@ -744,43 +721,31 @@
 
   <!-- HERO -->
   <section id="hero">
-    <!-- orbiting photo stickers — 6 photos, 60° apart, 25s loop -->
-    <div class="orbit-ring" style="--orbit-r:240px; --orbit-dur:25s; --photo-w:96px; --photo-h:84px; margin-top:-20px;">
-      <div class="orbit-arm" style="--start-angle:0deg">
-        <div class="orbit-photo">
-          <img src="assets/thishya.jpg" alt="Thishya" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-          <div class="orbit-photo-fallback" style="display:none">🌿</div>
-        </div>
+    <!-- orbiting photo stickers — JS ellipse orbit with bottom fade -->
+    <div class="orbit-ring" id="orbitRing">
+      <div class="orbit-photo" data-offset="0">
+        <img src="assets/thishya.jpg" alt="Thishya" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <div class="orbit-photo-fallback" style="display:none">🌿</div>
       </div>
-      <div class="orbit-arm" style="--start-angle:60deg">
-        <div class="orbit-photo">
-          <img src="assets/horse.jpg" alt="Horse" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-          <div class="orbit-photo-fallback" style="display:none">🐴</div>
-        </div>
+      <div class="orbit-photo" data-offset="1">
+        <img src="assets/horse.jpg" alt="Horse" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <div class="orbit-photo-fallback" style="display:none">🐴</div>
       </div>
-      <div class="orbit-arm" style="--start-angle:120deg">
-        <div class="orbit-photo">
-          <img src="assets/breakfast.jpg" alt="Breakfast" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-          <div class="orbit-photo-fallback" style="display:none">🥣</div>
-        </div>
+      <div class="orbit-photo" data-offset="2">
+        <img src="assets/breakfast.jpg" alt="Breakfast" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <div class="orbit-photo-fallback" style="display:none">🥣</div>
       </div>
-      <div class="orbit-arm" style="--start-angle:180deg">
-        <div class="orbit-photo">
-          <img src="assets/cake.jpg" alt="Cake" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-          <div class="orbit-photo-fallback" style="display:none">🍰</div>
-        </div>
+      <div class="orbit-photo" data-offset="3">
+        <img src="assets/cake.jpg" alt="Cake" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <div class="orbit-photo-fallback" style="display:none">🍰</div>
       </div>
-      <div class="orbit-arm" style="--start-angle:240deg">
-        <div class="orbit-photo">
-          <img src="assets/ocean.jpg" alt="Ocean" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-          <div class="orbit-photo-fallback" style="display:none">🌊</div>
-        </div>
+      <div class="orbit-photo" data-offset="4">
+        <img src="assets/ocean.jpg" alt="Ocean" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <div class="orbit-photo-fallback" style="display:none">🌊</div>
       </div>
-      <div class="orbit-arm" style="--start-angle:300deg">
-        <div class="orbit-photo">
-          <img src="assets/flowers.jpg" alt="Flowers" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-          <div class="orbit-photo-fallback" style="display:none">🌻</div>
-        </div>
+      <div class="orbit-photo" data-offset="5">
+        <img src="assets/flowers.jpg" alt="Flowers" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <div class="orbit-photo-fallback" style="display:none">🌻</div>
       </div>
     </div>
 
@@ -1012,6 +977,58 @@
       if (link.getAttribute('href') === '#' + current) link.classList.add('active');
     });
   }, { passive: true });
+
+  /* ── ORBIT ANIMATION ── */
+  (function() {
+    const hero = document.getElementById('hero');
+    const ring = document.getElementById('orbitRing');
+    if (!hero || !ring) return;
+
+    const photos = Array.from(ring.querySelectorAll('.orbit-photo'));
+    const N = photos.length;
+    const DUR = 28000; // ms for full revolution
+    /* Ellipse: rx wider than ry to spread photos left/right around text.
+       Center offset: slightly above hero center so orbit wraps around title */
+    const RX = 340;   // horizontal radius
+    const RY = 130;   // vertical radius (flat ellipse)
+    const CY_OFFSET = -30; // shift orbit center up relative to hero center
+
+    let start = null;
+
+    function tick(ts) {
+      if (!start) start = ts;
+      const elapsed = ts - start;
+      const heroW = hero.offsetWidth;
+      const heroH = hero.offsetHeight;
+      const cx = heroW / 2;
+      const cy = heroH / 2 + CY_OFFSET;
+
+      photos.forEach((el, i) => {
+        const angle = ((elapsed / DUR) * Math.PI * 2) + (i / N) * Math.PI * 2;
+        const x = cx + RX * Math.cos(angle);
+        const y = cy + RY * Math.sin(angle);
+
+        /* Fade out as photo descends below orbit center — smooth disappear at bottom */
+        const sinVal = Math.sin(angle); // -1=top, +1=bottom
+        const opacity = sinVal > 0
+          ? Math.max(0, 1 - sinVal * 1.4)  // fades to 0 before fully at bottom
+          : 1;
+
+        /* Scale slightly smaller at top (depth illusion) */
+        const scale = 0.78 + 0.22 * ((sinVal + 1) / 2);
+
+        el.style.left = x + 'px';
+        el.style.top  = y + 'px';
+        el.style.opacity = opacity;
+        el.style.transform = `translate(-50%, -50%) scale(${scale})`;
+        el.style.zIndex = sinVal < 0 ? 2 : 0; // above text when in front (top arc)
+      });
+
+      requestAnimationFrame(tick);
+    }
+
+    requestAnimationFrame(tick);
+  })();
 </script>
 </body>
 </html>
