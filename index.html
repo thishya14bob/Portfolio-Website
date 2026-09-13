@@ -210,8 +210,8 @@
     align-items: center;
     justify-content: center;
     gap: 12px;
-    /* Top padding keeps top-arc photos inside hero bounds */
-    padding: 200px 24px 80px;
+    /* Extra top padding so orbit photos on the top arc are never clipped */
+    padding: 180px 24px 100px;
     position: relative;
     overflow: visible;
   }
@@ -976,11 +976,11 @@
 
     /* Ellipse dimensions — wide and relatively flat so photos hover
        well above and to the sides of the title text */
-    /* Orbit center is pinned to the hero BOTTOM edge so the ellipse
-       curves upward through the hero — cards arc over the title and
-       sink back into the Featured Projects divider line */
-    const RX = 400;   // horizontal radius
-    const RY = 320;   // vertical radius (how high into hero photos rise)
+    const RX = 360;   // horizontal radius
+    const RY = 150;   // vertical radius
+    /* Center sits at hero midpoint; with 180px top padding the top arc
+       (cy - RY) is well within the hero bounds and never clipped */
+    const CY_OFFSET = 0;
 
     let start = null;
 
@@ -989,40 +989,38 @@
       const elapsed = ts - start;
       const heroH = hero.offsetHeight;
       const heroW = hero.offsetWidth;
-
-      /* Center X = hero midpoint; Center Y = bottom edge of hero */
       const cx = heroW / 2;
-      const cy = heroH;   // the divider line
+      const cy = heroH / 2 + CY_OFFSET;
 
       photos.forEach((el, i) => {
-        /* Travel the top semicircle only: angle goes from π (left) → 0 (right)
-           passing through -π/2 (top peak). We loop the full circle but
-           photos are only visible on the upper arc (sin < 0). */
-        const angle = Math.PI + ((elapsed / DUR) * Math.PI * 2) + (i / N) * Math.PI * 2;
+        /* Start at top (-π/2) so first photo appears above title on load */
+        const angle = -Math.PI / 2 + ((elapsed / DUR) * Math.PI * 2) + (i / N) * Math.PI * 2;
         const x = cx + RX * Math.cos(angle);
-        const y = cy + RY * Math.sin(angle);  // negative sin = above center = above line
+        const y = cy + RY * Math.sin(angle);
 
-        /* sinVal: -1 = top peak (fully visible), 0 = at the line (fade out),
-           positive = below the line (hidden). Fade window: sin -0.15 → 0 */
+        /* sinVal: -1 = top of ellipse, +1 = bottom.
+           Fade starts when photo descends past the center (sin > 0.1),
+           fully invisible by sin = 0.7 — this aligns fade with the
+           hero/projects boundary line */
         const sinVal = Math.sin(angle);
         let opacity;
-        if (sinVal <= -0.15) {
+        if (sinVal <= 0.1) {
           opacity = 1;
-        } else if (sinVal >= 0) {
+        } else if (sinVal >= 0.7) {
           opacity = 0;
         } else {
-          opacity = sinVal / -0.15; // 1 at -0.15, 0 at 0
+          opacity = 1 - (sinVal - 0.1) / 0.6;
         }
 
-        /* Scale: largest at top peak, smallest near the line */
-        const t = Math.max(0, Math.min(1, (-sinVal)));
-        const scale = 0.75 + 0.25 * t;
+        /* Subtle depth scale: slightly smaller at top */
+        const scale = 0.82 + 0.18 * ((sinVal + 1) / 2);
 
         el.style.left = x + 'px';
         el.style.top  = y + 'px';
         el.style.opacity = opacity;
         el.style.transform = `translate(-50%, -50%) scale(${scale})`;
-        el.style.zIndex = opacity > 0.5 ? 2 : 0;
+        /* Photos on upper arc render above text; lower arc go behind */
+        el.style.zIndex = sinVal < 0.1 ? 2 : 0;
       });
 
       requestAnimationFrame(tick);
