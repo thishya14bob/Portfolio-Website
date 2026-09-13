@@ -319,25 +319,69 @@
     transform: rotate(6deg);
     box-shadow: 0 4px 6px -1px rgba(0,0,0,.1), 0 2px 4px -2px rgba(0,0,0,.1);
   }
-  .sticker-avatar {
-    bottom: 70px; right: 91px;
-    background: #fff;
-    border: 1px solid #e7e5e4;
-    padding: 7px;
-    width: 57px; height: 57px;
-    transform: rotate(3deg);
-    box-shadow: 0 4px 6px -1px rgba(0,0,0,.1), 0 2px 4px -2px rgba(0,0,0,.1);
-    overflow: hidden;
+
+  /* ── ORBITING PHOTO STICKERS ── */
+  /* Orbit system: 3 photos rotate around the hero center on a shared ellipse.
+     Each photo counter-rotates so it stays upright. */
+  .orbit-ring {
+    position: absolute;
+    /* Center the ring on the hero */
+    top: 50%; left: 50%;
+    width: 0; height: 0;
+    pointer-events: none;
   }
-  .sticker-avatar-inner {
-    width: 40px; height: 40px;
-    border-radius: 12px;
-    background: linear-gradient(135deg, #fbbf24, #f59e0b);
+  @keyframes orbit-cw {
+    from { transform: rotate(var(--start-angle)); }
+    to   { transform: rotate(calc(var(--start-angle) + 360deg)); }
+  }
+  @keyframes counter-cw {
+    from { transform: translateX(var(--orbit-r)) rotate(calc(-1 * var(--start-angle))); }
+    to   { transform: translateX(var(--orbit-r)) rotate(calc(-1 * var(--start-angle) - 360deg)); }
+  }
+
+  .orbit-arm {
+    position: absolute;
+    top: 0; left: 0;
+    width: 0; height: 0;
+    animation: orbit-cw var(--orbit-dur, 18s) linear infinite;
+    transform-origin: 0 0;
+  }
+  .orbit-photo {
+    position: absolute;
+    top: 0; left: var(--orbit-r, 200px);
+    transform: translateX(var(--orbit-r, 200px)) rotate(calc(-1 * var(--start-angle)));
+    animation: counter-cw var(--orbit-dur, 18s) linear infinite;
+    transform-origin: calc(-1 * var(--orbit-r, 200px)) 0;
+    width: var(--photo-w, 90px);
+    height: var(--photo-h, 80px);
+    margin-top: calc(var(--photo-h, 80px) / -2);
+    margin-left: calc(-1 * var(--photo-w, 90px) / 2);
+    border-radius: 14px;
     overflow: hidden;
+    border: 3px solid #fff;
+    box-shadow: 0 8px 24px rgba(0,0,0,.15);
+    background: #e8dfd4;
+  }
+  .orbit-photo img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .orbit-photo-fallback {
+    width: 100%; height: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 22px;
+    font-size: 28px;
+  }
+
+  /* Three arms, offset 120° each */
+  .orbit-arm:nth-child(1) { --start-angle: 0deg; }
+  .orbit-arm:nth-child(2) { --start-angle: 120deg; }
+  .orbit-arm:nth-child(3) { --start-angle: 240deg; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .orbit-arm, .orbit-photo { animation: none; }
   }
 
   /* ── PROJECTS ── */
@@ -703,20 +747,29 @@
 
   <!-- HERO -->
   <section id="hero">
-    <!-- stickers -->
-    <div class="sticker sticker-pluto">pluto<span>tv</span></div>
-    <div class="sticker sticker-figma">
-      <svg viewBox="0 0 24 24" fill="none">
-        <path d="M8 24c2.2 0 4-1.8 4-4v-4H8c-2.2 0-4 1.8-4 4s1.8 4 4 4z" fill="#0ACF83"/>
-        <path d="M4 12c0-2.2 1.8-4 4-4h4v8H8c-2.2 0-4-1.8-4-4z" fill="#A259FF"/>
-        <path d="M4 4c0-2.2 1.8-4 4-4h4v8H8C5.8 8 4 6.2 4 4z" fill="#F24E1E"/>
-        <path d="M12 0h4c2.2 0 4 1.8 4 4s-1.8 4-4 4h-4V0z" fill="#FF7262"/>
-        <path d="M20 12c0 2.2-1.8 4-4 4s-4-1.8-4-4 1.8-4 4-4 4 1.8 4 4z" fill="#1ABCFE"/>
-      </svg>
-    </div>
-    <div class="sticker sticker-cat">🐱</div>
-    <div class="sticker sticker-avatar">
-      <div class="sticker-avatar-inner">🧋</div>
+    <!-- orbiting photo stickers -->
+    <div class="orbit-ring" style="--orbit-r:220px; --orbit-dur:20s; --photo-w:100px; --photo-h:88px; margin-top:-20px;">
+      <!-- Photo 1: Thishya in forest -->
+      <div class="orbit-arm">
+        <div class="orbit-photo">
+          <img src="assets/thishya.jpg" alt="Thishya" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="orbit-photo-fallback" style="display:none">🌿</div>
+        </div>
+      </div>
+      <!-- Photo 2: Horse -->
+      <div class="orbit-arm">
+        <div class="orbit-photo">
+          <img src="assets/horse.jpg" alt="Horse" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="orbit-photo-fallback" style="display:none">🐴</div>
+        </div>
+      </div>
+      <!-- Photo 3: Breakfast bowl -->
+      <div class="orbit-arm">
+        <div class="orbit-photo">
+          <img src="assets/breakfast.jpg" alt="Breakfast" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="orbit-photo-fallback" style="display:none">🥣</div>
+        </div>
+      </div>
     </div>
 
     <!-- content -->
