@@ -274,14 +274,20 @@
     text-align: center;
     max-width: 560px;
   }
-  .hero-mission .accent { color: #2200ff; font-weight: 600; }
+  .hero-mission .accent { color: #2200ff; font-weight: 400; }
   .hero-mission .accent-link {
     text-decoration: underline;
-    text-decoration-color: rgba(34,0,255,.3);
-    text-underline-offset: 2px;
-    transition: text-decoration-color .2s;
+    text-decoration-color: #2200ff;
+    text-underline-offset: 3px;
+    text-decoration-thickness: 1px;
+    transition: color .15s, background .15s;
+    border-radius: 2px;
+    padding: 0 1px;
   }
-  .hero-mission .accent-link:hover { text-decoration-color: #2200ff; }
+  .hero-mission .accent-link:hover {
+    background: rgba(34,0,255,.08);
+    color: #1a00cc;
+  }
 
   .hero-status {
     font-family: 'Inter', sans-serif;
