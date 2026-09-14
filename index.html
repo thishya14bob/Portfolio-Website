@@ -698,11 +698,6 @@
 <!-- ── SIDEBAR ── -->
 <aside id="sidebar">
   <div class="sidebar-top">
-    <!-- Starburst mark -->
-    <svg class="starburst" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M16 2 L17.4 13.5 L28 10 L19.5 18 L28 22 L17.4 18.5 L16 30 L14.6 18.5 L4 22 L12.5 18 L4 10 L14.6 13.5 Z" fill="#a2e048"/>
-    </svg>
-
     <div class="sidebar-name">Thishya Mannur</div>
     <div class="sidebar-tagline">"Product Designer and Builder, by accident."</div>
     <div class="sidebar-bio">"I skate, I love traveling, and I'm either all in or all out on everything and I'm curious to see where that takes me next."</div>
@@ -742,9 +737,8 @@
   <div class="sidebar-bottom">
     <div class="clock-wrap">
       <div class="clock-time" id="liveClock">--:--:-- --</div>
-      <div class="clock-location">San Francisco, CA</div>
+      <div class="clock-location">Mumbai, India · IST</div>
     </div>
-    <div class="mascot">🤖</div>
   </div>
 </aside>
 
@@ -977,14 +971,14 @@
     el.addEventListener('mouseleave', () => cursor.classList.remove('big'));
   });
 
-  /* ── LIVE CLOCK (PT) ── */
+  /* ── LIVE CLOCK (IST) ── */
   function updateClock() {
     const now = new Date();
-    const pt = new Intl.DateTimeFormat('en-US', {
-      timeZone: 'America/Los_Angeles',
+    const ist = new Intl.DateTimeFormat('en-IN', {
+      timeZone: 'Asia/Kolkata',
       hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true
     }).format(now);
-    document.getElementById('liveClock').textContent = pt;
+    document.getElementById('liveClock').textContent = ist;
   }
   updateClock();
   setInterval(updateClock, 1000);
