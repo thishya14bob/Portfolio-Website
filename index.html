@@ -1011,12 +1011,12 @@
     const canvas = document.getElementById('particle-canvas');
     if (!h1 || !canvas) return;
 
-    /* Split title into letter spans */
+    /* Split title into letter spans; mark apostrophe for physics ball */
     const text = h1.textContent;
     h1.innerHTML = text.split('').map(ch =>
       ch === ' '
         ? '<span class="mag-space"> </span>'
-        : `<span class="mag-letter">${ch}</span>`
+        : `<span class="mag-letter" data-ch="${ch}">${ch}</span>`
     ).join('');
 
     const ctx = canvas.getContext('2d');
@@ -1097,14 +1097,14 @@
     const h1    = document.querySelector('.hero-title');
     if (!hero || !ball || !h1) return;
 
-    /* Hide the apostrophe; find the lowercase "i" in "i'm" to drop from its dot */
+    /* Hide the apostrophe (straight ' or curly '); find lowercase "i" in "i'm" */
     const spans = Array.from(h1.querySelectorAll('.mag-letter'));
-    const apostropheSpan = spans.find(s => s.textContent === "'");
+    const apostropheSpan = spans.find(s => /['']/.test(s.textContent));
     if (apostropheSpan) apostropheSpan.classList.add('apos-hidden');
 
     /* The lowercase "i" in "i'm" — second "i" in the title */
     const allI = spans.filter(s => s.textContent === 'i');
-    const dotI = allI[1] || allI[0]; /* "i" from "i'm" */
+    const dotI = allI[1] || allI[0];
 
     const RADIUS  = 5.5;   // ball radius px
     const GRAVITY = 0.22;
