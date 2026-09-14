@@ -1101,7 +1101,8 @@
     /* Hide the apostrophe (straight ' or curly '); find lowercase "i" in "i'm" */
     const spans = Array.from(h1.querySelectorAll('.mag-letter'));
     const apostropheSpan = spans.find(s => /['']/.test(s.textContent));
-    if (apostropheSpan) apostropheSpan.classList.add('apos-hidden');
+    /* Keep apostrophe visible — ball is a separate floating element */
+    // if (apostropheSpan) apostropheSpan.classList.add('apos-hidden');
 
     /* The lowercase "i" in "i'm" — second "i" in the title */
     const allI = spans.filter(s => s.textContent === 'i');
