@@ -294,15 +294,6 @@
     text-align: center;
     max-width: 480px;
     margin-top: 2px;
-    min-height: 1.4em;
-  }
-  .tw-cursor {
-    display: inline-block;
-    color: #78716c;
-    animation: tw-blink .7s step-end infinite;
-    margin-left: 1px;
-  }
-  @keyframes tw-blink { 0%,100%{opacity:1} 50%{opacity:0} }
 
   .hero-cta {
     margin-top: 8px;
@@ -792,7 +783,7 @@
     <p class="hero-mission">
       "Right now I'm building <a href="https://prruf.com/" target="_blank" rel="noopener" class="accent accent-link">Prruf</a> and co-founding <a href="https://wasabie.in/" target="_blank" rel="noopener" class="accent accent-link">Wasabie Studios</a>."
     </p>
-    <p class="hero-status"><span id="typewriter"></span><span class="tw-cursor">|</span></p>
+    <p class="hero-status">"just here to make cool things and have a good time doing it."</p>
     <a href="#projects" class="hero-cta">View my work ! ↓</a>
   </section>
 
@@ -1262,44 +1253,6 @@
     requestAnimationFrame(tick);
   })();
 
-  /* ── TYPEWRITER CYCLING STATUS ── */
-  (function() {
-    const lines = [
-      '"just here to make cool things and have a good time doing it."',
-      '"currently: designing, building, and drinking too much coffee."',
-      '"obsessed with details no one else notices."',
-      '"making the internet a little more thoughtful, one pixel at a time."',
-    ];
-    const el = document.getElementById('typewriter');
-    if (!el) return;
-    let lineIdx = 0, charIdx = 0, deleting = false;
-    const TYPE_SPEED = 38, DELETE_SPEED = 18, PAUSE = 2400;
-
-    function tick() {
-      const current = lines[lineIdx];
-      if (!deleting) {
-        charIdx++;
-        el.textContent = current.slice(0, charIdx);
-        if (charIdx === current.length) {
-          deleting = true;
-          setTimeout(tick, PAUSE);
-          return;
-        }
-        setTimeout(tick, TYPE_SPEED);
-      } else {
-        charIdx--;
-        el.textContent = current.slice(0, charIdx);
-        if (charIdx === 0) {
-          deleting = false;
-          lineIdx = (lineIdx + 1) % lines.length;
-          setTimeout(tick, 300);
-          return;
-        }
-        setTimeout(tick, DELETE_SPEED);
-      }
-    }
-    setTimeout(tick, 800);
-  })();
 </script>
 </body>
 </html>
