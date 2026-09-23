@@ -381,128 +381,101 @@
   .wa-text { font-family: 'Inter', sans-serif; font-size: 14px; line-height: 1.5; color: #111b21; }
   .wa-time { font-family: 'Inter', sans-serif; font-size: 10px; color: #8696a0; text-align: right; margin-top: 4px; }
 
-  /* ── HOW IT WORKS: interactive tour ── */
-  .tour-stage { position: relative; overflow: hidden; margin-top: 28px; border: 1px solid #e2dcd2; border-radius: 20px; background: #efebe4; background-image: radial-gradient(circle, rgba(0,0,0,.06) 1px, transparent 1px); background-size: 18px 18px; padding: 48px 20px 64px; min-height: 580px; display: flex; justify-content: flex-start; padding-left: 64px; }
-  .tour-device { width: 340px; position: relative; z-index: 1; }
-  .tour-bar { display: flex; align-items: center; justify-content: flex-end; gap: 14px; height: 26px; padding: 0 12px; border-radius: 10px 10px 0 0; background: #e4ded3; border: 1px solid #d6cfc2; border-bottom: none; font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #57534e; }
-  .tour-bar .on { display: inline-flex; align-items: center; gap: 5px; color: #15803d; }
-  .tour-bar .on i { width: 7px; height: 7px; border-radius: 50%; background: #22c55e; box-shadow: 0 0 6px #22c55e; }
-  .tour-app { background: #fbf9f5; border: 1px solid #d6cfc2; border-radius: 0 0 14px 14px; box-shadow: 0 24px 50px -24px rgba(28,25,23,.35); overflow: hidden; position: relative; }
-  .tour-head { padding: 14px 16px 12px; border-bottom: 1px solid #e7e1d6; }
-  .tour-title-row { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
-  .tour-title { display: flex; align-items: center; gap: 9px; font-family: 'DM Sans', sans-serif; font-size: 15px; font-weight: 500; color: #1c1917; }
-  .tour-mark { width: 22px; height: 22px; flex: none; }
-  .tour-chip { font-family: 'Inter', sans-serif; font-size: 11px; font-weight: 500; padding: 4px 9px; border-radius: 999px; display: inline-flex; align-items: center; gap: 6px; color: #15803d; background: #dcfce7; white-space: nowrap; }
-  .tour-chip i { width: 7px; height: 7px; border-radius: 50%; background: #22c55e; }
-  .tour-sub { font-family: 'Inter', sans-serif; font-size: 11px; color: #a8a29e; margin-top: 7px; }
-  .tour-log { padding: 4px 16px 12px; }
-  .tour-entry { padding: 11px 0; border-bottom: 1px solid #efe9df; display: flex; flex-direction: column; gap: 4px; }
-  .tour-entry:last-child { border-bottom: none; }
-  .tour-entry[hidden] { display: none; }
-  .tour-entry .row { display: flex; align-items: center; gap: 8px; }
-  .tour-entry time { font-family: 'JetBrains Mono', monospace; font-size: 10.5px; color: #a8a29e; }
-  .tour-badge { font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 600; color: #2200ff; background: #eceaff; border-radius: 4px; padding: 1px 6px; }
-  .tour-entry .desc { font-family: 'Inter', sans-serif; font-size: 13px; line-height: 1.4; color: #1c1917; }
-  .tour-entry.live { animation: tourPop .5s ease both; }
-  .tour-flash { font-family: 'Inter', sans-serif; font-size: 10.5px; color: #15803d; }
-  @keyframes tourPop { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
-  .tour-cbx { width: 15px; height: 15px; border: 1.5px solid #d6cfc2; border-radius: 4px; flex: none; display: none; align-items: center; justify-content: center; }
-  .tour-app.review .tour-cbx { display: inline-flex; }
-  .tour-cbx svg { opacity: 0; }
-  .tour-app.review .tour-entry.sel .tour-cbx { background: #2200ff; border-color: #2200ff; }
-  .tour-app.review .tour-entry.sel .tour-cbx svg { opacity: 1; }
-  .tour-review { display: none; gap: 8px; padding: 10px 16px; border-top: 1px solid #e7e1d6; background: #f4f0e8; }
-  .tour-review.show { display: flex; }
-  .tour-review span { flex: 1; text-align: center; font-family: 'Inter', sans-serif; font-size: 12px; font-weight: 500; padding: 8px; border-radius: 8px; border: 1px solid #d6cfc2; background: #fff; color: #1c1917; }
-  .tour-review span.key { background: #2200ff; border-color: #2200ff; color: #fff; }
-  .tour-foot { padding: 9px 16px; border-top: 1px solid #e7e1d6; font-family: 'Inter', sans-serif; font-size: 10.5px; color: #78716c; }
-  .tour-foot b { color: #1c1917; font-weight: 600; }
-  .tour-break { position: absolute; left: 14px; right: 14px; bottom: 14px; z-index: 3; display: none; background: #fff; border: 1px solid #f59e0b; border-radius: 12px; padding: 13px 14px; box-shadow: 0 16px 30px -14px rgba(0,0,0,.25); animation: tourPop .4s ease both; }
-  .tour-break.show { display: block; }
-  .tour-break .top { display: flex; align-items: center; gap: 9px; margin-bottom: 8px; }
-  .tour-break .q { font-family: 'DM Sans', sans-serif; font-weight: 500; font-size: 14px; color: #1c1917; }
-  .tour-break .sub { font-family: 'Inter', sans-serif; font-size: 11px; line-height: 1.45; color: #78716c; margin-bottom: 11px; }
-  .tour-break .btns { display: flex; gap: 8px; }
-  .tour-break .btns span { flex: 1; text-align: center; font-family: 'Inter', sans-serif; font-size: 12px; font-weight: 500; padding: 8px; border-radius: 8px; border: 1px solid #e2dcd2; color: #1c1917; }
-  .tour-break .btns span.pause { background: #f59e0b; border-color: #f59e0b; color: #fff; }
-  .tour-report { display: none; padding: 14px 16px 16px; font-family: 'Inter', sans-serif; }
-  .tour-report.show { display: block; animation: tourPop .4s ease both; }
-  .tour-report .sum { font-size: 12.5px; line-height: 1.5; color: #44403c; background: #f4f0e8; border-left: 3px solid #2200ff; padding: 10px 12px; border-radius: 0 8px 8px 0; margin-bottom: 12px; }
-  .tour-report h4 { font-size: 9px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: #78716c; margin-bottom: 8px; }
-  .tour-report ul { list-style: none; display: flex; flex-direction: column; gap: 8px; margin-bottom: 12px; }
-  .tour-report li { font-size: 12.5px; line-height: 1.4; color: #1c1917; display: flex; gap: 8px; }
-  .tour-report li::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: #2200ff; margin-top: 6px; flex: none; }
-  .tour-report .export { text-align: center; font-size: 12.5px; font-weight: 500; padding: 9px; border-radius: 999px; background: #1c1917; color: #fff; }
-  .tour-spot { position: absolute; z-index: 2; border-radius: 12px; pointer-events: none; opacity: 0; box-shadow: 0 0 0 2px #2200ff, 0 0 0 9999px rgba(28,25,23,.45); transition: all .42s cubic-bezier(.4,0,.2,1); }
-  .tour-spot.show { opacity: 1; }
-  .tour-coach { position: absolute; z-index: 4; width: 290px; background: #fff; border: 1px solid #e2dcd2; border-radius: 14px; box-shadow: 0 24px 50px -20px rgba(28,25,23,.4); padding: 16px 16px 14px; transition: top .42s cubic-bezier(.4,0,.2,1), left .42s cubic-bezier(.4,0,.2,1); }
-  .tour-coach .c-top { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
-  .tour-coach .c-m { width: 32px; height: 32px; flex: none; }
-  .tour-coach .c-step { font-family: 'JetBrains Mono', monospace; font-size: 10.5px; color: #a8a29e; letter-spacing: .1em; }
-  .tour-coach h3 { font-family: 'DM Sans', sans-serif; font-size: 16px; font-weight: 500; color: #1c1917; }
-  .tour-coach p { font-family: 'Inter', sans-serif; font-size: 13px; line-height: 1.55; color: #57534e; margin: 2px 0 14px; }
-  .tour-coach .c-ctrl { display: flex; align-items: center; gap: 8px; }
-  .tour-dots { display: flex; gap: 6px; flex: 1; }
-  .tour-dots i { width: 6px; height: 6px; border-radius: 50%; background: #e2dcd2; transition: all .3s; }
-  .tour-dots i.on { width: 16px; border-radius: 3px; background: #2200ff; }
-  .tour-stage button { font-family: 'Inter', sans-serif; font-size: 12.5px; font-weight: 500; border-radius: 999px; padding: 7px 14px; border: 1px solid #e2dcd2; background: transparent; color: #1c1917; cursor: none; }
-  .tour-stage button.next, .tour-done button.again { background: #1c1917; border-color: #1c1917; color: #fff; }
-  .tour-stage button.ghost { border-color: transparent; color: #78716c; padding: 7px 6px; }
-  .tour-stage button:disabled { opacity: .35; }
-  .tour-arrow { position: absolute; width: 14px; height: 14px; background: #fff; border: 1px solid #e2dcd2; transform: rotate(45deg); }
-  .tour-skip { position: absolute; top: 14px; right: 16px; z-index: 5; background: rgba(255,255,255,.8) !important; }
-  .tour-done { position: absolute; inset: 0; z-index: 6; display: none; align-items: center; justify-content: center; padding: 24px; background: rgba(28,25,23,.35); backdrop-filter: blur(3px); }
-  .tour-done.show { display: flex; animation: tourPop .4s ease both; }
-  .tour-done .card { background: #fff; border: 1px solid #e2dcd2; border-radius: 16px; padding: 26px 24px; max-width: 340px; text-align: center; }
-  .tour-done .m { width: 48px; height: 48px; margin: 0 auto 12px; }
-  .tour-done h3 { font-family: 'DM Sans', sans-serif; font-weight: 500; font-size: 19px; color: #1c1917; margin-bottom: 8px; }
-  .tour-done p { font-family: 'Inter', sans-serif; font-size: 13.5px; line-height: 1.55; color: #57534e; margin-bottom: 18px; }
-  .tour-hint { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 1.2px; text-transform: uppercase; color: #a8a29e; margin-top: 10px; text-align: center; }
-  /* Prruf brand colours for the walkthrough */
-  .tour-stage { background: radial-gradient(700px 380px at 50% -30%, rgba(58,114,230,.12), transparent 70%), linear-gradient(170deg, #e7ecf3, #dde4ee); border-color: #cdd5e2; }
-  .tour-bar { background: linear-gradient(#2b2d34,#232529); border-color: #2c2e36; color: #c7c9d1; }
-  .tour-bar .on { color: #2ecc71; } .tour-bar .on i { background: #2ecc71; box-shadow: 0 0 6px #2ecc71; }
-  .tour-app { background: #16171b; border-color: #2c2e36; box-shadow: 0 24px 60px -28px rgba(23,37,84,.55); }
-  .tour-head, .tour-foot, .tour-review { border-color: #2c2e36; }
-  .tour-title { font-family: 'Space Grotesk', sans-serif; font-weight: 600; color: #e8e8ea; }
-  .tour-chip { color: #2ecc71; background: #1f3328; } .tour-chip i { background: #2ecc71; box-shadow: 0 0 6px #2ecc71; }
-  .tour-sub, .tour-entry time, .tour-foot { color: #9a9ba1; }
-  .tour-foot b { color: #e8e8ea; }
-  .tour-entry { border-color: #2c2e36; }
-  .tour-entry .desc { color: #e8e8ea; }
-  .tour-badge { color: #6ea8fe; background: #262a33; }
-  .tour-flash { color: #2ecc71; }
-  .tour-cbx { border-color: #3a3d46; }
-  .tour-app.review .tour-entry.sel .tour-cbx { background: #6ea8fe; border-color: #6ea8fe; }
-  .tour-review { background: #191b21; }
-  .tour-review span { background: #22252d; border-color: #2c2e36; color: #e8e8ea; }
-  .tour-review span.key { background: #6ea8fe; border-color: #6ea8fe; color: #0c1220; }
-  .tour-break { background: linear-gradient(#20232b,#1b1d24); border-color: #e0a44a; }
-  .tour-break .q { font-family: 'Space Grotesk', sans-serif; font-weight: 600; color: #e8e8ea; }
-  .tour-break .sub { color: #9a9ba1; }
-  .tour-break .btns span { background: #23262e; border-color: #2c2e36; color: #e8e8ea; }
-  .tour-break .btns span.pause { background: #e0a44a; border-color: #e0a44a; color: #241704; }
-  .tour-report .sum { background: #1b1d24; color: #cfd2da; border: 1px solid #2c2e36; border-left: 3px solid #6ea8fe; border-radius: 8px; }
-  .tour-report h4 { color: #9a9ba1; }
-  .tour-report li { color: #e8e8ea; } .tour-report li::before { background: #6ea8fe; }
-  .tour-report .export { background: #6ea8fe; color: #0c1220; border-radius: 8px; font-weight: 600; }
-  .tour-spot { box-shadow: 0 0 0 2px #3a72e6, 0 0 0 9999px rgba(10,11,14,.55); }
-  .tour-coach { border-color: #d6dde8; box-shadow: 0 24px 60px -28px rgba(23,37,84,.45); }
-  .tour-coach h3, .tour-done h3 { font-family: 'Space Grotesk', sans-serif; font-weight: 600; color: #1a1d24; }
-  .tour-coach p, .tour-done p { color: #5b6474; }
-  .tour-dots i { background: #cdd5e2; } .tour-dots i.on { background: #3a72e6; }
-  .tour-stage button { border-radius: 8px; border-color: #d6dde8; font-weight: 600; }
-  .tour-stage button.next, .tour-done button.again { background: #3a72e6; border-color: #3a72e6; color: #fff; }
-  .tour-arrow { border-color: #d6dde8; }
-  .tour-done { background: rgba(10,11,14,.5); }
+  /* ── HOW IT WORKS: Prruf walkthrough on a Mac desktop ── */
+  .pr-stage { position: relative; overflow: hidden; margin-top: 28px; border-radius: 16px; height: 720px; border: 1px solid #1c1917; box-shadow: 0 24px 60px -30px rgba(0,0,0,.45); font-family: 'Inter', -apple-system, 'Segoe UI', sans-serif;
+    background: radial-gradient(120% 90% at 20% 110%, #f59e5b 0%, transparent 45%), radial-gradient(90% 80% at 90% 100%, #c2417a 0%, transparent 50%), radial-gradient(120% 90% at 50% -10%, #3b5bdb 0%, transparent 60%), linear-gradient(160deg, #1e3a8a, #6d28d9 55%, #db2777); }
+  .pr-menubar { position: absolute; top: 0; left: 0; right: 0; height: 26px; display: flex; align-items: center; gap: 18px; padding: 0 14px; background: rgba(20,20,30,.28); backdrop-filter: blur(20px); color: #fff; font-size: 12.5px; z-index: 1; }
+  .pr-menubar b { font-weight: 600; }
+  .pr-menubar .right { margin-left: auto; display: flex; gap: 14px; align-items: center; }
+  .pr-bgwin { position: absolute; top: 60px; right: 40px; width: 380px; height: 250px; border-radius: 10px; background: #2c2c2c; box-shadow: 0 20px 50px rgba(0,0,0,.35); overflow: hidden; opacity: .9; }
+  .pr-bgwin .tb { height: 28px; background: #383838; display: flex; align-items: center; gap: 7px; padding: 0 10px; font-size: 11px; color: #bbb; }
+  .pr-bgwin .tb span { margin-left: 8px; }
+  .pr-bgwin .canvas { position: absolute; inset: 28px 0 0 0; background: #1e1e1e; }
+  .pr-bgwin .canvas i { position: absolute; background: #3a3a3a; border-radius: 4px; }
+  .pr-dock { position: absolute; bottom: 8px; left: 50%; transform: translateX(-50%); display: flex; gap: 8px; padding: 6px 8px; border-radius: 16px; background: rgba(255,255,255,.22); backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,.3); z-index: 1; }
+  .pr-dock i { width: 38px; height: 38px; border-radius: 10px; display: block; position: relative; }
+  .pr-dock i.active::after { content: ''; position: absolute; bottom: -5px; left: 50%; width: 4px; height: 4px; margin-left: -2px; border-radius: 50%; background: rgba(255,255,255,.8); }
+  .pr-dl { position: absolute; width: 11px; height: 11px; border-radius: 50%; display: inline-block; }
+  .tl { display: inline-block; width: 12px; height: 12px; border-radius: 50%; }
+  .tl.r { background: #ff5f57; } .tl.y { background: #febc2e; } .tl.g { background: #28c840; }
 
+  .pr-win { position: absolute; top: 48px; left: 44px; width: 380px; height: 610px; z-index: 2; border-radius: 12px; overflow: hidden; background: #17181c; box-shadow: 0 30px 70px -20px rgba(0,0,0,.6), 0 0 0 1px rgba(255,255,255,.08); display: flex; flex-direction: column; color: #e6e6e8; }
+  .pr-titlebar { height: 30px; flex: none; display: flex; align-items: center; gap: 8px; padding: 0 12px; background: #232428; border-bottom: 1px solid #2c2d33; }
+  .pr-titlebar .t { position: absolute; left: 50%; transform: translateX(-50%); font-size: 12px; color: #9a9ba1; }
+  .pr-head { padding: 16px 18px 12px; border-bottom: 1px solid #2c2d33; flex: none; }
+  .pr-head-row { display: flex; align-items: center; justify-content: space-between; }
+  .pr-logo { font-size: 17px; font-weight: 600; color: #f2f2f3; }
+  .pr-status { display: inline-flex; align-items: center; gap: 7px; font-size: 12px; padding: 5px 11px; border-radius: 999px; background: #26272d; color: #b7b8be; }
+  .pr-status i { width: 8px; height: 8px; border-radius: 50%; background: #9a9ba1; }
+  .pr-status.on { background: #1d3326; color: #4ade80; } .pr-status.on i { background: #4ade80; box-shadow: 0 0 6px #4ade80; }
+  .pr-sub { font-size: 11px; color: #9a9ba1; margin-top: 8px; }
+  .pr-body { flex: 1; overflow: hidden; padding: 12px 18px; display: flex; flex-direction: column; gap: 9px; position: relative; }
+  .pr-body > * { flex: none; }
+  .pr-btn { border-radius: 8px; padding: 10px 12px; font-size: 13px; text-align: center; background: #1f2026; border: 1px solid #2e2f35; color: #e6e6e8; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .pr-btn.primary { background: #6ea8fe; border-color: #6ea8fe; color: #10131a; }
+  .pr-btn.dim { background: #20222a; }
+  .pr-input { border-radius: 8px; padding: 10px 12px; font-size: 12px; background: #17181c; border: 1px solid #2e2f35; color: #6b6c72; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .pr-row { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .pr-row.combine { grid-template-columns: 1fr auto; }
+  .pr-help { font-size: 11px; line-height: 1.5; color: #9a9ba1; }
+  .pr-card { display: flex; align-items: center; gap: 12px; padding: 12px 14px; border-radius: 10px; background: #1f2026; border: 1px solid #2e2f35; }
+  .pr-card .cb { width: 16px; height: 16px; border-radius: 3px; background: #fff; flex: none; }
+  .pr-card .nm { font-size: 14px; font-weight: 600; color: #6b6c72; }
+  .pr-card .meta { font-size: 11px; color: #9a9ba1; margin-top: 3px; }
+  .pr-card .open { margin-left: auto; font-size: 12px; color: #6ea8fe; border: 1px solid #2e2f35; border-radius: 6px; padding: 4px 9px; white-space: nowrap; }
+  .pr-empty { text-align: center; font-size: 12.5px; line-height: 1.6; color: #9a9ba1; margin-top: 22px; }
+  .pr-cap { padding: 7px 12px; border-radius: 10px; background: #1f2026; border: 1px solid #2e2f35; animation: prPop .45s ease both; display: flex; gap: 10px; align-items: flex-start; }
+  .pr-cap .cb { width: 14px; height: 14px; border-radius: 3px; border: 1.5px solid #4a4b52; flex: none; margin-top: 2px; display: none; }
+  .pr-win.review .pr-cap .cb { display: block; }
+  .pr-win.review .pr-cap.sel .cb { background: #6ea8fe; border-color: #6ea8fe; }
+  .pr-cap time { font-size: 10.5px; color: #9a9ba1; font-family: 'JetBrains Mono', monospace; }
+  .pr-cap .d { font-size: 12.5px; line-height: 1.4; color: #e6e6e8; margin-top: 2px; }
+  .pr-cap .del { font-size: 10.5px; color: #4ade80; margin-top: 3px; }
+  .pr-foot { flex: none; padding: 10px 18px 12px; border-top: 1px solid #2c2d33; font-size: 11px; line-height: 1.6; color: #9a9ba1; }
+  .pr-foot b { color: #e6e6e8; font-weight: 600; }
+  .pr-break { position: absolute; left: 14px; right: 14px; bottom: 14px; padding: 13px 14px; border-radius: 12px; background: #202228; border: 1px solid #e0a44a; box-shadow: 0 16px 30px -14px rgba(0,0,0,.7); animation: prPop .4s ease both; }
+  .pr-break .q { font-size: 13.5px; font-weight: 600; color: #f2f2f3; margin-bottom: 5px; }
+  .pr-break .s { font-size: 11px; line-height: 1.45; color: #9a9ba1; margin-bottom: 10px; }
+  .pr-break .r { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .pr-break .r .pr-btn { padding: 8px; font-size: 12px; }
+  .pr-break .r .pr-btn.amber { background: #e0a44a; border-color: #e0a44a; color: #241704; }
+  .pr-rep { background: #1f2026; border: 1px solid #2e2f35; border-left: 3px solid #6ea8fe; border-radius: 8px; padding: 10px 12px; font-size: 12px; line-height: 1.5; color: #cfd2da; }
+  .pr-h4 { font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase; color: #9a9ba1; font-weight: 600; }
+  .pr-li { font-size: 12.5px; color: #e6e6e8; display: flex; gap: 8px; }
+  .pr-li::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: #6ea8fe; margin-top: 6px; flex: none; }
+  [data-scr] { display: none; } [data-scr].on { display: flex; } .pr-head[data-scr].on { display: block; }
+  @keyframes prPop { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+
+  .pr-spot { position: absolute; z-index: 3; border-radius: 10px; pointer-events: none; opacity: 0; box-shadow: 0 0 0 2px #6ea8fe, 0 0 0 9999px rgba(8,8,12,.5); transition: all .42s cubic-bezier(.4,0,.2,1); }
+  .pr-spot.show { opacity: 1; }
+  .pr-coach { position: absolute; z-index: 4; width: 280px; background: #fff; border-radius: 14px; box-shadow: 0 24px 60px -20px rgba(0,0,0,.55); padding: 16px 16px 14px; transition: top .42s cubic-bezier(.4,0,.2,1), left .42s cubic-bezier(.4,0,.2,1); }
+  .pr-coach .st { font-family: 'JetBrains Mono', monospace; font-size: 10.5px; color: #8a90a0; letter-spacing: .1em; }
+  .pr-coach h3 { font-family: 'Space Grotesk', sans-serif; font-size: 16px; font-weight: 600; color: #1a1d24; margin: 2px 0 6px; }
+  .pr-coach p { font-size: 13px; line-height: 1.55; color: #5b6474; margin-bottom: 14px; }
+  .pr-ctrl { display: flex; align-items: center; gap: 8px; }
+  .pr-dots { display: flex; gap: 5px; flex: 1; }
+  .pr-dots i { width: 6px; height: 6px; border-radius: 50%; background: #d6dde8; transition: all .3s; }
+  .pr-dots i.on { width: 16px; border-radius: 3px; background: #3a72e6; }
+  .pr-stage button { font-family: 'Inter', sans-serif; font-size: 12.5px; font-weight: 600; border-radius: 8px; padding: 7px 14px; border: 1px solid #d6dde8; background: #fff; color: #1a1d24; cursor: none; }
+  .pr-stage button.next { background: #3a72e6; border-color: #3a72e6; color: #fff; }
+  .pr-stage button.ghost { border-color: transparent; background: transparent; color: #5b6474; padding: 7px 6px; }
+  .pr-stage button:disabled { opacity: .35; }
+  .pr-arrow { position: absolute; width: 14px; height: 14px; background: #fff; transform: rotate(45deg); }
+  .pr-skip { position: absolute; top: 36px; right: 14px; z-index: 5; }
+  .pr-done { position: absolute; inset: 0; z-index: 6; display: none; align-items: center; justify-content: center; padding: 24px; background: rgba(8,8,12,.45); backdrop-filter: blur(3px); }
+  .pr-done.show { display: flex; animation: prPop .4s ease both; }
+  .pr-done .card { background: #fff; border-radius: 16px; padding: 26px 24px; max-width: 340px; text-align: center; }
+  .pr-done h3 { font-family: 'Space Grotesk', sans-serif; font-size: 19px; color: #1a1d24; margin-bottom: 8px; }
+  .pr-done p { font-size: 13.5px; line-height: 1.55; color: #5b6474; margin-bottom: 18px; }
+  .pr-hint { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 1.2px; text-transform: uppercase; color: #a8a29e; margin-top: 10px; text-align: center; }
   @media (max-width: 900px) {
-    .tour-stage { padding: 48px 16px 250px; justify-content: center; }
-    .tour-device { width: 100%; max-width: 340px; }
-    .tour-coach { left: 16px !important; right: 16px; top: auto !important; bottom: 16px; width: auto; }
-    .tour-arrow { display: none; }
+    .pr-stage { height: 860px; }
+    .pr-bgwin { display: none; }
+    .pr-win { left: 50%; transform: translateX(-50%); width: calc(100% - 28px); max-width: 380px; }
+    .pr-coach { left: 14px !important; right: 14px; top: auto !important; bottom: 70px; width: auto; }
+    .pr-arrow { display: none; }
   }
-  @media (prefers-reduced-motion: reduce) { .tour-stage *, .tour-spot, .tour-coach { animation: none !important; transition: none !important; } }
+  @media (prefers-reduced-motion: reduce) { .pr-stage *, .pr-spot, .pr-coach { animation: none !important; transition: none !important; } }
 
   /* ── MOBILE ── */
   @media (max-width: 900px) {
@@ -752,60 +725,67 @@
     <section class="cs-section" id="how">
       <p class="cs-section-heading">04. How it works</p>
       <h2 class="cs-section-title">See it in action.</h2>
-      <div class="cs-body"><p>Click through a real work session, the way Prruf would walk you through it.</p></div>
+      <div class="cs-body"><p>Click through a real work session in the actual Prruf app.</p></div>
 
-      <div class="tour-stage" id="tour-stage" tabindex="0">
-        <button class="tour-skip" id="tour-skip">Skip →</button>
-        <div class="tour-device">
-          <div class="tour-bar"><span class="on"><i></i>Prruf</span><span>2:14 PM</span></div>
-          <div class="tour-app" id="tour-app">
-            <div class="tour-head">
-              <div class="tour-title-row">
-                <span class="tour-title"><span class="tour-mark"><svg viewBox="0 0 40 40" width="100%" height="100%" fill="none" aria-hidden="true"><rect x="4.5" y="6.5" width="31" height="29" rx="10.5" fill="#6ea8fe"/><path d="M4.5 17c0-5.8 4.7-10.5 10.5-10.5h10C30.8 6.5 35.5 11.2 35.5 17Z" fill="#fff" opacity=".14"/><ellipse cx="15" cy="19.5" rx="3" ry="3.4" fill="#12203a"/><ellipse cx="25" cy="19.5" rx="3" ry="3.4" fill="#12203a"/><circle cx="16.1" cy="18.3" r=".95" fill="#fff"/><circle cx="26.1" cy="18.3" r=".95" fill="#fff"/><path d="M15.5 26.2q4.5 3 9 0" stroke="#12203a" stroke-width="1.9" stroke-linecap="round"/></svg></span>Homepage redesign</span>
-                <span class="tour-chip" id="tour-chip"><i></i>Capturing</span>
-              </div>
-              <div class="tour-sub">Session started 1:48 PM · 3 tasks so far</div>
+      <div class="pr-stage" id="pr-stage">
+        <div class="pr-menubar"><svg width="13" height="15" viewBox="0 0 17 20" fill="#fff"><path d="M14.1 10.6c0-2.6 2.1-3.8 2.2-3.9-1.2-1.8-3.1-2-3.8-2-1.6-.2-3.1.9-3.9.9-.8 0-2-.9-3.4-.9C3.5 4.8 1.8 5.9.9 7.5c-1.9 3.2-.5 8 1.3 10.6.9 1.3 1.9 2.7 3.3 2.6 1.3-.1 1.8-.8 3.4-.8s2 .8 3.4.8c1.4 0 2.3-1.3 3.2-2.6 1-1.5 1.4-2.9 1.4-3-.1 0-2.8-1.1-2.8-4.5zM11.5 3c.7-.9 1.2-2 1.1-3.1-1 0-2.3.7-3 1.5-.7.8-1.2 1.9-1.1 3 1.1.1 2.3-.6 3-1.4z"/></svg><b>Prruf</b><span>File</span><span>Edit</span><span>Window</span><span class="right"><span>🔋</span><span>Wed 2:14 PM</span></span></div>
+        <div class="pr-bgwin"><div class="tb"><span class="tl r"></span><span class="tl y"></span><span class="tl g"></span><span>Figma: Homepage v2</span></div><div class="canvas"><i style="left:20px;top:20px;width:150px;height:14px"></i><i style="left:20px;top:44px;width:220px;height:70px;background:#4a4a4a"></i><i style="left:20px;top:124px;width:100px;height:40px"></i><i style="left:130px;top:124px;width:100px;height:40px"></i><i style="left:260px;top:20px;width:95px;height:150px;background:#333"></i></div></div>
+        <div class="pr-dock"><i style="background:linear-gradient(#5ac8fa,#007aff)"></i><i style="background:linear-gradient(#f5f5f5,#d9d9d9)"></i><i style="background:linear-gradient(#1e1e1e,#000)" class=active></i><i style="background:linear-gradient(#ffd54f,#ffb300)"></i><i style="background:linear-gradient(#34c759,#248a3d)"></i><i style="background:#17181c;box-shadow:inset 0 0 0 1px #3a3b42" class=active></i></div>
+
+        <div class="pr-win" id="pr-win">
+          <div class="pr-titlebar"><span class="tl r"></span><span class="tl y"></span><span class="tl g"></span><span class="t">Prruf</span></div>
+
+          <!-- Sessions screen -->
+          <div class="pr-head" data-scr="list"><div class="pr-logo">Prruf</div></div>
+          <div class="pr-body" data-scr="list" style="flex-direction:column">
+            <div class="pr-btn primary" id="pr-new">+ New session</div>
+            <div class="pr-row combine"><div class="pr-input">Name a combined report (e.g. Week 1), then tick</div><div class="pr-btn">Combine</div></div>
+            <div class="pr-help">Click a session to continue it, or start a new one. Tick several sessions to club them into one report.</div>
+            <div class="pr-card"><span class="cb"></span><div><div class="nm">Untitled session</div><div class="meta">created Sep 13 · 0 tasks · 0 captures</div></div><span class="open">Open →</span></div><div class="pr-card"><span class="cb"></span><div><div class="nm">Untitled session</div><div class="meta">created Sep 13 · 0 tasks · 0 captures</div></div><span class="open">Open →</span></div><div class="pr-card"><span class="cb"></span><div><div class="nm">Untitled session</div><div class="meta">created Sep 12 · 0 tasks · 0 captures</div></div><span class="open">Open →</span></div>
+          </div>
+
+          <!-- Session screen -->
+          <div class="pr-head" data-scr="sess">
+            <div class="pr-head-row"><div class="pr-logo">Prruf</div><span class="pr-status" id="pr-status"><i></i><span>Paused</span></span></div>
+            <div class="pr-sub">Captures every 3 min · claude-sonnet-5 · images never saved to disk</div>
+          </div>
+          <div class="pr-body" data-scr="sess" style="flex-direction:column">
+            <div class="pr-row"><div class="pr-btn dim">← Sessions</div><div class="pr-input" style="color:#e6e6e8;font-weight:600">Homepage redesign</div></div>
+            <div class="pr-input">Focus (optional), e.g. Homepage rebuild for Jamalo</div>
+            <div class="pr-row" id="pr-caprow"><div class="pr-btn primary" id="pr-start">Start capturing Ctrl+Alt+S</div><div class="pr-btn">Capture now Ctrl+Alt+X</div></div>
+            <div class="pr-row" id="pr-actrow"><div class="pr-btn dim" id="pr-review">Review tasks</div><div class="pr-btn dim" id="pr-gen">Generate report</div></div>
+            <div id="pr-feed" style="display:flex;flex-direction:column;gap:8px">
+              <div class="pr-empty" id="pr-empty">Nothing captured yet.<br>Press Start capturing (or Capture now).</div>
             </div>
-            <div class="tour-log" id="tour-log">
-              <div class="tour-entry"><div class="row"><span class="tour-cbx"><svg viewBox="0 0 12 12" width="11" height="11" fill="none"><path d="M2.5 6.2 5 8.6 9.5 3.8" stroke="#fff" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg></span><time>1:52 PM</time><span class="tour-badge">TASK 1</span></div><div class="desc">Setting up the homepage layout file in Figma</div></div>
-              <div class="tour-entry sel"><div class="row"><span class="tour-cbx"><svg viewBox="0 0 12 12" width="11" height="11" fill="none"><path d="M2.5 6.2 5 8.6 9.5 3.8" stroke="#fff" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg></span><time>2:03 PM</time><span class="tour-badge">TASK 2</span></div><div class="desc">Drafting hero copy in Google Docs</div></div>
-              <div class="tour-entry live sel" id="tour-live" hidden><div class="row"><span class="tour-cbx"><svg viewBox="0 0 12 12" width="11" height="11" fill="none"><path d="M2.5 6.2 5 8.6 9.5 3.8" stroke="#fff" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg></span><time>2:11 PM</time><span class="tour-badge">TASK 3</span></div><div class="desc">Cropping the hero image in Figma</div><div class="tour-flash">● seen and written, screenshot deleted</div></div>
+            <div class="pr-row" id="pr-editrow" style="display:none;grid-template-columns:1fr 1fr 1fr"><div class="pr-btn">Merge</div><div class="pr-btn primary">Split</div><div class="pr-btn">Rename</div></div>
+            <div id="pr-report" style="display:none;flex-direction:column;gap:9px">
+              <div class="pr-rep">This afternoon the homepage went from an empty file to a laid-out hero: layout built in Figma, copy drafted, and the hero image cropped in.</div>
+              <div class="pr-h4">What got done</div>
+              <div class="pr-li">Built the homepage layout in Figma</div><div class="pr-li">Drafted the hero copy in Google Docs</div><div class="pr-li">Cropped and placed the hero image</div>
+              <div class="pr-btn primary">Export PDF</div>
             </div>
-            <div class="tour-report" id="tour-report">
-              <div class="sum">This afternoon the homepage went from an empty file to a laid-out hero: structure built in Figma, copy drafted, and the hero image cropped in.</div>
-              <h4>What got done</h4>
-              <ul><li>Built the homepage layout in Figma</li><li>Drafted and placed the hero copy</li><li>Cropped and set the hero image</li></ul>
-              <div class="export">Export PDF →</div>
-            </div>
-            <div class="tour-review" id="tour-review"><span>Merge</span><span class="key">Split</span><span>Rename</span></div>
-            <div class="tour-foot" id="tour-foot"><b>Text only.</b> No image is ever saved.</div>
-            <div class="tour-break" id="tour-break">
-              <div class="top"><span class="tour-mark"><svg viewBox="0 0 40 40" width="100%" height="100%" fill="none" aria-hidden="true"><rect x="4.5" y="6.5" width="31" height="29" rx="10.5" fill="#6ea8fe"/><path d="M4.5 17c0-5.8 4.7-10.5 10.5-10.5h10C30.8 6.5 35.5 11.2 35.5 17Z" fill="#fff" opacity=".14"/><ellipse cx="15" cy="19.5" rx="3" ry="3.4" fill="#12203a"/><ellipse cx="25" cy="19.5" rx="3" ry="3.4" fill="#12203a"/><circle cx="16.1" cy="18.3" r=".95" fill="#fff"/><circle cx="26.1" cy="18.3" r=".95" fill="#fff"/><path d="M15.5 26.2q4.5 3 9 0" stroke="#12203a" stroke-width="1.9" stroke-linecap="round"/></svg></span><span class="q">Looks like you're on a break?</span></div>
-              <div class="sub">That last stretch didn't look like work. I'll pause so it doesn't get logged.</div>
-              <div class="btns"><span class="pause">Pause</span><span>Keep going</span></div>
+            <div class="pr-break" id="pr-break" style="display:none">
+              <div class="q">Looks like you're on a break?</div>
+              <div class="s">That last stretch didn't look like work. I'll pause so it doesn't get logged.</div>
+              <div class="r"><div class="pr-btn amber">Pause</div><div class="pr-btn">Keep going</div></div>
             </div>
           </div>
+
+          <div class="pr-foot" id="pr-foot">Works from anywhere: <b>Ctrl+Alt+X</b> capture · <b>Ctrl+Alt+S</b> start/pause · <b>Ctrl+Alt+P</b> show window</div>
         </div>
 
-        <div class="tour-spot" id="tour-spot"></div>
-
-        <div class="tour-coach" id="tour-coach" aria-live="polite">
-          <span class="tour-arrow" id="tour-arrow"></span>
-          <div class="c-top"><span class="c-m"><svg viewBox="0 0 40 40" width="100%" height="100%" fill="none" aria-hidden="true"><rect x="4.5" y="6.5" width="31" height="29" rx="10.5" fill="#6ea8fe"/><path d="M4.5 17c0-5.8 4.7-10.5 10.5-10.5h10C30.8 6.5 35.5 11.2 35.5 17Z" fill="#fff" opacity=".14"/><ellipse cx="15" cy="19.5" rx="3" ry="3.4" fill="#12203a"/><ellipse cx="25" cy="19.5" rx="3" ry="3.4" fill="#12203a"/><circle cx="16.1" cy="18.3" r=".95" fill="#fff"/><circle cx="26.1" cy="18.3" r=".95" fill="#fff"/><path d="M15.5 26.2q4.5 3 9 0" stroke="#12203a" stroke-width="1.9" stroke-linecap="round"/></svg></span><div><div class="c-step" id="tour-step">01 / 05</div><h3 id="tour-title">Title</h3></div></div>
-          <p id="tour-line">Line</p>
-          <div class="c-ctrl"><span class="tour-dots" id="tour-dots"></span><button class="ghost" id="tour-back">Back</button><button class="next" id="tour-next">Next</button></div>
+        <div class="pr-spot" id="pr-spot"></div>
+        <button class="pr-skip" id="pr-skip">Skip →</button>
+        <div class="pr-coach" id="pr-coach" aria-live="polite">
+          <span class="pr-arrow" id="pr-arrow"></span>
+          <div class="st" id="pr-step">01</div>
+          <h3 id="pr-title"></h3>
+          <p id="pr-line"></p>
+          <div class="pr-ctrl"><span class="pr-dots" id="pr-dots"></span><button class="ghost" id="pr-back">Back</button><button class="next" id="pr-next">Next</button></div>
         </div>
-
-        <div class="tour-done" id="tour-done">
-          <div class="card">
-            <div class="m"><svg viewBox="0 0 40 40" width="100%" height="100%" fill="none" aria-hidden="true"><rect x="4.5" y="6.5" width="31" height="29" rx="10.5" fill="#6ea8fe"/><path d="M4.5 17c0-5.8 4.7-10.5 10.5-10.5h10C30.8 6.5 35.5 11.2 35.5 17Z" fill="#fff" opacity=".14"/><ellipse cx="15" cy="19.5" rx="3" ry="3.4" fill="#12203a"/><ellipse cx="25" cy="19.5" rx="3" ry="3.4" fill="#12203a"/><circle cx="16.1" cy="18.3" r=".95" fill="#fff"/><circle cx="26.1" cy="18.3" r=".95" fill="#fff"/><path d="M15.5 26.2q4.5 3 9 0" stroke="#12203a" stroke-width="1.9" stroke-linecap="round"/></svg></div>
-            <h3>That's the whole job.</h3>
-            <p>You do the work. Prruf keeps the record, privately, and hands it back to you when you need it.</p>
-            <button class="again" id="tour-again">Replay</button>
-          </div>
-        </div>
+        <div class="pr-done" id="pr-done"><div class="card"><h3>That's the whole job.</h3><p>You do the work. Prruf keeps the record, privately, and hands it back when you need it.</p><button class="next" id="pr-again">Replay</button></div></div>
       </div>
-      <p class="tour-hint">Click Next, or use ← → keys</p>
+      <p class="pr-hint">Click Next, or use ← → keys</p>
     </section>
 
     <!-- 05 NOT SURVEILLANCE -->
@@ -986,68 +966,71 @@
 
 <script>
   (function(){
-    var steps = [
-      { t:'#tour-chip', place:'right', title:"Always on, never hidden", line:"I sit quietly in the background. Green means I'm capturing: one quick look at your screen every couple of minutes." },
-      { t:'#tour-live', place:'right', title:"I saw the work, not the picture", line:"You just went back to Figma, so I wrote that down. Then I deleted the screenshot. Only the words stay." },
-      { t:'#tour-break', place:'right', title:"Looks like a break?", line:"If you drift into something unrelated, I notice, ask, and step aside. Breaks never get logged as work." },
-      { t:'#tour-review', place:'right', title:"Your record, your call", line:"Grouped two things as one? Merge, split or rename in a tap. I never change your record behind your back." },
-      { t:'#tour-report', place:'right', title:"Turned into a report", line:"When you're ready, the day becomes a clean summary you can send to a client, or keep for yourself." }
+    var $=function(id){ return document.getElementById(id); };
+    var stage=$('pr-stage'); if(!stage) return;
+    var win=$('pr-win'), spot=$('pr-spot'), coach=$('pr-coach'), arrow=$('pr-arrow'), done=$('pr-done'), dots=$('pr-dots');
+    var caps=[['1:52 PM','Setting up the homepage layout file in Figma'],['2:03 PM','Drafting hero copy in Google Docs'],['2:11 PM','Cropping the hero image in Figma']];
+    var steps=[
+      {t:'#pr-new', title:'Start a session', line:'Every piece of work gets its own session. One click and you\'re in.'},
+      {t:'#pr-start', title:'Start capturing', line:'Hit Start, or press Ctrl+Alt+S from anywhere. Prruf takes one quick look at your screen every few minutes.'},
+      {t:'#pr-feed', title:'It saw the work, not the picture', line:'Each capture becomes one line of text. The screenshot is deleted right after, and only the words stay.'},
+      {t:'#pr-break', title:'Looks like a break?', line:'Drift into something unrelated and Prruf notices, asks, and pauses. Breaks never get logged as work.'},
+      {t:'#pr-feed', title:'Your record, your call', line:'Review tasks to merge, split or rename anything. Prruf never changes your record behind your back.'},
+      {t:'#pr-report', title:'Turned into a report', line:'Generate report turns the day into a clean summary and PDF, ready to send or keep.'},
+      {t:'#pr-foot', title:'Works from anywhere', line:'Global shortcuts let you capture, pause or open Prruf without leaving what you\'re doing.'}
     ];
-    var $ = function(id){ return document.getElementById(id); };
-    var stage=$('tour-stage'), spot=$('tour-spot'), coach=$('tour-coach'), arrow=$('tour-arrow'), app=$('tour-app'), done=$('tour-done'), dots=$('tour-dots');
-    if(!stage) return;
     var i=0;
-    steps.forEach(function(_,k){ var d=document.createElement('i'); dots.appendChild(d); });
+    steps.forEach(function(){ dots.appendChild(document.createElement('i')); });
+    function scr(name){ win.querySelectorAll('[data-scr]').forEach(function(e){ e.classList.toggle('on', e.getAttribute('data-scr')===name); }); }
+    function feed(n,review){
+      var f=$('pr-feed'); f.querySelectorAll('.pr-cap').forEach(function(e){ e.remove(); });
+      $('pr-empty').style.display = n? 'none':'';
+      for(var k=0;k<n;k++){ var c=document.createElement('div'); c.className='pr-cap'+(k>0&&review?' sel':''); c.innerHTML='<span class="cb"></span><div><time>'+caps[k][0]+'</time><div class="d">'+caps[k][1]+'</div>'+(k===n-1&&!review?'<div class="del">● seen and written, screenshot deleted</div>':'')+'</div>'; f.appendChild(c); }
+    }
     function state(n){
-      $('tour-live').hidden = n<1;
-      $('tour-break').classList.toggle('show', n===2);
-      $('tour-review').classList.toggle('show', n===3);
-      app.classList.toggle('review', n===3);
-      var r = n>=4;
-      $('tour-report').classList.toggle('show', r);
-      $('tour-log').style.display = r?'none':'';
-      $('tour-foot').style.display = r?'none':'';
+      scr(n===0?'list':'sess');
+      var cap=n>=1 && n<5;
+      var st=$('pr-status'); st.classList.toggle('on',cap); st.lastChild.textContent=cap?'Capturing':'Paused';
+      $('pr-start').textContent = cap?'Pause Ctrl+Alt+S':'Start capturing Ctrl+Alt+S';
+      feed(n<2?0:3, n===4);
+      win.classList.toggle('review', n===4);
+      $('pr-editrow').style.display = n===4?'grid':'none';
+      $('pr-break').style.display = n===3?'block':'none';
+      var rep = n>=5;
+      $('pr-report').style.display = rep?'flex':'none';
+      $('pr-feed').style.display = rep?'none':'flex';
+      $('pr-caprow').style.display = (rep||n===4)?'none':'grid';
+      $('pr-actrow').style.display = rep?'none':'grid';
     }
     function place(){
-      var s=steps[i], el=document.querySelector(s.t), sr=stage.getBoundingClientRect(), tr=el.getBoundingClientRect(), pad=8;
+      var el=document.querySelector(steps[i].t), sr=stage.getBoundingClientRect(), tr=el.getBoundingClientRect(), pad=6;
       var tx=tr.left-sr.left, ty=tr.top-sr.top;
-      spot.style.left=(tx-pad)+'px'; spot.style.top=(ty-pad)+'px';
-      spot.style.width=(tr.width+pad*2)+'px'; spot.style.height=(tr.height+pad*2)+'px';
+      spot.style.left=(tx-pad)+'px'; spot.style.top=(ty-pad)+'px'; spot.style.width=(tr.width+pad*2)+'px'; spot.style.height=(tr.height+pad*2)+'px';
       spot.classList.add('show');
       if(window.matchMedia('(max-width:900px)').matches) return;
-      var cw=coach.offsetWidth, ch=coach.offsetHeight, gap=18, cx, cy;
-      var right = tx+tr.width+gap+cw < sr.width-8;
-      cx = right ? tx+tr.width+gap : tx-gap-cw;
-      cy = ty+tr.height/2-ch/2;
-      cx=Math.max(8,Math.min(cx,sr.width-cw-8)); cy=Math.max(8,Math.min(cy,sr.height-ch-8));
+      var wr=win.getBoundingClientRect(), cw=coach.offsetWidth, ch=coach.offsetHeight;
+      var cx=wr.right-sr.left+24, cy=ty+tr.height/2-ch/2;
+      cy=Math.max(36,Math.min(cy,sr.height-ch-70));
       coach.style.left=cx+'px'; coach.style.top=cy+'px';
-      var a=arrow.style; a.left=a.right=a.top=''; a.border='';
-      a.top=Math.max(12,Math.min(ch-22,(ty+tr.height/2)-cy-7))+'px';
-      if(right){ a.left='-8px'; a.borderRight='none'; a.borderTop='none'; }
-      else { a.right='-8px'; a.borderLeft='none'; a.borderBottom='none'; }
+      arrow.style.left='-7px'; arrow.style.top=Math.max(12,Math.min(ch-22,(ty+tr.height/2)-cy-7))+'px';
     }
     function render(){
-      var s=steps[i]; state(i);
-      $('tour-step').textContent=('0'+(i+1)).slice(-2)+' / 0'+steps.length;
-      $('tour-title').textContent=s.title; $('tour-line').textContent=s.line;
-      $('tour-back').disabled = i===0;
-      $('tour-next').textContent = i===steps.length-1 ? 'Finish' : 'Next';
-      Array.prototype.forEach.call(dots.children,function(d,k){ d.className = k===i?'on':''; });
+      state(i);
+      $('pr-step').textContent=('0'+(i+1)).slice(-2)+' / '+('0'+steps.length).slice(-2);
+      $('pr-title').textContent=steps[i].title; $('pr-line').textContent=steps[i].line;
+      $('pr-back').disabled=i===0; $('pr-next').textContent=i===steps.length-1?'Finish':'Next';
+      Array.prototype.forEach.call(dots.children,function(d,k){ d.className=k===i?'on':''; });
       requestAnimationFrame(function(){ requestAnimationFrame(place); });
     }
     function go(n){ if(n<0) return; if(n>=steps.length){ finish(); return; } i=n; render(); }
     function finish(){ coach.style.display='none'; spot.classList.remove('show'); done.classList.add('show'); }
-    function again(){ done.classList.remove('show'); coach.style.display=''; i=0; render(); }
-    $('tour-next').onclick=function(){ go(i+1); };
-    $('tour-back').onclick=function(){ go(i-1); };
-    $('tour-skip').onclick=finish;
-    $('tour-again').onclick=again;
+    $('pr-next').onclick=function(){ go(i+1); };
+    $('pr-back').onclick=function(){ go(i-1); };
+    $('pr-skip').onclick=finish;
+    $('pr-again').onclick=function(){ done.classList.remove('show'); coach.style.display=''; i=0; render(); };
     var inView=false;
     new IntersectionObserver(function(e){ inView=e[0].isIntersecting; },{threshold:.5}).observe(stage);
-    document.addEventListener('keydown',function(e){
-      if(!inView || done.classList.contains('show')) return;
-      if(e.key==='ArrowRight'){ go(i+1); } else if(e.key==='ArrowLeft'){ go(i-1); }
-    });
+    document.addEventListener('keydown',function(e){ if(!inView||done.classList.contains('show')) return; if(e.key==='ArrowRight') go(i+1); else if(e.key==='ArrowLeft') go(i-1); });
     window.addEventListener('resize',function(){ if(!done.classList.contains('show')) place(); });
     render();
   })();
