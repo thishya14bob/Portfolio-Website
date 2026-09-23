@@ -507,86 +507,22 @@
   }
 
   /* ── FOOTER ── */
-  #footer {
-    background: #bd5b6d;
-    padding: 64px 56px;
-    display: flex;
-    flex-direction: column;
-    gap: 48px;
-  }
-
-  .footer-grid {
-    display: grid;
-    grid-template-columns: 7fr 2fr 3fr;
-    gap: 40px;
-    max-width: 1152px;
-    width: 100%;
-  }
-
-  .footer-quote {
-    font-family: 'Newsreader', serif;
-    font-size: 36px;
-    font-weight: 400;
-    color: #fff;
-    line-height: 1.11;
-    margin-bottom: 24px;
-  }
-  .footer-quote em { color: #ffe4e6; font-style: italic; }
-
-  .footer-ascii {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 9px;
-    color: rgba(254,205,211,.7);
-    line-height: 1.4;
-    white-space: pre;
-    margin-top: 4px;
-  }
-
+  #footer { background: #1c1917; color: #fbf9f5; padding: 72px 56px 32px; display: flex; flex-direction: column; gap: 56px; background-image: radial-gradient(circle, rgba(255,255,255,.06) 1px, transparent 1px); background-size: 28px 28px; }
+  .footer-grid { display: grid; grid-template-columns: 6fr 3fr 3fr; gap: 40px; max-width: 1152px; width: 100%; }
+  .footer-kicker { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 1.4px; text-transform: uppercase; color: #a8a29e; margin-bottom: 18px; display: flex; align-items: center; gap: 8px; }
+  .footer-kicker i { width: 7px; height: 7px; border-radius: 50%; background: #c6f432; box-shadow: 0 0 8px #c6f432; }
+  .footer-quote { font-family: 'DM Sans', sans-serif; font-weight: 300; font-size: 40px; letter-spacing: -1px; line-height: 1.1; color: #fbf9f5; margin-bottom: 28px; }
+  .footer-quote em { font-style: normal; color: #f0ffcc; }
+  .footer-cta { display: inline-flex; align-items: center; gap: 10px; background: #f0ffcc; color: #1c1917; font-family: 'Inter', sans-serif; font-size: 14px; font-weight: 500; padding: 12px 22px; border-radius: 999px; text-decoration: none; cursor: none; transition: transform .2s; }
+  .footer-cta:hover { transform: translateY(-2px); }
+  .footer-col-label { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 1.6px; text-transform: uppercase; color: #78716c; margin-bottom: 16px; }
   .footer-nav { display: flex; flex-direction: column; gap: 12px; }
-  .footer-nav-link {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 12px;
-    letter-spacing: .6px;
-    text-transform: uppercase;
-    color: #fff1f2;
-    text-decoration: none;
-    transition: color .2s;
-  }
-  .footer-nav-link:hover { color: #fff; }
-
-  .footer-right { display: flex; flex-direction: column; justify-content: space-between; }
-  .footer-back {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 12px;
-    letter-spacing: .6px;
-    text-transform: uppercase;
-    color: #ffe4e6;
-    text-decoration: none;
-    cursor: none;
-    margin-top: auto;
-  }
-  .footer-back:hover { color: #fff; }
-
-  .footer-bottom {
-    border-top: 1px solid rgba(251,113,133,.4);
-    padding-top: 25px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    max-width: 1152px;
-    width: 100%;
-  }
-  .footer-copy {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 12px;
-    color: rgba(254,205,211,.8);
-  }
-  .footer-sig {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 11px;
-    color: rgba(254,205,211,.8);
-    letter-spacing: .4px;
-  }
+  .footer-nav-link { font-family: 'Inter', sans-serif; font-size: 14px; color: #d6d3d1; text-decoration: none; transition: color .2s; cursor: none; }
+  .footer-nav-link:hover { color: #f0ffcc; }
+  .footer-nav-link .arr { color: #78716c; margin-left: 4px; }
+  .footer-bottom { border-top: 1px solid rgba(255,255,255,.1); padding-top: 24px; display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; max-width: 1152px; width: 100%; font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #78716c; letter-spacing: .4px; }
+  .footer-back { color: #d6d3d1; text-decoration: none; cursor: none; }
+  .footer-back:hover { color: #f0ffcc; }
 
   /* ── MOBILE ── */
   @media (max-width: 900px) {
@@ -603,8 +539,9 @@
     .sticker { display: none; }
     #projects { padding: 0 20px 80px; }
     .projects-grid { grid-template-columns: 1fr; gap: 20px; }
-    .footer-grid { grid-template-columns: 1fr; gap: 32px; }
-    #footer { padding: 48px 20px; }
+    .footer-grid { grid-template-columns: 1fr; gap: 36px; }
+    #footer { padding: 56px 20px 28px; }
+    .footer-quote { font-size: 30px; }
     .section-heading { flex-direction: column; align-items: flex-start; gap: 4px; }
   }
 
@@ -940,43 +877,32 @@
   <footer id="footer">
     <div class="footer-grid">
       <div>
-        <div class="footer-quote">
-          Discoveries are out there,<br>
-          waiting to be made.<br>
-          <em>Why not by you?</em>
-        </div>
-        <pre class="footer-ascii">        .:*+..         .::--::.     :--.   ..-.
-     .-==++++=-.      :=======:     `--`
-   .+++++++++++-.     :++++++++=-.
-  -++++++++++++++:    .++++++++++:
-  :++++++++++++++:     :+++++++++:
-   -++++++++++++-      :+++++++++:
-     .=++++++++:       :+++++++++:
-        :==--:         :===---:      .::::.
-         :---.          .---.       .::::::.
-      .:==+++=-.     .-+++=-.
-</pre>
+        <p class="footer-kicker"><i></i>Open to product design roles &amp; collaborations</p>
+        <p class="footer-quote">Designing for the people<br>systems forget to <em>talk back to.</em></p>
+        <a href="mailto:thishya14@gmail.com" class="footer-cta">Say hello → thishya14@gmail.com</a>
       </div>
-      <nav class="footer-nav">
-        <a href="mailto:thishya14@gmail.com" class="footer-nav-link">Email</a>
-        <a href="https://linkedin.com/in/thishya" target="_blank" class="footer-nav-link">LinkedIn</a>
-        <a href="https://github.com/thishya14bob" target="_blank" class="footer-nav-link">GitHub</a>
-        <a href="https://x.com/thishya" target="_blank" class="footer-nav-link">X</a>
-        <a href="assets/A UX Case Study on Biometric Verification.pdf" target="_blank" class="footer-nav-link">Resume</a>
-      </nav>
-      <div class="footer-right">
+      <div>
+        <p class="footer-col-label">Work</p>
         <nav class="footer-nav">
-          <a href="#" class="footer-nav-link">Home</a>
-          <a href="#about" class="footer-nav-link">About Me</a>
-          <a href="#" class="footer-nav-link">Playground</a>
-          <a href="#" class="footer-nav-link">Visitor Gallery</a>
+          <a href="prruf.html" class="footer-nav-link">Prruf<span class="arr">↗</span></a>
+          <a href="biometric.html" class="footer-nav-link">Biometric Verification<span class="arr">↗</span></a>
+          <a href="https://prruf.com/" target="_blank" rel="noopener" class="footer-nav-link">prruf.com<span class="arr">↗</span></a>
+          <a href="https://wasabie.in/" target="_blank" rel="noopener" class="footer-nav-link">Wasabie Studios<span class="arr">↗</span></a>
         </nav>
-        <a href="#" class="footer-back">✦ Back to top</a>
+      </div>
+      <div>
+        <p class="footer-col-label">Elsewhere</p>
+        <nav class="footer-nav">
+          <a href="mailto:thishya14@gmail.com" class="footer-nav-link">Email</a>
+          <a href="https://linkedin.com/in/thishya" target="_blank" class="footer-nav-link">LinkedIn</a>
+          <a href="https://github.com/thishya14bob" target="_blank" class="footer-nav-link">GitHub</a>
+          <a href="https://x.com/thishya" target="_blank" class="footer-nav-link">X</a>
+        </nav>
       </div>
     </div>
     <div class="footer-bottom">
-      <span class="footer-copy">© 2026 Mannur Thishya.</span>
-      <span class="footer-sig">THISHYA PORTFOLIO</span>
+      <span>© 2026 Thishya Mannur · Product Designer · Bangalore, IN</span>
+      <a href="#" class="footer-back">✦ Back to top</a>
     </div>
   </footer>
 
