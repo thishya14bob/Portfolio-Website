@@ -6,71 +6,86 @@
 <title>Lingofable — Thishya Mannur</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;600&family=Newsreader:ital,opsz,wght@0,6..72,400;1,6..72,400&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   html { scroll-behavior: smooth; }
 
-  :root {
-    --bg: #f5f2ec;
-    --card-bg: #ede9e1;
-    --accent: #b85c72;
-    --accent-bg: #b85c72;
-    --text: #1c1917;
-    --muted: #78716c;
-    --border: rgba(0,0,0,.09);
-    --sidebar-w: 260px;
-  }
-
   body {
     font-family: 'Inter', sans-serif;
-    background: var(--bg);
-    color: var(--text);
+    background: #fbf9f5;
+    color: #1c1917;
     min-height: 100vh;
     display: flex;
+    cursor: none;
   }
+
+  /* ── CURSOR ── */
+  .cursor {
+    position: fixed;
+    width: 10px;
+    height: 10px;
+    background: #064e3b;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9999;
+    transform: translate(-50%, -50%);
+    transition: width .15s, height .15s, background .15s;
+  }
+  .cursor.big {
+    width: 32px;
+    height: 32px;
+    background: rgba(6,78,59,.15);
+    border: 1.5px solid #064e3b;
+  }
+  @media (max-width: 768px) { .cursor { display: none; } body { cursor: auto; } }
 
   /* ── SIDEBAR ── */
   #sidebar {
     position: sticky;
     top: 0;
     height: 100vh;
-    width: var(--sidebar-w);
-    min-width: var(--sidebar-w);
-    background: var(--bg);
-    border-right: 1px solid var(--border);
+    width: 280px;
+    min-width: 280px;
+    background: #f0ffcc;
+    border-right: 1px solid rgba(0,0,0,.06);
     display: flex;
     flex-direction: column;
-    padding: 36px 28px;
-    gap: 32px;
+    justify-content: space-between;
+    padding: 32px;
     z-index: 10;
-    overflow-y: auto;
+    overflow: hidden;
   }
+
+  .sidebar-top { display: flex; flex-direction: column; gap: 0; }
 
   .back-link {
     display: inline-flex;
     align-items: center;
-    gap: 6px;
+    gap: 8px;
     font-family: 'Inter', sans-serif;
     font-size: 11px;
     font-weight: 500;
     letter-spacing: 1.2px;
     text-transform: uppercase;
-    color: var(--muted);
+    color: #78716c;
     text-decoration: none;
+    margin-bottom: 32px;
     transition: color .2s;
   }
-  .back-link:hover { color: var(--text); }
+  .back-link:hover { color: #1c1917; }
   .back-link svg { transition: transform .2s; }
   .back-link:hover svg { transform: translateX(-3px); }
 
   .toc-label {
-    font-size: 9px;
-    font-weight: 600;
-    letter-spacing: 2px;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 500;
+    font-size: 11px;
+    letter-spacing: 1.1px;
     text-transform: uppercase;
-    color: var(--muted);
-    margin-bottom: 12px;
+    color: #78716c;
+    padding-bottom: 6px;
+    margin-bottom: 6px;
   }
 
   .toc-list {
@@ -81,51 +96,80 @@
   }
 
   .toc-list a {
-    display: block;
-    padding: 7px 10px;
-    border-radius: 8px;
-    font-size: 13px;
-    font-weight: 400;
-    color: var(--muted);
-    text-decoration: none;
-    transition: background .15s, color .15s;
-  }
-  .toc-list a:hover { background: rgba(0,0,0,.05); color: var(--text); }
-  .toc-list a.active {
-    background: #e2dcd2;
-    color: var(--text);
-    font-weight: 500;
-  }
-
-  .back-to-top {
-    font-size: 10px;
-    letter-spacing: 1.2px;
-    text-transform: uppercase;
-    color: var(--muted);
-    text-decoration: none;
     display: flex;
     align-items: center;
-    gap: 6px;
-    margin-top: auto;
-    padding-top: 16px;
+    justify-content: space-between;
+    padding: 10px 14px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 400;
+    color: #1c1917;
+    text-decoration: none;
+    transition: background .2s;
   }
-  .back-to-top:hover { color: var(--text); }
+  .toc-list a .toc-arrow { font-size: 12px; color: #a8a29e; font-family: 'JetBrains Mono', monospace; }
+  .toc-list a:not(.active):hover { background: rgba(0,0,0,.06); }
+  .toc-list a.active {
+    background: #1c1917;
+    color: #fff;
+  }
+  .toc-list a.active .toc-arrow { color: #fff; }
+
+  /* sidebar bottom */
+  .sidebar-bottom {
+    border-top: 1px solid rgba(0,0,0,.1);
+    padding-top: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .clock-wrap { display: flex; flex-direction: column; gap: 7px; }
+  .clock-time {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: #57534e;
+    letter-spacing: .6px;
+  }
+  .clock-location {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: #a8a29e;
+    letter-spacing: .4px;
+    text-transform: uppercase;
+  }
+  .mascot {
+    width: 36px;
+    height: 36px;
+    background: #1c1917;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+  }
 
   /* ── MAIN ── */
   #main {
     flex: 1;
     min-width: 0;
-    padding: 56px 72px 120px;
-    max-width: 860px;
+    background-color: #fbf9f5;
+    background-image: radial-gradient(circle, #c8c4bc 1px, transparent 1px);
+    background-size: 28px 28px;
+    padding: 56px 64px 120px;
+  }
+
+  .content-wrap {
+    max-width: 780px;
   }
 
   /* ── HERO IMAGE ── */
   .hero-image {
     width: 100%;
-    border-radius: 16px;
+    border-radius: 20px;
     overflow: hidden;
-    background: #e2dcd2;
-    margin-bottom: 40px;
+    background: #efebe4;
+    border: 1px solid #e2dcd2;
+    margin-bottom: 44px;
     aspect-ratio: 16/8;
     display: flex;
     align-items: center;
@@ -138,10 +182,11 @@
     display: block;
   }
   .hero-image-placeholder {
-    color: var(--muted);
-    font-size: 13px;
-    letter-spacing: 1px;
+    color: #a8a29e;
+    font-size: 11px;
+    letter-spacing: 1.4px;
     text-transform: uppercase;
+    font-family: 'JetBrains Mono', monospace;
   }
 
   /* ── TAGS ── */
@@ -156,44 +201,47 @@
     font-weight: 500;
     letter-spacing: 1.4px;
     text-transform: uppercase;
-    padding: 5px 12px;
-    border: 1px solid var(--text);
+    padding: 5px 13px;
+    border: 1px solid #1c1917;
     border-radius: 100px;
-    color: var(--text);
+    color: #1c1917;
+    font-family: 'Inter', sans-serif;
   }
 
   /* ── TITLE ── */
   .cs-title {
-    font-family: 'Playfair Display', serif;
-    font-size: 52px;
-    font-weight: 500;
-    line-height: 1.1;
-    letter-spacing: -1px;
-    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    font-size: clamp(32px, 4vw, 52px);
+    letter-spacing: -1.2px;
+    line-height: 1.08;
+    color: #1c1917;
     margin-bottom: 18px;
     display: flex;
     align-items: flex-start;
-    gap: 14px;
+    gap: 12px;
   }
   .cs-title-star {
-    color: var(--accent);
-    font-size: 44px;
-    line-height: 1.2;
+    color: #2200ff;
+    font-size: 0.85em;
+    line-height: 1.25;
     flex-shrink: 0;
   }
 
   /* ── DESCRIPTION ── */
   .cs-description {
-    font-size: 16px;
-    line-height: 1.7;
-    color: #44403c;
-    max-width: 660px;
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    line-height: 1.75;
+    color: #57534e;
+    max-width: 640px;
     margin-bottom: 24px;
   }
   .cs-description a {
-    color: var(--accent);
+    color: #2200ff;
     text-decoration: underline;
     text-underline-offset: 3px;
+    text-decoration-thickness: 1px;
   }
 
   /* ── CTA BUTTON ── */
@@ -201,80 +249,85 @@
     display: block;
     width: 100%;
     padding: 16px;
-    border: 1.5px solid #c8c4bc;
-    border-radius: 100px;
+    border: 1px solid #1c1917;
+    border-radius: 9999px;
     text-align: center;
-    font-size: 14px;
-    font-weight: 400;
-    color: var(--text);
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: .3px;
+    color: #1c1917;
     text-decoration: none;
-    margin-bottom: 40px;
-    transition: background .2s, border-color .2s;
+    margin-bottom: 44px;
+    transition: background .2s, color .2s;
+    background: transparent;
+    font-family: 'Inter', sans-serif;
   }
-  .cs-cta:hover { background: rgba(0,0,0,.04); border-color: var(--text); }
+  .cs-cta:hover { background: #1c1917; color: #fff; }
 
   /* ── METADATA BAR ── */
   .meta-bar {
-    background: var(--accent-bg);
-    border-radius: 14px;
+    background: #1c1917;
+    border-radius: 16px;
     padding: 28px 32px;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 24px;
     margin-bottom: 56px;
   }
-  .meta-col {}
   .meta-label {
     font-size: 9px;
     font-weight: 600;
     letter-spacing: 2px;
     text-transform: uppercase;
-    color: rgba(255,255,255,.65);
+    color: rgba(255,255,255,.45);
     margin-bottom: 10px;
+    font-family: 'Inter', sans-serif;
   }
   .meta-value {
-    font-size: 13px;
-    line-height: 1.6;
-    color: rgba(255,255,255,.92);
+    font-size: 12px;
+    line-height: 1.65;
+    color: rgba(255,255,255,.8);
+    font-family: 'Inter', sans-serif;
   }
-  .meta-value strong {
-    font-weight: 500;
-    color: #fff;
-  }
+  .meta-value strong { font-weight: 500; color: #fff; }
 
-  /* ── IMPACT ── */
+  /* ── SECTION LABEL ── */
   .section-label {
     font-size: 9px;
     font-weight: 600;
     letter-spacing: 2px;
     text-transform: uppercase;
-    color: var(--muted);
+    color: #78716c;
     margin-bottom: 16px;
+    font-family: 'Inter', sans-serif;
   }
 
+  /* ── IMPACT GRID ── */
   .impact-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 12px;
-    margin-bottom: 56px;
+    margin-bottom: 64px;
   }
   .impact-card {
-    background: var(--card-bg);
-    border-radius: 12px;
-    padding: 22px 24px 20px;
+    background: #efebe4;
+    border: 1px solid #e2dcd2;
+    border-radius: 14px;
+    padding: 24px;
   }
   .impact-dash {
-    width: 24px;
+    width: 22px;
     height: 3px;
-    background: var(--accent);
+    background: #2200ff;
     border-radius: 2px;
     margin-bottom: 14px;
   }
   .impact-number {
-    font-family: 'Playfair Display', serif;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
     font-size: 36px;
-    font-weight: 500;
-    color: var(--text);
+    letter-spacing: -1px;
+    color: #1c1917;
     line-height: 1;
     margin-bottom: 6px;
   }
@@ -283,74 +336,94 @@
     font-weight: 600;
     letter-spacing: 2px;
     text-transform: uppercase;
-    color: var(--muted);
+    color: #78716c;
+    font-family: 'Inter', sans-serif;
+  }
+
+  /* ── DIVIDER ── */
+  .cs-divider {
+    border: none;
+    border-top: 1px solid rgba(0,0,0,.08);
+    margin: 56px 0;
   }
 
   /* ── CONTENT SECTIONS ── */
-  .cs-section {
-    margin-bottom: 64px;
-  }
+  .cs-section { margin-bottom: 72px; }
 
   .cs-section-heading {
     font-size: 9px;
     font-weight: 600;
     letter-spacing: 2px;
     text-transform: uppercase;
-    color: var(--muted);
-    margin-bottom: 20px;
-    padding-bottom: 12px;
-    border-bottom: 1px solid var(--border);
+    color: #78716c;
+    margin-bottom: 18px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid rgba(0,0,0,.08);
+    font-family: 'Inter', sans-serif;
   }
 
   .cs-section-title {
-    font-family: 'Playfair Display', serif;
-    font-size: 28px;
-    font-weight: 500;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    font-size: 26px;
+    letter-spacing: -0.5px;
     line-height: 1.3;
     margin-bottom: 16px;
-    color: var(--text);
+    color: #1c1917;
   }
 
   .cs-body {
-    font-size: 15px;
-    line-height: 1.75;
-    color: #44403c;
-    max-width: 640px;
+    font-size: 14px;
+    line-height: 1.8;
+    color: #57534e;
+    max-width: 620px;
+    font-family: 'Inter', sans-serif;
   }
   .cs-body p + p { margin-top: 14px; }
 
+  /* ── CALLOUT ── */
+  .cs-callout {
+    background: #efebe4;
+    border-left: 3px solid #2200ff;
+    border-radius: 0 12px 12px 0;
+    padding: 18px 22px;
+    margin: 28px 0;
+    font-family: 'Newsreader', serif;
+    font-size: 17px;
+    line-height: 1.6;
+    color: #44403c;
+    font-style: italic;
+  }
+
+  /* ── IMAGES ── */
   .cs-image {
     width: 100%;
-    border-radius: 12px;
-    background: #e2dcd2;
+    border-radius: 14px;
+    background: #efebe4;
+    border: 1px solid #e2dcd2;
     margin-top: 28px;
     overflow: hidden;
   }
-  .cs-image img {
-    width: 100%;
-    display: block;
-    border-radius: 12px;
-  }
+  .cs-image img { width: 100%; display: block; border-radius: 14px; }
   .cs-image-placeholder {
     aspect-ratio: 16/9;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: var(--muted);
-    font-size: 12px;
-    letter-spacing: 1px;
+    color: #a8a29e;
+    font-size: 11px;
+    letter-spacing: 1.4px;
     text-transform: uppercase;
+    font-family: 'JetBrains Mono', monospace;
   }
-
   .cs-image-caption {
     font-size: 11px;
-    color: var(--muted);
+    color: #a8a29e;
     margin-top: 8px;
     text-align: center;
     letter-spacing: 0.3px;
+    font-family: 'Inter', sans-serif;
   }
-
-  /* ── IMAGE GRID ── */
   .cs-image-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -358,241 +431,233 @@
     margin-top: 28px;
   }
 
-  /* ── CALLOUT ── */
-  .cs-callout {
-    background: var(--card-bg);
-    border-left: 3px solid var(--accent);
-    border-radius: 0 10px 10px 0;
-    padding: 20px 24px;
-    margin: 28px 0;
-    font-size: 15px;
-    line-height: 1.65;
-    color: #44403c;
-    font-style: italic;
-  }
-
-  /* ── DIVIDER ── */
-  .cs-divider {
-    border: none;
-    border-top: 1px solid var(--border);
-    margin: 56px 0;
-  }
-
-  /* ── SCROLL SPY ── */
+  /* ── MOBILE ── */
   @media (max-width: 900px) {
     #sidebar { display: none; }
-    #main { padding: 36px 24px 80px; max-width: 100%; }
+    #main { padding: 36px 24px 80px; }
     .meta-bar { grid-template-columns: 1fr 1fr; }
     .impact-grid { grid-template-columns: 1fr; }
-    .cs-title { font-size: 36px; }
+    .cs-image-grid { grid-template-columns: 1fr; }
   }
 </style>
 </head>
 <body>
 
+<div class="cursor" id="cursor"></div>
+
 <!-- SIDEBAR -->
 <nav id="sidebar">
-  <div>
+  <div class="sidebar-top">
     <a href="index.html" class="back-link">
       <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
         <path d="M9 11L5 7l4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
       </svg>
       Home
     </a>
-  </div>
 
-  <div>
     <p class="toc-label">Table of Contents</p>
     <ul class="toc-list">
-      <li><a href="#context" class="active">01. Context</a></li>
-      <li><a href="#solution">02. The solution</a></li>
-      <li><a href="#features">03. Features</a></li>
-      <li><a href="#design">04. Interaction design</a></li>
-      <li><a href="#onboarding">05. Onboarding & conversion</a></li>
-      <li><a href="#reflection">06. Reflection</a></li>
+      <li><a href="#context" class="active">01. Context <span class="toc-arrow">→</span></a></li>
+      <li><a href="#solution">02. The solution <span class="toc-arrow">→</span></a></li>
+      <li><a href="#features">03. Features <span class="toc-arrow">→</span></a></li>
+      <li><a href="#design">04. Interaction design <span class="toc-arrow">→</span></a></li>
+      <li><a href="#onboarding">05. Onboarding & conversion <span class="toc-arrow">→</span></a></li>
+      <li><a href="#reflection">06. Reflection <span class="toc-arrow">→</span></a></li>
     </ul>
   </div>
 
-  <a href="#top" class="back-to-top">
-    <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
-      <path d="M6 9V3M3 6l3-3 3 3" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
-    </svg>
-    Back to top
-  </a>
+  <div class="sidebar-bottom">
+    <div class="clock-wrap">
+      <span class="clock-time" id="cs-clock">--:-- --</span>
+      <span class="clock-location">Bangalore, IN</span>
+    </div>
+    <div class="mascot">🌿</div>
+  </div>
 </nav>
 
 <!-- MAIN CONTENT -->
-<main id="main" id="top">
+<main id="main">
+  <div class="content-wrap">
 
-  <!-- HERO IMAGE -->
-  <div class="hero-image">
-    <!-- Replace with: <img src="assets/lingofable-hero.png" alt="Lingofable"> -->
-    <span class="hero-image-placeholder">Hero image — upload your mockup</span>
-  </div>
+    <!-- HERO IMAGE -->
+    <div class="hero-image">
+      <!-- Replace: <img src="assets/lingofable-hero.png" alt="Lingofable"> -->
+      <span class="hero-image-placeholder">Hero image — drop your mockup here</span>
+    </div>
 
-  <!-- TAGS -->
-  <div class="tags">
-    <span class="tag">Side Project</span>
-    <span class="tag">Shipped</span>
-  </div>
+    <!-- TAGS -->
+    <div class="tags">
+      <span class="tag">Side Project</span>
+      <span class="tag">Shipped</span>
+    </div>
 
-  <!-- TITLE -->
-  <h1 class="cs-title">
-    <span class="cs-title-star">✳</span>
-    Building Lingofable from 0–1
-  </h1>
+    <!-- TITLE -->
+    <h1 class="cs-title">
+      <span class="cs-title-star">✳</span>
+      Building Lingofable from 0–1
+    </h1>
 
-  <!-- DESCRIPTION -->
-  <p class="cs-description">
-    I designed &amp; built Lingofable together with <a href="#">@Simon Ilincev</a> as a passion project.
-    It is a language app focused on learning through stories — we launched on the App Store in March 2026,
-    pitched to Pinterest's ex-CPO, and were featured on Cornell's Speaking of Language podcast!
-  </p>
+    <!-- DESCRIPTION -->
+    <p class="cs-description">
+      I designed &amp; built Lingofable together with <a href="#">@Simon Ilincev</a> as a passion project.
+      It is a language app focused on learning through stories — we launched on the App Store in March 2026,
+      pitched to Pinterest's ex-CPO, and were featured on Cornell's Speaking of Language podcast!
+    </p>
 
-  <!-- CTA -->
-  <a href="https://lingofable.com" target="_blank" class="cs-cta">Visit Lingofable →</a>
+    <!-- CTA -->
+    <a href="https://lingofable.com" target="_blank" class="cs-cta">Visit Lingofable →</a>
 
-  <!-- METADATA BAR -->
-  <div class="meta-bar">
-    <div class="meta-col">
-      <p class="meta-label">Role</p>
-      <p class="meta-value">Founder<br>Design Engineer<br>Marketing</p>
-    </div>
-    <div class="meta-col">
-      <p class="meta-label">Team</p>
-      <p class="meta-value"><strong>Simon Ilincev</strong> (Co-Founder &amp; Software Engineer)</p>
-    </div>
-    <div class="meta-col">
-      <p class="meta-label">Timeline</p>
-      <p class="meta-value">Oct 2025 – Apr 2026</p>
-    </div>
-    <div class="meta-col">
-      <p class="meta-label">Skills</p>
-      <p class="meta-value">Vibe coding<br>Interaction design<br>Motion design</p>
-    </div>
-  </div>
-
-  <!-- IMPACT -->
-  <p class="section-label">Impact</p>
-  <div class="impact-grid">
-    <div class="impact-card">
-      <div class="impact-dash"></div>
-      <p class="impact-number">500+</p>
-      <p class="impact-caption">Downloads</p>
-    </div>
-    <div class="impact-card">
-      <div class="impact-dash"></div>
-      <p class="impact-number">1,000+</p>
-      <p class="impact-caption">Stories read</p>
-    </div>
-    <div class="impact-card">
-      <div class="impact-dash"></div>
-      <p class="impact-number">5.0 ★</p>
-      <p class="impact-caption">App Store rating</p>
-    </div>
-  </div>
-
-  <hr class="cs-divider">
-
-  <!-- SECTION 01: CONTEXT -->
-  <section class="cs-section" id="context">
-    <p class="cs-section-heading">01 — Context</p>
-    <h2 class="cs-section-title">Why does language learning feel like homework?</h2>
-    <div class="cs-body">
-      <p>Most language apps rely on gamified drills and flashcards — effective in the short term, but forgettable. Learners plateau, lose motivation, and abandon the habit before they can hold a real conversation.</p>
-      <p>We wanted to explore what language learning could feel like if it were as immersive as reading a novel you can't put down.</p>
-    </div>
-    <div class="cs-callout">
-      "The most effective way to learn a language is to be surrounded by it — through real context, not isolated vocabulary lists."
-    </div>
-    <div class="cs-image">
-      <!-- <img src="assets/lingofable-context.png" alt="Context"> -->
-      <div class="cs-image-placeholder">Insert image</div>
-    </div>
-    <p class="cs-image-caption">Caption describing the image goes here</p>
-  </section>
-
-  <!-- SECTION 02: SOLUTION -->
-  <section class="cs-section" id="solution">
-    <p class="cs-section-heading">02 — The Solution</p>
-    <h2 class="cs-section-title">Language learning, one story at a time</h2>
-    <div class="cs-body">
-      <p>Lingofable is a reading app where every story is written in your target language. Tap any word for an instant definition, track vocabulary automatically, and progress through levels as the stories get harder.</p>
-      <p>The design challenge was making this feel effortless — so learners stay in the reading flow without ever feeling like they're studying.</p>
-    </div>
-    <div class="cs-image-grid">
-      <div class="cs-image">
-        <div class="cs-image-placeholder">Screen 1</div>
+    <!-- METADATA BAR -->
+    <div class="meta-bar">
+      <div>
+        <p class="meta-label">Role</p>
+        <p class="meta-value">Founder<br>Design Engineer<br>Marketing</p>
       </div>
-      <div class="cs-image">
-        <div class="cs-image-placeholder">Screen 2</div>
+      <div>
+        <p class="meta-label">Team</p>
+        <p class="meta-value"><strong>Simon Ilincev</strong><br>(Co-Founder &amp; Software Engineer)</p>
+      </div>
+      <div>
+        <p class="meta-label">Timeline</p>
+        <p class="meta-value">Oct 2025 – Apr 2026</p>
+      </div>
+      <div>
+        <p class="meta-label">Skills</p>
+        <p class="meta-value">Vibe coding<br>Interaction design<br>Motion design</p>
       </div>
     </div>
-  </section>
 
-  <!-- SECTION 03: FEATURES -->
-  <section class="cs-section" id="features">
-    <p class="cs-section-heading">03 — Features</p>
-    <h2 class="cs-section-title">What we built</h2>
-    <div class="cs-body">
-      <p>Describe the core features of the product. What were the most important things to get right? What problems did you solve?</p>
+    <!-- IMPACT -->
+    <p class="section-label">Impact</p>
+    <div class="impact-grid">
+      <div class="impact-card">
+        <div class="impact-dash"></div>
+        <p class="impact-number">500+</p>
+        <p class="impact-caption">Downloads</p>
+      </div>
+      <div class="impact-card">
+        <div class="impact-dash"></div>
+        <p class="impact-number">1,000+</p>
+        <p class="impact-caption">Stories read</p>
+      </div>
+      <div class="impact-card">
+        <div class="impact-dash"></div>
+        <p class="impact-number">5.0 ★</p>
+        <p class="impact-caption">App Store rating</p>
+      </div>
     </div>
-    <div class="cs-image">
-      <div class="cs-image-placeholder">Feature overview image</div>
-    </div>
-  </section>
 
-  <!-- SECTION 04: INTERACTION DESIGN -->
-  <section class="cs-section" id="design">
-    <p class="cs-section-heading">04 — Interaction Design</p>
-    <h2 class="cs-section-title">Designing the reading experience</h2>
-    <div class="cs-body">
-      <p>Walk through the key interaction decisions. Why did you make specific choices? What did you prototype and test?</p>
-    </div>
-    <div class="cs-image">
-      <div class="cs-image-placeholder">Interaction design image</div>
-    </div>
-  </section>
+    <hr class="cs-divider">
 
-  <!-- SECTION 05: ONBOARDING -->
-  <section class="cs-section" id="onboarding">
-    <p class="cs-section-heading">05 — Onboarding &amp; Conversion</p>
-    <h2 class="cs-section-title">Getting users to their first story</h2>
-    <div class="cs-body">
-      <p>Explain the onboarding flow and conversion strategy. What was the goal of the onboarding? What did you learn?</p>
-    </div>
-    <div class="cs-image">
-      <div class="cs-image-placeholder">Onboarding flow image</div>
-    </div>
-  </section>
+    <!-- 01 CONTEXT -->
+    <section class="cs-section" id="context">
+      <p class="cs-section-heading">01 — Context</p>
+      <h2 class="cs-section-title">Why does language learning feel like homework?</h2>
+      <div class="cs-body">
+        <p>Most language apps rely on gamified drills and flashcards — effective in the short term, but forgettable. Learners plateau, lose motivation, and abandon the habit before they can hold a real conversation.</p>
+        <p>We wanted to explore what language learning could feel like if it were as immersive as reading a novel you can't put down.</p>
+      </div>
+      <div class="cs-callout">
+        "The most effective way to learn a language is to be surrounded by it — through real context, not isolated vocabulary lists."
+      </div>
+      <div class="cs-image">
+        <div class="cs-image-placeholder">Context image</div>
+      </div>
+      <p class="cs-image-caption">Caption describing the image goes here</p>
+    </section>
 
-  <!-- SECTION 06: REFLECTION -->
-  <section class="cs-section" id="reflection">
-    <p class="cs-section-heading">06 — Reflection</p>
-    <h2 class="cs-section-title">What I'd do differently</h2>
-    <div class="cs-body">
-      <p>Share your honest reflection on the project. What worked well? What was hard? What would you change if you started again?</p>
-      <p>This is the part that makes a case study feel human and genuine.</p>
-    </div>
-  </section>
+    <!-- 02 SOLUTION -->
+    <section class="cs-section" id="solution">
+      <p class="cs-section-heading">02 — The Solution</p>
+      <h2 class="cs-section-title">Language learning, one story at a time</h2>
+      <div class="cs-body">
+        <p>Lingofable is a reading app where every story is written in your target language. Tap any word for an instant definition, track vocabulary automatically, and progress through levels as the stories get harder.</p>
+        <p>The design challenge was making this feel effortless — so learners stay in the reading flow without ever feeling like they're studying.</p>
+      </div>
+      <div class="cs-image-grid">
+        <div class="cs-image"><div class="cs-image-placeholder">Screen 1</div></div>
+        <div class="cs-image"><div class="cs-image-placeholder">Screen 2</div></div>
+      </div>
+    </section>
 
+    <!-- 03 FEATURES -->
+    <section class="cs-section" id="features">
+      <p class="cs-section-heading">03 — Features</p>
+      <h2 class="cs-section-title">What we built</h2>
+      <div class="cs-body">
+        <p>Describe the core features of the product. What were the most important things to get right? What problems did you solve?</p>
+      </div>
+      <div class="cs-image"><div class="cs-image-placeholder">Feature overview</div></div>
+    </section>
+
+    <!-- 04 INTERACTION DESIGN -->
+    <section class="cs-section" id="design">
+      <p class="cs-section-heading">04 — Interaction Design</p>
+      <h2 class="cs-section-title">Designing the reading experience</h2>
+      <div class="cs-body">
+        <p>Walk through the key interaction decisions. Why did you make specific choices? What did you prototype and test?</p>
+      </div>
+      <div class="cs-image"><div class="cs-image-placeholder">Interaction design</div></div>
+    </section>
+
+    <!-- 05 ONBOARDING -->
+    <section class="cs-section" id="onboarding">
+      <p class="cs-section-heading">05 — Onboarding &amp; Conversion</p>
+      <h2 class="cs-section-title">Getting users to their first story</h2>
+      <div class="cs-body">
+        <p>Explain the onboarding flow and conversion strategy. What was the goal of the onboarding? What did you learn?</p>
+      </div>
+      <div class="cs-image"><div class="cs-image-placeholder">Onboarding flow</div></div>
+    </section>
+
+    <!-- 06 REFLECTION -->
+    <section class="cs-section" id="reflection">
+      <p class="cs-section-heading">06 — Reflection</p>
+      <h2 class="cs-section-title">What I'd do differently</h2>
+      <div class="cs-body">
+        <p>Share your honest reflection on the project. What worked well? What was hard? What would you change if you started again?</p>
+        <p>This is the part that makes a case study feel human and genuine.</p>
+      </div>
+    </section>
+
+  </div>
 </main>
 
 <script>
-  // Scroll spy for TOC
+  // Custom cursor
+  const cur = document.getElementById('cursor');
+  document.addEventListener('mousemove', e => {
+    cur.style.left = e.clientX + 'px';
+    cur.style.top = e.clientY + 'px';
+  });
+  document.querySelectorAll('a, button').forEach(el => {
+    el.addEventListener('mouseenter', () => cur.classList.add('big'));
+    el.addEventListener('mouseleave', () => cur.classList.remove('big'));
+  });
+
+  // Clock
+  function tick() {
+    const d = new Date();
+    const h = d.getHours(), m = d.getMinutes();
+    const ampm = h >= 12 ? 'PM' : 'AM';
+    const hh = ((h % 12) || 12).toString().padStart(2, '0');
+    const mm = m.toString().padStart(2, '0');
+    document.getElementById('cs-clock').textContent = `${hh}:${mm} ${ampm}`;
+  }
+  tick(); setInterval(tick, 1000);
+
+  // Scroll spy
   const sections = document.querySelectorAll('section[id]');
   const links = document.querySelectorAll('.toc-list a');
-
   const obs = new IntersectionObserver(entries => {
     entries.forEach(e => {
       if (e.isIntersecting) {
         links.forEach(l => l.classList.remove('active'));
-        const active = document.querySelector(`.toc-list a[href="#${e.target.id}"]`);
-        if (active) active.classList.add('active');
+        const a = document.querySelector(`.toc-list a[href="#${e.target.id}"]`);
+        if (a) a.classList.add('active');
       }
     });
   }, { rootMargin: '-20% 0px -70% 0px' });
-
   sections.forEach(s => obs.observe(s));
 </script>
 </body>
