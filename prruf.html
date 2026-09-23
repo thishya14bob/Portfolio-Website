@@ -87,6 +87,17 @@
   .clock-location { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: #a8a29e; letter-spacing: .4px; text-transform: uppercase; }
   .mascot { width: 36px; height: 36px; background: #1c1917; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 16px; }
 
+  /* ── Walking mascot in sidebar ── */
+  .sb-walk { position: relative; height: 56px; margin-bottom: -1px; overflow: hidden; }
+  .sb-mascot { position: absolute; bottom: 0; left: 0; width: 44px; animation: sbPace 9s ease-in-out infinite; }
+  .sb-mascot .body { animation: sbBob .5s ease-in-out infinite; transform-origin: 50% 100%; }
+  .sb-mascot .legL { animation: sbStep .5s ease-in-out infinite; transform-origin: 16px 36px; }
+  .sb-mascot .legR { animation: sbStep .5s ease-in-out infinite reverse; transform-origin: 24px 36px; }
+  @keyframes sbPace { 0% { left: 0; transform: scaleX(1); } 45% { left: calc(100% - 44px); transform: scaleX(1); } 50% { left: calc(100% - 44px); transform: scaleX(-1); } 95% { left: 0; transform: scaleX(-1); } 100% { left: 0; transform: scaleX(1); } }
+  @keyframes sbBob { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-2px); } }
+  @keyframes sbStep { 0%,100% { transform: rotate(18deg); } 50% { transform: rotate(-18deg); } }
+  @media (prefers-reduced-motion: reduce) { .sb-mascot, .sb-mascot * { animation: none !important; } }
+
   /* ── MAIN ── */
   #main {
     flex: 1; min-width: 0;
@@ -516,11 +527,26 @@
       <li><a href="#now">07. Why Prruf <span class="toc-arrow">→</span></a></li>
     </ul>
   </div>
+  <div>
+    <div class="sb-walk" aria-hidden="true">
+      <svg class="sb-mascot" viewBox="0 0 40 46" fill="none">
+        <g class="legL"><rect x="14" y="34" width="4" height="10" rx="2" fill="#005B41"/></g>
+        <g class="legR"><rect x="22" y="34" width="4" height="10" rx="2" fill="#005B41"/></g>
+        <g class="body">
+          <rect x="4.5" y="6.5" width="31" height="29" rx="10.5" fill="#005B41"/>
+          <path d="M4.5 17c0-5.8 4.7-10.5 10.5-10.5h10C30.8 6.5 35.5 11.2 35.5 17Z" fill="#fff" opacity=".12"/>
+          <ellipse cx="17" cy="19.5" rx="3" ry="3.4" fill="#F7F4EB"/><ellipse cx="27" cy="19.5" rx="3" ry="3.4" fill="#F7F4EB"/>
+          <circle cx="18" cy="19.8" r="1.4" fill="#1A1A0F"/><circle cx="28" cy="19.8" r="1.4" fill="#1A1A0F"/>
+          <path d="M17.5 26.2q4.5 3 9 0" stroke="#F7F4EB" stroke-width="1.9" stroke-linecap="round"/>
+        </g>
+      </svg>
+    </div>
   <div class="sidebar-bottom">
     <div class="clock-wrap">
       <span class="clock-time" id="cs-clock">--:-- --</span>
       <span class="clock-location">Hyderabad, IN</span>
     </div>
+  </div>
   </div>
 </nav>
 
