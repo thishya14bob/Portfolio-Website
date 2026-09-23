@@ -6,7 +6,7 @@
 <title>Prruf | Thishya Mannur</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;600&family=Newsreader:ital,opsz,wght@0,6..72,400;1,6..72,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@500;600&family=JetBrains+Mono:wght@400;600&family=Newsreader:ital,opsz,wght@0,6..72,400;1,6..72,400&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   html { scroll-behavior: smooth; }
@@ -458,6 +458,44 @@
   .tour-done h3 { font-family: 'DM Sans', sans-serif; font-weight: 500; font-size: 19px; color: #1c1917; margin-bottom: 8px; }
   .tour-done p { font-family: 'Inter', sans-serif; font-size: 13.5px; line-height: 1.55; color: #57534e; margin-bottom: 18px; }
   .tour-hint { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 1.2px; text-transform: uppercase; color: #a8a29e; margin-top: 10px; text-align: center; }
+  /* Prruf brand colours for the walkthrough */
+  .tour-stage { background: radial-gradient(700px 380px at 50% -30%, rgba(58,114,230,.12), transparent 70%), linear-gradient(170deg, #e7ecf3, #dde4ee); border-color: #cdd5e2; }
+  .tour-bar { background: linear-gradient(#2b2d34,#232529); border-color: #2c2e36; color: #c7c9d1; }
+  .tour-bar .on { color: #2ecc71; } .tour-bar .on i { background: #2ecc71; box-shadow: 0 0 6px #2ecc71; }
+  .tour-app { background: #16171b; border-color: #2c2e36; box-shadow: 0 24px 60px -28px rgba(23,37,84,.55); }
+  .tour-head, .tour-foot, .tour-review { border-color: #2c2e36; }
+  .tour-title { font-family: 'Space Grotesk', sans-serif; font-weight: 600; color: #e8e8ea; }
+  .tour-chip { color: #2ecc71; background: #1f3328; } .tour-chip i { background: #2ecc71; box-shadow: 0 0 6px #2ecc71; }
+  .tour-sub, .tour-entry time, .tour-foot { color: #9a9ba1; }
+  .tour-foot b { color: #e8e8ea; }
+  .tour-entry { border-color: #2c2e36; }
+  .tour-entry .desc { color: #e8e8ea; }
+  .tour-badge { color: #6ea8fe; background: #262a33; }
+  .tour-flash { color: #2ecc71; }
+  .tour-cbx { border-color: #3a3d46; }
+  .tour-app.review .tour-entry.sel .tour-cbx { background: #6ea8fe; border-color: #6ea8fe; }
+  .tour-review { background: #191b21; }
+  .tour-review span { background: #22252d; border-color: #2c2e36; color: #e8e8ea; }
+  .tour-review span.key { background: #6ea8fe; border-color: #6ea8fe; color: #0c1220; }
+  .tour-break { background: linear-gradient(#20232b,#1b1d24); border-color: #e0a44a; }
+  .tour-break .q { font-family: 'Space Grotesk', sans-serif; font-weight: 600; color: #e8e8ea; }
+  .tour-break .sub { color: #9a9ba1; }
+  .tour-break .btns span { background: #23262e; border-color: #2c2e36; color: #e8e8ea; }
+  .tour-break .btns span.pause { background: #e0a44a; border-color: #e0a44a; color: #241704; }
+  .tour-report .sum { background: #1b1d24; color: #cfd2da; border: 1px solid #2c2e36; border-left: 3px solid #6ea8fe; border-radius: 8px; }
+  .tour-report h4 { color: #9a9ba1; }
+  .tour-report li { color: #e8e8ea; } .tour-report li::before { background: #6ea8fe; }
+  .tour-report .export { background: #6ea8fe; color: #0c1220; border-radius: 8px; font-weight: 600; }
+  .tour-spot { box-shadow: 0 0 0 2px #3a72e6, 0 0 0 9999px rgba(10,11,14,.55); }
+  .tour-coach { border-color: #d6dde8; box-shadow: 0 24px 60px -28px rgba(23,37,84,.45); }
+  .tour-coach h3, .tour-done h3 { font-family: 'Space Grotesk', sans-serif; font-weight: 600; color: #1a1d24; }
+  .tour-coach p, .tour-done p { color: #5b6474; }
+  .tour-dots i { background: #cdd5e2; } .tour-dots i.on { background: #3a72e6; }
+  .tour-stage button { border-radius: 8px; border-color: #d6dde8; font-weight: 600; }
+  .tour-stage button.next, .tour-done button.again { background: #3a72e6; border-color: #3a72e6; color: #fff; }
+  .tour-arrow { border-color: #d6dde8; }
+  .tour-done { background: rgba(10,11,14,.5); }
+
   @media (max-width: 900px) {
     .tour-stage { padding: 48px 16px 250px; justify-content: center; }
     .tour-device { width: 100%; max-width: 340px; }
@@ -723,7 +761,7 @@
           <div class="tour-app" id="tour-app">
             <div class="tour-head">
               <div class="tour-title-row">
-                <span class="tour-title"><span class="tour-mark"><svg viewBox="0 0 40 40" width="100%" height="100%" fill="none" aria-hidden="true"><rect x="4.5" y="6.5" width="31" height="29" rx="10.5" fill="#2200ff"/><path d="M4.5 17c0-5.8 4.7-10.5 10.5-10.5h10C30.8 6.5 35.5 11.2 35.5 17Z" fill="#fff" opacity=".16"/><ellipse cx="15" cy="19.5" rx="3" ry="3.4" fill="#fff"/><ellipse cx="25" cy="19.5" rx="3" ry="3.4" fill="#fff"/><circle cx="15.6" cy="20" r="1.4" fill="#12103a"/><circle cx="25.6" cy="20" r="1.4" fill="#12103a"/><path d="M15.5 26.2q4.5 3 9 0" stroke="#fff" stroke-width="1.9" stroke-linecap="round"/></svg></span>Homepage redesign</span>
+                <span class="tour-title"><span class="tour-mark"><svg viewBox="0 0 40 40" width="100%" height="100%" fill="none" aria-hidden="true"><rect x="4.5" y="6.5" width="31" height="29" rx="10.5" fill="#6ea8fe"/><path d="M4.5 17c0-5.8 4.7-10.5 10.5-10.5h10C30.8 6.5 35.5 11.2 35.5 17Z" fill="#fff" opacity=".14"/><ellipse cx="15" cy="19.5" rx="3" ry="3.4" fill="#12203a"/><ellipse cx="25" cy="19.5" rx="3" ry="3.4" fill="#12203a"/><circle cx="16.1" cy="18.3" r=".95" fill="#fff"/><circle cx="26.1" cy="18.3" r=".95" fill="#fff"/><path d="M15.5 26.2q4.5 3 9 0" stroke="#12203a" stroke-width="1.9" stroke-linecap="round"/></svg></span>Homepage redesign</span>
                 <span class="tour-chip" id="tour-chip"><i></i>Capturing</span>
               </div>
               <div class="tour-sub">Session started 1:48 PM · 3 tasks so far</div>
@@ -742,7 +780,7 @@
             <div class="tour-review" id="tour-review"><span>Merge</span><span class="key">Split</span><span>Rename</span></div>
             <div class="tour-foot" id="tour-foot"><b>Text only.</b> No image is ever saved.</div>
             <div class="tour-break" id="tour-break">
-              <div class="top"><span class="tour-mark"><svg viewBox="0 0 40 40" width="100%" height="100%" fill="none" aria-hidden="true"><rect x="4.5" y="6.5" width="31" height="29" rx="10.5" fill="#2200ff"/><path d="M4.5 17c0-5.8 4.7-10.5 10.5-10.5h10C30.8 6.5 35.5 11.2 35.5 17Z" fill="#fff" opacity=".16"/><ellipse cx="15" cy="19.5" rx="3" ry="3.4" fill="#fff"/><ellipse cx="25" cy="19.5" rx="3" ry="3.4" fill="#fff"/><circle cx="15.6" cy="20" r="1.4" fill="#12103a"/><circle cx="25.6" cy="20" r="1.4" fill="#12103a"/><path d="M15.5 26.2q4.5 3 9 0" stroke="#fff" stroke-width="1.9" stroke-linecap="round"/></svg></span><span class="q">Looks like you're on a break?</span></div>
+              <div class="top"><span class="tour-mark"><svg viewBox="0 0 40 40" width="100%" height="100%" fill="none" aria-hidden="true"><rect x="4.5" y="6.5" width="31" height="29" rx="10.5" fill="#6ea8fe"/><path d="M4.5 17c0-5.8 4.7-10.5 10.5-10.5h10C30.8 6.5 35.5 11.2 35.5 17Z" fill="#fff" opacity=".14"/><ellipse cx="15" cy="19.5" rx="3" ry="3.4" fill="#12203a"/><ellipse cx="25" cy="19.5" rx="3" ry="3.4" fill="#12203a"/><circle cx="16.1" cy="18.3" r=".95" fill="#fff"/><circle cx="26.1" cy="18.3" r=".95" fill="#fff"/><path d="M15.5 26.2q4.5 3 9 0" stroke="#12203a" stroke-width="1.9" stroke-linecap="round"/></svg></span><span class="q">Looks like you're on a break?</span></div>
               <div class="sub">That last stretch didn't look like work. I'll pause so it doesn't get logged.</div>
               <div class="btns"><span class="pause">Pause</span><span>Keep going</span></div>
             </div>
@@ -753,14 +791,14 @@
 
         <div class="tour-coach" id="tour-coach" aria-live="polite">
           <span class="tour-arrow" id="tour-arrow"></span>
-          <div class="c-top"><span class="c-m"><svg viewBox="0 0 40 40" width="100%" height="100%" fill="none" aria-hidden="true"><rect x="4.5" y="6.5" width="31" height="29" rx="10.5" fill="#2200ff"/><path d="M4.5 17c0-5.8 4.7-10.5 10.5-10.5h10C30.8 6.5 35.5 11.2 35.5 17Z" fill="#fff" opacity=".16"/><ellipse cx="15" cy="19.5" rx="3" ry="3.4" fill="#fff"/><ellipse cx="25" cy="19.5" rx="3" ry="3.4" fill="#fff"/><circle cx="15.6" cy="20" r="1.4" fill="#12103a"/><circle cx="25.6" cy="20" r="1.4" fill="#12103a"/><path d="M15.5 26.2q4.5 3 9 0" stroke="#fff" stroke-width="1.9" stroke-linecap="round"/></svg></span><div><div class="c-step" id="tour-step">01 / 05</div><h3 id="tour-title">Title</h3></div></div>
+          <div class="c-top"><span class="c-m"><svg viewBox="0 0 40 40" width="100%" height="100%" fill="none" aria-hidden="true"><rect x="4.5" y="6.5" width="31" height="29" rx="10.5" fill="#6ea8fe"/><path d="M4.5 17c0-5.8 4.7-10.5 10.5-10.5h10C30.8 6.5 35.5 11.2 35.5 17Z" fill="#fff" opacity=".14"/><ellipse cx="15" cy="19.5" rx="3" ry="3.4" fill="#12203a"/><ellipse cx="25" cy="19.5" rx="3" ry="3.4" fill="#12203a"/><circle cx="16.1" cy="18.3" r=".95" fill="#fff"/><circle cx="26.1" cy="18.3" r=".95" fill="#fff"/><path d="M15.5 26.2q4.5 3 9 0" stroke="#12203a" stroke-width="1.9" stroke-linecap="round"/></svg></span><div><div class="c-step" id="tour-step">01 / 05</div><h3 id="tour-title">Title</h3></div></div>
           <p id="tour-line">Line</p>
           <div class="c-ctrl"><span class="tour-dots" id="tour-dots"></span><button class="ghost" id="tour-back">Back</button><button class="next" id="tour-next">Next</button></div>
         </div>
 
         <div class="tour-done" id="tour-done">
           <div class="card">
-            <div class="m"><svg viewBox="0 0 40 40" width="100%" height="100%" fill="none" aria-hidden="true"><rect x="4.5" y="6.5" width="31" height="29" rx="10.5" fill="#2200ff"/><path d="M4.5 17c0-5.8 4.7-10.5 10.5-10.5h10C30.8 6.5 35.5 11.2 35.5 17Z" fill="#fff" opacity=".16"/><ellipse cx="15" cy="19.5" rx="3" ry="3.4" fill="#fff"/><ellipse cx="25" cy="19.5" rx="3" ry="3.4" fill="#fff"/><circle cx="15.6" cy="20" r="1.4" fill="#12103a"/><circle cx="25.6" cy="20" r="1.4" fill="#12103a"/><path d="M15.5 26.2q4.5 3 9 0" stroke="#fff" stroke-width="1.9" stroke-linecap="round"/></svg></div>
+            <div class="m"><svg viewBox="0 0 40 40" width="100%" height="100%" fill="none" aria-hidden="true"><rect x="4.5" y="6.5" width="31" height="29" rx="10.5" fill="#6ea8fe"/><path d="M4.5 17c0-5.8 4.7-10.5 10.5-10.5h10C30.8 6.5 35.5 11.2 35.5 17Z" fill="#fff" opacity=".14"/><ellipse cx="15" cy="19.5" rx="3" ry="3.4" fill="#12203a"/><ellipse cx="25" cy="19.5" rx="3" ry="3.4" fill="#12203a"/><circle cx="16.1" cy="18.3" r=".95" fill="#fff"/><circle cx="26.1" cy="18.3" r=".95" fill="#fff"/><path d="M15.5 26.2q4.5 3 9 0" stroke="#12203a" stroke-width="1.9" stroke-linecap="round"/></svg></div>
             <h3>That's the whole job.</h3>
             <p>You do the work. Prruf keeps the record, privately, and hands it back to you when you need it.</p>
             <button class="again" id="tour-again">Replay</button>
