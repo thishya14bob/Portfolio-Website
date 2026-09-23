@@ -257,25 +257,29 @@
   .video-label { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 1.4px; text-transform: uppercase; color: rgba(255,255,255,.4); }
 
   /* ── FEATURES CLICKY-STYLE ── */
-  .feat-rows { display: flex; flex-direction: column; gap: 56px; margin-top: 48px; }
+  .feat-rows { display: flex; flex-direction: column; gap: 64px; margin-top: 48px; }
 
   .feat-row {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 32px;
+    grid-template-columns: 58% 42%;
+    gap: 0;
     align-items: center;
+    background: #f2ede6;
+    border: 1px solid #e2dcd2;
+    border-radius: 20px;
+    overflow: hidden;
   }
 
-  /* Mac Preview window */
+  /* Mac Preview window — fills left cell */
   .mac-window {
-    border-radius: 12px;
+    border-radius: 0;
     overflow: hidden;
-    box-shadow: 0 12px 40px rgba(0,0,0,.14), 0 2px 8px rgba(0,0,0,.08);
-    background: #e8e4de;
+    background: #d6d1c9;
+    border-right: 1px solid #e2dcd2;
   }
   .mac-titlebar {
-    background: #d4cfc8;
-    padding: 11px 14px;
+    background: #ccc8c0;
+    padding: 10px 14px;
     display: flex;
     align-items: center;
     gap: 7px;
@@ -287,89 +291,113 @@
   .mac-dot.green { background: #28c840; }
   .mac-title {
     position: absolute; left: 50%; transform: translateX(-50%);
-    font-family: 'Inter', sans-serif; font-size: 11px; font-weight: 500; color: #78716c; letter-spacing: .2px;
+    font-family: 'Inter', sans-serif; font-size: 11px; font-weight: 400; color: #78716c; letter-spacing: .2px;
   }
   .mac-content {
     aspect-ratio: 4/3;
-    background: #efebe4;
+    background: #d0cbc3;
     display: flex; align-items: center; justify-content: center;
+    position: relative;
   }
   .mac-content img { width: 100%; height: 100%; object-fit: cover; display: block; }
   .mac-placeholder {
     font-family: 'JetBrains Mono', monospace; font-size: 10px;
     color: #a8a29e; letter-spacing: 1.2px; text-transform: uppercase; text-align: center; padding: 16px; line-height: 1.8;
   }
+  /* mute icon bottom-right of video */
+  .mac-mute {
+    position: absolute; bottom: 12px; right: 12px;
+    width: 28px; height: 28px; border-radius: 50%;
+    background: rgba(0,0,0,.35);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .mac-mute svg { display: block; }
 
   /* Right demo panel */
-  .feat-demo {
+  .feat-right {
+    padding: 32px 28px 32px 24px;
     display: flex;
     flex-direction: column;
-    gap: 16px;
-    align-items: flex-start;
+    gap: 20px;
   }
 
-  /* Pagination dots */
-  .feat-dots { display: flex; gap: 5px; margin-bottom: 4px; }
-  .feat-dot { width: 7px; height: 7px; border-radius: 50%; background: #c8c4bc; }
-  .feat-dot.active { background: #78716c; width: 20px; border-radius: 4px; }
+  /* Waveform dots */
+  .feat-waveform {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    height: 18px;
+  }
+  .feat-wave-bar {
+    width: 4px;
+    border-radius: 2px;
+    background: #c8c4bc;
+  }
 
   /* iMessage bubbles */
-  .imsg-wrap { display: flex; flex-direction: column; gap: 8px; align-items: flex-end; width: 100%; }
+  .imsg-wrap { display: flex; flex-direction: column; gap: 8px; align-items: flex-end; }
   .imsg-bubble {
-    max-width: 80%;
-    padding: 10px 15px;
-    border-radius: 18px;
+    max-width: 86%;
+    padding: 10px 16px;
+    border-radius: 20px;
     font-family: 'Inter', sans-serif;
     font-size: 14px;
     line-height: 1.45;
     font-weight: 400;
   }
   .imsg-bubble.sent {
-    background: linear-gradient(135deg, #5db8f8 0%, #4a9ff5 100%);
+    background: linear-gradient(160deg, #6ec0fb 0%, #4da6f5 100%);
     color: #fff;
-    border-bottom-right-radius: 4px;
+    border-bottom-right-radius: 5px;
     align-self: flex-end;
   }
   .imsg-bubble.reply {
     background: #f5c9a4;
-    color: #44340a;
-    border-bottom-right-radius: 4px;
+    color: #5c3a0a;
+    border-bottom-right-radius: 5px;
     align-self: flex-end;
+  }
+
+  /* Feature title + desc — below bubbles in same right column */
+  .feat-info { padding-top: 4px; }
+  .feat-info-name {
+    font-family: 'Inter', sans-serif; font-size: 15px; font-weight: 700;
+    color: #1c1917; margin-bottom: 6px; text-align: center;
+  }
+  .feat-info-desc {
+    font-family: 'Inter', sans-serif; font-size: 12px; line-height: 1.65;
+    color: #78716c; text-align: center;
   }
 
   /* Notification pill */
   .feat-notif {
     background: #1c1917;
-    border-radius: 14px;
-    padding: 14px 18px;
+    border-radius: 12px;
+    padding: 12px 16px;
     display: flex;
     align-items: flex-start;
-    gap: 12px;
+    gap: 10px;
     width: 100%;
   }
-  .feat-notif-icon { font-size: 18px; flex-shrink: 0; margin-top: 1px; }
-  .feat-notif-title { font-family: 'Inter', sans-serif; font-size: 12px; font-weight: 600; color: #fff; margin-bottom: 3px; }
-  .feat-notif-body { font-family: 'Inter', sans-serif; font-size: 11px; color: rgba(255,255,255,.55); line-height: 1.5; }
+  .feat-notif-icon { font-size: 16px; flex-shrink: 0; margin-top: 1px; }
+  .feat-notif-title { font-family: 'Inter', sans-serif; font-size: 12px; font-weight: 600; color: #fff; margin-bottom: 2px; }
+  .feat-notif-body { font-family: 'Inter', sans-serif; font-size: 11px; color: rgba(255,255,255,.5); line-height: 1.5; }
+  .feat-notif.light { background: #e8e3db; border: 1px solid #d8d2c8; }
+  .feat-notif.light .feat-notif-title { color: #1c1917; }
+  .feat-notif.light .feat-notif-body { color: #78716c; }
 
   /* Before/after tag rows */
-  .feat-tags { display: flex; flex-direction: column; gap: 6px; width: 100%; }
-  .feat-tag-row { display: flex; align-items: center; gap: 8px; }
+  .feat-tags { display: flex; flex-direction: column; gap: 8px; }
+  .feat-tag-row { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
   .feat-tag {
-    font-family: 'JetBrains Mono', monospace; font-size: 11px;
-    padding: 5px 10px; border-radius: 6px; white-space: nowrap;
-    color: #78716c; background: #efebe4; border: 1px solid #e2dcd2;
+    font-family: 'JetBrains Mono', monospace; font-size: 10px;
+    padding: 4px 9px; border-radius: 6px;
+    color: #78716c; background: #e8e3db; border: 1px solid #d8d2c8;
   }
-  .feat-tag.merged { background: #1c1917; color: #fff; border-color: #1c1917; }
-  .feat-tag-arrow { color: #a8a29e; font-size: 12px; }
-
-  /* Feature title + desc below */
-  .feat-info { margin-top: 4px; }
-  .feat-info-name {
-    font-family: 'Inter', sans-serif; font-size: 15px; font-weight: 600; color: #1c1917; margin-bottom: 5px;
-  }
-  .feat-info-desc {
-    font-family: 'Inter', sans-serif; font-size: 13px; line-height: 1.65; color: #78716c; max-width: 340px;
-  }
+  .feat-tag.merged { background: #1c1917; color: #fff; border-color: #1c1917; font-size: 11px; padding: 5px 11px; }
+  .feat-tag-plus { color: #a8a29e; font-size: 11px; font-family: 'Inter', sans-serif; }
+  .feat-arrow-row { display: flex; align-items: center; gap: 6px; padding: 0 2px; }
+  .feat-arrow-label { font-family: 'Inter', sans-serif; font-size: 11px; color: #a8a29e; }
 
   /* ── TERMINAL CARD ── */
   .terminal {
@@ -647,37 +675,38 @@
               <div class="mac-dot red"></div>
               <div class="mac-dot yellow"></div>
               <div class="mac-dot green"></div>
-              <span class="mac-title">Prruf</span>
+              <span class="mac-title">Preview</span>
             </div>
             <div class="mac-content">
               <!-- <img src="assets/prruf-capture.png" alt="Auto-capture"> -->
-              <span class="mac-placeholder">App screen —<br>live capture in progress</span>
+              <span class="mac-placeholder">App screenshot —<br>live capture in progress</span>
+              <div class="mac-mute">
+                <svg width="13" height="13" viewBox="0 0 13 13" fill="none">
+                  <path d="M1 4.5h2l3-3v10l-3-3H1V4.5z" fill="rgba(255,255,255,0.8)"/>
+                  <path d="M9 4s1 1 1 2.5S9 9 9 9" stroke="rgba(255,255,255,0.8)" stroke-width="1.2" stroke-linecap="round"/>
+                  <line x1="10" y1="3" x2="12" y2="11" stroke="rgba(255,255,255,0.8)" stroke-width="1.2" stroke-linecap="round"/>
+                </svg>
+              </div>
             </div>
           </div>
-          <div class="feat-demo">
-            <div class="feat-dots">
-              <div class="feat-dot active"></div>
-              <div class="feat-dot"></div>
-              <div class="feat-dot"></div>
-              <div class="feat-dot"></div>
+          <div class="feat-right">
+            <div class="feat-waveform">
+              <div class="feat-wave-bar" style="height:6px"></div>
+              <div class="feat-wave-bar" style="height:10px"></div>
+              <div class="feat-wave-bar" style="height:14px"></div>
+              <div class="feat-wave-bar" style="height:18px;background:#78716c"></div>
+              <div class="feat-wave-bar" style="height:14px;background:#78716c"></div>
+              <div class="feat-wave-bar" style="height:10px"></div>
+              <div class="feat-wave-bar" style="height:7px"></div>
+              <div class="feat-wave-bar" style="height:5px"></div>
             </div>
-            <div class="feat-notif">
-              <span class="feat-notif-icon">📸</span>
-              <div>
-                <p class="feat-notif-title">Just captured</p>
-                <p class="feat-notif-body">Designing the Jamalo homepage — 2 mins ago</p>
-              </div>
-            </div>
-            <div class="feat-notif" style="background: #efebe4; border: 1px solid #e2dcd2;">
-              <span class="feat-notif-icon">📸</span>
-              <div>
-                <p class="feat-notif-title" style="color: #1c1917;">Just captured</p>
-                <p class="feat-notif-body" style="color: #78716c;">Reviewing client feedback doc — 4 mins ago</p>
-              </div>
+            <div class="imsg-wrap">
+              <div class="imsg-bubble sent">prruf, what did I work on today?</div>
+              <div class="imsg-bubble reply">on it! 👀</div>
             </div>
             <div class="feat-info">
-              <p class="feat-info-name">Auto-capture, always on</p>
-              <p class="feat-info-desc">Every ~2.5 minutes, Prruf quietly looks at your screen and writes one sentence about what you're doing. Held in memory, never saved to disk.</p>
+              <p class="feat-info-name">auto-capture, always on</p>
+              <p class="feat-info-desc">every ~2.5 minutes, prruf quietly looks at your screen and writes one sentence about what you're doing. held in memory, never saved to disk.</p>
             </div>
           </div>
         </div>
@@ -689,40 +718,50 @@
               <div class="mac-dot red"></div>
               <div class="mac-dot yellow"></div>
               <div class="mac-dot green"></div>
-              <span class="mac-title">Prruf — Session</span>
+              <span class="mac-title">Preview</span>
             </div>
             <div class="mac-content">
               <!-- <img src="assets/prruf-grouped.png" alt="Smart grouping"> -->
               <span class="mac-placeholder">Session view —<br>tasks grouped from captures</span>
+              <div class="mac-mute">
+                <svg width="13" height="13" viewBox="0 0 13 13" fill="none">
+                  <path d="M1 4.5h2l3-3v10l-3-3H1V4.5z" fill="rgba(255,255,255,0.8)"/>
+                  <line x1="10" y1="3" x2="12" y2="11" stroke="rgba(255,255,255,0.8)" stroke-width="1.2" stroke-linecap="round"/>
+                </svg>
+              </div>
             </div>
           </div>
-          <div class="feat-demo">
-            <div class="feat-dots">
-              <div class="feat-dot"></div>
-              <div class="feat-dot active"></div>
-              <div class="feat-dot"></div>
-              <div class="feat-dot"></div>
+          <div class="feat-right">
+            <div class="feat-waveform">
+              <div class="feat-wave-bar" style="height:5px"></div>
+              <div class="feat-wave-bar" style="height:9px"></div>
+              <div class="feat-wave-bar" style="height:13px"></div>
+              <div class="feat-wave-bar" style="height:9px"></div>
+              <div class="feat-wave-bar" style="height:16px;background:#78716c"></div>
+              <div class="feat-wave-bar" style="height:11px;background:#78716c"></div>
+              <div class="feat-wave-bar" style="height:7px"></div>
+              <div class="feat-wave-bar" style="height:4px"></div>
             </div>
             <div class="feat-tags">
               <div class="feat-tag-row">
                 <span class="feat-tag">designing hero</span>
-                <span class="feat-tag-arrow">+</span>
+                <span class="feat-tag-plus">+</span>
                 <span class="feat-tag">hero layout</span>
-                <span class="feat-tag-arrow">+</span>
+                <span class="feat-tag-plus">+</span>
                 <span class="feat-tag">figma homepage</span>
               </div>
-              <div style="display:flex;align-items:center;gap:8px;padding:0 4px;">
-                <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 3v10M8 13l-3-3M8 13l3-3" stroke="#a8a29e" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                <span style="font-family:'Inter',sans-serif;font-size:11px;color:#a8a29e;">grouped into one task</span>
+              <div class="feat-arrow-row">
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M7 2v10M7 12l-3-3M7 12l3-3" stroke="#a8a29e" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                <span class="feat-arrow-label">grouped into one task</span>
               </div>
               <div class="feat-tag-row">
                 <span class="feat-tag merged">Designing the Jamalo homepage</span>
-                <span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#a8a29e;padding-left:4px;">1h 20m</span>
+                <span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#a8a29e;">1h 20m</span>
               </div>
             </div>
             <div class="feat-info">
-              <p class="feat-info-name">Smart grouping</p>
-              <p class="feat-info-desc">~400 captured moments get stitched into ~10 readable tasks. Not a wall of fragments — a day that actually makes sense.</p>
+              <p class="feat-info-name">smart grouping</p>
+              <p class="feat-info-desc">~400 captured moments get stitched into ~10 readable tasks. not a wall of fragments — a day that actually makes sense.</p>
             </div>
           </div>
         </div>
@@ -734,30 +773,40 @@
               <div class="mac-dot red"></div>
               <div class="mac-dot yellow"></div>
               <div class="mac-dot green"></div>
-              <span class="mac-title">Prruf</span>
+              <span class="mac-title">Preview</span>
             </div>
             <div class="mac-content">
               <!-- <img src="assets/prruf-break.png" alt="Break detection"> -->
               <span class="mac-placeholder">Break prompt —<br>"Looks like you're on a break?"</span>
+              <div class="mac-mute">
+                <svg width="13" height="13" viewBox="0 0 13 13" fill="none">
+                  <path d="M1 4.5h2l3-3v10l-3-3H1V4.5z" fill="rgba(255,255,255,0.8)"/>
+                  <line x1="10" y1="3" x2="12" y2="11" stroke="rgba(255,255,255,0.8)" stroke-width="1.2" stroke-linecap="round"/>
+                </svg>
+              </div>
             </div>
           </div>
-          <div class="feat-demo">
-            <div class="feat-dots">
-              <div class="feat-dot"></div>
-              <div class="feat-dot"></div>
-              <div class="feat-dot active"></div>
-              <div class="feat-dot"></div>
+          <div class="feat-right">
+            <div class="feat-waveform">
+              <div class="feat-wave-bar" style="height:7px"></div>
+              <div class="feat-wave-bar" style="height:12px;background:#78716c"></div>
+              <div class="feat-wave-bar" style="height:17px;background:#78716c"></div>
+              <div class="feat-wave-bar" style="height:12px"></div>
+              <div class="feat-wave-bar" style="height:8px"></div>
+              <div class="feat-wave-bar" style="height:14px"></div>
+              <div class="feat-wave-bar" style="height:9px"></div>
+              <div class="feat-wave-bar" style="height:5px"></div>
             </div>
             <div class="imsg-wrap">
-              <div class="imsg-bubble sent">Looks like you're on a break? 👀</div>
-              <div style="display:flex;gap:8px;margin-top:2px;">
-                <div style="padding:9px 18px;background:#f5f5f5;border-radius:18px;border-bottom-left-radius:4px;font-family:'Inter',sans-serif;font-size:13px;color:#44403c;border:1px solid #e2dcd2;">Pause recording</div>
-                <div style="padding:9px 18px;background:#f5f5f5;border-radius:18px;border-bottom-left-radius:4px;font-family:'Inter',sans-serif;font-size:13px;color:#44403c;border:1px solid #e2dcd2;">Keep going</div>
+              <div class="imsg-bubble sent">looks like you're on a break? 👀</div>
+              <div style="display:flex;gap:8px;align-self:flex-end;">
+                <span style="padding:8px 16px;background:#e8e3db;border-radius:16px;border-bottom-right-radius:4px;font-family:'Inter',sans-serif;font-size:13px;color:#44403c;border:1px solid #d8d2c8;cursor:pointer;">pause</span>
+                <span style="padding:8px 16px;background:#e8e3db;border-radius:16px;border-bottom-right-radius:4px;font-family:'Inter',sans-serif;font-size:13px;color:#44403c;border:1px solid #d8d2c8;cursor:pointer;">keep going</span>
               </div>
             </div>
             <div class="feat-info">
-              <p class="feat-info-name">Break detection</p>
-              <p class="feat-info-desc">When what's on screen drifts away from work, Prruf asks gently and steps aside. A warden would flag the break. Prruf just looks away.</p>
+              <p class="feat-info-name">break detection</p>
+              <p class="feat-info-desc">when what's on screen drifts from work, prruf asks gently and steps aside. a warden would flag the break. prruf just looks away.</p>
             </div>
           </div>
         </div>
@@ -769,34 +818,37 @@
               <div class="mac-dot red"></div>
               <div class="mac-dot yellow"></div>
               <div class="mac-dot green"></div>
-              <span class="mac-title">Prruf — Report</span>
+              <span class="mac-title">Preview</span>
             </div>
             <div class="mac-content">
               <!-- <img src="assets/prruf-report.png" alt="Export"> -->
-              <span class="mac-placeholder">Report + PDF export —<br>summary, tasks, timesheet</span>
+              <span class="mac-placeholder">Report + PDF —<br>summary, tasks, timesheet</span>
+              <div class="mac-mute">
+                <svg width="13" height="13" viewBox="0 0 13 13" fill="none">
+                  <path d="M1 4.5h2l3-3v10l-3-3H1V4.5z" fill="rgba(255,255,255,0.8)"/>
+                  <line x1="10" y1="3" x2="12" y2="11" stroke="rgba(255,255,255,0.8)" stroke-width="1.2" stroke-linecap="round"/>
+                </svg>
+              </div>
             </div>
           </div>
-          <div class="feat-demo">
-            <div class="feat-dots">
-              <div class="feat-dot"></div>
-              <div class="feat-dot"></div>
-              <div class="feat-dot"></div>
-              <div class="feat-dot active"></div>
+          <div class="feat-right">
+            <div class="feat-waveform">
+              <div class="feat-wave-bar" style="height:5px"></div>
+              <div class="feat-wave-bar" style="height:8px"></div>
+              <div class="feat-wave-bar" style="height:6px"></div>
+              <div class="feat-wave-bar" style="height:14px;background:#78716c"></div>
+              <div class="feat-wave-bar" style="height:18px;background:#78716c"></div>
+              <div class="feat-wave-bar" style="height:11px"></div>
+              <div class="feat-wave-bar" style="height:7px"></div>
+              <div class="feat-wave-bar" style="height:4px"></div>
             </div>
             <div class="imsg-wrap">
               <div class="imsg-bubble sent">prruf, export today's report</div>
               <div class="imsg-bubble reply">on it! 📄</div>
             </div>
-            <div class="feat-notif" style="margin-top: 4px;">
-              <span class="feat-notif-icon">✅</span>
-              <div>
-                <p class="feat-notif-title">Report ready</p>
-                <p class="feat-notif-body">Wasabie_Report_23Sep.pdf — saved to Desktop</p>
-              </div>
-            </div>
             <div class="feat-info">
               <p class="feat-info-name">1-click export</p>
-              <p class="feat-info-desc">A clean narrative summary, task list, and Format-C timesheet on your studio letterhead — ready to send to a client or keep for yourself.</p>
+              <p class="feat-info-desc">a clean summary, task list, and timesheet on your studio letterhead — ready to send to a client or keep for yourself.</p>
             </div>
           </div>
         </div>
