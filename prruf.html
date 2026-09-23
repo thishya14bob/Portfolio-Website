@@ -223,29 +223,6 @@
   .cs-takeaway-dot { width: 6px; height: 6px; background: #2200ff; border-radius: 50%; flex-shrink: 0; margin-top: 6px; }
   .cs-takeaway-text { font-size: 13px; line-height: 1.7; color: #44403c; font-family: 'Inter', sans-serif; }
 
-  /* ── FEATURES BENTO GRID ── */
-  .features-bento {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-auto-rows: auto;
-    gap: 12px;
-    margin-top: 28px;
-  }
-  .feat-card {
-    background: #efebe4;
-    border: 1px solid #e2dcd2;
-    border-radius: 14px;
-    padding: 22px 20px;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-  }
-  .feat-card.wide { grid-column: span 2; }
-  .feat-card.full { grid-column: span 3; }
-  .feat-icon { font-size: 22px; line-height: 1; }
-  .feat-name { font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 500; color: #1c1917; }
-  .feat-desc { font-family: 'Inter', sans-serif; font-size: 12px; line-height: 1.6; color: #78716c; }
-
   /* ── VIDEO PLACEHOLDER ── */
   .video-placeholder {
     width: 100%;
@@ -278,6 +255,121 @@
   }
   .video-play-btn svg { margin-left: 3px; }
   .video-label { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 1.4px; text-transform: uppercase; color: rgba(255,255,255,.4); }
+
+  /* ── FEATURES CLICKY-STYLE ── */
+  .feat-rows { display: flex; flex-direction: column; gap: 56px; margin-top: 48px; }
+
+  .feat-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+    align-items: center;
+  }
+
+  /* Mac Preview window */
+  .mac-window {
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 12px 40px rgba(0,0,0,.14), 0 2px 8px rgba(0,0,0,.08);
+    background: #e8e4de;
+  }
+  .mac-titlebar {
+    background: #d4cfc8;
+    padding: 11px 14px;
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    position: relative;
+  }
+  .mac-dot { width: 11px; height: 11px; border-radius: 50%; }
+  .mac-dot.red { background: #ff5f57; }
+  .mac-dot.yellow { background: #febc2e; }
+  .mac-dot.green { background: #28c840; }
+  .mac-title {
+    position: absolute; left: 50%; transform: translateX(-50%);
+    font-family: 'Inter', sans-serif; font-size: 11px; font-weight: 500; color: #78716c; letter-spacing: .2px;
+  }
+  .mac-content {
+    aspect-ratio: 4/3;
+    background: #efebe4;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .mac-content img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .mac-placeholder {
+    font-family: 'JetBrains Mono', monospace; font-size: 10px;
+    color: #a8a29e; letter-spacing: 1.2px; text-transform: uppercase; text-align: center; padding: 16px; line-height: 1.8;
+  }
+
+  /* Right demo panel */
+  .feat-demo {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    align-items: flex-start;
+  }
+
+  /* Pagination dots */
+  .feat-dots { display: flex; gap: 5px; margin-bottom: 4px; }
+  .feat-dot { width: 7px; height: 7px; border-radius: 50%; background: #c8c4bc; }
+  .feat-dot.active { background: #78716c; width: 20px; border-radius: 4px; }
+
+  /* iMessage bubbles */
+  .imsg-wrap { display: flex; flex-direction: column; gap: 8px; align-items: flex-end; width: 100%; }
+  .imsg-bubble {
+    max-width: 80%;
+    padding: 10px 15px;
+    border-radius: 18px;
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    line-height: 1.45;
+    font-weight: 400;
+  }
+  .imsg-bubble.sent {
+    background: linear-gradient(135deg, #5db8f8 0%, #4a9ff5 100%);
+    color: #fff;
+    border-bottom-right-radius: 4px;
+    align-self: flex-end;
+  }
+  .imsg-bubble.reply {
+    background: #f5c9a4;
+    color: #44340a;
+    border-bottom-right-radius: 4px;
+    align-self: flex-end;
+  }
+
+  /* Notification pill */
+  .feat-notif {
+    background: #1c1917;
+    border-radius: 14px;
+    padding: 14px 18px;
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    width: 100%;
+  }
+  .feat-notif-icon { font-size: 18px; flex-shrink: 0; margin-top: 1px; }
+  .feat-notif-title { font-family: 'Inter', sans-serif; font-size: 12px; font-weight: 600; color: #fff; margin-bottom: 3px; }
+  .feat-notif-body { font-family: 'Inter', sans-serif; font-size: 11px; color: rgba(255,255,255,.55); line-height: 1.5; }
+
+  /* Before/after tag rows */
+  .feat-tags { display: flex; flex-direction: column; gap: 6px; width: 100%; }
+  .feat-tag-row { display: flex; align-items: center; gap: 8px; }
+  .feat-tag {
+    font-family: 'JetBrains Mono', monospace; font-size: 11px;
+    padding: 5px 10px; border-radius: 6px; white-space: nowrap;
+    color: #78716c; background: #efebe4; border: 1px solid #e2dcd2;
+  }
+  .feat-tag.merged { background: #1c1917; color: #fff; border-color: #1c1917; }
+  .feat-tag-arrow { color: #a8a29e; font-size: 12px; }
+
+  /* Feature title + desc below */
+  .feat-info { margin-top: 4px; }
+  .feat-info-name {
+    font-family: 'Inter', sans-serif; font-size: 15px; font-weight: 600; color: #1c1917; margin-bottom: 5px;
+  }
+  .feat-info-desc {
+    font-family: 'Inter', sans-serif; font-size: 13px; line-height: 1.65; color: #78716c; max-width: 340px;
+  }
 
   /* ── TERMINAL CARD ── */
   .terminal {
@@ -378,8 +470,7 @@
     .meta-bar { grid-template-columns: 1fr 1fr; }
     .stats-grid { grid-template-columns: 1fr 1fr; }
     .cs-image-grid { grid-template-columns: 1fr; }
-    .features-bento { grid-template-columns: 1fr 1fr; }
-    .feat-card.wide, .feat-card.full { grid-column: span 2; }
+    .feat-row { grid-template-columns: 1fr; }
     .testimonials-grid { grid-template-columns: 1fr; }
     .terminal-row { grid-template-columns: 140px 1fr; }
   }
@@ -547,47 +638,169 @@
         <span class="video-label">Product walkthrough — drop video here</span>
       </div>
 
-      <div class="features-bento" style="margin-top: 20px;">
-        <div class="feat-card">
-          <span class="feat-icon">📸</span>
-          <p class="feat-name">Auto-capture</p>
-          <p class="feat-desc">A screenshot every ~2.5 minutes, held in memory. Never written to disk.</p>
+      <div class="feat-rows">
+
+        <!-- FEATURE 1: Auto-capture -->
+        <div class="feat-row">
+          <div class="mac-window">
+            <div class="mac-titlebar">
+              <div class="mac-dot red"></div>
+              <div class="mac-dot yellow"></div>
+              <div class="mac-dot green"></div>
+              <span class="mac-title">Prruf</span>
+            </div>
+            <div class="mac-content">
+              <!-- <img src="assets/prruf-capture.png" alt="Auto-capture"> -->
+              <span class="mac-placeholder">App screen —<br>live capture in progress</span>
+            </div>
+          </div>
+          <div class="feat-demo">
+            <div class="feat-dots">
+              <div class="feat-dot active"></div>
+              <div class="feat-dot"></div>
+              <div class="feat-dot"></div>
+              <div class="feat-dot"></div>
+            </div>
+            <div class="feat-notif">
+              <span class="feat-notif-icon">📸</span>
+              <div>
+                <p class="feat-notif-title">Just captured</p>
+                <p class="feat-notif-body">Designing the Jamalo homepage — 2 mins ago</p>
+              </div>
+            </div>
+            <div class="feat-notif" style="background: #efebe4; border: 1px solid #e2dcd2;">
+              <span class="feat-notif-icon">📸</span>
+              <div>
+                <p class="feat-notif-title" style="color: #1c1917;">Just captured</p>
+                <p class="feat-notif-body" style="color: #78716c;">Reviewing client feedback doc — 4 mins ago</p>
+              </div>
+            </div>
+            <div class="feat-info">
+              <p class="feat-info-name">Auto-capture, always on</p>
+              <p class="feat-info-desc">Every ~2.5 minutes, Prruf quietly looks at your screen and writes one sentence about what you're doing. Held in memory, never saved to disk.</p>
+            </div>
+          </div>
         </div>
-        <div class="feat-card">
-          <span class="feat-icon">🧠</span>
-          <p class="feat-name">Smart grouping</p>
-          <p class="feat-desc">Captures stitched into ~10 readable tasks — not 400 disconnected fragments.</p>
+
+        <!-- FEATURE 2: Smart grouping -->
+        <div class="feat-row">
+          <div class="mac-window">
+            <div class="mac-titlebar">
+              <div class="mac-dot red"></div>
+              <div class="mac-dot yellow"></div>
+              <div class="mac-dot green"></div>
+              <span class="mac-title">Prruf — Session</span>
+            </div>
+            <div class="mac-content">
+              <!-- <img src="assets/prruf-grouped.png" alt="Smart grouping"> -->
+              <span class="mac-placeholder">Session view —<br>tasks grouped from captures</span>
+            </div>
+          </div>
+          <div class="feat-demo">
+            <div class="feat-dots">
+              <div class="feat-dot"></div>
+              <div class="feat-dot active"></div>
+              <div class="feat-dot"></div>
+              <div class="feat-dot"></div>
+            </div>
+            <div class="feat-tags">
+              <div class="feat-tag-row">
+                <span class="feat-tag">designing hero</span>
+                <span class="feat-tag-arrow">+</span>
+                <span class="feat-tag">hero layout</span>
+                <span class="feat-tag-arrow">+</span>
+                <span class="feat-tag">figma homepage</span>
+              </div>
+              <div style="display:flex;align-items:center;gap:8px;padding:0 4px;">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 3v10M8 13l-3-3M8 13l3-3" stroke="#a8a29e" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                <span style="font-family:'Inter',sans-serif;font-size:11px;color:#a8a29e;">grouped into one task</span>
+              </div>
+              <div class="feat-tag-row">
+                <span class="feat-tag merged">Designing the Jamalo homepage</span>
+                <span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#a8a29e;padding-left:4px;">1h 20m</span>
+              </div>
+            </div>
+            <div class="feat-info">
+              <p class="feat-info-name">Smart grouping</p>
+              <p class="feat-info-desc">~400 captured moments get stitched into ~10 readable tasks. Not a wall of fragments — a day that actually makes sense.</p>
+            </div>
+          </div>
         </div>
-        <div class="feat-card">
-          <span class="feat-icon">☕</span>
-          <p class="feat-name">Break detection</p>
-          <p class="feat-desc">"Looks like you're on a break?" — Prruf steps aside. Picks back up when you're back.</p>
+
+        <!-- FEATURE 3: Break detection -->
+        <div class="feat-row">
+          <div class="mac-window">
+            <div class="mac-titlebar">
+              <div class="mac-dot red"></div>
+              <div class="mac-dot yellow"></div>
+              <div class="mac-dot green"></div>
+              <span class="mac-title">Prruf</span>
+            </div>
+            <div class="mac-content">
+              <!-- <img src="assets/prruf-break.png" alt="Break detection"> -->
+              <span class="mac-placeholder">Break prompt —<br>"Looks like you're on a break?"</span>
+            </div>
+          </div>
+          <div class="feat-demo">
+            <div class="feat-dots">
+              <div class="feat-dot"></div>
+              <div class="feat-dot"></div>
+              <div class="feat-dot active"></div>
+              <div class="feat-dot"></div>
+            </div>
+            <div class="imsg-wrap">
+              <div class="imsg-bubble sent">Looks like you're on a break? 👀</div>
+              <div style="display:flex;gap:8px;margin-top:2px;">
+                <div style="padding:9px 18px;background:#f5f5f5;border-radius:18px;border-bottom-left-radius:4px;font-family:'Inter',sans-serif;font-size:13px;color:#44403c;border:1px solid #e2dcd2;">Pause recording</div>
+                <div style="padding:9px 18px;background:#f5f5f5;border-radius:18px;border-bottom-left-radius:4px;font-family:'Inter',sans-serif;font-size:13px;color:#44403c;border:1px solid #e2dcd2;">Keep going</div>
+              </div>
+            </div>
+            <div class="feat-info">
+              <p class="feat-info-name">Break detection</p>
+              <p class="feat-info-desc">When what's on screen drifts away from work, Prruf asks gently and steps aside. A warden would flag the break. Prruf just looks away.</p>
+            </div>
+          </div>
         </div>
-        <div class="feat-card wide">
-          <span class="feat-icon">✂️</span>
-          <p class="feat-name">Merge · Split · Rename</p>
-          <p class="feat-desc">A raw stream is messy. The editing layer lets you clean the whole day in seconds — split one task into two, merge three rows that were the same effort, rename anything so it reads the way you'd describe it yourself.</p>
+
+        <!-- FEATURE 4: 1-click export -->
+        <div class="feat-row">
+          <div class="mac-window">
+            <div class="mac-titlebar">
+              <div class="mac-dot red"></div>
+              <div class="mac-dot yellow"></div>
+              <div class="mac-dot green"></div>
+              <span class="mac-title">Prruf — Report</span>
+            </div>
+            <div class="mac-content">
+              <!-- <img src="assets/prruf-report.png" alt="Export"> -->
+              <span class="mac-placeholder">Report + PDF export —<br>summary, tasks, timesheet</span>
+            </div>
+          </div>
+          <div class="feat-demo">
+            <div class="feat-dots">
+              <div class="feat-dot"></div>
+              <div class="feat-dot"></div>
+              <div class="feat-dot"></div>
+              <div class="feat-dot active"></div>
+            </div>
+            <div class="imsg-wrap">
+              <div class="imsg-bubble sent">prruf, export today's report</div>
+              <div class="imsg-bubble reply">on it! 📄</div>
+            </div>
+            <div class="feat-notif" style="margin-top: 4px;">
+              <span class="feat-notif-icon">✅</span>
+              <div>
+                <p class="feat-notif-title">Report ready</p>
+                <p class="feat-notif-body">Wasabie_Report_23Sep.pdf — saved to Desktop</p>
+              </div>
+            </div>
+            <div class="feat-info">
+              <p class="feat-info-name">1-click export</p>
+              <p class="feat-info-desc">A clean narrative summary, task list, and Format-C timesheet on your studio letterhead — ready to send to a client or keep for yourself.</p>
+            </div>
+          </div>
         </div>
-        <div class="feat-card">
-          <span class="feat-icon">📁</span>
-          <p class="feat-name">Sessions</p>
-          <p class="feat-desc">Named, resumable sessions — like chats. Combine several into one recap.</p>
-        </div>
-        <div class="feat-card">
-          <span class="feat-icon">📄</span>
-          <p class="feat-name">Export PDF</p>
-          <p class="feat-desc">One click. Clean summary, task list, and a timesheet on your studio letterhead.</p>
-        </div>
-        <div class="feat-card">
-          <span class="feat-icon">✍️</span>
-          <p class="feat-name">Off-laptop work</p>
-          <p class="feat-desc">Add calls, meetings, sketching sessions by hand — always kept visibly separate from captured work.</p>
-        </div>
-        <div class="feat-card wide">
-          <span class="feat-icon">🔒</span>
-          <p class="feat-name">Privacy-first, by design</p>
-          <p class="feat-desc">The image is deleted the instant it's read. Only text is ever stored. No screenshots on disk, ever. The safeguards aren't a feature — they're the reason it works at all.</p>
-        </div>
+
       </div>
     </section>
 
