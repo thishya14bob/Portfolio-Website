@@ -490,6 +490,7 @@
     .wa-grid { grid-template-columns: 1fr; }
     .terminal-row { grid-template-columns: 140px 1fr; }
   }
+  .cs-image { background: transparent; border: none; }
 </style>
 </head>
 <body>
@@ -528,7 +529,7 @@
 <main id="main">
   <div class="content-wrap">
 
-    <div class="hero-image" style="background:#fff"><img src="assets/bio/hero.jpg" alt="Fingerprint scanner" style="object-fit:contain"></div>
+    <div class="hero-image" style="background:transparent;border:none"><img src="assets/bio/hero.png" alt="Fingerprint scanner" style="object-fit:contain"></div>
 
     <div class="tags">
       <span class="tag">UX Research</span>
@@ -565,7 +566,7 @@
         <p>He wasn't struggling with the task. He was struggling with a system that said nothing back.</p>
       </div>
       <div class="cs-callout">"I kept trying to scan my finger… it just didn't tell me what I was doing wrong."</div>
-      <div class="cs-image"><img src="assets/bio/grandpa.jpg" alt="Confused pensioner illustration"></div>
+      <div class="cs-image"><img src="assets/bio/grandpa.png" alt="Confused pensioner illustration"></div>
     </section>
 
     <section class="cs-section" id="research">
@@ -574,7 +575,7 @@
       <div class="cs-body">
         <p>My first guess was the fingerprint scanner: improve the hardware, improve the sensitivity. But the experience involves two people, the pensioner and the operator who assists them. So I interviewed both.</p>
       </div>
-      <div class="cs-image"><img src="assets/bio/personas.jpg" alt="Sita Aunty and Rajesh Ji interview insights"></div>
+      <div class="cs-image"><img src="assets/bio/personas.png" alt="Sita Aunty and Rajesh Ji interview insights"></div>
       <p class="cs-image-caption">Sita Aunty, a pensioner since 2017, and Rajesh Ji, a Meeseva operator since 2021</p>
       <div class="cs-callout">The problem wasn't the product. It was the interaction between user, system, and guidance.</div>
     </section>
@@ -585,7 +586,7 @@
       <div class="cs-body">
         <p>I mapped what pensioners say, think, do and feel during verification. When a scan failed, they didn't just retry. They turned to operators for help, which made them more dependent.</p>
       </div>
-      <div class="cs-image"><img src="assets/bio/empathy.jpg" alt="Empathy map"></div>
+      <div class="cs-image"><img src="assets/bio/empathy.png" alt="Empathy map"></div>
       <div class="cs-takeaways">
         <div class="cs-takeaway"><div class="cs-takeaway-dot"></div><p class="cs-takeaway-text"><strong>The real problem:</strong> no clear feedback, and heavy dependency on operators.</p></div>
         <div class="cs-takeaway"><div class="cs-takeaway-dot"></div><p class="cs-takeaway-text"><strong>Where users struggle:</strong> biometric verification and assisted data entry.</p></div>
@@ -597,9 +598,9 @@
       <p class="cs-section-heading">04. The journey</p>
       <h2 class="cs-section-title">Where the experience breaks.</h2>
       <div class="cs-body"><p>The current flow has five phases. It starts smooth, then drops sharply at data entry and biometric verification, where repeated failures and zero feedback cause the most frustration.</p></div>
-      <div class="cs-image"><img src="assets/bio/flow.jpg" alt="Current life certificate submission flow"></div>
+      <div class="cs-image"><img src="assets/bio/flow.png" alt="Current life certificate submission flow"></div>
       <p class="cs-image-caption">Current life certificate submission flow</p>
-      <div class="cs-image"><img src="assets/bio/journey.jpg" alt="User experience journey graph"></div>
+      <div class="cs-image"><img src="assets/bio/journey.png" alt="User experience journey graph"></div>
       <p class="cs-image-caption">Experience dips at data entry, attempt and retry</p>
       <div class="cs-callout">"The problem wasn't failure. It was not knowing why."</div>
     </section>
@@ -613,17 +614,17 @@
       </div>
       <h3 class="cs-step-title" style="margin-top:32px">1. Biometric first, then auto-fetch</h3>
       <div class="cs-body"><p>Instead of manual data entry by an operator, the pensioner scans first. Their details are fetched automatically and they simply confirm them.</p></div>
-      <div class="cs-image"><img src="assets/bio/sol1.jpg" alt="Biometric-first wireframes"></div>
+      <div class="cs-image"><img src="assets/bio/sol1.png" alt="Biometric-first wireframes"></div>
       <h3 class="cs-step-title" style="margin-top:40px">2. Real-time feedback while scanning</h3>
       <div class="cs-body"><p>Instead of a silent failure, the kiosk explains what went wrong and how to fix it: wipe a moist finger, press more firmly, or reposition. If it still fails, it offers an alternate verification or help.</p></div>
-      <div class="cs-image"><img src="assets/bio/sol2.jpg" alt="Guided scanning wireframes"></div>
+      <div class="cs-image"><img src="assets/bio/sol2.png" alt="Guided scanning wireframes"></div>
     </section>
 
     <section class="cs-section" id="feedback">
       <p class="cs-section-heading">06. Feedback</p>
       <h2 class="cs-section-title">I took it back to the people I interviewed.</h2>
       <div class="cs-body"><p>I walked Sita Aunty and Rajesh Ji through the wireframes.</p></div>
-      <div class="cs-image"><img src="assets/bio/feedback.jpg" alt="Feedback from Sita Aunty and Rajesh Ji"></div>
+      <div class="cs-image"><img src="assets/bio/feedback.png" alt="Feedback from Sita Aunty and Rajesh Ji"></div>
       <div class="cs-takeaways">
         <div class="cs-takeaway"><div class="cs-takeaway-dot"></div><p class="cs-takeaway-text"><strong>Sita Aunty:</strong> "Ohhh… ab yeh sach mein batata hai kya karna hai." (Now it actually tells me what to do.)</p></div>
         <div class="cs-takeaway"><div class="cs-takeaway-dot"></div><p class="cs-takeaway-text"><strong>Rajesh Ji:</strong> "Ab mujhe baar-baar sab samjhana nahi padega. Isse kaafi samay bachega." (I won't have to explain everything again and again. This will save a lot of time.)</p></div>
