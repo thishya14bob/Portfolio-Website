@@ -375,6 +375,9 @@
   .wa-chat { background: #f5f1ea url('assets/wa-texture.png') center / cover; padding: 18px 16px 22px; min-height: 150px; }
   .wa-bubble { position: relative; background: #fff; border-radius: 0 10px 10px 10px; padding: 8px 12px 6px; max-width: 92%; box-shadow: 0 1px 1px rgba(0,0,0,.12); }
   .wa-bubble::before { content: ''; position: absolute; left: -8px; top: 0; border-top: 10px solid #fff; border-left: 8px solid transparent; }
+  .wa-bubble.out { background: #d9fdd3; border-radius: 10px 0 10px 10px; margin: 10px 0 0 auto; }
+  .wa-bubble.out::before { left: auto; right: -8px; border-top-color: #d9fdd3; border-left: none; border-right: 8px solid transparent; }
+  .wa-ticks { color: #53bdeb; margin-left: 3px; }
   .wa-text { font-family: 'Inter', sans-serif; font-size: 14px; line-height: 1.5; color: #111b21; }
   .wa-time { font-family: 'Inter', sans-serif; font-size: 10px; color: #8696a0; text-align: right; margin-top: 4px; }
 
@@ -776,6 +779,10 @@
               <p class="wa-text">This is something I can use with my team for better collaboration, especially since a few of my team members work remotely.</p>
               <p class="wa-time">10:42 AM</p>
             </div>
+            <div class="wa-bubble out">
+              <p class="wa-text">That's so good to hear! Remote teams are exactly who we had in mind 🙌</p>
+              <p class="wa-time">10:44 AM<span class="wa-ticks">✓✓</span></p>
+            </div>
           </div>
         </div>
         <div class="wa-card">
@@ -787,6 +794,10 @@
             <div class="wa-bubble">
               <p class="wa-text">As I mentioned before, I am someone who does a lot of ad-hoc tasks, and to me this tool is a must-have.</p>
               <p class="wa-time">2:15 PM</p>
+            </div>
+            <div class="wa-bubble out">
+              <p class="wa-text">Ad-hoc days are the hardest to remember. Glad it's got your back!</p>
+              <p class="wa-time">2:17 PM<span class="wa-ticks">✓✓</span></p>
             </div>
           </div>
         </div>
@@ -800,6 +811,10 @@
               <p class="wa-text">We saw the video, if we could get demo access so we can experience it?</p>
               <p class="wa-time">6:08 PM</p>
             </div>
+            <div class="wa-bubble out">
+              <p class="wa-text">Oh definitely, we would love for you guys to test out our MVP.</p>
+              <p class="wa-time">6:10 PM<span class="wa-ticks">✓✓</span></p>
+            </div>
           </div>
         </div>
         <div class="wa-card">
@@ -811,6 +826,10 @@
             <div class="wa-bubble">
               <p class="wa-text">Yes I did test it today. And honestly, it did all the work for me.</p>
               <p class="wa-time">9:30 PM</p>
+            </div>
+            <div class="wa-bubble out">
+              <p class="wa-text">That's exactly the goal. You work, it remembers 💚</p>
+              <p class="wa-time">9:32 PM<span class="wa-ticks">✓✓</span></p>
             </div>
           </div>
         </div>
