@@ -1,0 +1,767 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Prruf — Thishya Mannur</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;600&family=Newsreader:ital,opsz,wght@0,6..72,400;1,6..72,400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: #fbf9f5;
+    color: #1c1917;
+    min-height: 100vh;
+    display: flex;
+    cursor: none;
+  }
+
+  /* ── CURSOR ── */
+  .cursor {
+    position: fixed;
+    width: 10px;
+    height: 10px;
+    background: #064e3b;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9999;
+    transform: translate(-50%, -50%);
+    transition: width .15s, height .15s, background .15s;
+  }
+  .cursor.big {
+    width: 32px;
+    height: 32px;
+    background: rgba(6,78,59,.15);
+    border: 1.5px solid #064e3b;
+  }
+  @media (max-width: 768px) { .cursor { display: none; } body { cursor: auto; } }
+
+  /* ── SIDEBAR ── */
+  #sidebar {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    width: 280px;
+    min-width: 280px;
+    background: #f0ffcc;
+    border-right: 1px solid rgba(0,0,0,.06);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 32px;
+    z-index: 10;
+    overflow: hidden;
+  }
+
+  .sidebar-top { display: flex; flex-direction: column; }
+
+  .back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    color: #78716c;
+    text-decoration: none;
+    margin-bottom: 32px;
+    transition: color .2s;
+  }
+  .back-link:hover { color: #1c1917; }
+  .back-link svg { transition: transform .2s; }
+  .back-link:hover svg { transform: translateX(-3px); }
+
+  .toc-label {
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 500;
+    font-size: 11px;
+    letter-spacing: 1.1px;
+    text-transform: uppercase;
+    color: #78716c;
+    padding-bottom: 6px;
+    margin-bottom: 6px;
+  }
+
+  .toc-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .toc-list a {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 14px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 400;
+    color: #1c1917;
+    text-decoration: none;
+    transition: background .2s;
+  }
+  .toc-list a .toc-arrow { font-size: 12px; color: #a8a29e; font-family: 'JetBrains Mono', monospace; }
+  .toc-list a:not(.active):hover { background: rgba(0,0,0,.06); }
+  .toc-list a.active { background: #1c1917; color: #fff; }
+  .toc-list a.active .toc-arrow { color: #fff; }
+
+  .sidebar-bottom {
+    border-top: 1px solid rgba(0,0,0,.1);
+    padding-top: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .clock-wrap { display: flex; flex-direction: column; gap: 7px; }
+  .clock-time { font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #57534e; letter-spacing: .6px; }
+  .clock-location { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: #a8a29e; letter-spacing: .4px; text-transform: uppercase; }
+  .mascot { width: 36px; height: 36px; background: #1c1917; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 16px; }
+
+  /* ── MAIN ── */
+  #main {
+    flex: 1;
+    min-width: 0;
+    background-color: #fbf9f5;
+    background-image: radial-gradient(circle, rgba(200,196,188,0.35) 1px, transparent 1px);
+    background-size: 28px 28px;
+    padding: 56px 64px 120px;
+  }
+
+  .content-wrap { max-width: 780px; }
+
+  /* ── HERO IMAGE ── */
+  .hero-image {
+    width: 100%;
+    border-radius: 20px;
+    overflow: hidden;
+    background: #efebe4;
+    border: 1px solid #e2dcd2;
+    margin-bottom: 44px;
+    aspect-ratio: 16/8;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .hero-image img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .hero-image-placeholder {
+    color: #a8a29e;
+    font-size: 11px;
+    letter-spacing: 1.4px;
+    text-transform: uppercase;
+    font-family: 'JetBrains Mono', monospace;
+    text-align: center;
+    line-height: 1.8;
+  }
+
+  /* ── TAGS ── */
+  .tags { display: flex; gap: 8px; margin-bottom: 16px; flex-wrap: wrap; }
+  .tag {
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 1.4px;
+    text-transform: uppercase;
+    padding: 5px 13px;
+    border: 1px solid #1c1917;
+    border-radius: 100px;
+    color: #1c1917;
+    font-family: 'Inter', sans-serif;
+  }
+  .tag.muted { border-color: #a8a29e; color: #78716c; }
+
+  /* ── TITLE ── */
+  .cs-title {
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    font-size: clamp(32px, 4vw, 52px);
+    letter-spacing: -1.2px;
+    line-height: 1.08;
+    color: #1c1917;
+    margin-bottom: 18px;
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+  }
+  .cs-title-star { color: #2200ff; font-size: 0.85em; line-height: 1.25; flex-shrink: 0; }
+
+  /* ── DESCRIPTION ── */
+  .cs-description {
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    line-height: 1.75;
+    color: #57534e;
+    max-width: 640px;
+    margin-bottom: 24px;
+  }
+  .cs-description a { color: #2200ff; text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px; }
+
+  /* ── CTA ── */
+  .cs-cta {
+    display: block;
+    width: 100%;
+    padding: 16px;
+    border: 1px solid #1c1917;
+    border-radius: 9999px;
+    text-align: center;
+    font-size: 13px;
+    font-weight: 500;
+    color: #1c1917;
+    text-decoration: none;
+    margin-bottom: 44px;
+    transition: background .2s, color .2s;
+    background: transparent;
+    font-family: 'Inter', sans-serif;
+    letter-spacing: .3px;
+  }
+  .cs-cta:hover { background: #1c1917; color: #fff; }
+
+  /* ── META BAR ── */
+  .meta-bar {
+    background: #1c1917;
+    border-radius: 16px;
+    padding: 28px 32px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+    margin-bottom: 56px;
+  }
+  .meta-label { font-size: 9px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,.45); margin-bottom: 10px; font-family: 'Inter', sans-serif; }
+  .meta-value { font-size: 12px; line-height: 1.65; color: rgba(255,255,255,.8); font-family: 'Inter', sans-serif; }
+  .meta-value strong { font-weight: 500; color: #fff; }
+
+  /* ── STATS ── */
+  .section-label { font-size: 9px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: #78716c; margin-bottom: 16px; font-family: 'Inter', sans-serif; }
+
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    margin-bottom: 64px;
+  }
+  .stat-card {
+    background: #efebe4;
+    border: 1px solid #e2dcd2;
+    border-radius: 14px;
+    padding: 22px 20px 18px;
+  }
+  .stat-dash { width: 22px; height: 3px; background: #2200ff; border-radius: 2px; margin-bottom: 14px; }
+  .stat-number { font-family: 'DM Sans', sans-serif; font-weight: 300; font-size: 28px; letter-spacing: -0.8px; color: #1c1917; line-height: 1; margin-bottom: 6px; }
+  .stat-caption { font-size: 9px; font-weight: 600; letter-spacing: 1.6px; text-transform: uppercase; color: #78716c; font-family: 'Inter', sans-serif; line-height: 1.4; }
+
+  /* ── DIVIDER ── */
+  .cs-divider { border: none; border-top: 1px solid rgba(0,0,0,.08); margin: 56px 0; }
+
+  /* ── SECTIONS ── */
+  .cs-section { margin-bottom: 72px; }
+
+  .cs-section-heading {
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #78716c;
+    margin-bottom: 18px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid rgba(0,0,0,.08);
+    font-family: 'Inter', sans-serif;
+  }
+
+  .cs-section-title {
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    font-size: 26px;
+    letter-spacing: -0.5px;
+    line-height: 1.3;
+    margin-bottom: 16px;
+    color: #1c1917;
+  }
+
+  .cs-body { font-size: 14px; line-height: 1.8; color: #57534e; max-width: 620px; font-family: 'Inter', sans-serif; }
+  .cs-body p + p { margin-top: 14px; }
+
+  /* ── CALLOUT ── */
+  .cs-callout {
+    background: #efebe4;
+    border-left: 3px solid #2200ff;
+    border-radius: 0 12px 12px 0;
+    padding: 18px 22px;
+    margin: 28px 0;
+    font-family: 'Newsreader', serif;
+    font-size: 17px;
+    line-height: 1.6;
+    color: #44403c;
+    font-style: italic;
+  }
+
+  /* ── TABLE ── */
+  .cs-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 28px 0;
+    font-size: 13px;
+    font-family: 'Inter', sans-serif;
+  }
+  .cs-table th {
+    text-align: left;
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 1.8px;
+    text-transform: uppercase;
+    color: #78716c;
+    padding: 10px 16px;
+    border-bottom: 1px solid rgba(0,0,0,.1);
+  }
+  .cs-table td {
+    padding: 12px 16px;
+    border-bottom: 1px solid rgba(0,0,0,.05);
+    color: #44403c;
+    line-height: 1.5;
+    vertical-align: top;
+  }
+  .cs-table tr:last-child td { border-bottom: none; }
+  .cs-table td:first-child { color: #78716c; white-space: nowrap; }
+  .cs-table tr:nth-child(even) td { background: rgba(0,0,0,.02); }
+
+  /* ── PROCESS STEPS ── */
+  .cs-steps { display: flex; flex-direction: column; gap: 0; margin: 28px 0; }
+  .cs-step {
+    display: flex;
+    gap: 20px;
+    padding: 20px 0;
+    border-bottom: 1px solid rgba(0,0,0,.06);
+  }
+  .cs-step:last-child { border-bottom: none; }
+  .cs-step-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: #2200ff;
+    font-weight: 600;
+    letter-spacing: .5px;
+    flex-shrink: 0;
+    padding-top: 2px;
+    width: 28px;
+  }
+  .cs-step-content {}
+  .cs-step-title { font-size: 14px; font-weight: 500; color: #1c1917; margin-bottom: 4px; font-family: 'Inter', sans-serif; }
+  .cs-step-body { font-size: 13px; line-height: 1.7; color: #78716c; font-family: 'Inter', sans-serif; }
+  .cs-step-note { font-size: 11px; color: #a8a29e; margin-top: 4px; font-family: 'JetBrains Mono', monospace; }
+
+  /* ── IMAGES ── */
+  .cs-image {
+    width: 100%;
+    border-radius: 14px;
+    background: #efebe4;
+    border: 1px solid #e2dcd2;
+    margin-top: 28px;
+    overflow: hidden;
+  }
+  .cs-image img { width: 100%; display: block; border-radius: 14px; }
+  .cs-image-placeholder {
+    aspect-ratio: 16/9;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #a8a29e;
+    font-size: 11px;
+    letter-spacing: 1.4px;
+    text-transform: uppercase;
+    font-family: 'JetBrains Mono', monospace;
+    text-align: center;
+    line-height: 1.8;
+    padding: 24px;
+  }
+  .cs-image-caption { font-size: 11px; color: #a8a29e; margin-top: 8px; text-align: center; letter-spacing: 0.3px; font-family: 'Inter', sans-serif; }
+
+  .cs-image-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 28px; }
+
+  /* ── TAKEAWAYS ── */
+  .cs-takeaways { display: flex; flex-direction: column; gap: 12px; margin-top: 20px; }
+  .cs-takeaway {
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+    padding: 16px 18px;
+    background: #efebe4;
+    border: 1px solid #e2dcd2;
+    border-radius: 12px;
+  }
+  .cs-takeaway-dot { width: 6px; height: 6px; background: #2200ff; border-radius: 50%; flex-shrink: 0; margin-top: 6px; }
+  .cs-takeaway-text { font-size: 13px; line-height: 1.7; color: #44403c; font-family: 'Inter', sans-serif; }
+
+  /* ── MOBILE ── */
+  @media (max-width: 900px) {
+    #sidebar { display: none; }
+    #main { padding: 36px 24px 80px; }
+    .meta-bar { grid-template-columns: 1fr 1fr; }
+    .stats-grid { grid-template-columns: 1fr 1fr; }
+    .cs-image-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+
+<!-- SIDEBAR -->
+<nav id="sidebar">
+  <div class="sidebar-top">
+    <a href="index.html" class="back-link">
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+        <path d="M9 11L5 7l4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      Home
+    </a>
+
+    <p class="toc-label">Table of Contents</p>
+    <ul class="toc-list">
+      <li><a href="#origin" class="active">01. Where it started <span class="toc-arrow">→</span></a></li>
+      <li><a href="#product">02. What it does <span class="toc-arrow">→</span></a></li>
+      <li><a href="#how">03. How it works <span class="toc-arrow">→</span></a></li>
+      <li><a href="#surveillance">04. Not surveillance <span class="toc-arrow">→</span></a></li>
+      <li><a href="#numbers">05. By the numbers <span class="toc-arrow">→</span></a></li>
+      <li><a href="#reflection">06. Reflection <span class="toc-arrow">→</span></a></li>
+    </ul>
+  </div>
+
+  <div class="sidebar-bottom">
+    <div class="clock-wrap">
+      <span class="clock-time" id="cs-clock">--:-- --</span>
+      <span class="clock-location">Bangalore, IN</span>
+    </div>
+    <div class="mascot">🌿</div>
+  </div>
+</nav>
+
+<!-- MAIN -->
+<main id="main">
+  <div class="content-wrap">
+
+    <!-- HERO -->
+    <div class="hero-image">
+      <!-- <img src="assets/prruf-hero.png" alt="Prruf"> -->
+      <span class="hero-image-placeholder">
+        Prruf mascot sitting quietly in the Mac menu bar<br>with a soft note card floating beside it
+      </span>
+    </div>
+
+    <!-- TAGS -->
+    <div class="tags">
+      <span class="tag">Mac App</span>
+      <span class="tag">Studio Project</span>
+      <span class="tag muted">In Testing</span>
+    </div>
+
+    <!-- TITLE -->
+    <h1 class="cs-title">
+      <span class="cs-title-star">✳</span>
+      What if your laptop just remembered for you?
+    </h1>
+
+    <!-- DESCRIPTION -->
+    <p class="cs-description">
+      I kept forgetting to log my work. So I built something that quietly watches what I'm doing — privately, on my own machine — and keeps the notes for me. Not a boss's tracking tool. A personal note-taker that works <em>for</em> the person being recorded. Built together with <a href="#">@Tanish Maheshwari</a> at Wasabie.
+    </p>
+
+    <!-- CTA -->
+    <a href="https://prruf.com" target="_blank" class="cs-cta">Visit Prruf →</a>
+
+    <!-- META BAR -->
+    <div class="meta-bar">
+      <div>
+        <p class="meta-label">Role</p>
+        <p class="meta-value">Founder<br>Product Designer<br>Builder</p>
+      </div>
+      <div>
+        <p class="meta-label">Team</p>
+        <p class="meta-value"><strong>Tanish Maheshwari</strong><br>(Co-Founder)</p>
+      </div>
+      <div>
+        <p class="meta-label">Timeline</p>
+        <p class="meta-value">2025 — ongoing</p>
+      </div>
+      <div>
+        <p class="meta-label">Skills</p>
+        <p class="meta-value">Product design<br>AI integration<br>Prototyping</p>
+      </div>
+    </div>
+
+    <!-- STATS -->
+    <p class="section-label">By the numbers</p>
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-dash"></div>
+        <p class="stat-number">~2.5 min</p>
+        <p class="stat-caption">Between captures</p>
+      </div>
+      <div class="stat-card">
+        <div class="stat-dash"></div>
+        <p class="stat-number">0</p>
+        <p class="stat-caption">Screenshots saved to disk</p>
+      </div>
+      <div class="stat-card">
+        <div class="stat-dash"></div>
+        <p class="stat-number">5+</p>
+        <p class="stat-caption">Studios in testing</p>
+      </div>
+      <div class="stat-card">
+        <div class="stat-dash"></div>
+        <p class="stat-number">2 wks</p>
+        <p class="stat-caption">How long my manual habit lasted</p>
+      </div>
+    </div>
+
+    <hr class="cs-divider">
+
+    <!-- 01 ORIGIN -->
+    <section class="cs-section" id="origin">
+      <p class="cs-section-heading">01 — Where it started</p>
+      <h2 class="cs-section-title">A small, quiet defeat that didn't go anywhere. Until it did.</h2>
+      <div class="cs-body">
+        <p>During an internship, I was asked to keep a progress report log. Being someone who leans on AI for most things, I tried to make it easy — after finishing a task, I'd dictate what I did to Claude and let it write the entry.</p>
+        <p>It lasted two weeks. Then I stopped entirely. It wasn't a dramatic failure. It was just a small, forgettable thing that I quietly let go.</p>
+        <p>The idea came back when I started running Wasabie, my studio. I remembered the problem — and then realized my co-founder was dealing with the exact same thing. Once we said it out loud to each other, it stopped being "a thing that happened to me" and became a real problem worth solving.</p>
+      </div>
+      <div class="cs-callout">
+        "What if my laptop could just see what I'm doing and keep the notes itself? No logging, no dictating, nothing to remember."
+      </div>
+      <div class="cs-image">
+        <!-- <img src="assets/prruf-origin.png" alt="The origin"> -->
+        <div class="cs-image-placeholder">The abandoned two-week manual log vs the Prruf dashboard —<br>the before/after of the exact same habit</div>
+      </div>
+
+      <p style="margin-top: 28px;" class="cs-body">We didn't theorize. We built the smallest possible test: a simple script that took a screenshot every few minutes, described what was on screen, and saved the sentence. Not the image — just the sentence.</p>
+      <p style="margin-top: 14px;" class="cs-body">What struck me wasn't the technical output. It was the <em>feeling</em> of it — like having someone sitting beside me, quietly taking notes on everything I was doing. A personal assistant. Something finally taking care of the part of work I always dropped.</p>
+    </section>
+
+    <!-- 02 PRODUCT -->
+    <section class="cs-section" id="product">
+      <p class="cs-section-heading">02 — What it does</p>
+      <h2 class="cs-section-title">A note-taker you never have to write in.</h2>
+      <div class="cs-body">
+        <p>Prruf is a small Mac app that lives in your menu bar. While it's on, every couple of minutes it quietly looks at your screen, works out what you're doing in words, and builds a running set of notes on your work. No timers to start. No notes to write. No end-of-day catch-up.</p>
+        <p>When you need to show what you did — to a client, a teammate, or just yourself next week — the notes are already there, ready to become a clean summary or a PDF.</p>
+      </div>
+
+      <div class="cs-image">
+        <div class="cs-image-placeholder">Three screens — Sessions (dashboard) / Session (live capture) / Report (finished summary + Export PDF)</div>
+      </div>
+      <p class="cs-image-caption">The app in its three states</p>
+
+      <div style="margin-top: 36px;" class="cs-body">
+        <p>The core bet: <strong>keeping the record shouldn't cost you any attention at all.</strong> Prruf takes the notes <em>while</em> you work, so the record exists whether or not you thought about it. The one chore you always drop just… stops being a chore.</p>
+      </div>
+
+      <div class="cs-image" style="margin-top: 28px;">
+        <div class="cs-image-placeholder">Split graphic — left: "worked on the site today" typed at 6pm (From memory) / right: auto-captured timestamped task list (From the record)</div>
+      </div>
+    </section>
+
+    <!-- 03 HOW IT WORKS -->
+    <section class="cs-section" id="how">
+      <p class="cs-section-heading">03 — How it works</p>
+      <h2 class="cs-section-title">The mechanism is deliberately boring. That's the point.</h2>
+
+      <div class="cs-steps">
+        <div class="cs-step">
+          <span class="cs-step-num">01</span>
+          <div class="cs-step-content">
+            <p class="cs-step-title">It looks</p>
+            <p class="cs-step-body">Every ~2.5 minutes, Prruf takes one screenshot — held in memory, never saved to disk.</p>
+          </div>
+        </div>
+        <div class="cs-step">
+          <span class="cs-step-num">02</span>
+          <div class="cs-step-content">
+            <p class="cs-step-title">It reads, then forgets the picture</p>
+            <p class="cs-step-body">The image goes to Claude, which answers one question: <em>what specifically is this person doing right now?</em> The moment it answers, the image is thrown away. Only the sentence survives.</p>
+            <p class="cs-step-note">🗑 image deleted immediately after read</p>
+          </div>
+        </div>
+        <div class="cs-step">
+          <span class="cs-step-num">03</span>
+          <div class="cs-step-content">
+            <p class="cs-step-title">It groups</p>
+            <p class="cs-step-body">Those sentences get stitched into tasks — "designing the homepage," "answering client email" — rather than a wall of disconnected moments.</p>
+          </div>
+        </div>
+        <div class="cs-step">
+          <span class="cs-step-num">04</span>
+          <div class="cs-step-content">
+            <p class="cs-step-title">It remembers</p>
+            <p class="cs-step-body">Whenever you want it, it turns the day's notes into a readable summary or a timesheet PDF — for a client, a teammate, or just yourself.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="cs-image">
+        <div class="cs-image-placeholder">Loop diagram — See → Describe (🗑 image deleted) → Group → Recall</div>
+      </div>
+
+      <div style="margin-top: 36px;" class="cs-body">
+        <p>A raw stream of "what you're doing" is messy — the classifier guesses one screenshot at a time, so it occasionally over-splits or mislabels. The craft of the product is the layer that lets you clean that up in seconds. Split one task into two. Merge three rows that were the same effort. Rename a title so it reads the way <em>you'd</em> describe it yourself.</p>
+        <p>And when what's on screen drifts — scrolling, watching something unrelated — Prruf asks gently: <em>"Looks like you're on a break?"</em> and pauses itself. A warden would flag the break. Prruf just steps aside for it.</p>
+      </div>
+
+      <div class="cs-image-grid">
+        <div class="cs-image">
+          <div class="cs-image-placeholder">Break prompt card —<br>"Looks like you're on a break?"</div>
+        </div>
+        <div class="cs-image">
+          <div class="cs-image-placeholder">Review screen mid-edit —<br>Merge / Split / Rename in action</div>
+        </div>
+      </div>
+
+      <div class="cs-image" style="margin-top: 12px;">
+        <div class="cs-image-placeholder">Finished report + PDF — narrative summary, "What got done" bullets, Format-C timesheet on letterhead</div>
+      </div>
+    </section>
+
+    <!-- 04 SURVEILLANCE -->
+    <section class="cs-section" id="surveillance">
+      <p class="cs-section-heading">04 — Not surveillance</p>
+      <h2 class="cs-section-title">Most tools in this space are built for the wrong person.</h2>
+      <div class="cs-body">
+        <p>The Hubstaffs, Time Doctors, and ActivTraks of the world are employee-monitoring software. The employer installs them. The data flows <em>up</em>, to the manager — stored screenshots, keystroke counts, productivity scores. The person on the keyboard is the subject of the tool. They're being watched, measured, and ranked by someone else.</p>
+        <p>Prruf is the opposite, on purpose.</p>
+      </div>
+
+      <table class="cs-table">
+        <thead>
+          <tr>
+            <th>Surveillance tools</th>
+            <th>Prruf</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Installed by the employer</td>
+            <td>Installed by you, for you</td>
+          </tr>
+          <tr>
+            <td>Data flows up to a manager</td>
+            <td>The record is yours — you edit it, you decide what's shared</td>
+          </tr>
+          <tr>
+            <td>Stores screenshots & keystrokes</td>
+            <td>Only text is ever stored. Image deleted instantly.</td>
+          </tr>
+          <tr>
+            <td>Scores and ranks you</td>
+            <td>No scores, no judgement — it just describes</td>
+          </tr>
+          <tr>
+            <td>You're the subject</td>
+            <td>You're the owner</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="cs-callout">
+        "The right mental model isn't a camera in the corner of the room. It's a personal observer sitting beside you, taking notes on your behalf — notes that are yours to keep, correct, and share."
+      </div>
+
+      <div class="cs-body">
+        <p>The safeguards came from real feedback. When we showed early versions to people who do client work, the reaction wasn't about the concept — it was about fear. They felt uncomfortable with something recording them. More than one privacy rule came directly out of those conversations, from people saying their fears out loud, not from us anticipating them in advance.</p>
+        <p>The raw screenshot never touches the disk. The image reference is deliberately erased after every read. Only text is ever stored. The safeguards <em>are</em> the product — because a note-taker nobody trusts enough to leave running is worth nothing.</p>
+      </div>
+
+      <div class="cs-image">
+        <div class="cs-image-placeholder">Observer, not warden — a small friendly character sitting next to a person at their desk, notepad in hand, facing the same direction</div>
+      </div>
+    </section>
+
+    <!-- 05 NUMBERS -->
+    <section class="cs-section" id="numbers">
+      <p class="cs-section-heading">05 — By the numbers</p>
+      <h2 class="cs-section-title">Where it actually stands.</h2>
+      <div class="cs-body">
+        <p>The MVP is past done. Right now it's out with five studios and a handful of freelancers, each testing it for a week before giving feedback. We're asking the real questions: does this fit into your workflow? Would you pay for it?</p>
+        <p>Testing is deciding the fate of this, not us. The storytelling is done. The verdict isn't.</p>
+      </div>
+
+      <div class="cs-image">
+        <div class="cs-image-placeholder">Stat strip — ~2.5 min · 0 screenshots saved · 5 studios · 2 weeks</div>
+      </div>
+    </section>
+
+    <!-- 06 REFLECTION -->
+    <section class="cs-section" id="reflection">
+      <p class="cs-section-heading">06 — Reflection</p>
+      <h2 class="cs-section-title">What I'd want a reader to take away.</h2>
+      <div class="cs-body">
+        <p>There was a moment, right after the first working prototype, where a real fear showed up: can we even build this without knowing how to code? Underneath that was a harder question — whether AI-assisted building counted as "real" building at all.</p>
+        <p>That doubt never fully went away. There's still a part of it that says anyone could copy this. What got me past it wasn't an answer — it was looking at companies like Emergent, built the same way, AI-first, and clearly working. If it works, I don't think anyone actually cares how it got built.</p>
+      </div>
+
+      <div class="cs-takeaways">
+        <div class="cs-takeaway">
+          <div class="cs-takeaway-dot"></div>
+          <p class="cs-takeaway-text">I had a small, personal, boring problem and refused to let it stay unsolved.</p>
+        </div>
+        <div class="cs-takeaway">
+          <div class="cs-takeaway-dot"></div>
+          <p class="cs-takeaway-text">I built the smallest thing that could answer "does this actually work?" before building anything bigger.</p>
+        </div>
+        <div class="cs-takeaway">
+          <div class="cs-takeaway-dot"></div>
+          <p class="cs-takeaway-text">I listened to fear as product feedback, and turned it into the product's spine.</p>
+        </div>
+        <div class="cs-takeaway">
+          <div class="cs-takeaway-dot"></div>
+          <p class="cs-takeaway-text">I made something that watches you — and made you the one it answers to.</p>
+        </div>
+      </div>
+
+      <div class="cs-image" style="margin-top: 36px;">
+        <div class="cs-image-placeholder">Closing — Prruf mascot + "Built to answer one question: what if remembering your own work cost you nothing?"</div>
+      </div>
+    </section>
+
+  </div>
+</main>
+
+<script>
+  // Custom cursor
+  const cur = document.getElementById('cursor');
+  document.addEventListener('mousemove', e => {
+    cur.style.left = e.clientX + 'px';
+    cur.style.top = e.clientY + 'px';
+  });
+  document.querySelectorAll('a, button').forEach(el => {
+    el.addEventListener('mouseenter', () => cur.classList.add('big'));
+    el.addEventListener('mouseleave', () => cur.classList.remove('big'));
+  });
+
+  // Clock
+  function tick() {
+    const d = new Date();
+    const h = d.getHours(), m = d.getMinutes();
+    const ampm = h >= 12 ? 'PM' : 'AM';
+    const hh = ((h % 12) || 12).toString().padStart(2, '0');
+    const mm = m.toString().padStart(2, '0');
+    document.getElementById('cs-clock').textContent = `${hh}:${mm} ${ampm}`;
+  }
+  tick(); setInterval(tick, 1000);
+
+  // Scroll spy
+  const sections = document.querySelectorAll('section[id]');
+  const links = document.querySelectorAll('.toc-list a');
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        links.forEach(l => l.classList.remove('active'));
+        const a = document.querySelector(`.toc-list a[href="#${e.target.id}"]`);
+        if (a) a.classList.add('active');
+      }
+    });
+  }, { rootMargin: '-20% 0px -70% 0px' });
+  sections.forEach(s => obs.observe(s));
+</script>
+</body>
+</html>
