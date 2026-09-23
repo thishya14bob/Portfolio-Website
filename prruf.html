@@ -752,7 +752,7 @@
           <div class="pr-body" data-scr="sess" style="flex-direction:column">
             <div class="pr-row"><div class="pr-btn dim">← Sessions</div><div class="pr-input" style="color:#e6e6e8;font-weight:600">Homepage redesign</div></div>
             <div class="pr-input">Focus (optional), e.g. Homepage rebuild for Jamalo</div>
-            <div class="pr-row" id="pr-caprow"><div class="pr-btn primary" id="pr-start">Start capturing Ctrl+Alt+S</div><div class="pr-btn">Capture now Ctrl+Alt+X</div></div>
+            <div class="pr-row" id="pr-caprow"><div class="pr-btn primary" id="pr-start">Start capturing ⌘⌥S</div><div class="pr-btn">Capture now ⌘⌥X</div></div>
             <div class="pr-row" id="pr-actrow"><div class="pr-btn dim" id="pr-review">Review tasks</div><div class="pr-btn dim" id="pr-gen">Generate report</div></div>
             <div id="pr-feed" style="display:flex;flex-direction:column;gap:8px">
               <div class="pr-empty" id="pr-empty">Nothing captured yet.<br>Press Start capturing (or Capture now).</div>
@@ -771,7 +771,7 @@
             </div>
           </div>
 
-          <div class="pr-foot" id="pr-foot">Works from anywhere: <b>Ctrl+Alt+X</b> capture · <b>Ctrl+Alt+S</b> start/pause · <b>Ctrl+Alt+P</b> show window</div>
+          <div class="pr-foot" id="pr-foot">Works from anywhere: <b>⌘⌥X</b> capture · <b>⌘⌥S</b> start/pause · <b>⌘⌥P</b> show window</div>
         </div>
 
         <div class="pr-spot" id="pr-spot"></div>
@@ -972,7 +972,7 @@
     var caps=[['1:52 PM','Setting up the homepage layout file in Figma'],['2:03 PM','Drafting hero copy in Google Docs'],['2:11 PM','Cropping the hero image in Figma']];
     var steps=[
       {t:'#pr-new', title:'Start a session', line:'Every piece of work gets its own session. One click and you\'re in.'},
-      {t:'#pr-start', title:'Start capturing', line:'Hit Start, or press Ctrl+Alt+S from anywhere. Prruf takes one quick look at your screen every few minutes.'},
+      {t:'#pr-start', title:'Start capturing', line:'Hit Start, or press ⌘⌥S from anywhere. Prruf takes one quick look at your screen every few minutes.'},
       {t:'#pr-feed', title:'It saw the work, not the picture', line:'Each capture becomes one line of text. The screenshot is deleted right after, and only the words stay.'},
       {t:'#pr-break', title:'Looks like a break?', line:'Drift into something unrelated and Prruf notices, asks, and pauses. Breaks never get logged as work.'},
       {t:'#pr-feed', title:'Your record, your call', line:'Review tasks to merge, split or rename anything. Prruf never changes your record behind your back.'},
@@ -991,7 +991,7 @@
       scr(n===0?'list':'sess');
       var cap=n>=1 && n<5;
       var st=$('pr-status'); st.classList.toggle('on',cap); st.lastChild.textContent=cap?'Capturing':'Paused';
-      $('pr-start').textContent = cap?'Pause Ctrl+Alt+S':'Start capturing Ctrl+Alt+S';
+      $('pr-start').textContent = cap?'Pause ⌘⌥S':'Start capturing ⌘⌥S';
       feed(n<2?0:3, n===4);
       win.classList.toggle('review', n===4);
       $('pr-editrow').style.display = n===4?'grid':'none';
