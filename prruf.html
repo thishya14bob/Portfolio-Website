@@ -289,14 +289,14 @@
             mask-image: linear-gradient(90deg, transparent, #000 25%, #000 75%, transparent); }
   .feat-wave-bar { width: 9px; border-radius: 5px; background: #cfcfcf; }
 
-  .imsg-wrap { display: flex; flex-direction: column; align-items: flex-end; gap: 18px; margin-bottom: 44px; }
+  .imsg-wrap { display: flex; flex-direction: column; align-items: flex-end; gap: 14px; margin-bottom: 44px; }
   .imsg-bubble {
-    position: relative; padding: 12px 20px 14px; border-radius: 22px;
-    font-family: 'Inter', sans-serif; font-size: 22px; line-height: 1.25; color: #111; text-align: left;
+    position: relative; padding: 9px 15px 10px; border-radius: 18px;
+    font-family: 'Inter', sans-serif; font-size: 16px; line-height: 1.35; color: #111; text-align: left;
     box-shadow: 0 6px 14px rgba(0,0,0,.12);
   }
   .imsg-bubble::before {
-    content: ''; position: absolute; left: 12px; right: 12px; top: 4px; height: 10px;
+    content: ''; position: absolute; left: 12px; right: 12px; top: 3px; height: 7px;
     border-radius: 10px; background: linear-gradient(rgba(255,255,255,.95), rgba(255,255,255,0));
   }
   .imsg-bubble::after {
@@ -304,8 +304,8 @@
     background: inherit; border: inherit; border-top: none; border-left: none;
     clip-path: polygon(0 0, 100% 0, 100% 100%);
   }
-  .imsg-bubble.sent { max-width: 330px; background: linear-gradient(#d6e8ff, #9cc6ff); border: 1px solid #3b4f9a; }
-  .imsg-bubble.reply { max-width: 300px; background: linear-gradient(#ffe6cf, #f7bd8c); border: 1px solid #8a5a33; }
+  .imsg-bubble.sent { max-width: 260px; background: linear-gradient(#d6e8ff, #9cc6ff); border: 1px solid #3b4f9a; }
+  .imsg-bubble.reply { max-width: 240px; background: linear-gradient(#ffe6cf, #f7bd8c); border: 1px solid #8a5a33; }
 
   .feat-info-name { font-family: 'Inter', sans-serif; font-size: 22px; font-weight: 500; color: #111; margin-bottom: 12px; letter-spacing: -.2px; }
   .feat-info-desc { font-family: 'Inter', sans-serif; font-size: 16px; line-height: 1.6; color: #7a7a7a; max-width: 360px; }
@@ -390,7 +390,7 @@
     .cs-image-grid { grid-template-columns: 1fr; }
     .feat-row { grid-template-columns: 1fr; }
     .feat-waveform { margin-bottom: 32px; }
-    .imsg-bubble, .feat-info-name { font-size: 18px; }
+    .imsg-bubble { font-size: 15px; } .feat-info-name { font-size: 18px; }
     .wa-grid { grid-template-columns: 1fr; }
     .terminal-row { grid-template-columns: 140px 1fr; }
   }
