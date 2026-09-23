@@ -382,12 +382,12 @@
   .wa-time { font-family: 'Inter', sans-serif; font-size: 10px; color: #8696a0; text-align: right; margin-top: 4px; }
 
   /* ── HOW IT WORKS: Prruf walkthrough on a Mac desktop ── */
-  .pr-stage { position: relative; overflow: hidden; margin-top: 28px; border-radius: 16px; height: 720px; border: 1px solid #1c1917; box-shadow: 0 24px 60px -30px rgba(0,0,0,.45); font-family: 'Inter', -apple-system, 'Segoe UI', sans-serif;
+  .pr-stage { position: relative; overflow: hidden; margin-top: 28px; border-radius: 16px; height: 560px; border: 1px solid #1c1917; box-shadow: 0 24px 60px -30px rgba(0,0,0,.45); font-family: 'Inter', -apple-system, 'Segoe UI', sans-serif;
     background: radial-gradient(120% 90% at 20% 110%, #f59e5b 0%, transparent 45%), radial-gradient(90% 80% at 90% 100%, #c2417a 0%, transparent 50%), radial-gradient(120% 90% at 50% -10%, #3b5bdb 0%, transparent 60%), linear-gradient(160deg, #1e3a8a, #6d28d9 55%, #db2777); }
   .pr-menubar { position: absolute; top: 0; left: 0; right: 0; height: 26px; display: flex; align-items: center; gap: 18px; padding: 0 14px; background: rgba(20,20,30,.28); backdrop-filter: blur(20px); color: #fff; font-size: 12.5px; z-index: 1; }
   .pr-menubar b { font-weight: 600; }
   .pr-menubar .right { margin-left: auto; display: flex; gap: 14px; align-items: center; }
-  .pr-bgwin { position: absolute; top: 60px; right: 40px; width: 380px; height: 250px; border-radius: 10px; background: #2c2c2c; box-shadow: 0 20px 50px rgba(0,0,0,.35); overflow: hidden; opacity: .9; }
+  .pr-bgwin { position: absolute; top: 50px; right: 40px; width: 380px; height: 250px; border-radius: 10px; background: #2c2c2c; box-shadow: 0 20px 50px rgba(0,0,0,.35); overflow: hidden; opacity: .9; }
   .pr-bgwin .tb { height: 28px; background: #383838; display: flex; align-items: center; gap: 7px; padding: 0 10px; font-size: 11px; color: #bbb; }
   .pr-bgwin .tb span { margin-left: 8px; }
   .pr-bgwin .canvas { position: absolute; inset: 28px 0 0 0; background: #1e1e1e; }
@@ -399,39 +399,39 @@
   .tl { display: inline-block; width: 12px; height: 12px; border-radius: 50%; }
   .tl.r { background: #ff5f57; } .tl.y { background: #febc2e; } .tl.g { background: #28c840; }
 
-  .pr-win { position: absolute; top: 48px; left: 44px; width: 380px; height: 610px; z-index: 2; border-radius: 12px; overflow: hidden; background: #17181c; box-shadow: 0 30px 70px -20px rgba(0,0,0,.6), 0 0 0 1px rgba(255,255,255,.08); display: flex; flex-direction: column; color: #e6e6e8; }
+  .pr-win { position: absolute; top: 40px; left: 44px; width: 380px; height: 470px; z-index: 2; border-radius: 12px; overflow: hidden; background: #17181c; box-shadow: 0 30px 70px -20px rgba(0,0,0,.6), 0 0 0 1px rgba(255,255,255,.08); display: flex; flex-direction: column; color: #e6e6e8; }
   .pr-titlebar { height: 30px; flex: none; display: flex; align-items: center; gap: 8px; padding: 0 12px; background: #232428; border-bottom: 1px solid #2c2d33; }
   .pr-titlebar .t { position: absolute; left: 50%; transform: translateX(-50%); font-size: 12px; color: #9a9ba1; }
-  .pr-head { padding: 16px 18px 12px; border-bottom: 1px solid #2c2d33; flex: none; }
+  .pr-head { padding: 10px 16px 9px; border-bottom: 1px solid #2c2d33; flex: none; }
   .pr-head-row { display: flex; align-items: center; justify-content: space-between; }
   .pr-logo { font-size: 17px; font-weight: 600; color: #f2f2f3; }
   .pr-status { display: inline-flex; align-items: center; gap: 7px; font-size: 12px; padding: 5px 11px; border-radius: 999px; background: #26272d; color: #b7b8be; }
   .pr-status i { width: 8px; height: 8px; border-radius: 50%; background: #9a9ba1; }
   .pr-status.on { background: #1d3326; color: #4ade80; } .pr-status.on i { background: #4ade80; box-shadow: 0 0 6px #4ade80; }
   .pr-sub { font-size: 11px; color: #9a9ba1; margin-top: 8px; }
-  .pr-body { flex: 1; overflow: hidden; padding: 12px 18px; display: flex; flex-direction: column; gap: 9px; position: relative; }
+  .pr-body { flex: 1; overflow: hidden; padding: 10px 16px; display: flex; flex-direction: column; gap: 7px; position: relative; }
   .pr-body > * { flex: none; }
-  .pr-btn { border-radius: 8px; padding: 10px 12px; font-size: 13px; text-align: center; background: #1f2026; border: 1px solid #2e2f35; color: #e6e6e8; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .pr-btn { border-radius: 7px; padding: 7px 10px; font-size: 12px; text-align: center; background: #1f2026; border: 1px solid #2e2f35; color: #e6e6e8; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
   .pr-btn.primary { background: #6ea8fe; border-color: #6ea8fe; color: #10131a; }
   .pr-btn.dim { background: #20222a; }
-  .pr-input { border-radius: 8px; padding: 10px 12px; font-size: 12px; background: #17181c; border: 1px solid #2e2f35; color: #6b6c72; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .pr-input { border-radius: 7px; padding: 7px 10px; font-size: 12px; background: #17181c; border: 1px solid #2e2f35; color: #6b6c72; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
   .pr-row { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
   .pr-row.combine { grid-template-columns: 1fr auto; }
   .pr-help { font-size: 11px; line-height: 1.5; color: #9a9ba1; }
-  .pr-card { display: flex; align-items: center; gap: 12px; padding: 12px 14px; border-radius: 10px; background: #1f2026; border: 1px solid #2e2f35; }
+  .pr-card { display: flex; align-items: center; gap: 12px; padding: 8px 12px; border-radius: 10px; background: #1f2026; border: 1px solid #2e2f35; }
   .pr-card .cb { width: 16px; height: 16px; border-radius: 3px; background: #fff; flex: none; }
   .pr-card .nm { font-size: 14px; font-weight: 600; color: #6b6c72; }
   .pr-card .meta { font-size: 11px; color: #9a9ba1; margin-top: 3px; }
   .pr-card .open { margin-left: auto; font-size: 12px; color: #6ea8fe; border: 1px solid #2e2f35; border-radius: 6px; padding: 4px 9px; white-space: nowrap; }
-  .pr-empty { text-align: center; font-size: 12.5px; line-height: 1.6; color: #9a9ba1; margin-top: 22px; }
-  .pr-cap { padding: 7px 12px; border-radius: 10px; background: #1f2026; border: 1px solid #2e2f35; animation: prPop .45s ease both; display: flex; gap: 10px; align-items: flex-start; }
+  .pr-empty { text-align: center; font-size: 12px; line-height: 1.6; color: #9a9ba1; margin-top: 10px; }
+  .pr-cap { padding: 5px 10px; border-radius: 10px; background: #1f2026; border: 1px solid #2e2f35; animation: prPop .45s ease both; display: flex; gap: 10px; align-items: flex-start; }
   .pr-cap .cb { width: 14px; height: 14px; border-radius: 3px; border: 1.5px solid #4a4b52; flex: none; margin-top: 2px; display: none; }
   .pr-win.review .pr-cap .cb { display: block; }
   .pr-win.review .pr-cap.sel .cb { background: #6ea8fe; border-color: #6ea8fe; }
   .pr-cap time { font-size: 10.5px; color: #9a9ba1; font-family: 'JetBrains Mono', monospace; }
   .pr-cap .d { font-size: 12.5px; line-height: 1.4; color: #e6e6e8; margin-top: 2px; }
   .pr-cap .del { font-size: 10.5px; color: #4ade80; margin-top: 3px; }
-  .pr-foot { flex: none; padding: 10px 18px 12px; border-top: 1px solid #2c2d33; font-size: 11px; line-height: 1.6; color: #9a9ba1; }
+  .pr-foot { flex: none; padding: 7px 16px 8px; border-top: 1px solid #2c2d33; font-size: 11px; line-height: 1.6; color: #9a9ba1; }
   .pr-foot b { color: #e6e6e8; font-weight: 600; }
   .pr-break { position: absolute; left: 14px; right: 14px; bottom: 14px; padding: 13px 14px; border-radius: 12px; background: #202228; border: 1px solid #e0a44a; box-shadow: 0 16px 30px -14px rgba(0,0,0,.7); animation: prPop .4s ease both; }
   .pr-break .q { font-size: 13.5px; font-weight: 600; color: #f2f2f3; margin-bottom: 5px; }
@@ -469,7 +469,7 @@
   .pr-done p { font-size: 13.5px; line-height: 1.55; color: #5b6474; margin-bottom: 18px; }
   .pr-hint { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 1.2px; text-transform: uppercase; color: #a8a29e; margin-top: 10px; text-align: center; }
   @media (max-width: 900px) {
-    .pr-stage { height: 860px; }
+    .pr-stage { height: 740px; }
     .pr-bgwin { display: none; }
     .pr-win { left: 50%; transform: translateX(-50%); width: calc(100% - 28px); max-width: 380px; }
     .pr-coach { left: 14px !important; right: 14px; top: auto !important; bottom: 70px; width: auto; }
