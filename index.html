@@ -618,6 +618,16 @@
   .mockup-gcal { background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); }
   .mockup-skoluj { background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%); }
 
+  .mockup-prruf { background: radial-gradient(120% 90% at 20% 110%, #f59e5b 0%, transparent 45%), radial-gradient(90% 80% at 90% 100%, #c2417a 0%, transparent 50%), linear-gradient(160deg, #1e3a8a, #6d28d9 55%, #db2777); }
+  .mini-prruf { text-transform: none; letter-spacing: normal; width: 62%; max-width: 240px; background: #17181c; border-radius: 8px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,.4); font-family: 'Inter', sans-serif; color: #e6e6e8; position: relative; z-index: 1; }
+  .mini-prruf-bar { height: 14px; background: #232428; display: flex; align-items: center; gap: 4px; padding: 0 7px; }
+  .mini-prruf-bar i { width: 6px; height: 6px; border-radius: 50%; }
+  .mini-prruf-body { padding: 9px 10px; display: flex; flex-direction: column; gap: 6px; }
+  .mini-prruf-head { display: flex; justify-content: space-between; align-items: center; font-size: 11px; font-weight: 600; }
+  .mini-prruf-chip { font-size: 7.5px; font-weight: 500; color: #4ade80; background: #1d3326; padding: 2px 6px; border-radius: 999px; }
+  .mini-prruf-btn { font-size: 8px; text-align: center; padding: 5px; border-radius: 5px; background: #6ea8fe; color: #10131a; }
+  .mini-prruf-cap { font-size: 7.5px; line-height: 1.4; padding: 5px 7px; border-radius: 5px; background: #1f2026; border: 1px solid #2e2f35; }
+  .mini-prruf-cap span { color: #9a9ba1; font-family: 'JetBrains Mono', monospace; display: block; }
   /* mini mockup content */
   .mini-ui {
     width: 80%;
@@ -759,6 +769,35 @@
     </div>
 
     <div class="projects-grid">
+
+      <!-- Card 0: Prruf -->
+      <a href="prruf.html" class="project-card reveal">
+        <div>
+          <div class="mockup-container mockup-prruf">
+            <div class="mockup-placeholder" style="align-items:center;justify-content:center;display:flex;">
+              <div class="mini-prruf">
+                <div class="mini-prruf-bar"><i style="background:#ff5f57"></i><i style="background:#febc2e"></i><i style="background:#28c840"></i></div>
+                <div class="mini-prruf-body">
+                  <div class="mini-prruf-head"><span>Prruf</span><span class="mini-prruf-chip">● Capturing</span></div>
+                  <div class="mini-prruf-btn">Pause ⌘⌥S</div>
+                  <div class="mini-prruf-cap"><span>1:52 PM</span>Setting up the homepage layout in Figma</div>
+                  <div class="mini-prruf-cap"><span>2:03 PM</span>Drafting hero copy in Google Docs</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="card-header">
+            <span class="card-title">Prruf</span>
+            <span class="card-tag">Studio Project</span>
+          </div>
+          <p class="card-desc">A private note-taker for Mac and Windows that watches your work, writes it down for you, and turns your day into a report.</p>
+        </div>
+        <div class="metrics-bar">
+          <div class="metric"><div class="metric-value">5+</div><div class="metric-label">Studios Testing</div></div>
+          <div class="metric"><div class="metric-value">~2.5 min</div><div class="metric-label">Per Capture</div></div>
+          <div class="metric"><div class="metric-value">1-click</div><div class="metric-label">Reports</div></div>
+        </div>
+      </a>
 
       <!-- Card 1: Lingofable -->
       <article class="project-card reveal" style="">
