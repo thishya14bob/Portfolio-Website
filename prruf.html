@@ -364,43 +364,19 @@
   }
   .terminal-cta:hover { border-color: rgba(255,255,255,.4); color: #fff; }
 
-  /* ── TESTIMONIALS (Mac Notes style) ── */
-  .testimonials-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 14px;
-    margin-top: 28px;
-    align-items: start;
-  }
-  .notes-card {
-    border-radius: 12px;
-    overflow: hidden;
-    box-shadow: 0 4px 20px rgba(0,0,0,.1), 0 1px 4px rgba(0,0,0,.06);
-    background: #fef9e7;
-  }
-  .notes-titlebar {
-    background: #f0e8c8;
-    padding: 10px 12px;
-    display: flex;
-    align-items: center;
-    gap: 7px;
-    border-bottom: 1px solid rgba(0,0,0,.08);
-  }
-  .notes-dot { width: 10px; height: 10px; border-radius: 50%; }
-  .notes-dot.red { background: #ff5f57; }
-  .notes-dot.yellow { background: #febc2e; }
-  .notes-dot.green { background: #28c840; }
-  .notes-app-name { font-family: 'Inter', sans-serif; font-size: 10px; font-weight: 500; color: #78716c; margin-left: auto; letter-spacing: .3px; }
-  .notes-body {
-    padding: 18px 16px 20px;
-    background: #fef9e7;
-    background-image: repeating-linear-gradient(transparent, transparent 23px, rgba(0,0,0,.06) 23px, rgba(0,0,0,.06) 24px);
-    background-position: 0 28px;
-  }
-  .notes-date { font-family: 'JetBrains Mono', monospace; font-size: 9px; color: #a8a29e; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 10px; }
-  .notes-text { font-family: 'Newsreader', serif; font-size: 14px; line-height: 1.7; color: #44403c; font-style: italic; }
-  .notes-author { font-family: 'Inter', sans-serif; font-size: 11px; font-weight: 500; color: #78716c; margin-top: 12px; letter-spacing: .2px; }
-  .notes-role { font-family: 'Inter', sans-serif; font-size: 10px; color: #a8a29e; margin-top: 2px; }
+  /* ── TESTIMONIALS (WhatsApp style) ── */
+  .wa-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 28px; }
+  .wa-card { border-radius: 16px; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,.08), 0 1px 4px rgba(0,0,0,.05); border: 1px solid #e2dcd2; }
+  .wa-header { background: #075e54; display: flex; align-items: center; gap: 12px; padding: 12px 16px; }
+  .wa-avatar { width: 38px; height: 38px; border-radius: 50%; background: #cfd8dc; flex-shrink: 0; overflow: hidden; display: flex; align-items: center; justify-content: center; font-family: 'JetBrains Mono', monospace; font-size: 8px; color: #607d8b; letter-spacing: .5px; }
+  .wa-avatar img { width: 100%; height: 100%; object-fit: cover; }
+  .wa-name { font-family: 'Inter', sans-serif; font-size: 14px; font-weight: 500; color: #fff; }
+  .wa-status { font-family: 'Inter', sans-serif; font-size: 11px; color: rgba(255,255,255,.7); margin-top: 1px; }
+  .wa-chat { background-color: #efe7dd; background-image: radial-gradient(rgba(0,0,0,.035) 1px, transparent 1px); background-size: 14px 14px; padding: 18px 16px 22px; min-height: 150px; }
+  .wa-bubble { position: relative; background: #fff; border-radius: 0 10px 10px 10px; padding: 8px 12px 6px; max-width: 92%; box-shadow: 0 1px 1px rgba(0,0,0,.12); }
+  .wa-bubble::before { content: ''; position: absolute; left: -8px; top: 0; border-top: 10px solid #fff; border-left: 8px solid transparent; }
+  .wa-text { font-family: 'Inter', sans-serif; font-size: 14px; line-height: 1.5; color: #111b21; }
+  .wa-time { font-family: 'Inter', sans-serif; font-size: 10px; color: #8696a0; text-align: right; margin-top: 4px; }
 
   /* ── MOBILE ── */
   @media (max-width: 900px) {
@@ -412,7 +388,7 @@
     .feat-row { grid-template-columns: 1fr; }
     .feat-waveform { margin-bottom: 32px; }
     .imsg-bubble, .feat-info-name { font-size: 18px; }
-    .testimonials-grid { grid-template-columns: 1fr; }
+    .wa-grid { grid-template-columns: 1fr; }
     .terminal-row { grid-template-columns: 140px 1fr; }
   }
 </style>
@@ -789,52 +765,53 @@
         <p>Five studios and a handful of freelancers have been testing Prruf for a week at a time. These are some of the things they said.</p>
       </div>
 
-      <div class="testimonials-grid">
-        <!-- Card 1 -->
-        <div class="notes-card">
-          <div class="notes-titlebar">
-            <div class="notes-dot red"></div>
-            <div class="notes-dot yellow"></div>
-            <div class="notes-dot green"></div>
-            <span class="notes-app-name">Notes</span>
+      <div class="wa-grid">
+        <div class="wa-card">
+          <div class="wa-header">
+            <div class="wa-avatar"><!-- <img src="assets/..."> -->IMG</div>
+            <div><p class="wa-name">Name Surname</p><p class="wa-status">Studio tester</p></div>
           </div>
-          <div class="notes-body">
-            <p class="notes-date">Week 1 — Studio Tester</p>
-            <p class="notes-text">"Add your tester quote here. Something honest and specific about what Prruf changed for them."</p>
-            <p class="notes-author">Name Surname</p>
-            <p class="notes-role">Role, Studio</p>
+          <div class="wa-chat">
+            <div class="wa-bubble">
+              <p class="wa-text">Add your tester quote here. Something honest and specific about what Prruf changed for them.</p>
+              <p class="wa-time">10:42 AM</p>
+            </div>
           </div>
         </div>
-
-        <!-- Card 2 -->
-        <div class="notes-card">
-          <div class="notes-titlebar">
-            <div class="notes-dot red"></div>
-            <div class="notes-dot yellow"></div>
-            <div class="notes-dot green"></div>
-            <span class="notes-app-name">Notes</span>
+        <div class="wa-card">
+          <div class="wa-header">
+            <div class="wa-avatar"><!-- <img src="assets/..."> -->IMG</div>
+            <div><p class="wa-name">Name Surname</p><p class="wa-status">Freelance designer</p></div>
           </div>
-          <div class="notes-body">
-            <p class="notes-date">Week 1 — Freelancer</p>
-            <p class="notes-text">"Add your tester quote here. Something honest and specific about what Prruf changed for them."</p>
-            <p class="notes-author">Name Surname</p>
-            <p class="notes-role">Freelance Designer</p>
+          <div class="wa-chat">
+            <div class="wa-bubble">
+              <p class="wa-text">Add your tester quote here. Something honest and specific about what Prruf changed for them.</p>
+              <p class="wa-time">2:15 PM</p>
+            </div>
           </div>
         </div>
-
-        <!-- Card 3 -->
-        <div class="notes-card">
-          <div class="notes-titlebar">
-            <div class="notes-dot red"></div>
-            <div class="notes-dot yellow"></div>
-            <div class="notes-dot green"></div>
-            <span class="notes-app-name">Notes</span>
+        <div class="wa-card">
+          <div class="wa-header">
+            <div class="wa-avatar"><!-- <img src="assets/..."> -->IMG</div>
+            <div><p class="wa-name">Name Surname</p><p class="wa-status">Studio tester</p></div>
           </div>
-          <div class="notes-body">
-            <p class="notes-date">Week 1 — Studio Tester</p>
-            <p class="notes-text">"Add your tester quote here. Something honest and specific about what Prruf changed for them."</p>
-            <p class="notes-author">Name Surname</p>
-            <p class="notes-role">Role, Studio</p>
+          <div class="wa-chat">
+            <div class="wa-bubble">
+              <p class="wa-text">Add your tester quote here. Something honest and specific about what Prruf changed for them.</p>
+              <p class="wa-time">6:08 PM</p>
+            </div>
+          </div>
+        </div>
+        <div class="wa-card">
+          <div class="wa-header">
+            <div class="wa-avatar"><!-- <img src="assets/..."> -->IMG</div>
+            <div><p class="wa-name">Name Surname</p><p class="wa-status">Freelance developer</p></div>
+          </div>
+          <div class="wa-chat">
+            <div class="wa-bubble">
+              <p class="wa-text">Add your tester quote here. Something honest and specific about what Prruf changed for them.</p>
+              <p class="wa-time">9:30 PM</p>
+            </div>
           </div>
         </div>
       </div>
