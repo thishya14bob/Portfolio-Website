@@ -89,14 +89,13 @@
 
   /* ── Walking mascot in sidebar ── */
   .sb-walk { position: relative; height: 56px; margin-bottom: -1px; overflow: hidden; }
-  .sb-mascot { position: absolute; bottom: 0; left: 0; width: 44px; animation: sbPace 9s ease-in-out infinite; }
-  .sb-mascot .body { animation: sbBob .5s ease-in-out infinite; transform-origin: 50% 100%; }
-  .sb-mascot .legL { animation: sbStep .5s ease-in-out infinite; transform-origin: 16px 36px; }
-  .sb-mascot .legR { animation: sbStep .5s ease-in-out infinite reverse; transform-origin: 24px 36px; }
-  @keyframes sbPace { 0% { left: 0; transform: scaleX(1); } 45% { left: calc(100% - 44px); transform: scaleX(1); } 50% { left: calc(100% - 44px); transform: scaleX(-1); } 95% { left: 0; transform: scaleX(-1); } 100% { left: 0; transform: scaleX(1); } }
+  .sb-waddle { position: absolute; bottom: 0; left: 0; width: 38px; height: 44px; animation: sbPace 10s linear infinite; }
+  .sb-waddle img { width: 100%; display: block; transform-origin: 50% 100%; animation: sbRock .45s ease-in-out infinite alternate; }
+  @keyframes sbPace { 0% { left: 0; } 50% { left: calc(100% - 38px); } 100% { left: 0; } }
+  @keyframes sbRock { from { transform: rotate(-7deg) translateY(0); } to { transform: rotate(7deg) translateY(-3px); } }
   @keyframes sbBob { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-2px); } }
   @keyframes sbStep { 0%,100% { transform: rotate(18deg); } 50% { transform: rotate(-18deg); } }
-  @media (prefers-reduced-motion: reduce) { .sb-mascot, .sb-mascot * { animation: none !important; } }
+  @media (prefers-reduced-motion: reduce) { .sb-waddle, .sb-waddle * { animation: none !important; } }
 
   /* ── MAIN ── */
   #main {
@@ -529,17 +528,7 @@
   </div>
   <div>
     <div class="sb-walk" aria-hidden="true">
-      <svg class="sb-mascot" viewBox="0 0 40 46" fill="none">
-        <g class="legL"><rect x="14" y="34" width="4" height="10" rx="2" fill="#005B41"/></g>
-        <g class="legR"><rect x="22" y="34" width="4" height="10" rx="2" fill="#005B41"/></g>
-        <g class="body">
-          <rect x="4.5" y="6.5" width="31" height="29" rx="10.5" fill="#005B41"/>
-          <path d="M4.5 17c0-5.8 4.7-10.5 10.5-10.5h10C30.8 6.5 35.5 11.2 35.5 17Z" fill="#fff" opacity=".12"/>
-          <ellipse cx="17" cy="19.5" rx="3" ry="3.4" fill="#F7F4EB"/><ellipse cx="27" cy="19.5" rx="3" ry="3.4" fill="#F7F4EB"/>
-          <circle cx="18" cy="19.8" r="1.4" fill="#1A1A0F"/><circle cx="28" cy="19.8" r="1.4" fill="#1A1A0F"/>
-          <path d="M17.5 26.2q4.5 3 9 0" stroke="#F7F4EB" stroke-width="1.9" stroke-linecap="round"/>
-        </g>
-      </svg>
+      <div class="sb-waddle"><img src="assets/prruf-mascot.png" alt=""></div>
     </div>
   <div class="sidebar-bottom">
     <div class="clock-wrap">
