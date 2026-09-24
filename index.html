@@ -604,12 +604,19 @@
   .mini-czech-pill { border: 1px solid #e2dcd2; border-radius: 10px; padding: 2px 8px; font-size: 9px; color: #44403c; }
   .mini-czech-pill.filled { background: #1c1917; color: #fff; border-color: #1c1917; }
 
-  /* ── Sidebar: off-white + lime ── */
-  #sidebar { background: #fafaf7 !important; border-right: 1px solid #ececea !important; }
-  #sidebar .sidebar-name { color: #1c1917; }
-  #sidebar .nav-link.active, #sidebar .toc-list a.active { background: #f0ffcc; box-shadow: inset 0 0 0 1px #d9f99d; }
+  /* ── Sidebar: muted dark olive + lime ── */
+  #sidebar { background: #2a2d25 !important; border-right: 1px solid rgba(255,255,255,.06) !important; }
+  #sidebar .sidebar-name { color: #eef2e6; }
+  #sidebar .sidebar-tagline, #sidebar .nav-label, #sidebar .outbound-label, #sidebar .toc-label, #sidebar .clock-location { color: #8a8f7e; }
+  #sidebar .sidebar-bio, #sidebar .outbound-links a, #sidebar .clock-time, #sidebar .back-link { color: #c9cdbf; }
+  #sidebar .outbound-links a:hover, #sidebar .back-link:hover { color: #f0ffcc; }
+  #sidebar .outbound-links a.underlined { text-decoration-color: #6b705f; }
+  #sidebar .nav-link .nav-link-text, #sidebar .toc-list a { color: #c9cdbf; }
+  #sidebar .nav-link .nav-arrow, #sidebar .toc-list a .toc-arrow { color: #6b705f; }
+  #sidebar .nav-link:not(.active):hover, #sidebar .toc-list a:not(.active):hover { background: rgba(255,255,255,.05); }
+  #sidebar .nav-link.active, #sidebar .toc-list a.active { background: #e6f2c4; }
   #sidebar .nav-link.active .nav-link-text, #sidebar .nav-link.active .nav-arrow, #sidebar .toc-list a.active, #sidebar .toc-list a.active .toc-arrow { color: #1c1917; }
-  #sidebar .nav-link:not(.active):hover, #sidebar .toc-list a:not(.active):hover { background: #f4f4ef; }
+  #sidebar .sidebar-bottom { border-top-color: rgba(255,255,255,.08); }
 </style>
 </head>
 <body>
