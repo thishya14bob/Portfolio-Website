@@ -500,6 +500,20 @@
     .wa-grid { grid-template-columns: 1fr; }
     .terminal-row { grid-template-columns: 140px 1fr; }
   }
+
+  /* ── Dark sidebar (matches footer) ── */
+  #sidebar { background: #1c1917 !important; border-right-color: rgba(255,255,255,.08) !important; background-image: radial-gradient(circle, rgba(255,255,255,.05) 1px, transparent 1px) !important; background-size: 28px 28px !important; }
+  #sidebar .sidebar-name { color: #f0ffcc; }
+  #sidebar .sidebar-tagline, #sidebar .nav-label, #sidebar .outbound-label, #sidebar .toc-label, #sidebar .clock-location { color: #78716c; }
+  #sidebar .sidebar-bio, #sidebar .outbound-links a, #sidebar .clock-time, #sidebar .back-link { color: #d6d3d1; }
+  #sidebar .outbound-links a:hover, #sidebar .back-link:hover { color: #f0ffcc; }
+  #sidebar .outbound-links a.underlined { text-decoration-color: #78716c; }
+  #sidebar .nav-link .nav-link-text, #sidebar .toc-list a { color: #d6d3d1; }
+  #sidebar .nav-link .nav-arrow, #sidebar .toc-list a .toc-arrow { color: #78716c; }
+  #sidebar .nav-link:not(.active):hover, #sidebar .toc-list a:not(.active):hover { background: rgba(255,255,255,.06); }
+  #sidebar .nav-link.active, #sidebar .toc-list a.active { background: #f0ffcc; }
+  #sidebar .nav-link.active .nav-link-text, #sidebar .nav-link.active .nav-arrow, #sidebar .toc-list a.active, #sidebar .toc-list a.active .toc-arrow { color: #1c1917; }
+  #sidebar .sidebar-bottom { border-top-color: rgba(255,255,255,.1); }
 </style>
 </head>
 <body>
