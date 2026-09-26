@@ -632,6 +632,11 @@
   .hv-sound { position: absolute; right: 10px; top: 10px; font-size: 11px; background: rgba(28,25,23,.6); color: #fff; border-radius: 999px; padding: 3px 8px; opacity: 0; transition: opacity .2s; font-family: 'Inter', sans-serif; }
   .hv:hover .hv-sound, .hv.unmuted .hv-sound { opacity: 1; }
   @media (max-width: 900px) { .hv { display: none; } #hero { min-height: auto; } }
+
+  .hv-frame img { animation: hvKen 7s ease-in-out infinite alternate; transform-origin: 50% 60%; }
+  .hv-frame { overflow: hidden; }
+  @keyframes hvKen { from { transform: scale(1) translate(0,0); } to { transform: scale(1.12) translate(-3%, -2%); } }
+  @media (prefers-reduced-motion: reduce) { .hv-frame img { animation: none; } }
 </style>
 </head>
 <body>
