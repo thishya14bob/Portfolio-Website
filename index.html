@@ -981,7 +981,7 @@
 
   /* ── HERO VIDEOS: always play muted; hover = bigger + sound ── */
   document.querySelectorAll('.hv').forEach(hv => {
-    const v = hv.querySelector('video'); if (!v) return;
+    const v = hv.querySelector('video') || { muted: true, play(){} };
     const play = () => { const p = v.play(); if (p) p.catch(() => {}); };
     play();
     hv.addEventListener('mouseenter', () => { v.muted = false; hv.classList.add('unmuted'); play(); });
