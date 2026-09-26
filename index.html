@@ -640,15 +640,15 @@
 
   /* ── Hero tickers ── */
   .hv-ticker { width: 100%; overflow: hidden; position: relative; z-index: 1; padding: 22px 0; -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); }
-  .hv-track { display: flex; align-items: flex-start; gap: 110px; padding-right: 110px; width: max-content; animation: hvScroll 60s linear infinite; }
+  .hv-track { display: flex; align-items: flex-start; gap: 90px; padding-right: 90px; width: max-content; animation: hvScroll 60s linear infinite; }
   .hv-bot .hv-track { animation-direction: reverse; }
   .hv-ticker:hover .hv-track { animation-play-state: paused; }
   @keyframes hvScroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
   .hv-ticker .hv { position: relative; width: auto; flex: none; }
-  .hv-ticker .hv-frame video, .hv-ticker .hv-frame img { height: 105px; width: auto !important; }
+  .hv-ticker .hv-frame video, .hv-ticker .hv-frame img { width: 160px !important; height: 120px; aspect-ratio: 4/3; object-fit: cover; }
   .hv-bot { margin-top: 20px; }
   #hero { min-height: 0 !important; padding-top: 30px !important; padding-bottom: 40px !important; }
-  @media (max-width: 900px) { .hv { display: flex !important; } .hv-ticker .hv-frame video, .hv-ticker .hv-frame img { height: 80px; } }
+  @media (max-width: 900px) { .hv { display: flex !important; } .hv-ticker .hv-frame video, .hv-ticker .hv-frame img { width: 120px !important; height: 90px; } }
   @media (prefers-reduced-motion: reduce) { .hv-track { animation: none; } }
 </style>
 </head>
@@ -742,7 +742,7 @@
 
     <div class="hv-ticker hv-top"><div class="hv-track">
     <div class="hv">
-      <div class="hv-frame"><video src="assets/hero/vid-125136.mp4" muted loop playsinline autoplay preload="auto" style="aspect-ratio:3/4"></video><span class="hv-sound">🔊</span></div>
+      <div class="hv-frame"><video src="assets/hero/vid-125136.mp4" muted loop playsinline autoplay preload="auto" style="aspect-ratio:4/3"></video><span class="hv-sound">🔊</span></div>
       <span class="hv-cap">flying out</span>
     </div>
     <div class="hv">
@@ -754,11 +754,11 @@
       <span class="hv-cap">lunch</span>
     </div>
     <div class="hv">
-      <div class="hv-frame"><video src="assets/hero/vid-11231.mp4" muted loop playsinline autoplay preload="auto" style="aspect-ratio:3/4"></video><span class="hv-sound">🔊</span></div>
+      <div class="hv-frame"><video src="assets/hero/vid-11231.mp4" muted loop playsinline autoplay preload="auto" style="aspect-ratio:4/3"></video><span class="hv-sound">🔊</span></div>
       <span class="hv-cap">by the sea</span>
     </div>
     <div class="hv">
-      <div class="hv-frame"><video src="assets/hero/vid-125136.mp4" muted loop playsinline autoplay preload="auto" style="aspect-ratio:3/4"></video><span class="hv-sound">🔊</span></div>
+      <div class="hv-frame"><video src="assets/hero/vid-125136.mp4" muted loop playsinline autoplay preload="auto" style="aspect-ratio:4/3"></video><span class="hv-sound">🔊</span></div>
       <span class="hv-cap">flying out</span>
     </div>
     <div class="hv">
@@ -770,11 +770,11 @@
       <span class="hv-cap">lunch</span>
     </div>
     <div class="hv">
-      <div class="hv-frame"><video src="assets/hero/vid-11231.mp4" muted loop playsinline autoplay preload="auto" style="aspect-ratio:3/4"></video><span class="hv-sound">🔊</span></div>
+      <div class="hv-frame"><video src="assets/hero/vid-11231.mp4" muted loop playsinline autoplay preload="auto" style="aspect-ratio:4/3"></video><span class="hv-sound">🔊</span></div>
       <span class="hv-cap">by the sea</span>
     </div>
     <div class="hv" aria-hidden="true">
-      <div class="hv-frame"><video src="assets/hero/vid-125136.mp4" muted loop playsinline autoplay preload="auto" style="aspect-ratio:3/4"></video><span class="hv-sound">🔊</span></div>
+      <div class="hv-frame"><video src="assets/hero/vid-125136.mp4" muted loop playsinline autoplay preload="auto" style="aspect-ratio:4/3"></video><span class="hv-sound">🔊</span></div>
       <span class="hv-cap">flying out</span>
     </div>
     <div class="hv" aria-hidden="true">
@@ -786,11 +786,11 @@
       <span class="hv-cap">lunch</span>
     </div>
     <div class="hv" aria-hidden="true">
-      <div class="hv-frame"><video src="assets/hero/vid-11231.mp4" muted loop playsinline autoplay preload="auto" style="aspect-ratio:3/4"></video><span class="hv-sound">🔊</span></div>
+      <div class="hv-frame"><video src="assets/hero/vid-11231.mp4" muted loop playsinline autoplay preload="auto" style="aspect-ratio:4/3"></video><span class="hv-sound">🔊</span></div>
       <span class="hv-cap">by the sea</span>
     </div>
     <div class="hv" aria-hidden="true">
-      <div class="hv-frame"><video src="assets/hero/vid-125136.mp4" muted loop playsinline autoplay preload="auto" style="aspect-ratio:3/4"></video><span class="hv-sound">🔊</span></div>
+      <div class="hv-frame"><video src="assets/hero/vid-125136.mp4" muted loop playsinline autoplay preload="auto" style="aspect-ratio:4/3"></video><span class="hv-sound">🔊</span></div>
       <span class="hv-cap">flying out</span>
     </div>
     <div class="hv" aria-hidden="true">
@@ -802,7 +802,7 @@
       <span class="hv-cap">lunch</span>
     </div>
     <div class="hv" aria-hidden="true">
-      <div class="hv-frame"><video src="assets/hero/vid-11231.mp4" muted loop playsinline autoplay preload="auto" style="aspect-ratio:3/4"></video><span class="hv-sound">🔊</span></div>
+      <div class="hv-frame"><video src="assets/hero/vid-11231.mp4" muted loop playsinline autoplay preload="auto" style="aspect-ratio:4/3"></video><span class="hv-sound">🔊</span></div>
       <span class="hv-cap">by the sea</span>
     </div>
     </div></div>
@@ -820,7 +820,7 @@
       <span class="hv-cap">boat ride</span>
     </div>
     <div class="hv">
-      <div class="hv-frame"><video src="assets/hero/vid-125354.mp4" muted loop playsinline autoplay preload="auto" style="aspect-ratio:3/4"></video><span class="hv-sound">🔊</span></div>
+      <div class="hv-frame"><video src="assets/hero/vid-125354.mp4" muted loop playsinline autoplay preload="auto" style="aspect-ratio:4/3"></video><span class="hv-sound">🔊</span></div>
       <span class="hv-cap">breakfast</span>
     </div>
     <div class="hv">
@@ -828,7 +828,7 @@
       <span class="hv-cap">skating</span>
     </div>
     <div class="hv">
-      <div class="hv-frame"><img src="assets/hero/img-121201.jpg" alt="" style="width:100%;aspect-ratio:3/4;object-fit:cover;display:block;border-radius:9px" draggable="false"></div>
+      <div class="hv-frame"><img src="assets/hero/img-121201.jpg" alt="" style="width:100%;aspect-ratio:4/3;object-fit:cover;display:block;border-radius:9px" draggable="false"></div>
       <span class="hv-cap">outdoors</span>
     </div>
     <div class="hv">
@@ -836,7 +836,7 @@
       <span class="hv-cap">boat ride</span>
     </div>
     <div class="hv">
-      <div class="hv-frame"><video src="assets/hero/vid-125354.mp4" muted loop playsinline autoplay preload="auto" style="aspect-ratio:3/4"></video><span class="hv-sound">🔊</span></div>
+      <div class="hv-frame"><video src="assets/hero/vid-125354.mp4" muted loop playsinline autoplay preload="auto" style="aspect-ratio:4/3"></video><span class="hv-sound">🔊</span></div>
       <span class="hv-cap">breakfast</span>
     </div>
     <div class="hv">
@@ -844,7 +844,7 @@
       <span class="hv-cap">skating</span>
     </div>
     <div class="hv">
-      <div class="hv-frame"><img src="assets/hero/img-121201.jpg" alt="" style="width:100%;aspect-ratio:3/4;object-fit:cover;display:block;border-radius:9px" draggable="false"></div>
+      <div class="hv-frame"><img src="assets/hero/img-121201.jpg" alt="" style="width:100%;aspect-ratio:4/3;object-fit:cover;display:block;border-radius:9px" draggable="false"></div>
       <span class="hv-cap">outdoors</span>
     </div>
     <div class="hv" aria-hidden="true">
@@ -852,7 +852,7 @@
       <span class="hv-cap">boat ride</span>
     </div>
     <div class="hv" aria-hidden="true">
-      <div class="hv-frame"><video src="assets/hero/vid-125354.mp4" muted loop playsinline autoplay preload="auto" style="aspect-ratio:3/4"></video><span class="hv-sound">🔊</span></div>
+      <div class="hv-frame"><video src="assets/hero/vid-125354.mp4" muted loop playsinline autoplay preload="auto" style="aspect-ratio:4/3"></video><span class="hv-sound">🔊</span></div>
       <span class="hv-cap">breakfast</span>
     </div>
     <div class="hv" aria-hidden="true">
@@ -860,7 +860,7 @@
       <span class="hv-cap">skating</span>
     </div>
     <div class="hv" aria-hidden="true">
-      <div class="hv-frame"><img src="assets/hero/img-121201.jpg" alt="" style="width:100%;aspect-ratio:3/4;object-fit:cover;display:block;border-radius:9px" draggable="false"></div>
+      <div class="hv-frame"><img src="assets/hero/img-121201.jpg" alt="" style="width:100%;aspect-ratio:4/3;object-fit:cover;display:block;border-radius:9px" draggable="false"></div>
       <span class="hv-cap">outdoors</span>
     </div>
     <div class="hv" aria-hidden="true">
@@ -868,7 +868,7 @@
       <span class="hv-cap">boat ride</span>
     </div>
     <div class="hv" aria-hidden="true">
-      <div class="hv-frame"><video src="assets/hero/vid-125354.mp4" muted loop playsinline autoplay preload="auto" style="aspect-ratio:3/4"></video><span class="hv-sound">🔊</span></div>
+      <div class="hv-frame"><video src="assets/hero/vid-125354.mp4" muted loop playsinline autoplay preload="auto" style="aspect-ratio:4/3"></video><span class="hv-sound">🔊</span></div>
       <span class="hv-cap">breakfast</span>
     </div>
     <div class="hv" aria-hidden="true">
@@ -876,7 +876,7 @@
       <span class="hv-cap">skating</span>
     </div>
     <div class="hv" aria-hidden="true">
-      <div class="hv-frame"><img src="assets/hero/img-121201.jpg" alt="" style="width:100%;aspect-ratio:3/4;object-fit:cover;display:block;border-radius:9px" draggable="false"></div>
+      <div class="hv-frame"><img src="assets/hero/img-121201.jpg" alt="" style="width:100%;aspect-ratio:4/3;object-fit:cover;display:block;border-radius:9px" draggable="false"></div>
       <span class="hv-cap">outdoors</span>
     </div>
     </div></div>
