@@ -916,10 +916,9 @@
     let i = 0, del = false;
     (function step(){
       el.textContent = text.slice(0, i);
-      if (!del && i === text.length) { del = true; return setTimeout(step, 2200); }
-      if (del && i === 0) { del = false; return setTimeout(step, 500); }
-      i += del ? -1 : 1;
-      setTimeout(step, del ? 25 : 55);
+      if (i === text.length) { document.querySelector('.tw-caret').style.display = 'none'; return; }
+      i++;
+      setTimeout(step, 55);
     })();
   })();
 </script>
