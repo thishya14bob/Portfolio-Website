@@ -611,6 +611,9 @@
   .project-card .mockup-container { border: 2px solid #1c1917; }
   .project-card .metrics-bar { border-top: 2px solid #1c1917; }
   .project-card .card-tag { background: #1c1917; color: #f0ffcc; }
+
+  .tw-caret { display: inline-block; margin-left: 2px; animation: twBlink .8s steps(1) infinite; }
+  @keyframes twBlink { 50% { opacity: 0; } }
 </style>
 </head>
 <body>
@@ -705,7 +708,7 @@
     <p class="hero-mission">
       "Right now I'm building <a href="https://prruf.com/" target="_blank" rel="noopener" class="accent accent-link">Prruf</a> and co-founding <a href="https://wasabie.in/" target="_blank" rel="noopener" class="accent accent-link">Wasabie Studios</a>."
     </p>
-    <p class="hero-status">"just here to make cool things and have a good time doing it."</p>
+    <p class="hero-status" aria-label="just here to make cool things and have a good time doing it."><span id="tw"></span><span class="tw-caret">|</span></p>
     <a href="#projects" class="hero-cta">View my work ! ↓</a>
   </section>
 
@@ -904,6 +907,21 @@
     requestAnimationFrame(tick);
   })();
 
+
+  /* ── TYPEWRITER (hero status) ── */
+  (function(){
+    const el = document.getElementById('tw'); if (!el) return;
+    const text = '"just here to make cool things and have a good time doing it."';
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) { el.textContent = text; return; }
+    let i = 0, del = false;
+    (function step(){
+      el.textContent = text.slice(0, i);
+      if (!del && i === text.length) { del = true; return setTimeout(step, 2200); }
+      if (del && i === 0) { del = false; return setTimeout(step, 500); }
+      i += del ? -1 : 1;
+      setTimeout(step, del ? 25 : 55);
+    })();
+  })();
 </script>
 </body>
 </html>
