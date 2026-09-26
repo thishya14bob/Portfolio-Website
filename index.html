@@ -619,12 +619,15 @@
   .orbit-ring { display: none !important; }
   #hero { min-height: 520px; padding-top: 110px !important; padding-bottom: 60px !important; }
   .hv { position: absolute; z-index: 1; display: flex; flex-direction: column; align-items: center; gap: 8px; }
-  .hv-frame { width: 100%; border-radius: 14px; overflow: hidden; border: 1.5px solid #a8a29e; background: #d6d3d1; box-shadow: 0 10px 30px -12px rgba(28,25,23,.25); transition: transform .35s cubic-bezier(.22,1,.36,1), box-shadow .35s; cursor: none; position: relative; }
+  .hv-frame { width: 100%; border-radius: 14px; overflow: hidden; border: 1.5px solid #a8a29e; background: #d6d3d1; transition: transform .35s cubic-bezier(.22,1,.36,1); cursor: none; position: relative; }
   .hv-frame video { width: 100%; height: 100%; object-fit: cover; display: block; }
   .hv-frame .ph { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 1.2px; text-transform: uppercase; color: #78716c; pointer-events: none; }
   .hv-frame video[src] + .ph { display: none; }
   .hv:hover { z-index: 5; }
-  .hv:hover .hv-frame { transform: scale(1.12); box-shadow: 0 24px 50px -16px rgba(28,25,23,.4); }
+  .hv:hover .hv-frame { transform: scale(1.12); }
+  .hv { touch-action: none; user-select: none; }
+  .hv.dragging { z-index: 6; }
+  .hv.dragging .hv-frame { transition: none; }
   .hv-cap { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #a8a29e; }
   .hv-sound { position: absolute; right: 8px; bottom: 8px; font-size: 11px; background: rgba(28,25,23,.6); color: #fff; border-radius: 999px; padding: 3px 8px; opacity: 0; transition: opacity .2s; font-family: 'Inter', sans-serif; }
   .hv:hover .hv-sound, .hv.unmuted .hv-sound { opacity: 1; }
@@ -971,7 +974,25 @@
     play();
     hv.addEventListener('mouseenter', () => { v.muted = false; hv.classList.add('unmuted'); play(); });
     hv.addEventListener('mouseleave', () => { v.muted = true; hv.classList.remove('unmuted'); });
-    hv.addEventListener('click', () => { v.muted = !v.muted; hv.classList.toggle('unmuted', !v.muted); play(); });
+    let sx, sy, ox, oy, moved = false, down = false;
+    hv.addEventListener('pointerdown', e => {
+      down = true; moved = false; sx = e.clientX; sy = e.clientY;
+      const r = hv.getBoundingClientRect(), pr = hv.offsetParent.getBoundingClientRect();
+      ox = r.left - pr.left; oy = r.top - pr.top;
+      hv.style.left = ox + 'px'; hv.style.top = oy + 'px'; hv.style.right = 'auto';
+      hv.setPointerCapture(e.pointerId);
+    });
+    hv.addEventListener('pointermove', e => {
+      if (!down) return;
+      const dx = e.clientX - sx, dy = e.clientY - sy;
+      if (!moved && Math.hypot(dx, dy) < 4) return;
+      moved = true; hv.classList.add('dragging');
+      hv.style.left = (ox + dx) + 'px'; hv.style.top = (oy + dy) + 'px';
+    });
+    hv.addEventListener('pointerup', () => {
+      down = false; hv.classList.remove('dragging');
+      if (!moved) { v.muted = !v.muted; hv.classList.toggle('unmuted', !v.muted); play(); }
+    });
   });
 </script>
 </body>
