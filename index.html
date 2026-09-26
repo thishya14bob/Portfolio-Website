@@ -614,6 +614,26 @@
 
   .tw-caret { display: inline-block; margin-left: 2px; animation: twBlink .8s steps(1) infinite; }
   @keyframes twBlink { 50% { opacity: 0; } }
+
+  /* ── HERO VIDEOS (heyclicky-style) ── */
+  .orbit-ring { display: none !important; }
+  #hero { min-height: 760px; }
+  .hv { position: absolute; z-index: 1; display: flex; flex-direction: column; align-items: center; gap: 8px; }
+  .hv-frame { width: 100%; border-radius: 14px; overflow: hidden; border: 1.5px solid #a8a29e; background: #d6d3d1; box-shadow: 0 10px 30px -12px rgba(28,25,23,.25); transition: transform .35s cubic-bezier(.22,1,.36,1), box-shadow .35s; cursor: none; position: relative; }
+  .hv-frame video { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .hv-frame .ph { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 1.2px; text-transform: uppercase; color: #78716c; pointer-events: none; }
+  .hv-frame video[src] + .ph { display: none; }
+  .hv:hover { z-index: 5; }
+  .hv:hover .hv-frame { transform: scale(1.12); box-shadow: 0 24px 50px -16px rgba(28,25,23,.4); }
+  .hv-cap { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #a8a29e; }
+  .hv-sound { position: absolute; right: 8px; bottom: 8px; font-size: 11px; background: rgba(28,25,23,.6); color: #fff; border-radius: 999px; padding: 3px 8px; opacity: 0; transition: opacity .2s; font-family: 'Inter', sans-serif; }
+  .hv:hover .hv-sound, .hv.unmuted .hv-sound { opacity: 1; }
+  .hv-1 { left: 4%;  top: 60px;  width: 150px; } .hv-1 .hv-frame { aspect-ratio: 3/5; }
+  .hv-2 { left: 30%; top: 20px;  width: 230px; } .hv-2 .hv-frame { aspect-ratio: 16/10; }
+  .hv-3 { right: 5%; top: 70px;  width: 270px; } .hv-3 .hv-frame { aspect-ratio: 16/9; }
+  .hv-4 { left: 5%;  top: 450px; width: 250px; } .hv-4 .hv-frame { aspect-ratio: 16/11; }
+  .hv-5 { right: 3%; top: 420px; width: 170px; } .hv-5 .hv-frame { aspect-ratio: 3/4; }
+  @media (max-width: 900px) { .hv { display: none; } #hero { min-height: auto; } }
 </style>
 </head>
 <body>
@@ -701,6 +721,28 @@
         <img src="assets/me.jpg" alt="Thishya" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
         <div class="orbit-photo-fallback" style="display:none">🍜</div>
       </div>
+    </div>
+
+    <!-- hero videos: add src="assets/videos/xxx.mp4" to each <video> -->
+    <div class="hv hv-1">
+      <div class="hv-frame"><video muted loop playsinline autoplay preload="metadata"></video><span class="ph">video 1</span><span class="hv-sound">🔊</span></div>
+      <span class="hv-cap">video-1.mov</span>
+    </div>
+    <div class="hv hv-2">
+      <div class="hv-frame"><video muted loop playsinline autoplay preload="metadata"></video><span class="ph">video 2</span><span class="hv-sound">🔊</span></div>
+      <span class="hv-cap">video-2.mov</span>
+    </div>
+    <div class="hv hv-3">
+      <div class="hv-frame"><video muted loop playsinline autoplay preload="metadata"></video><span class="ph">video 3</span><span class="hv-sound">🔊</span></div>
+      <span class="hv-cap">video-3.mov</span>
+    </div>
+    <div class="hv hv-4">
+      <div class="hv-frame"><video muted loop playsinline autoplay preload="metadata"></video><span class="ph">video 4</span><span class="hv-sound">🔊</span></div>
+      <span class="hv-cap">video-4.mov</span>
+    </div>
+    <div class="hv hv-5">
+      <div class="hv-frame"><video muted loop playsinline autoplay preload="metadata"></video><span class="ph">video 5</span><span class="hv-sound">🔊</span></div>
+      <span class="hv-cap">video-5.mov</span>
     </div>
 
     <!-- content -->
@@ -921,6 +963,16 @@
       setTimeout(step, 55);
     })();
   })();
+
+  /* ── HERO VIDEOS: always play muted; hover = bigger + sound ── */
+  document.querySelectorAll('.hv').forEach(hv => {
+    const v = hv.querySelector('video'); if (!v) return;
+    const play = () => { const p = v.play(); if (p) p.catch(() => {}); };
+    play();
+    hv.addEventListener('mouseenter', () => { v.muted = false; hv.classList.add('unmuted'); play(); });
+    hv.addEventListener('mouseleave', () => { v.muted = true; hv.classList.remove('unmuted'); });
+    hv.addEventListener('click', () => { v.muted = !v.muted; hv.classList.toggle('unmuted', !v.muted); play(); });
+  });
 </script>
 </body>
 </html>
