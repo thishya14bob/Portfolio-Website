@@ -640,15 +640,15 @@
 
   /* ── Hero tickers ── */
   .hv-ticker { width: 100%; overflow: hidden; position: relative; z-index: 1; padding: 22px 0; -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); }
-  .hv-track { display: flex; align-items: flex-start; gap: 28px; width: max-content; animation: hvScroll 40s linear infinite; }
+  .hv-track { display: flex; align-items: flex-start; gap: 20px; width: max-content; animation: hvScroll 40s linear infinite; }
   .hv-bot .hv-track { animation-direction: reverse; }
   .hv-ticker:hover .hv-track { animation-play-state: paused; }
   @keyframes hvScroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
   .hv-ticker .hv { position: relative; width: auto; flex: none; }
-  .hv-ticker .hv-frame video, .hv-ticker .hv-frame img { height: 150px; width: auto !important; }
+  .hv-ticker .hv-frame video, .hv-ticker .hv-frame img { height: 105px; width: auto !important; }
   .hv-bot { margin-top: 20px; }
   #hero { min-height: 0 !important; padding-top: 30px !important; padding-bottom: 40px !important; }
-  @media (max-width: 900px) { .hv { display: flex !important; } .hv-ticker .hv-frame video, .hv-ticker .hv-frame img { height: 110px; } }
+  @media (max-width: 900px) { .hv { display: flex !important; } .hv-ticker .hv-frame video, .hv-ticker .hv-frame img { height: 80px; } }
   @media (prefers-reduced-motion: reduce) { .hv-track { animation: none; } }
 </style>
 </head>
