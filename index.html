@@ -619,9 +619,9 @@
   .orbit-ring { display: none !important; }
   #hero { min-height: 520px; padding-top: 110px !important; padding-bottom: 60px !important; }
   .hv { position: absolute; z-index: 1; display: flex; flex-direction: column; align-items: center; gap: 8px; }
-  .hv-frame { width: 100%; border-radius: 12px; overflow: hidden; border: 4px solid #fff; outline: 1px solid rgba(28,25,23,.08); outline-offset: 0; background: #e7e5e4; transition: transform .35s cubic-bezier(.22,1,.36,1); cursor: none; position: relative; }
-  .hv-frame video { width: 100%; height: 100%; object-fit: cover; display: block; }
-  .hv-frame .ph { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 1.2px; text-transform: uppercase; color: #78716c; pointer-events: none; }
+  .hv-frame { width: 100%; border-radius: 14px; overflow: hidden; padding: 6px; background: linear-gradient(145deg,#f4f4f4,#b9bcc0 45%,#e9eaec 55%,#9fa3a8); box-shadow: inset 0 1px 0 #fff, inset 0 -1px 0 #7d8187; transition: transform .35s cubic-bezier(.22,1,.36,1); cursor: none; position: relative; }
+  .hv-frame video { width: 100%; height: 100%; object-fit: cover; display: block; border-radius: 9px; background: #e7e5e4; }
+  .hv-frame .ph { position: absolute; inset: 6px; border-radius: 9px; display: flex; align-items: center; justify-content: center; font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 1.2px; text-transform: uppercase; color: #78716c; pointer-events: none; }
   .hv-frame video[src] + .ph { display: none; }
   .hv:hover { z-index: 5; }
   .hv:hover .hv-frame { transform: scale(1.12); }
