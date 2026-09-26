@@ -617,11 +617,10 @@
 
   /* ── HERO VIDEOS (heyclicky-style) ── */
   .orbit-ring { display: none !important; }
-  #hero { min-height: 600px; padding-top: 110px !important; padding-bottom: 60px !important; }
+  #hero { min-height: 680px; padding-top: 110px !important; padding-bottom: 60px !important; }
   .hv { position: absolute; z-index: 1; display: flex; flex-direction: column; align-items: center; gap: 8px; }
-  .hv-frame { width: 100%; border-radius: 14px; overflow: hidden; padding: 5px 5px 14px; background: #e8e2d4; border: 1.5px solid #1c1917; transition: transform .35s cubic-bezier(.22,1,.36,1); cursor: none; position: relative; }
-  .hv-frame video { width: 100%; object-fit: cover; display: block; border-radius: 14px / 10px; border: 1.5px solid #1c1917; background: #d6d3d1; }
-  .hv-frame::after { content: ''; position: absolute; bottom: 4px; right: 10px; width: 6px; height: 6px; border-radius: 50%; background: #1c1917; box-shadow: -10px 0 0 #1c1917; }
+  .hv-frame { width: 100%; border-radius: 14px; overflow: hidden; padding: 4px; background: #fff; border: 1px solid #e2dcd2; transition: transform .35s cubic-bezier(.22,1,.36,1); cursor: none; position: relative; }
+  .hv-frame video { width: 100%; object-fit: cover; display: block; border-radius: 9px; background: #e7e5e4; }
   .hv-frame .ph { position: absolute; inset: 5px 5px 14px; border-radius: 14px / 10px; display: flex; align-items: center; justify-content: center; font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 1.2px; text-transform: uppercase; color: #78716c; pointer-events: none; }
   .hv-frame video[src] + .ph { display: none; }
   .hv:hover { z-index: 5; }
@@ -629,7 +628,7 @@
   .hv { touch-action: none; user-select: none; }
   .hv.dragging { z-index: 6; }
   .hv.dragging .hv-frame { transition: none; }
-  .hv-cap { font-family: 'Newsreader', serif; font-style: italic; font-size: 13px; color: #a8a29e; }
+  .hv-cap { font-family: 'Newsreader', serif; font-style: italic; font-size: 13px; color: #78716c; }
   .hv-sound { position: absolute; right: 10px; top: 10px; font-size: 11px; background: rgba(28,25,23,.6); color: #fff; border-radius: 999px; padding: 3px 8px; opacity: 0; transition: opacity .2s; font-family: 'Inter', sans-serif; }
   .hv:hover .hv-sound, .hv.unmuted .hv-sound { opacity: 1; }
   @media (max-width: 900px) { .hv { display: none; } #hero { min-height: auto; } }
@@ -723,37 +722,37 @@
     </div>
 
     <!-- hero media -->
-    <div class="hv" style="left:3%;top:10px;width:92px">
+    <div class="hv" style="left:2%;top:0px;width:150px">
       <div class="hv-frame"><video src="assets/hero/vid-125136.mp4" muted loop playsinline autoplay preload="auto" style="aspect-ratio:3/4"></video><span class="hv-sound">🔊</span></div>
-      <span class="hv-cap">flight.mp4</span>
+      <span class="hv-cap">up in the clouds</span>
     </div>
-    <div class="hv" style="left:17%;top:40px;width:145px">
+    <div class="hv" style="left:21%;top:30px;width:170px">
       <div class="hv-frame"><video src="assets/hero/vid-10822.mp4" muted loop playsinline autoplay preload="auto" style="aspect-ratio:4/3"></video><span class="hv-sound">🔊</span></div>
-      <span class="hv-cap">chai-pour.mp4</span>
+      <span class="hv-cap">chai first, always</span>
     </div>
-    <div class="hv" style="left:40%;top:0px;width:150px">
+    <div class="hv" style="left:44%;top:0px;width:170px">
       <div class="hv-frame"><video src="assets/hero/vid-11152.mp4" muted loop playsinline autoplay preload="auto" style="aspect-ratio:4/3"></video><span class="hv-sound">🔊</span></div>
-      <span class="hv-cap">hummus.mp4</span>
+      <span class="hv-cap">good food, good mood</span>
     </div>
-    <div class="hv" style="right:24%;top:30px;width:92px">
+    <div class="hv" style="right:23%;top:20px;width:115px">
       <div class="hv-frame"><video src="assets/hero/vid-11231.mp4" muted loop playsinline autoplay preload="auto" style="aspect-ratio:3/4"></video><span class="hv-sound">🔊</span></div>
-      <span class="hv-cap">sea-breeze.mp4</span>
+      <span class="hv-cap">sea breeze therapy</span>
     </div>
-    <div class="hv" style="right:3%;top:10px;width:165px">
+    <div class="hv" style="right:2%;top:10px;width:190px">
       <div class="hv-frame"><video src="assets/hero/vid-125530.mp4" muted loop playsinline autoplay preload="auto" style="aspect-ratio:4/3"></video><span class="hv-sound">🔊</span></div>
-      <span class="hv-cap">boat-ride.mp4</span>
+      <span class="hv-cap">lost in the mangroves</span>
     </div>
-    <div class="hv" style="left:4%;top:250px;width:100px">
+    <div class="hv" style="left:3%;top:290px;width:120px">
       <div class="hv-frame"><video src="assets/hero/vid-125354.mp4" muted loop playsinline autoplay preload="auto" style="aspect-ratio:3/4"></video><span class="hv-sound">🔊</span></div>
-      <span class="hv-cap">acai-bowl.mp4</span>
+      <span class="hv-cap">slow mornings</span>
     </div>
-    <div class="hv" style="left:17%;top:390px;width:140px">
-      <div class="hv-frame"><img src="assets/hero/img-10822.jpg" alt="" style="width:100%;aspect-ratio:4/3;object-fit:cover;display:block;border-radius:14px / 10px;border:1.5px solid #1c1917" draggable="false"></div>
-      <span class="hv-cap">skating.jpg</span>
+    <div class="hv" style="left:17%;top:420px;width:170px">
+      <div class="hv-frame"><img src="assets/hero/img-10822.jpg" alt="" style="width:100%;aspect-ratio:4/3;object-fit:cover;display:block;border-radius:9px" draggable="false"></div>
+      <span class="hv-cap">on wheels since forever</span>
     </div>
-    <div class="hv" style="right:5%;top:250px;width:110px">
-      <div class="hv-frame"><img src="assets/hero/img-121201.jpg" alt="" style="width:100%;aspect-ratio:3/4;object-fit:cover;display:block;border-radius:14px / 10px;border:1.5px solid #1c1917" draggable="false"></div>
-      <span class="hv-cap">forest.jpg</span>
+    <div class="hv" style="right:4%;top:300px;width:130px">
+      <div class="hv-frame"><img src="assets/hero/img-121201.jpg" alt="" style="width:100%;aspect-ratio:3/4;object-fit:cover;display:block;border-radius:9px" draggable="false"></div>
+      <span class="hv-cap">touching grass</span>
     </div>
 
     <!-- content -->
