@@ -501,6 +501,9 @@
     .terminal-row { grid-template-columns: 140px 1fr; }
   }
 
+
+  .ul { background-image: linear-gradient(transparent 62%, #e6f59a 62%, #e6f59a 92%, transparent 92%); background-repeat: no-repeat; background-size: 0% 100%; transition: background-size 1s cubic-bezier(.22,1,.36,1); color: #1c1917; }
+  .ul.on { background-size: 100% 100%; }
 </style>
 </head>
 <body>
@@ -564,7 +567,7 @@
 
     <!-- DESCRIPTION -->
     <p class="cs-description">
-      I kept forgetting to log my work. So we built something that quietly watches what you're doing, privately and on your own machine, and writes the notes for you. Not a boss's tracking tool. A personal note-taker that works <em>for</em> the person being recorded. Built with <a href="#">Tanish Maheshwari</a>, who was facing the exact same problem.
+      I kept forgetting to log my work. So <span class="ul">we built something that quietly watches what you're doing</span>, privately and on your own machine, and writes the notes for you. Not a boss's tracking tool. A personal note-taker that works <em>for</em> the person being recorded. Built with <a href="#">Tanish Maheshwari</a>, who was facing the exact same problem.
     </p>
 
     <!-- CTA -->
@@ -623,7 +626,7 @@
       <h2 class="cs-section-title">We kept forgetting to log our work.</h2>
       <div class="cs-body">
         <p>During an internship I had to keep a progress log. I tried dictating each task to Claude. It lasted two weeks, then I quietly stopped.</p>
-        <p>Later, Tanish mentioned he was facing the same issue. We spoke about it, and hearing it from him validated the idea for both of us.</p>
+        <p>Later, Tanish mentioned he was facing the same issue. We spoke about it, and <span class="ul">hearing it from him validated the idea for both of us</span>.</p>
       </div>
       <div class="cs-callout">
         "What if my laptop could just see what I'm doing and keep the notes itself?"
@@ -806,8 +809,8 @@
       <p class="cs-section-heading">05. Not surveillance</p>
       <h2 class="cs-section-title">Built for you, not your manager.</h2>
       <div class="cs-body">
-        <p>The Hubstaffs and Time Doctors of the world are employee-monitoring software. The employer installs them. Data flows <em>up</em> to a manager: stored screenshots, keystroke counts, productivity scores. The person on the keyboard is the subject. They're being watched by someone else.</p>
-        <p>Prruf is the opposite, on purpose. The safeguards came from real feedback, from people who said their fears out loud when we showed them early versions. Not from us anticipating them.</p>
+        <p>The Hubstaffs and Time Doctors of the world are employee-monitoring software. The employer installs them. Data flows <em>up</em> to a manager: stored screenshots, keystroke counts, productivity scores. <span class="ul">The person on the keyboard is the subject.</span> They're being watched by someone else.</p>
+        <p><span class="ul">Prruf is the opposite, on purpose.</span> The safeguards came from real feedback, from people who said their fears out loud when we showed them early versions. Not from us anticipating them.</p>
       </div>
 
       <!-- TERMINAL CARD -->
@@ -966,7 +969,7 @@
       <p class="cs-section-heading">07. Why Prruf</p>
       <h2 class="cs-section-title">Your work, your record.</h2>
       <div class="cs-body">
-        <p>We're not looking at what you do. Prruf is built for you, not for a manager or for us. It quietly keeps notes on your work, and what you do with them is entirely up to you.</p>
+        <p><span class="ul">We're not looking at what you do.</span> Prruf is built for you, not for a manager or for us. It quietly keeps notes on your work, and what you do with them is entirely up to you.</p>
       </div>
       <div class="cs-takeaways">
         <div class="cs-takeaway"><div class="cs-takeaway-dot"></div><p class="cs-takeaway-text"><strong>Private by default:</strong> screenshots are never saved, and only text notes stay on your machine.</p></div>
@@ -1080,6 +1083,8 @@
     });
   }, { rootMargin: '-20% 0px -70% 0px' });
   sections.forEach(s => obs.observe(s));
+
+  document.querySelectorAll('.ul').forEach(el => new IntersectionObserver((es, o) => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('on'); o.disconnect(); } }), { threshold: 1 }).observe(el));
 </script>
 </body>
 </html>
