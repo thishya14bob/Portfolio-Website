@@ -598,6 +598,43 @@
 
   .ul { background-image: linear-gradient(transparent 62%, #e6f59a 62%, #e6f59a 92%, transparent 92%); background-repeat: no-repeat; background-size: 0% 100%; transition: background-size 1s cubic-bezier(.22,1,.36,1); color: #1c1917; }
   .ul.on { background-size: 100% 100%; }
+
+  /* ── Wireframe-style kiosk prototype ── */
+  .wf-wrap { margin: 32px 0 8px; display: flex; flex-direction: column; align-items: center; gap: 22px; }
+  .wf-screen { width: 100%; max-width: 520px; aspect-ratio: 16/9.2; background: #fff; border: 1.5px solid #1c1917; border-radius: 10px; overflow: hidden; display: flex; flex-direction: column; font-family: 'Inter', sans-serif; color: #1c1917; transition: border-color .3s; }
+  .wf-screen.err { border-color: #c2412d; }
+  .wf-title { text-align: center; font-size: 20px; padding: 10px 0 9px; border-bottom: 1.5px solid #1c1917; transition: border-color .3s; }
+  .wf-screen.err .wf-title { border-bottom-color: #e8a497; }
+  .wf-body { flex: 1; position: relative; display: flex; flex-direction: column; align-items: center; padding: 10px 22px 14px; animation: wfIn .35s ease; }
+  @keyframes wfIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+  .wf-sub { font-size: 13px; margin-bottom: 8px; }
+  .wf-sub .o { color: #e4a11b; }
+  .wf-frame { width: 78px; height: 88px; border: 9px solid #8a8a8a; background: #d9d9d9; display: flex; align-items: center; justify-content: center; transition: border-color .3s; box-sizing: border-box; }
+  .wf-frame.g { border-color: #2ec23a; }
+  .wf-fp { width: 44px; height: 52px; color: #bdbdbd; }
+  .wf-fp.big { width: 64px; height: 76px; }
+  .wf-fp.dark { color: #1c1917; } .wf-fp.green { color: #6dbb3a; }
+  .wf-bar { display: flex; align-items: center; gap: 6px; margin-top: 12px; font-size: 12px; }
+  .wf-bar .t { width: 170px; height: 9px; border-radius: 9px; background: #8a8a8a; overflow: hidden; }
+  .wf-bar .t i { display: block; height: 100%; width: 0; background: #2ec23a; border-radius: 9px; transition: width .9s ease; }
+  .wf-bar .t.dk i { background: #0f2e1c; }
+  .wf-small { align-self: flex-start; margin-left: calc(50% - 85px); font-size: 8px; margin-top: 2px; }
+  .wf-btn { font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 600; padding: 4px 16px; border: 1.3px solid #1c1917; border-radius: 999px; background: #fff; color: #1c1917; cursor: none; }
+  .wf-btn:hover { background: #1c1917; color: #fff; }
+  .wf-btn.red { color: #c2412d; border-color: #c2412d; font-weight: 500; font-size: 12px; } .wf-btn.red:hover { background: #c2412d; color: #fff; }
+  .wf-next { position: absolute; right: 22px; bottom: 12px; }
+  .wf-back { position: absolute; left: 18px; bottom: 12px; font-size: 12px; background: none; border: 0; color: #1c1917; cursor: none; font-family: 'Inter', sans-serif; }
+  .wf-msg { font-size: 14px; text-align: center; line-height: 1.35; margin: 22px 0 10px; max-width: 320px; }
+  .wf-ico { font-size: 26px; margin-bottom: 12px; }
+  .wf-rows { width: 100%; max-width: 380px; display: flex; flex-direction: column; gap: 4px; }
+  .wf-row { display: grid; grid-template-columns: 18px 1fr 10px 1.1fr; align-items: center; font-size: 11.5px; border: 1.2px solid #1c1917; border-radius: 5px; padding: 1px 8px; box-shadow: 0 1px 0 #1c1917; opacity: 0; animation: wfIn .3s ease forwards; }
+  .wf-help { width: calc(100% + 44px); background: #dcdcdc; text-align: center; font-size: 11px; padding: 6px 0; margin-top: auto; margin-bottom: 20px; }
+  .wf-big { font-size: 22px; margin: auto 0; letter-spacing: .5px; }
+  .wf-ctrl { text-align: center; }
+  .wf-ctrl .lbl { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 1.4px; text-transform: uppercase; color: #a8a29e; margin-bottom: 12px; }
+  .wf-hint { font-size: 12px; color: #a8a29e; margin-top: 12px; }
+  .wf-ctrl .k-btns { justify-content: center; }
+  @media (max-width: 600px) { .wf-screen { aspect-ratio: auto; min-height: 280px; } .wf-title { font-size: 17px; } }
 </style>
 </head>
 <body>
@@ -722,39 +759,21 @@
         <p>The Meeseva Assisted Kiosk sits at CSC centres and targets the two biggest pain points.</p>
       </div>
 
-      <div class="kiosk-wrap rv">
-        <div class="kiosk">
-          <div class="k-screen">
-            <p class="k-step" id="k-step">Step 1 of 2 · Verify</p>
-            <p class="k-title" id="k-title">Place your finger on the scanner</p>
-            <div class="k-pad" id="k-pad"><span class="k-scan"></span><svg viewBox="0 0 64 64" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round"><path d="M20 44c-3-6-3-14 2-19 6-6 16-6 21 1 3 4 3 10 2 16"/><path d="M26 48c-3-6-3-14 3-17 5-2 10 1 10 7 0 5-1 9-3 13"/><path d="M32 38c0 5-1 9-3 13"/><path d="M14 36c-1-9 3-18 11-22 9-4 20-1 25 8"/><path d="M47 30c1 6 0 13-2 18"/></svg></div>
-            <div class="k-bar"><i id="k-bar"></i></div>
-            <p class="k-msg" id="k-msg">Waiting for your finger…</p>
-            <div class="k-card" id="k-card">
-              <h4>Please confirm your details</h4>
-              <div class="k-row"><span>Name</span><b>Shyam Prasad</b></div>
-              <div class="k-row"><span>Pension type</span><b>Old Age Pension</b></div>
-              <div class="k-row"><span>Bank A/c</span><b>•••• 3487</b></div>
-              <div class="k-row"><span>PPO number</span><b>PO/12345/2024</b></div>
-              <div class="k-row"><span>Agency</span><b>State Pension Dept.</b></div>
-              <div class="k-submit">Submit life certificate</div>
-            </div>
-            <div class="k-done" id="k-done">
-              <svg viewBox="0 0 64 64" fill="none" stroke="#1f9d63" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><circle cx="32" cy="32" r="29"/><path d="M19 33l9 9 17-19"/></svg>
-              <p>Life certificate submitted</p><span>No operator needed.</span>
-            </div>
-          </div>
+      <div class="wf-wrap rv">
+        <div class="wf-screen" id="wf">
+          <div class="wf-title" id="wf-title">Biometric Verification</div>
+          <div class="wf-body" id="wf-body"></div>
         </div>
-        <div class="k-ctrl">
-          <p class="lbl">Interactive prototype</p>
-          <h3>Try the kiosk.</h3>
-          <p class="d">Pick what happens when the pensioner scans. The kiosk explains the problem and guides them to fix it, then fetches their details automatically.</p>
+        <div class="wf-ctrl">
+          <p class="lbl">Interactive prototype · built from my wireframes</p>
           <div class="k-btns">
             <button class="main" data-k="good">Good scan</button>
             <button data-k="moist">Moist finger</button>
             <button data-k="light">Too light</button>
+            <button data-k="fail">Still failing</button>
             <button data-k="reset">Restart</button>
           </div>
+          <p class="wf-hint">You can also click Next, Retry, Back and Submit inside the screen.</p>
         </div>
       </div>
       <h3 class="cs-step-title" style="margin-top:32px">1. Biometric first, then auto-fetch</h3>
@@ -900,41 +919,44 @@
   const rvo = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); rvo.unobserve(e.target); } }), { threshold: .12 });
   document.querySelectorAll('.rv').forEach(el => rvo.observe(el));
 
-  /* ── Kiosk prototype ── */
+  /* ── Kiosk prototype (wireframe style) ── */
   (function(){
-    const $ = id => document.getElementById(id);
-    const pad = $('k-pad'); if (!pad) return;
-    let timers = [];
-    const later = (fn, ms) => timers.push(setTimeout(fn, ms));
-    const clear = () => { timers.forEach(clearTimeout); timers = []; };
-    function set(title, msg, cls, bar, padCls) {
-      $('k-title').textContent = title; const m = $('k-msg'); m.textContent = msg; m.className = 'k-msg ' + (cls || '');
-      $('k-bar').style.width = bar + '%'; pad.className = 'k-pad ' + (padCls || '');
+    const scr = document.getElementById('wf'); if (!scr) return;
+    const body = document.getElementById('wf-body'), title = document.getElementById('wf-title');
+    const FP = (cls) => `<svg class="wf-fp" viewBox="0 0 60 70" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M12 50c-4-8-4-20 3-28 8-9 22-9 30 0 6 7 6 17 4 26"/><path d="M18 56c-4-9-4-20 2-26 6-6 16-6 21 1 4 6 3 15 1 24"/><path d="M24 60c-3-8-3-17 1-21 4-4 10-3 12 2 2 6 1 13-1 20"/><path d="M30 44c1 6 0 13-2 19"/><path d="M7 38c-1-12 5-24 16-28 11-5 24-2 31 9"/><path d="M54 30c1 5 1 11 0 16"/></svg>`.replace('class="wf-fp"', 'class="wf-fp ' + (cls||'') + '"');
+    let timers = []; const later = (f, ms) => timers.push(setTimeout(f, ms)); const clear = () => { timers.forEach(clearTimeout); timers = []; };
+    const bar = (pct, label, dk) => `<div class="wf-bar"><span class="t ${dk?'dk':''}"><i style="width:${pct}%"></i></span>${label?'<span>'+label+'</span>':''}</div>`;
+    const S = {
+      place: ['Biometric Verification', false, `<p class="wf-sub">Place your finger on the Scanner</p><div class="wf-frame">${FP()}</div>${bar(0)}<p class="wf-small">Starting ....</p><button class="wf-btn wf-next" data-go="detect">Next →</button>`],
+      detect:['Biometric Verification', false, `<p class="wf-sub">Finger Detected</p><div class="wf-frame g">${FP()}</div>${bar(0)}<p class="wf-small">Starting ....</p><button class="wf-btn wf-next" data-go="scan">Next →</button>`],
+      scan:  ['Biometric Verification', false, `<p class="wf-sub">Scan in progress......</p>${FP('big')}${bar(21,'21%')}<button class="wf-btn wf-next" data-go="done">Next →</button>`],
+      moist: ['Biometric Verification', true, `<p class="wf-msg">“Moisture detected”. Please wipe your finger gently and try again</p><div class="wf-ico">🖐️</div><button class="wf-btn red" data-go="place">Retry</button><button class="wf-back" data-go="place">← Back</button>`],
+      light: ['Biometric Verification', true, `<p class="wf-msg">Apply more pressure. Push your Finger towards the Scanner</p><div class="wf-ico">⇵</div><button class="wf-btn red" data-go="place">Retry</button><button class="wf-back" data-go="place">← Back</button>`],
+      fail:  ['Still Having Difficultly ?', true, `<p class="wf-msg" style="margin-bottom:4px">You may try:</p><b style="font-size:13px;font-weight:600">Alternate Verification</b><div class="wf-ico" style="margin-top:8px">🛡️</div><div class="wf-help">or ask for help</div><button class="wf-back" data-go="place">← Back</button>`],
+      done:  ['Biometric Verification', false, `${FP('big green')}${bar(100,'100%')}<button class="wf-btn wf-next" data-go="success">Next →</button>`],
+      success:['Biometric Verification', false, `<p class="wf-big">SUCCESS !</p>${bar(100,'100%')}<div style="height:30px"></div>`],
+      confirm:['Identity Confirmation', false, `<p class="wf-sub">Please <span class="o">verify your details</span></p><div class="wf-rows">${[['👤','Name','Shyam Prasad'],['🪪','Pension Type','Old Age Pension'],['🏦','Bank A/c No.','**** **** **** 3487'],['🏛️','Disbursing Agency','State Pension Dept.'],['📞','Mobile No.','+91-7839026178'],['📄','P/O Number','PO/12345/2024']].map((r,i)=>`<div class="wf-row" style="animation-delay:${i*.08}s"><span>${r[0]}</span><span>${r[1]}</span><span>:</span><span>${r[2]}</span></div>`).join('')}</div><button class="wf-btn" style="position:absolute;bottom:10px" data-go="ready">Submit Life Certificate</button><button class="wf-back" data-go="place">← Back</button>`],
+      ready: ['Ready to Submit ?', false, `<p class="wf-msg" style="margin:auto 0;font-size:17px;max-width:360px">Please review the details and submit your Life Certificate</p><button class="wf-btn" style="position:absolute;bottom:12px" data-go="submitted">Submit</button><button class="wf-back" data-go="confirm">← Back</button>`],
+      submitted:['Submitted', false, `<p class="wf-big">✓ Life Certificate Submitted</p><p class="wf-sub" style="margin-bottom:26px">No operator needed.</p>`]
+    };
+    function show(k) {
+      const [t, err, html] = S[k]; title.textContent = t; scr.classList.toggle('err', err);
+      body.style.animation = 'none'; body.offsetHeight; body.style.animation = '';
+      body.innerHTML = html;
+      if (k === 'scan') later(() => { const i = body.querySelector('.wf-bar i'); if (i) { i.style.width = '55%'; body.querySelector('.wf-bar span:last-child').textContent = '55%'; } }, 700);
+      if (k === 'success') later(() => show('confirm'), 1600);
     }
-    function reset() {
-      clear(); $('k-card').classList.remove('show'); $('k-done').classList.remove('show');
-      $('k-step').textContent = 'Step 1 of 2 · Verify';
-      set('Place your finger on the scanner', 'Waiting for your finger…', '', 0, '');
+    body.addEventListener('click', e => { const g = e.target.closest('[data-go]'); if (g) { clear(); show(g.dataset.go); } });
+    function run(kind) {
+      clear(); show('place');
+      later(() => show('detect'), 900);
+      later(() => show('scan'), 1900);
+      if (kind === 'good') { later(() => show('done'), 3400); later(() => show('success'), 4400); later(() => show('ready'), 8200); later(() => show('submitted'), 9600); }
+      else later(() => show(kind), 3400);
     }
-    function scan(outcome) {
-      reset();
-      later(() => set('Finger detected', 'Hold still…', '', 15, 'detect'), 300);
-      later(() => set('Scanning…', 'Checking scan quality', '', 45, 'scanning'), 1200);
-      if (outcome === 'moist') {
-        later(() => set('Moisture detected', 'Your finger looks slightly moist. Gently wipe it and place it again.', 'warn', 55, 'warn'), 2600);
-        return;
-      }
-      if (outcome === 'light') {
-        later(() => set('Press a little firmer', 'Push your finger gently towards the scanner so it covers the glass.', 'warn', 40, 'warn'), 2600);
-        return;
-      }
-      later(() => set('Scan successful', 'Fetching your pension details…', 'ok', 100, 'ok'), 2600);
-      later(() => { $('k-step').textContent = 'Step 2 of 2 · Confirm'; $('k-card').classList.add('show'); }, 3600);
-      later(() => $('k-done').classList.add('show'), 6200);
-    }
-    document.querySelectorAll('[data-k]').forEach(b => b.addEventListener('click', () => b.dataset.k === 'reset' ? reset() : scan(b.dataset.k)));
-    // autoplay once when it scrolls into view
-    new IntersectionObserver((es, o) => es.forEach(e => { if (e.isIntersecting) { scan('moist'); later(() => scan('good'), 5200); o.disconnect(); } }), { threshold: .5 }).observe(pad);
+    document.querySelectorAll('[data-k]').forEach(b => b.addEventListener('click', () => b.dataset.k === 'reset' ? (clear(), show('place')) : run(b.dataset.k)));
+    show('place');
+    new IntersectionObserver((es, o) => es.forEach(e => { if (e.isIntersecting) { run('good'); o.disconnect(); } }), { threshold: .5 }).observe(scr);
   })();
 
   document.querySelectorAll('.ul').forEach(el => new IntersectionObserver((es, o) => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('on'); o.disconnect(); } }), { threshold: 1 }).observe(el));
