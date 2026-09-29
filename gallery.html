@@ -232,7 +232,7 @@
 
   /* ── Layout + dark theme ── */
   body { display: flex; background: #121110 !important; color: #f3f1e8; background-image: none !important; }
-  #main { flex: 1; min-width: 0; background-color: #121110; background-image: radial-gradient(circle, rgba(255,255,255,.07) 1px, transparent 1px); background-size: 28px 28px; min-height: 100vh; }
+  #main { flex: 1; min-width: 0; background-color: #121110; background-image: radial-gradient(circle, rgba(255,255,255,.2) 1.1px, transparent 1.1px); background-size: 28px 28px; min-height: 100vh; }
   .back { display: none; }
   h1 { color: #f3f1e8; }
   .count, .sub, .empty { color: #a8a29e; }
@@ -291,7 +291,7 @@
 <main id="main">
 <div class="wrap">
   <div class="top"><a class="back" href="index.html">← Home</a></div>
-  <div class="head"><h1>Scribbles From Strangers</h1><span class="count" id="count">loading…</span></div>
+  <div class="head"><h1>Scribbles From Strangers</h1></div>
   <div class="top">
     <p class="sub">Leave a little doodle behind. Draw anything, sign it, and it joins the wall.</p>
     <div class="actions">
@@ -373,7 +373,6 @@ const esc = s => String(s || '').replace(/[&<>"]/g, m => ({ '&':'&amp;','<':'&lt
 function render() {
   const mine = get(LS_MINE, null), g = $('grid');
   $('add').textContent = mine ? '✎ Edit my card' : '✎ Add my card';
-  $('count').textContent = cards.length ? `${cards.length} doodle${cards.length > 1 ? 's' : ''} so far` : 'be the first!';
   if (!cards.length) { g.innerHTML = '<p class="empty">No cards yet. Grab the pencil and start the wall.</p>'; return; }
   g.innerHTML = cards.map((c, i) => `<article class="card ${mine && mine.id === c.id ? 'mine' : ''}" style="background:${esc(c.color) || CARD_COLORS[0]};--r:${((i * 37) % 5 - 2) * 0.6}deg;animation-delay:${Math.min(i, 12) * 40}ms">
       <div class="c-top"><span>Visitor No. ${String(cards.length - i).padStart(3,'0')}</span><span>${fmt(c.created_at)}</span></div>
