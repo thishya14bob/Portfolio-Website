@@ -497,6 +497,14 @@
 
   .ul { background-image: linear-gradient(transparent 62%, #e6f59a 62%, #e6f59a 92%, transparent 92%); background-repeat: no-repeat; background-size: 0% 100%; transition: background-size 1s cubic-bezier(.22,1,.36,1); color: #1c1917; }
   .ul.on { background-size: 100% 100%; }
+
+  /* ── Alternate feature rows ── */
+  .feat-row:nth-child(even) { grid-template-columns: 1fr 1.55fr; }
+  .feat-row:nth-child(even) .mac-frame { order: 2; }
+  .feat-row:nth-child(even) .feat-right { align-items: flex-start; text-align: left; }
+  .feat-row:nth-child(even) .imsg-wrap { align-items: flex-start; }
+  .feat-row:nth-child(even) .imsg-bubble { border-bottom-right-radius: 22px; border-bottom-left-radius: 6px; }
+  @media (max-width: 900px) { .feat-row:nth-child(even) { grid-template-columns: 1fr; } .feat-row:nth-child(even) .mac-frame { order: 0; } }
 </style>
 </head>
 <body>
