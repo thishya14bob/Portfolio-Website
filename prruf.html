@@ -517,6 +517,9 @@
   .mac-wall { padding: 7px !important; }
   .mac-titlebar { height: 24px !important; } .mac-dot { width: 10px !important; height: 10px !important; } .mac-title { font-size: 11px !important; }
   @media (max-width: 900px) { .feat-row, .feat-row:nth-child(even) { grid-template-columns: 1fr !important; } }
+
+  /* ── Compact walkthrough ── */
+  .pr-stage { zoom: .85; }
 </style>
 </head>
 <body>
@@ -1033,15 +1036,16 @@
     }
     function place(){
       var el=document.querySelector(steps[i].t), sr=stage.getBoundingClientRect(), tr=el.getBoundingClientRect(), pad=6;
-      var tx=tr.left-sr.left, ty=tr.top-sr.top;
-      spot.style.left=(tx-pad)+'px'; spot.style.top=(ty-pad)+'px'; spot.style.width=(tr.width+pad*2)+'px'; spot.style.height=(tr.height+pad*2)+'px';
+      var z=(sr.width/stage.offsetWidth)||1;
+      var tx=(tr.left-sr.left)/z, ty=(tr.top-sr.top)/z, tw=tr.width/z, th=tr.height/z, sh=sr.height/z;
+      spot.style.left=(tx-pad)+'px'; spot.style.top=(ty-pad)+'px'; spot.style.width=(tw+pad*2)+'px'; spot.style.height=(th+pad*2)+'px';
       spot.classList.add('show');
       if(window.matchMedia('(max-width:900px)').matches) return;
       var wr=win.getBoundingClientRect(), cw=coach.offsetWidth, ch=coach.offsetHeight;
-      var cx=wr.right-sr.left+24, cy=ty+tr.height/2-ch/2;
-      cy=Math.max(36,Math.min(cy,sr.height-ch-70));
+      var cx=(wr.right-sr.left)/z+24, cy=ty+th/2-ch/2;
+      cy=Math.max(36,Math.min(cy,sh-ch-70));
       coach.style.left=cx+'px'; coach.style.top=cy+'px';
-      arrow.style.left='-7px'; arrow.style.top=Math.max(12,Math.min(ch-22,(ty+tr.height/2)-cy-7))+'px';
+      arrow.style.left='-7px'; arrow.style.top=Math.max(12,Math.min(ch-22,(ty+th/2)-cy-7))+'px';
     }
     function render(){
       state(i);
