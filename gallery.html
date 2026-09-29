@@ -324,6 +324,12 @@
         <span class="tool" data-t="brush" title="Brush">🖌️</span>
         <span class="tool" data-t="eraser" title="Eraser">🧽</span>
         <span class="tool" data-t="fill" title="Fill background">🪣</span>
+        <span class="tool" data-t="line" title="Line (drag)">╱</span>
+        <span class="tool" data-t="rect" title="Rectangle (drag)">▭</span>
+        <span class="tool" data-t="ellipse" title="Circle (drag)">◯</span>
+        <span class="tool" data-t="star" title="Star (drag)">☆</span>
+        <span class="tool" data-t="heart" title="Heart (drag)">♡</span>
+        <span class="tool" data-t="filled" title="Fill shapes on/off">◐</span>
         <span class="tool" data-t="undo" title="Undo">↶</span>
         <span class="tool" data-t="clear" title="Clear">🗑️</span>
         <div class="sizes" id="sizes">
@@ -403,14 +409,31 @@ function snap() { history.push(ctx.getImageData(0, 0, cv.width, cv.height)); if 
 function pick(t) {
   if (t === 'undo') { if (history.length) ctx.putImageData(history.pop(), 0, 0); return; }
   if (t === 'clear') { snap(); blank(); return; }
+  if (t === 'filled') { filled = !filled; document.querySelector('[data-t=filled]').classList.toggle('on', filled); return; }
   if (t === 'fill') { snap(); const d = ctx.getImageData(0,0,cv.width,cv.height); const tmp = document.createElement('canvas'); tmp.width = cv.width; tmp.height = cv.height; const t2 = tmp.getContext('2d'); t2.putImageData(d,0,0); ctx.fillStyle = color; ctx.fillRect(0,0,cv.width,cv.height); ctx.globalCompositeOperation = 'multiply'; ctx.drawImage(tmp,0,0); ctx.globalCompositeOperation = 'source-over'; return; }
-  tool = t; document.querySelectorAll('.tool').forEach(x => x.classList.toggle('on', x.dataset.t === t));
+  tool = t; document.querySelectorAll('.tool:not([data-t=filled])').forEach(x => x.classList.toggle('on', x.dataset.t === t));
 }
 document.querySelectorAll('.tool').forEach(x => x.onclick = () => pick(x.dataset.t));
 document.querySelectorAll('.size').forEach(x => x.onclick = () => { size = +x.dataset.s; document.querySelectorAll('.size').forEach(y => y.classList.toggle('on', y === x)); });
 const pos = e => { const r = cv.getBoundingClientRect(); return { x: (e.clientX - r.left) * cv.width / r.width, y: (e.clientY - r.top) * cv.height / r.height }; };
-cv.addEventListener('pointerdown', e => { drawing = true; cv.setPointerCapture(e.pointerId); snap(); last = pos(e); stroke(last, last); });
-cv.addEventListener('pointermove', e => { if (!drawing) return; const p = pos(e); stroke(last, p); last = p; });
+const SHAPES = ['line','rect','ellipse','star','heart'];
+let start = null, base = null, filled = false;
+cv.addEventListener('pointerdown', e => { drawing = true; cv.setPointerCapture(e.pointerId); snap(); last = start = pos(e);
+  if (SHAPES.includes(tool)) { base = ctx.getImageData(0, 0, cv.width, cv.height); return; } stroke(last, last); });
+cv.addEventListener('pointermove', e => { if (!drawing) return; const p = pos(e);
+  if (SHAPES.includes(tool)) { ctx.putImageData(base, 0, 0); shape(start, p); return; }
+  stroke(last, p); last = p; });
+function shape(a, b) {
+  const x = Math.min(a.x, b.x), y = Math.min(a.y, b.y), w = Math.abs(b.x - a.x), h = Math.abs(b.y - a.y), cx = x + w / 2, cy = y + h / 2;
+  ctx.lineWidth = Math.max(size, 2); ctx.strokeStyle = ctx.fillStyle = color; ctx.lineCap = ctx.lineJoin = 'round';
+  ctx.beginPath();
+  if (tool === 'line') { ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y); ctx.stroke(); return; }
+  if (tool === 'rect') ctx.rect(x, y, w, h);
+  if (tool === 'ellipse') ctx.ellipse(cx, cy, w / 2 || .1, h / 2 || .1, 0, 0, Math.PI * 2);
+  if (tool === 'star') { for (let i = 0; i < 10; i++) { const r = i % 2 ? .45 : 1, t = -Math.PI / 2 + i * Math.PI / 5; ctx.lineTo(cx + Math.cos(t) * w / 2 * r, cy + Math.sin(t) * h / 2 * r); } ctx.closePath(); }
+  if (tool === 'heart') { ctx.moveTo(cx, y + h * .3); ctx.bezierCurveTo(cx, y, x, y, x, y + h * .32); ctx.bezierCurveTo(x, y + h * .6, cx, y + h * .8, cx, y + h); ctx.bezierCurveTo(cx, y + h * .8, x + w, y + h * .6, x + w, y + h * .32); ctx.bezierCurveTo(x + w, y, cx, y, cx, y + h * .3); ctx.closePath(); }
+  filled ? ctx.fill() : ctx.stroke();
+}
 ['pointerup','pointercancel','pointerleave'].forEach(ev => cv.addEventListener(ev, () => drawing = false));
 function stroke(a, b) {
   ctx.lineCap = ctx.lineJoin = 'round';
