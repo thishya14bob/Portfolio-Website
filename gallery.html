@@ -324,12 +324,12 @@
         <span class="tool" data-t="brush" title="Brush">🖌️</span>
         <span class="tool" data-t="eraser" title="Eraser">🧽</span>
         <span class="tool" data-t="fill" title="Fill background">🪣</span>
-        <span class="tool" data-t="line" title="Line (drag)">╱</span>
-        <span class="tool" data-t="rect" title="Rectangle (drag)">▭</span>
-        <span class="tool" data-t="ellipse" title="Circle (drag)">◯</span>
-        <span class="tool" data-t="star" title="Star (drag)">☆</span>
-        <span class="tool" data-t="heart" title="Heart (drag)">♡</span>
-        <span class="tool" data-t="filled" title="Fill shapes on/off">◐</span>
+        <span class="tool" data-t="spray" title="Spray paint">💨</span>
+        <span class="tool" data-t="crayon" title="Crayon">🖍️</span>
+        <span class="tool" data-t="chalk" title="Chalk">✨</span>
+        <span class="tool" data-t="marker" title="Highlighter">🖊️</span>
+        <span class="tool" data-t="stripes" title="Stripes">▤</span>
+        <span class="tool" data-t="confetti" title="Confetti">🎉</span>
         <span class="tool" data-t="undo" title="Undo">↶</span>
         <span class="tool" data-t="clear" title="Clear">🗑️</span>
         <div class="sizes" id="sizes">
@@ -409,14 +409,13 @@ function snap() { history.push(ctx.getImageData(0, 0, cv.width, cv.height)); if 
 function pick(t) {
   if (t === 'undo') { if (history.length) ctx.putImageData(history.pop(), 0, 0); return; }
   if (t === 'clear') { snap(); blank(); return; }
-  if (t === 'filled') { filled = !filled; document.querySelector('[data-t=filled]').classList.toggle('on', filled); return; }
   if (t === 'fill') { snap(); const d = ctx.getImageData(0,0,cv.width,cv.height); const tmp = document.createElement('canvas'); tmp.width = cv.width; tmp.height = cv.height; const t2 = tmp.getContext('2d'); t2.putImageData(d,0,0); ctx.fillStyle = color; ctx.fillRect(0,0,cv.width,cv.height); ctx.globalCompositeOperation = 'multiply'; ctx.drawImage(tmp,0,0); ctx.globalCompositeOperation = 'source-over'; return; }
-  tool = t; document.querySelectorAll('.tool:not([data-t=filled])').forEach(x => x.classList.toggle('on', x.dataset.t === t));
+  tool = t; document.querySelectorAll('.tool').forEach(x => x.classList.toggle('on', x.dataset.t === t));
 }
 document.querySelectorAll('.tool').forEach(x => x.onclick = () => pick(x.dataset.t));
 document.querySelectorAll('.size').forEach(x => x.onclick = () => { size = +x.dataset.s; document.querySelectorAll('.size').forEach(y => y.classList.toggle('on', y === x)); });
 const pos = e => { const r = cv.getBoundingClientRect(); return { x: (e.clientX - r.left) * cv.width / r.width, y: (e.clientY - r.top) * cv.height / r.height }; };
-const SHAPES = ['line','rect','ellipse','star','heart'];
+const SHAPES = [];
 let start = null, base = null, filled = false;
 cv.addEventListener('pointerdown', e => { drawing = true; cv.setPointerCapture(e.pointerId); snap(); last = start = pos(e);
   if (SHAPES.includes(tool)) { base = ctx.getImageData(0, 0, cv.width, cv.height); return; } stroke(last, last); });
@@ -435,7 +434,22 @@ function shape(a, b) {
   filled ? ctx.fill() : ctx.stroke();
 }
 ['pointerup','pointercancel','pointerleave'].forEach(ev => cv.addEventListener(ev, () => drawing = false));
+const rnd = (a, b) => a + Math.random() * (b - a);
+function stripePattern() { const c = document.createElement('canvas'); c.width = c.height = 12; const g = c.getContext('2d'); g.fillStyle = '#fff'; g.fillRect(0,0,12,12); g.strokeStyle = color; g.lineWidth = 3; g.beginPath(); g.moveTo(-3,15); g.lineTo(15,-3); g.moveTo(-3,3); g.lineTo(3,-3); g.moveTo(9,15); g.lineTo(15,9); g.stroke(); return ctx.createPattern(c, 'repeat'); }
+function texture(a, b) {
+  const d = Math.hypot(b.x - a.x, b.y - a.y), n = Math.max(1, Math.ceil(d / 2)), r = size * 3 + 4;
+  for (let k = 0; k <= n; k++) {
+    const x = a.x + (b.x - a.x) * k / n, y = a.y + (b.y - a.y) * k / n;
+    if (tool === 'spray') { ctx.fillStyle = color; for (let i = 0; i < 10; i++) { const t = rnd(0, 6.28), q = Math.sqrt(Math.random()) * r; ctx.fillRect(x + Math.cos(t) * q, y + Math.sin(t) * q, 1.2, 1.2); } }
+    if (tool === 'crayon') { ctx.fillStyle = color; ctx.globalAlpha = .55; for (let i = 0; i < 6; i++) ctx.fillRect(x + rnd(-size, size), y + rnd(-size, size), rnd(.8, 2), rnd(.8, 2)); ctx.globalAlpha = 1; }
+    if (tool === 'chalk') { ctx.fillStyle = color; ctx.globalAlpha = rnd(.2, .7); ctx.fillRect(x + rnd(-size * 1.5, size * 1.5), y + rnd(-size, size), rnd(2, size + 3), rnd(1, 2.5)); ctx.globalAlpha = 1; }
+    if (tool === 'confetti' && k % 3 === 0) { ctx.fillStyle = PAINT[16 + Math.floor(rnd(0, 12))]; ctx.save(); ctx.translate(x + rnd(-r, r), y + rnd(-r, r)); ctx.rotate(rnd(0, 3)); ctx.fillRect(-3, -1.5, 6, 3); ctx.restore(); }
+  }
+  if (tool === 'marker') { ctx.globalAlpha = .35; ctx.strokeStyle = color; ctx.lineCap = 'butt'; ctx.lineWidth = size * 3 + 8; ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x + .01, b.y); ctx.stroke(); ctx.globalAlpha = 1; }
+  if (tool === 'stripes') { ctx.strokeStyle = stripePattern(); ctx.lineCap = ctx.lineJoin = 'round'; ctx.lineWidth = size * 3 + 12; ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x + .01, b.y); ctx.stroke(); }
+}
 function stroke(a, b) {
+  if (['spray','crayon','chalk','marker','stripes','confetti'].includes(tool)) return texture(a, b);
   ctx.lineCap = ctx.lineJoin = 'round';
   ctx.strokeStyle = tool === 'eraser' ? '#fff' : color;
   ctx.lineWidth = tool === 'brush' ? size * 2.2 : tool === 'eraser' ? size * 3 : size;
