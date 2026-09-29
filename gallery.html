@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Visitor Gallery | Thishya Mannur</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Newsreader:ital,opsz@1,6..72&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root { --bg: #fbf9f5; --ink: #1c1917; --mut: #78716c; --line: #e2dcd2; --lime: #f0ffcc; --card: #efebe4; }
+  body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--ink); background-image: radial-gradient(circle, rgba(200,196,188,.35) 1px, transparent 1px); background-size: 28px 28px; min-height: 100vh; }
+  .wrap { max-width: 1120px; margin: 0 auto; padding: 36px 24px 100px; }
+  .top { display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; margin-bottom: 8px; }
+  .back { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 1.2px; text-transform: uppercase; color: var(--mut); text-decoration: none; }
+  .back:hover { color: var(--ink); }
+  h1 { font-family: 'DM Sans', sans-serif; font-weight: 300; font-size: clamp(34px, 5vw, 52px); letter-spacing: -1.2px; }
+  .head { display: flex; align-items: baseline; gap: 16px; flex-wrap: wrap; margin: 18px 0 6px; }
+  .count { font-family: 'JetBrains Mono', monospace; font-size: 12px; letter-spacing: 1.2px; text-transform: uppercase; color: var(--mut); }
+  .sub { color: var(--mut); font-size: 14px; margin-bottom: 26px; max-width: 520px; line-height: 1.6; }
+  .actions { display: flex; gap: 8px; }
+  .btn { font-family: 'JetBrains Mono', monospace; font-size: 12px; letter-spacing: 1px; text-transform: uppercase; padding: 10px 16px; border-radius: 10px; border: 1.5px solid var(--ink); background: #fff; color: var(--ink); cursor: pointer; transition: transform .15s, background .2s; }
+  .btn:hover { transform: translateY(-2px); }
+  .btn.pri { background: var(--lime); }
+  .note { font-size: 12px; color: var(--mut); background: #fff7d6; border: 1px solid #f1e3a6; border-radius: 10px; padding: 10px 14px; margin-bottom: 22px; display: none; }
+
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 22px; }
+  .card { position: relative; border-radius: 18px; padding: 18px 20px 16px; color: #fff; overflow: hidden; min-height: 250px; display: flex; flex-direction: column; border: 1.5px solid rgba(0,0,0,.12); transform: rotate(var(--r)); transition: transform .25s cubic-bezier(.22,1,.36,1); animation: pop .5s cubic-bezier(.22,1,.36,1) both; }
+  .card:hover { transform: rotate(0) translateY(-4px); }
+  @keyframes pop { from { opacity: 0; transform: translateY(14px) rotate(var(--r)); } to { opacity: 1; } }
+  .card.mine { outline: 2px dashed rgba(255,255,255,.7); outline-offset: -8px; }
+  .c-top { display: flex; justify-content: space-between; align-items: flex-start; font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 1.4px; text-transform: uppercase; opacity: .8; }
+  .c-title { font-family: 'Newsreader', serif; font-style: italic; font-size: 22px; margin: 4px 0 10px; }
+  .c-art { flex: 1; background: rgba(255,255,255,.95); border-radius: 10px; min-height: 120px; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+  .c-art img { width: 100%; height: 100%; object-fit: contain; display: block; }
+  .c-foot { margin-top: 12px; }
+  .c-name { font-family: 'JetBrains Mono', monospace; font-size: 13px; letter-spacing: 1px; text-transform: uppercase; }
+  .c-msg { font-size: 13px; opacity: .9; margin-top: 3px; line-height: 1.45; }
+  .empty { grid-column: 1/-1; text-align: center; color: var(--mut); padding: 60px 0; font-size: 14px; }
+
+  /* ── Paint modal ── */
+  .modal { position: fixed; inset: 0; background: rgba(28,25,23,.45); display: none; align-items: center; justify-content: center; z-index: 50; padding: 16px; }
+  .modal.show { display: flex; }
+  .win { width: 100%; max-width: 720px; background: #c0c0c0; border: 2px solid; border-color: #fff #404040 #404040 #fff; box-shadow: 0 30px 60px -20px rgba(0,0,0,.5); font-family: 'Inter', sans-serif; }
+  .w-bar { background: linear-gradient(90deg, #0a246a, #3a6ea5); color: #fff; font-size: 13px; font-weight: 600; padding: 5px 8px; display: flex; justify-content: space-between; align-items: center; }
+  .w-x { width: 20px; height: 18px; background: #c0c0c0; color: #000; border: 2px solid; border-color: #fff #404040 #404040 #fff; font-size: 11px; line-height: 13px; text-align: center; cursor: pointer; font-weight: 700; }
+  .w-body { padding: 10px; display: grid; grid-template-columns: 56px 1fr; gap: 8px; }
+  .tools { display: grid; grid-template-columns: 1fr 1fr; gap: 3px; align-content: start; }
+  .tool { width: 24px; height: 24px; background: #c0c0c0; border: 2px solid; border-color: #fff #404040 #404040 #fff; display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 13px; }
+  .tool.on { border-color: #404040 #fff #fff #404040; background: #dcdcdc; }
+  .sizes { grid-column: 1/-1; margin-top: 6px; display: flex; flex-direction: column; gap: 3px; background: #fff; border: 2px solid; border-color: #404040 #fff #fff #404040; padding: 4px; }
+  .size { height: 14px; display: flex; align-items: center; justify-content: center; cursor: pointer; }
+  .size i { display: block; background: #000; border-radius: 99px; width: 80%; }
+  .size.on { background: #0a246a; } .size.on i { background: #fff; }
+  .canvas-box { background: #808080; border: 2px solid; border-color: #404040 #fff #fff #404040; padding: 6px; }
+  canvas { display: block; width: 100%; aspect-ratio: 16/10; background: #fff; cursor: crosshair; touch-action: none; }
+  .pal { grid-column: 1/-1; display: flex; align-items: center; gap: 8px; margin-top: 2px; }
+  .cur { width: 30px; height: 30px; border: 2px solid; border-color: #404040 #fff #fff #404040; position: relative; background: #fff; }
+  .cur i { position: absolute; inset: 5px; }
+  .swatches { display: grid; grid-template-columns: repeat(14, 16px); gap: 2px; }
+  .sw { width: 16px; height: 16px; border: 1px solid; border-color: #404040 #fff #fff #404040; cursor: pointer; }
+  .form { grid-column: 1/-1; display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 6px; }
+  .form label { font-size: 12px; display: flex; flex-direction: column; gap: 3px; }
+  .form input { font-family: 'Inter', sans-serif; font-size: 13px; padding: 5px 7px; border: 2px solid; border-color: #404040 #fff #fff #404040; background: #fff; }
+  .cardcol { grid-column: 1/-1; display: flex; align-items: center; gap: 6px; font-size: 12px; flex-wrap: wrap; }
+  .cc { width: 22px; height: 22px; border-radius: 50%; cursor: pointer; border: 2px solid transparent; }
+  .cc.on { border-color: #000; }
+  .w-foot { grid-column: 1/-1; display: flex; justify-content: flex-end; gap: 8px; margin-top: 4px; }
+  .w-btn { font-family: 'Inter', sans-serif; font-size: 13px; padding: 5px 16px; background: #c0c0c0; border: 2px solid; border-color: #fff #404040 #404040 #fff; cursor: pointer; }
+  .w-btn:active { border-color: #404040 #fff #fff #404040; }
+  .w-status { font-size: 11px; color: #333; margin-right: auto; align-self: center; }
+  @media (max-width: 600px) { .w-body { grid-template-columns: 1fr; } .tools { grid-template-columns: repeat(8, 1fr); } .sizes { flex-direction: row; } .swatches { grid-template-columns: repeat(7, 16px); } .form { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top"><a class="back" href="index.html">← Home</a></div>
+  <div class="head"><h1>Visitor Gallery</h1><span class="count" id="count">loading…</span></div>
+  <div class="top">
+    <p class="sub">Leave a little doodle behind. Draw anything, sign it, and it joins the wall.</p>
+    <div class="actions">
+      <button class="btn pri" id="add">✎ Add my card</button>
+      <button class="btn" id="shuffle">⤮ Shuffle</button>
+    </div>
+  </div>
+  <p class="note" id="note">Preview mode: cards are only saved in your browser until the database is connected.</p>
+  <div class="grid" id="grid"></div>
+</div>
+
+<div class="modal" id="modal">
+  <div class="win">
+    <div class="w-bar"><span id="w-title">untitled - Doodle</span><span class="w-x" id="close">×</span></div>
+    <div class="w-body">
+      <div class="tools" id="tools">
+        <span class="tool on" data-t="pen" title="Pencil">✏️</span>
+        <span class="tool" data-t="brush" title="Brush">🖌️</span>
+        <span class="tool" data-t="eraser" title="Eraser">🧽</span>
+        <span class="tool" data-t="fill" title="Fill background">🪣</span>
+        <span class="tool" data-t="undo" title="Undo">↶</span>
+        <span class="tool" data-t="clear" title="Clear">🗑️</span>
+        <div class="sizes" id="sizes">
+          <span class="size on" data-s="2"><i style="height:2px"></i></span>
+          <span class="size" data-s="5"><i style="height:4px"></i></span>
+          <span class="size" data-s="10"><i style="height:7px"></i></span>
+          <span class="size" data-s="18"><i style="height:10px"></i></span>
+        </div>
+      </div>
+      <div class="canvas-box"><canvas id="cv" width="640" height="400"></canvas></div>
+      <div class="pal"><span class="cur"><i id="cur" style="background:#000"></i></span><div class="swatches" id="sw"></div></div>
+      <div class="form">
+        <label>Your name<input id="f-name" maxlength="30" placeholder="e.g. Koko"></label>
+        <label>Something to say (optional)<input id="f-msg" maxlength="80" placeholder="hi from Hyderabad!"></label>
+      </div>
+      <div class="cardcol" id="cardcol">Card colour:</div>
+      <div class="w-foot"><span class="w-status" id="status"></span><button class="w-btn" id="cancel">Cancel</button><button class="w-btn" id="save"><b>Save card</b></button></div>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+/* ── CONFIG: paste your Supabase project URL + anon key here ── */
+const SUPABASE_URL = '';
+const SUPABASE_ANON_KEY = '';
+
+const CARD_COLORS = ['#1f7a47','#c2566f','#1788a0','#d97a2b','#5b4bd6','#2f6b55','#8a5a33'];
+const PAINT = ['#000000','#808080','#800000','#808000','#008000','#008080','#000080','#800080','#808040','#004040','#0080ff','#004080','#8000ff','#804000','#ffffff','#c0c0c0','#ff0000','#ffff00','#00ff00','#00ffff','#0000ff','#ff00ff','#ffff80','#00ff80','#80ffff','#8080ff','#ff0080','#ff8040'];
+const db = (SUPABASE_URL && SUPABASE_ANON_KEY && window.supabase) ? window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY) : null;
+const $ = id => document.getElementById(id);
+const LS_CARDS = 'tm-gallery-cards', LS_MINE = 'tm-gallery-mine';
+const get = (k, d) => { try { return JSON.parse(localStorage.getItem(k)) ?? d; } catch { return d; } };
+const set = (k, v) => { try { localStorage.setItem(k, JSON.stringify(v)); } catch {} };
+if (!db) $('note').style.display = 'block';
+
+/* ── Data layer ── */
+async function loadCards() {
+  if (db) { const { data, error } = await db.from('cards').select('id,name,note,drawing,color,created_at').order('created_at', { ascending: false }).limit(200); if (!error) return data; }
+  return get(LS_CARDS, []);
+}
+async function saveCard(c, mine) {
+  if (db) {
+    if (mine) { const { error } = await db.rpc('update_card', { p_id: mine.id, p_token: mine.token, p_name: c.name, p_note: c.note, p_drawing: c.drawing, p_color: c.color }); if (error) throw error; return mine; }
+    const { data, error } = await db.rpc('create_card', { p_name: c.name, p_note: c.note, p_drawing: c.drawing, p_color: c.color }); if (error) throw error;
+    return { id: data[0].id, token: data[0].edit_token };
+  }
+  const all = get(LS_CARDS, []);
+  if (mine) { const i = all.findIndex(x => x.id === mine.id); if (i > -1) all[i] = { ...all[i], ...c }; set(LS_CARDS, all); return mine; }
+  const id = Date.now().toString(36); all.unshift({ id, ...c, created_at: new Date().toISOString() }); set(LS_CARDS, all); return { id, token: 'local' };
+}
+
+/* ── Render ── */
+let cards = [];
+const fmt = d => { const x = new Date(d); return String(x.getMonth()+1).padStart(2,'0') + '/' + String(x.getDate()).padStart(2,'0') + '/' + String(x.getFullYear()).slice(2); };
+const esc = s => String(s || '').replace(/[&<>"]/g, m => ({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;' }[m]));
+function render() {
+  const mine = get(LS_MINE, null), g = $('grid');
+  $('add').textContent = mine ? '✎ Edit my card' : '✎ Add my card';
+  $('count').textContent = cards.length ? `${cards.length} doodle${cards.length > 1 ? 's' : ''} so far` : 'be the first!';
+  if (!cards.length) { g.innerHTML = '<p class="empty">No cards yet. Grab the pencil and start the wall.</p>'; return; }
+  g.innerHTML = cards.map((c, i) => `<article class="card ${mine && mine.id === c.id ? 'mine' : ''}" style="background:${esc(c.color) || CARD_COLORS[0]};--r:${((i * 37) % 5 - 2) * 0.6}deg;animation-delay:${Math.min(i, 12) * 40}ms">
+      <div class="c-top"><span>Visitor No. ${String(cards.length - i).padStart(3,'0')}</span><span>${fmt(c.created_at)}</span></div>
+      <p class="c-title">Thishya's wall</p>
+      <div class="c-art"><img src="${esc(c.drawing)}" alt="Doodle by ${esc(c.name)}" loading="lazy"></div>
+      <div class="c-foot"><p class="c-name">${esc(c.name)}</p>${c.note ? `<p class="c-msg">${esc(c.note)}</p>` : ''}</div>
+    </article>`).join('');
+}
+$('shuffle').onclick = () => { cards.sort(() => Math.random() - .5); render(); };
+
+/* ── Paint ── */
+const cv = $('cv'), ctx = cv.getContext('2d');
+let tool = 'pen', size = 2, color = '#000000', cardColor = CARD_COLORS[0], history = [], drawing = false, last = null;
+PAINT.forEach(c => { const s = document.createElement('span'); s.className = 'sw'; s.style.background = c; s.onclick = () => { color = c; $('cur').style.background = c; if (tool === 'eraser') pick('pen'); }; $('sw').appendChild(s); });
+CARD_COLORS.forEach((c, i) => { const s = document.createElement('span'); s.className = 'cc' + (i ? '' : ' on'); s.style.background = c; s.onclick = () => { cardColor = c; document.querySelectorAll('.cc').forEach(x => x.classList.toggle('on', x === s)); }; $('cardcol').appendChild(s); });
+function blank() { ctx.fillStyle = '#fff'; ctx.fillRect(0, 0, cv.width, cv.height); }
+function snap() { history.push(ctx.getImageData(0, 0, cv.width, cv.height)); if (history.length > 30) history.shift(); }
+function pick(t) {
+  if (t === 'undo') { if (history.length) ctx.putImageData(history.pop(), 0, 0); return; }
+  if (t === 'clear') { snap(); blank(); return; }
+  if (t === 'fill') { snap(); const d = ctx.getImageData(0,0,cv.width,cv.height); const tmp = document.createElement('canvas'); tmp.width = cv.width; tmp.height = cv.height; const t2 = tmp.getContext('2d'); t2.putImageData(d,0,0); ctx.fillStyle = color; ctx.fillRect(0,0,cv.width,cv.height); ctx.globalCompositeOperation = 'multiply'; ctx.drawImage(tmp,0,0); ctx.globalCompositeOperation = 'source-over'; return; }
+  tool = t; document.querySelectorAll('.tool').forEach(x => x.classList.toggle('on', x.dataset.t === t));
+}
+document.querySelectorAll('.tool').forEach(x => x.onclick = () => pick(x.dataset.t));
+document.querySelectorAll('.size').forEach(x => x.onclick = () => { size = +x.dataset.s; document.querySelectorAll('.size').forEach(y => y.classList.toggle('on', y === x)); });
+const pos = e => { const r = cv.getBoundingClientRect(); return { x: (e.clientX - r.left) * cv.width / r.width, y: (e.clientY - r.top) * cv.height / r.height }; };
+cv.addEventListener('pointerdown', e => { drawing = true; cv.setPointerCapture(e.pointerId); snap(); last = pos(e); stroke(last, last); });
+cv.addEventListener('pointermove', e => { if (!drawing) return; const p = pos(e); stroke(last, p); last = p; });
+['pointerup','pointercancel','pointerleave'].forEach(ev => cv.addEventListener(ev, () => drawing = false));
+function stroke(a, b) {
+  ctx.lineCap = ctx.lineJoin = 'round';
+  ctx.strokeStyle = tool === 'eraser' ? '#fff' : color;
+  ctx.lineWidth = tool === 'brush' ? size * 2.2 : tool === 'eraser' ? size * 3 : size;
+  ctx.globalAlpha = tool === 'brush' ? .75 : 1;
+  ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x + .01, b.y); ctx.stroke(); ctx.globalAlpha = 1;
+}
+
+/* ── Modal ── */
+function open() {
+  const mine = get(LS_MINE, null), c = mine && cards.find(x => x.id === mine.id);
+  history = []; blank(); $('status').textContent = '';
+  $('f-name').value = c ? c.name : ''; $('f-msg').value = c ? (c.note || '') : '';
+  cardColor = c ? c.color : CARD_COLORS[Math.floor(Math.random() * CARD_COLORS.length)];
+  document.querySelectorAll('.cc').forEach(x => x.classList.toggle('on', x.style.background === hexToRgb(cardColor)));
+  $('w-title').textContent = (c ? c.name : 'untitled') + ' - Doodle';
+  if (c) { const img = new Image(); img.onload = () => ctx.drawImage(img, 0, 0, cv.width, cv.height); img.src = c.drawing; }
+  $('modal').classList.add('show'); setTimeout(() => $('f-name').focus(), 50);
+}
+const hexToRgb = h => { const n = parseInt(h.slice(1), 16); return `rgb(${n >> 16}, ${(n >> 8) & 255}, ${n & 255})`; };
+const close = () => $('modal').classList.remove('show');
+$('add').onclick = open; $('close').onclick = close; $('cancel').onclick = close;
+$('modal').onclick = e => { if (e.target.id === 'modal') close(); };
+$('save').onclick = async () => {
+  const name = $('f-name').value.trim();
+  if (!name) { $('status').textContent = 'Please add your name first.'; $('f-name').focus(); return; }
+  $('status').textContent = 'Saving…';
+  const small = document.createElement('canvas'); small.width = 480; small.height = 300; small.getContext('2d').drawImage(cv, 0, 0, 480, 300);
+  const card = { name, note: $('f-msg').value.trim(), color: cardColor, drawing: small.toDataURL('image/webp', .8) };
+  try { const mine = await saveCard(card, get(LS_MINE, null)); set(LS_MINE, mine); cards = await loadCards(); render(); close(); }
+  catch (err) { $('status').textContent = 'Could not save, try again.'; console.error(err); }
+};
+
+(async () => { cards = await loadCards(); render(); })();
+</script>
+</body>
+</html>
