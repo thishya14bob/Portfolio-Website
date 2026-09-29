@@ -505,6 +505,18 @@
   .feat-row:nth-child(even) .imsg-wrap { align-items: flex-start; }
   .feat-row:nth-child(even) .imsg-bubble { border-bottom-right-radius: 22px; border-bottom-left-radius: 6px; }
   @media (max-width: 900px) { .feat-row:nth-child(even) { grid-template-columns: 1fr; } .feat-row:nth-child(even) .mac-frame { order: 0; } }
+
+  /* ── Compact features ── */
+  .feat-rows { gap: 56px !important; max-width: 700px; margin-left: auto; margin-right: auto; }
+  .feat-row { grid-template-columns: 1.3fr 1fr !important; gap: 36px !important; }
+  .feat-row:nth-child(even) { grid-template-columns: 1fr 1.3fr !important; }
+  .imsg-bubble { font-size: 14px !important; padding: 8px 13px 9px !important; }
+  .imsg-wrap { gap: 10px !important; margin-bottom: 26px !important; }
+  .feat-info-name { font-size: 18px !important; margin-bottom: 8px !important; }
+  .feat-info-desc { font-size: 14px !important; }
+  .mac-wall { padding: 7px !important; }
+  .mac-titlebar { height: 24px !important; } .mac-dot { width: 10px !important; height: 10px !important; } .mac-title { font-size: 11px !important; }
+  @media (max-width: 900px) { .feat-row, .feat-row:nth-child(even) { grid-template-columns: 1fr !important; } }
 </style>
 </head>
 <body>
