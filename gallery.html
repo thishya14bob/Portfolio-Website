@@ -241,6 +241,16 @@
   .card { border-color: rgba(255,255,255,.08); }
   @media (max-width: 900px) { body { flex-direction: column; } }
 
+
+  /* ── Paint window: smaller + clearer form ── */
+  .win { max-width: 560px !important; color: #000; }
+  .w-body { padding: 8px !important; gap: 6px !important; }
+  .form { background: #dcdcdc; border: 2px solid; border-color: #fff #808080 #808080 #fff; padding: 8px 10px; margin-top: 4px; }
+  .form label { font-size: 12px; font-weight: 700; color: #000; }
+  .form input { font-size: 13px; }
+  .form input:focus { outline: 2px solid #0a246a; outline-offset: -2px; }
+  .cardcol { background: #dcdcdc; border: 2px solid; border-color: #fff #808080 #808080 #fff; padding: 6px 10px; font-weight: 700; color: #000; }
+  .w-btn { color: #000; }
 </style>
 </head>
 <body>
@@ -326,8 +336,8 @@
       <div class="canvas-box"><canvas id="cv" width="640" height="400"></canvas></div>
       <div class="pal"><span class="cur"><i id="cur" style="background:#000"></i></span><div class="swatches" id="sw"></div></div>
       <div class="form">
-        <label>Your name<input id="f-name" maxlength="30" placeholder="e.g. Koko"></label>
-        <label>Something to say (optional)<input id="f-msg" maxlength="80" placeholder="hi from Hyderabad!"></label>
+        <label>✎ Your name<input id="f-name" maxlength="30" placeholder="e.g. Koko"></label>
+        <label><span>💬 Something to say <span style="font-weight:400">(optional)</span></span><input id="f-msg" maxlength="80" placeholder="hi from Hyderabad!"></label>
       </div>
       <div class="cardcol" id="cardcol">Card colour:</div>
       <div class="w-foot"><span class="w-status" id="status"></span><button class="w-btn" id="cancel">Cancel</button><button class="w-btn" id="save"><b>Save card</b></button></div>
