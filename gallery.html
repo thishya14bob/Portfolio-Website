@@ -466,7 +466,14 @@ function stamp(x, y) {
     ctx.fillStyle = '#2e7d32'; ctx.globalAlpha = .6; ctx.fillRect(x - r * .8, y, r * 1.6, 3); ctx.globalAlpha = 1; }
   if (tool === 'clouds') { ctx.fillStyle = color === '#000000' ? '#ffffff' : color; ctx.strokeStyle = '#9aa0a6'; ctx.lineWidth = 1.2; const R = r * .7; [[-R, 0, R * .8], [0, -R * .5, R], [R, 0, R * .8], [0, R * .2, R * .9]].forEach(([dx, dy, rr]) => { ctx.beginPath(); ctx.arc(x + dx, y + dy, rr, 0, 6.28); ctx.fill(); }); }
   if (tool === 'stars') { const R = rnd(r * .4, r * .8), cx = x + rnd(-r, r), cy = y + rnd(-r, r); ctx.fillStyle = color; ctx.beginPath(); for (let i = 0; i < 10; i++) { const q = i % 2 ? R * .45 : R, t = -1.5708 + i * .6283; ctx.lineTo(cx + Math.cos(t) * q, cy + Math.sin(t) * q); } ctx.closePath(); ctx.fill(); }
-  if (tool === 'flowers') { const cx = x + rnd(-r, r), cy = y + rnd(-r, r), R = rnd(r * .3, r * .5); ctx.fillStyle = color; for (let i = 0; i < 5; i++) { const t = i * 1.2566; ctx.beginPath(); ctx.arc(cx + Math.cos(t) * R, cy + Math.sin(t) * R, R * .7, 0, 6.28); ctx.fill(); } ctx.fillStyle = '#f7c948'; ctx.beginPath(); ctx.arc(cx, cy, R * .55, 0, 6.28); ctx.fill(); }
+  if (tool === 'flowers') { const cx = x + rnd(-r, r), cy = y + rnd(-r, r), R = rnd(r * .3, r * .5), pink = Math.random() < .6;
+    const petal = pink ? ['#f9a8d4','#f472b6','#fbcfe8'][Math.floor(rnd(0,3))] : ['#fde68a','#fcd34d','#fef3c7'][Math.floor(rnd(0,3))];
+    const edge = pink ? '#db2777' : '#d97706', rot = rnd(0, 1.26);
+    for (let i = 0; i < 5; i++) { const t = rot + i * 1.2566, px = cx + Math.cos(t) * R, py = cy + Math.sin(t) * R;
+      const g = ctx.createRadialGradient(px, py, 0, px, py, R * .75); g.addColorStop(0, '#fff'); g.addColorStop(.35, petal); g.addColorStop(1, edge);
+      ctx.fillStyle = g; ctx.beginPath(); ctx.ellipse(px, py, R * .72, R * .55, t, 0, 6.28); ctx.fill(); }
+    ctx.fillStyle = pink ? '#fcd34d' : '#f472b6'; ctx.beginPath(); ctx.arc(cx, cy, R * .45, 0, 6.28); ctx.fill();
+    ctx.fillStyle = 'rgba(255,255,255,.7)'; ctx.beginPath(); ctx.arc(cx - R * .12, cy - R * .12, R * .14, 0, 6.28); ctx.fill(); }
 }
 function texture(a, b) {
   const d = Math.hypot(b.x - a.x, b.y - a.y), n = Math.max(1, Math.ceil(d / 2)), r = size * 3 + 4;
