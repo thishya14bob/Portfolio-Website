@@ -654,6 +654,14 @@
   @keyframes bioSweep { 0%,100% { top: 12%; opacity: 0; } 15% { opacity: 1; } 50% { top: 85%; opacity: 1; } 65% { opacity: 0; } }
   @keyframes bioFloat { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
   @media (prefers-reduced-motion: reduce) { .bio-scan, .bio-mock img { animation: none; } .bio-scan { display: none; } }
+
+  /* ── Wiggly name ── */
+  .wig { display: inline-block; cursor: none; }
+  .wig span { display: inline-block; transition: color .3s, transform .3s cubic-bezier(.34,1.56,.64,1); transform-origin: 50% 90%; }
+  .wig:hover span { color: var(--c); animation: wigWave .9s cubic-bezier(.34,1.56,.64,1) calc(var(--i) * 60ms) both; }
+  .wig span:hover { transform: translateY(-10px) rotate(-8deg) scale(1.12); }
+  @keyframes wigWave { 0% { transform: translateY(0) rotate(0); } 30% { transform: translateY(-14px) rotate(-6deg); } 55% { transform: translateY(3px) rotate(4deg); } 75% { transform: translateY(-4px) rotate(-2deg); } 100% { transform: translateY(0) rotate(0); } }
+  @media (prefers-reduced-motion: reduce) { .wig:hover span { animation: none; } }
 </style>
 </head>
 <body>
@@ -745,7 +753,7 @@
 
 
     <!-- content -->
-    <h1 class="hero-title">Hi, i'm Thishya</h1>
+    <h1 class="hero-title">Hi, i'm <span class="wig" aria-label="Thishya"><span style="--i:0;--c:#2200ff">T</span><span style="--i:1;--c:#e5484d">h</span><span style="--i:2;--c:#1f9d63">i</span><span style="--i:3;--c:#f59e0b">s</span><span style="--i:4;--c:#8b5cf6">h</span><span style="--i:5;--c:#0ea5e9">y</span><span style="--i:6;--c:#ec4899">a</span></span></h1>
     <p class="hero-mission">
       "Right now I'm building <a href="https://prruf.com/" target="_blank" rel="noopener" class="accent accent-link">Prruf</a> and co-founding <a href="https://wasabie.in/" target="_blank" rel="noopener" class="accent accent-link">Wasabie Studios</a>."
     </p>
