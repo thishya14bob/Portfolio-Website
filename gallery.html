@@ -251,6 +251,14 @@
   .form input:focus { outline: 2px solid #0a246a; outline-offset: -2px; }
   .cardcol { background: #dcdcdc; border: 2px solid; border-color: #fff #808080 #808080 #fff; padding: 6px 10px; font-weight: 700; color: #000; }
   .w-btn { color: #000; }
+
+  /* ── Bigger toolbar ── */
+  .w-body { grid-template-columns: 78px 1fr !important; }
+  .tools { gap: 4px !important; }
+  .canvas-box { align-self: start; }
+  .tool { width: 34px !important; height: 34px !important; font-size: 18px !important; }
+  .size { height: 18px !important; }
+  @media (max-width: 600px) { .w-body { grid-template-columns: 1fr !important; } }
 </style>
 </head>
 <body>
@@ -440,7 +448,7 @@ function stamp(x, y) {
   const r = size * 2 + 8;
   if (tool === 'bubbles') { const R = rnd(r * .45, r * 1.1), cx = x + rnd(-r, r), cy = y + rnd(-r, r);
     const g = ctx.createRadialGradient(cx - R * .3, cy - R * .3, R * .1, cx, cy, R);
-    g.addColorStop(0, 'rgba(255,255,255,.55)'); g.addColorStop(.55, 'rgba(160,215,255,.25)'); g.addColorStop(.9, 'rgba(70,150,235,.45)'); g.addColorStop(1, 'rgba(40,110,210,.75)');
+    g.addColorStop(0, 'rgba(225,242,255,.7)'); g.addColorStop(.5, 'rgba(120,190,255,.45)'); g.addColorStop(.85, 'rgba(40,130,230,.65)'); g.addColorStop(1, 'rgba(20,90,200,.9)');
     ctx.fillStyle = g; ctx.beginPath(); ctx.arc(cx, cy, R, 0, 6.28); ctx.fill();
     ctx.strokeStyle = 'rgba(40,110,210,.7)'; ctx.lineWidth = 1; ctx.stroke();
     ctx.fillStyle = 'rgba(255,255,255,.95)'; ctx.beginPath(); ctx.ellipse(cx - R * .38, cy - R * .42, R * .22, R * .12, -.6, 0, 6.28); ctx.fill();
