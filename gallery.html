@@ -71,9 +71,224 @@
   .w-btn:active { border-color: #404040 #fff #fff #404040; }
   .w-status { font-size: 11px; color: #333; margin-right: auto; align-self: center; }
   @media (max-width: 600px) { .w-body { grid-template-columns: 1fr; } .tools { grid-template-columns: repeat(8, 1fr); } .sizes { flex-direction: row; } .swatches { grid-template-columns: repeat(7, 16px); } .form { grid-template-columns: 1fr; } }
+  /* ── SIDEBAR ── */
+  #sidebar {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    width: 280px;
+    min-width: 280px;
+    background: #f0ffcc;
+    border-right: 1px solid rgba(0,0,0,.06);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 32px;
+    z-index: 10;
+    overflow: hidden;
+  }
+
+  .sidebar-top { display: flex; flex-direction: column; gap: 0; }
+
+  .sidebar-name {
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    font-size: 34px;
+    line-height: 1.1;
+    letter-spacing: -0.8px;
+    color: #1c1917;
+    margin-top: 0;
+    margin-bottom: 6px;
+  }
+
+  .sidebar-tagline {
+    font-family: 'Inter', sans-serif;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 1.6px;
+    text-transform: uppercase;
+    color: #78716c;
+    margin-bottom: 14px;
+  }
+
+  .sidebar-bio {
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    font-weight: 400;
+    color: #57534e;
+    line-height: 1.7;
+    margin-bottom: 20px;
+  }
+
+  /* nav */
+  .sidebar-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-top: 24px;
+  }
+  .nav-label {
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 500;
+    font-size: 11px;
+    letter-spacing: 1.1px;
+    text-transform: uppercase;
+    color: #78716c;
+    padding-bottom: 6px;
+  }
+  .nav-link {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 14px;
+    border-radius: 12px;
+    text-decoration: none;
+    transition: background .2s, box-shadow .2s;
+  }
+  .nav-link .nav-link-text {
+    font-size: 12px;
+    font-weight: 400;
+    color: #1c1917;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .nav-link .nav-arrow { font-size: 12px; color: #a8a29e; font-family: 'JetBrains Mono', monospace; }
+  .nav-link.active { background: #1c1917; }
+  .nav-link.active .nav-link-text { color: #fff; }
+  .nav-link.active .nav-arrow { color: #fff; }
+  .nav-link:not(.active):hover { background: rgba(0,0,0,.06); }
+  .live-dot { width: 6px; height: 6px; background: #f43f5e; border-radius: 50%; display: inline-block; animation: pulse 2s infinite; }
+  @keyframes pulse { 0%,100%{opacity:1;} 50%{opacity:.4;} }
+
+  /* outbound */
+  .outbound { margin-top: 24px; }
+  .outbound-label {
+    font-size: 11px;
+    font-weight: 400;
+    letter-spacing: 1.1px;
+    text-transform: uppercase;
+    color: #78716c;
+    margin-bottom: 10px;
+  }
+  .outbound-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .outbound-links a {
+    font-size: 12px;
+    color: #44403c;
+    text-decoration: none;
+    transition: color .2s;
+  }
+  .outbound-links a:hover { color: #1c1917; }
+  .outbound-links a.underlined { text-decoration: underline; text-decoration-color: #a8a29e; }
+
+  /* sidebar bottom */
+  .sidebar-bottom {
+    border-top: 1px solid rgba(0,0,0,.1);
+    padding-top: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .clock-wrap { display: flex; flex-direction: column; gap: 7px; }
+  .clock-time {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: #57534e;
+    letter-spacing: .6px;
+  }
+  .clock-location {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: #a8a29e;
+    letter-spacing: .4px;
+    text-transform: uppercase;
+  }
+  .mascot {
+    width: 36px;
+    height: 36px;
+    background: #1c1917;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    box-shadow: 0 1px 1px rgba(0,0,0,.05);
+  }
+
+  @media (max-width: 900px) {
+    #sidebar {
+      position: relative;
+      width: 100%;
+      min-width: unset;
+      height: auto;
+      padding: 24px 20px;
+    }
+    .sidebar-bottom { margin-top: 24px; }
+  }
+
+  /* ── Layout + dark theme ── */
+  body { display: flex; background: #121110 !important; color: #f3f1e8; background-image: none !important; }
+  #main { flex: 1; min-width: 0; background-color: #121110; background-image: radial-gradient(circle, rgba(255,255,255,.07) 1px, transparent 1px); background-size: 28px 28px; min-height: 100vh; }
+  .back { display: none; }
+  h1 { color: #f3f1e8; }
+  .count, .sub, .empty { color: #a8a29e; }
+  .btn { background: #1c1917; color: #f3f1e8; border-color: #57534e; }
+  .btn.pri { background: #f0ffcc; color: #1c1917; border-color: #f0ffcc; }
+  .card { border-color: rgba(255,255,255,.08); }
+  @media (max-width: 900px) { body { flex-direction: column; } }
+
 </style>
 </head>
 <body>
+<aside id="sidebar">
+  <div class="sidebar-top">
+    <div class="sidebar-name">Thishya Mannur</div>
+    <div class="sidebar-tagline">"Product Designer and Builder, by accident."</div>
+    <div class="sidebar-bio">Skater. Traveler. All in or all out.</div>
+
+    <nav class="sidebar-nav">
+      <div class="nav-label">Explore</div>
+      <a href="index.html#projects" class="nav-link">
+        <span class="nav-link-text">01. Work</span>
+        <span class="nav-arrow">→</span>
+      </a>
+      <a href="about.html" class="nav-link">
+        <span class="nav-link-text">02. About Me</span>
+        <span class="nav-arrow">→</span>
+      </a>
+      <a href="index.html" class="nav-link">
+        <span class="nav-link-text">03. Playground</span>
+        <span class="nav-arrow">→</span>
+      </a>
+      <a href="gallery.html" class="nav-link active">
+        <span class="nav-link-text">04. Visitor Gallery <span class="live-dot"></span></span>
+        <span class="nav-arrow">→</span>
+      </a>
+    </nav>
+
+    <div class="outbound">
+      <div class="outbound-label">Outbound</div>
+      <div class="outbound-links">
+        <a href="mailto:thishya14@gmail.com">Email,</a>
+        <a href="https://www.linkedin.com/in/thishya-mannur" target="_blank">LinkedIn,</a>
+        <a href="https://github.com/thishya14bob" target="_blank">GitHub,</a>
+        <a href="cv/Thishya_Mannur_Resume.pdf" target="_blank" class="underlined">Resume</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="sidebar-bottom">
+    <div class="clock-wrap">
+      <div class="clock-time" id="liveClock">--:--:-- --</div>
+      <div class="clock-location">Hyderabad, India · IST</div>
+    </div>
+  </div>
+</aside>
+<main id="main">
 <div class="wrap">
   <div class="top"><a class="back" href="index.html">← Home</a></div>
   <div class="head"><h1>Visitor Gallery</h1><span class="count" id="count">loading…</span></div>
@@ -87,6 +302,8 @@
   <p class="note" id="note">Preview mode: cards are only saved in your browser until the database is connected.</p>
   <div class="grid" id="grid"></div>
 </div>
+
+</main>
 
 <div class="modal" id="modal">
   <div class="win">
@@ -220,6 +437,8 @@ $('save').onclick = async () => {
 };
 
 (async () => { cards = await loadCards(); render(); })();
+function updateClock(){ const el=document.getElementById('liveClock'); if(!el) return; el.textContent=new Intl.DateTimeFormat('en-IN',{timeZone:'Asia/Kolkata',hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:true}).format(new Date()); }
+updateClock(); setInterval(updateClock,1000);
 </script>
 </body>
 </html>
