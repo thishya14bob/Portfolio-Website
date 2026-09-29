@@ -324,12 +324,12 @@
         <span class="tool" data-t="brush" title="Brush">🖌️</span>
         <span class="tool" data-t="eraser" title="Eraser">🧽</span>
         <span class="tool" data-t="fill" title="Fill background">🪣</span>
+        <span class="tool" data-t="bubbles" title="Bubbles">🫧</span>
+        <span class="tool" data-t="grass" title="Grass">🌿</span>
+        <span class="tool" data-t="clouds" title="Clouds">☁️</span>
+        <span class="tool" data-t="stars" title="Stars">⭐</span>
+        <span class="tool" data-t="flowers" title="Flowers">🌼</span>
         <span class="tool" data-t="spray" title="Spray paint">💨</span>
-        <span class="tool" data-t="crayon" title="Crayon">🖍️</span>
-        <span class="tool" data-t="chalk" title="Chalk">✨</span>
-        <span class="tool" data-t="marker" title="Highlighter">🖊️</span>
-        <span class="tool" data-t="stripes" title="Stripes">▤</span>
-        <span class="tool" data-t="confetti" title="Confetti">🎉</span>
         <span class="tool" data-t="undo" title="Undo">↶</span>
         <span class="tool" data-t="clear" title="Clear">🗑️</span>
         <div class="sizes" id="sizes">
@@ -435,21 +435,25 @@ function shape(a, b) {
 }
 ['pointerup','pointercancel','pointerleave'].forEach(ev => cv.addEventListener(ev, () => drawing = false));
 const rnd = (a, b) => a + Math.random() * (b - a);
-function stripePattern() { const c = document.createElement('canvas'); c.width = c.height = 12; const g = c.getContext('2d'); g.fillStyle = '#fff'; g.fillRect(0,0,12,12); g.strokeStyle = color; g.lineWidth = 3; g.beginPath(); g.moveTo(-3,15); g.lineTo(15,-3); g.moveTo(-3,3); g.lineTo(3,-3); g.moveTo(9,15); g.lineTo(15,9); g.stroke(); return ctx.createPattern(c, 'repeat'); }
+function _unused() { const c = document.createElement('canvas'); c.width = c.height = 12; const g = c.getContext('2d'); g.fillStyle = '#fff'; g.fillRect(0,0,12,12); g.strokeStyle = color; g.lineWidth = 3; g.beginPath(); g.moveTo(-3,15); g.lineTo(15,-3); g.moveTo(-3,3); g.lineTo(3,-3); g.moveTo(9,15); g.lineTo(15,9); g.stroke(); return ctx.createPattern(c, 'repeat'); }
+let acc = 0;
+function stamp(x, y) {
+  const r = size * 2 + 8;
+  if (tool === 'bubbles') { const R = rnd(r * .4, r); ctx.strokeStyle = color; ctx.lineWidth = 1.5; ctx.beginPath(); ctx.arc(x + rnd(-r, r), y + rnd(-r, r), R, 0, 6.28); ctx.stroke(); ctx.fillStyle = 'rgba(255,255,255,.9)'; ctx.beginPath(); ctx.arc(x - R * .35, y - R * .35, R * .18, 0, 6.28); ctx.fill(); }
+  if (tool === 'grass') { ctx.strokeStyle = color; ctx.lineWidth = 1.6; ctx.lineCap = 'round'; for (let i = 0; i < 4; i++) { const bx = x + rnd(-r * .6, r * .6), h = rnd(r * .8, r * 1.8); ctx.beginPath(); ctx.moveTo(bx, y); ctx.quadraticCurveTo(bx + rnd(-4, 4), y - h * .6, bx + rnd(-r * .4, r * .4), y - h); ctx.stroke(); } }
+  if (tool === 'clouds') { ctx.fillStyle = color === '#000000' ? '#ffffff' : color; ctx.strokeStyle = '#9aa0a6'; ctx.lineWidth = 1.2; const R = r * .7; [[-R, 0, R * .8], [0, -R * .5, R], [R, 0, R * .8], [0, R * .2, R * .9]].forEach(([dx, dy, rr]) => { ctx.beginPath(); ctx.arc(x + dx, y + dy, rr, 0, 6.28); ctx.fill(); }); }
+  if (tool === 'stars') { const R = rnd(r * .4, r * .8), cx = x + rnd(-r, r), cy = y + rnd(-r, r); ctx.fillStyle = color; ctx.beginPath(); for (let i = 0; i < 10; i++) { const q = i % 2 ? R * .45 : R, t = -1.5708 + i * .6283; ctx.lineTo(cx + Math.cos(t) * q, cy + Math.sin(t) * q); } ctx.closePath(); ctx.fill(); }
+  if (tool === 'flowers') { const cx = x + rnd(-r, r), cy = y + rnd(-r, r), R = rnd(r * .3, r * .5); ctx.fillStyle = color; for (let i = 0; i < 5; i++) { const t = i * 1.2566; ctx.beginPath(); ctx.arc(cx + Math.cos(t) * R, cy + Math.sin(t) * R, R * .7, 0, 6.28); ctx.fill(); } ctx.fillStyle = '#f7c948'; ctx.beginPath(); ctx.arc(cx, cy, R * .55, 0, 6.28); ctx.fill(); }
+}
 function texture(a, b) {
   const d = Math.hypot(b.x - a.x, b.y - a.y), n = Math.max(1, Math.ceil(d / 2)), r = size * 3 + 4;
-  for (let k = 0; k <= n; k++) {
-    const x = a.x + (b.x - a.x) * k / n, y = a.y + (b.y - a.y) * k / n;
-    if (tool === 'spray') { ctx.fillStyle = color; for (let i = 0; i < 10; i++) { const t = rnd(0, 6.28), q = Math.sqrt(Math.random()) * r; ctx.fillRect(x + Math.cos(t) * q, y + Math.sin(t) * q, 1.2, 1.2); } }
-    if (tool === 'crayon') { ctx.fillStyle = color; ctx.globalAlpha = .55; for (let i = 0; i < 6; i++) ctx.fillRect(x + rnd(-size, size), y + rnd(-size, size), rnd(.8, 2), rnd(.8, 2)); ctx.globalAlpha = 1; }
-    if (tool === 'chalk') { ctx.fillStyle = color; ctx.globalAlpha = rnd(.2, .7); ctx.fillRect(x + rnd(-size * 1.5, size * 1.5), y + rnd(-size, size), rnd(2, size + 3), rnd(1, 2.5)); ctx.globalAlpha = 1; }
-    if (tool === 'confetti' && k % 3 === 0) { ctx.fillStyle = PAINT[16 + Math.floor(rnd(0, 12))]; ctx.save(); ctx.translate(x + rnd(-r, r), y + rnd(-r, r)); ctx.rotate(rnd(0, 3)); ctx.fillRect(-3, -1.5, 6, 3); ctx.restore(); }
-  }
-  if (tool === 'marker') { ctx.globalAlpha = .35; ctx.strokeStyle = color; ctx.lineCap = 'butt'; ctx.lineWidth = size * 3 + 8; ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x + .01, b.y); ctx.stroke(); ctx.globalAlpha = 1; }
-  if (tool === 'stripes') { ctx.strokeStyle = stripePattern(); ctx.lineCap = ctx.lineJoin = 'round'; ctx.lineWidth = size * 3 + 12; ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x + .01, b.y); ctx.stroke(); }
+  if (tool === 'spray') { ctx.fillStyle = color; for (let k = 0; k <= n; k++) { const x = a.x + (b.x - a.x) * k / n, y = a.y + (b.y - a.y) * k / n; for (let i = 0; i < 10; i++) { const t = rnd(0, 6.28), q = Math.sqrt(Math.random()) * r; ctx.fillRect(x + Math.cos(t) * q, y + Math.sin(t) * q, 1.2, 1.2); } } return; }
+  const gap = tool === 'clouds' ? size * 3 + 22 : tool === 'grass' ? 7 : size * 2 + 14;
+  acc += d; if (d === 0) { stamp(b.x, b.y); return; }
+  while (acc >= gap) { acc -= gap; const t = 1 - acc / d; stamp(a.x + (b.x - a.x) * t, a.y + (b.y - a.y) * t); }
 }
 function stroke(a, b) {
-  if (['spray','crayon','chalk','marker','stripes','confetti'].includes(tool)) return texture(a, b);
+  if (['bubbles','grass','clouds','stars','flowers','spray'].includes(tool)) return texture(a, b);
   ctx.lineCap = ctx.lineJoin = 'round';
   ctx.strokeStyle = tool === 'eraser' ? '#fff' : color;
   ctx.lineWidth = tool === 'brush' ? size * 2.2 : tool === 'eraser' ? size * 3 : size;
