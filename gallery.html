@@ -379,6 +379,15 @@ async function loadCards() {
   if (db) { try { const q = db.from('cards').select('id,name,note,drawing,color,created_at').order('created_at', { ascending: false }).limit(200); const { data, error } = await Promise.race([q, new Promise((_, r) => setTimeout(() => r('timeout'), 6000))]); if (!error) return data; } catch (e) { console.warn('gallery load failed', e); } }
   return get(LS_CARDS, []);
 }
+function shrink() {
+  const tries = [[480, 300, .8], [480, 300, .6], [400, 250, .55], [320, 200, .5], [320, 200, .35]];
+  for (const [w, h, q] of tries) {
+    const c = document.createElement('canvas'); c.width = w; c.height = h; c.getContext('2d').drawImage(cv, 0, 0, w, h);
+    let d = c.toDataURL('image/webp', q); if (!d.startsWith('data:image/webp')) d = c.toDataURL('image/jpeg', q);
+    if (d.length < 190000) return d;
+  }
+  const c = document.createElement('canvas'); c.width = 240; c.height = 150; c.getContext('2d').drawImage(cv, 0, 0, 240, 150); return c.toDataURL('image/jpeg', .4);
+}
 async function saveCard(c, mine) {
   if (db) {
     if (mine) { const { error } = await db.rpc('update_card', { p_id: mine.id, p_token: mine.token, p_name: c.name, p_note: c.note, p_drawing: c.drawing, p_color: c.color }); if (error) throw error; return mine; }
@@ -516,10 +525,14 @@ $('save').onclick = async () => {
   const name = $('f-name').value.trim();
   if (!name) { $('status').textContent = 'Please add your name first.'; $('f-name').focus(); return; }
   $('status').textContent = 'Saving…';
-  const small = document.createElement('canvas'); small.width = 480; small.height = 300; small.getContext('2d').drawImage(cv, 0, 0, 480, 300);
-  const card = { name, note: $('f-msg').value.trim(), color: cardColor, drawing: small.toDataURL('image/webp', .8) };
-  try { const mine = await saveCard(card, get(LS_MINE, null)); set(LS_MINE, mine); cards = await loadCards(); render(); close(); }
-  catch (err) { $('status').textContent = 'Could not save, try again.'; console.error(err); }
+  const card = { name, note: $('f-msg').value.trim(), color: cardColor, drawing: shrink() };
+  try {
+    const mine = await Promise.race([saveCard(card, get(LS_MINE, null)), new Promise((_, r) => setTimeout(() => r(new Error('timeout')), 10000))]);
+    set(LS_MINE, mine); cards = await loadCards(); render(); close();
+  } catch (err) {
+    console.error('save failed', err);
+    $('status').textContent = String(err && err.message || err).includes('check') ? 'Drawing too detailed, try a smaller size.' : 'Could not reach the wall. Check your connection and try again.';
+  }
 };
 
 (async () => { cards = await loadCards(); render(); })();
