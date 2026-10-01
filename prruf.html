@@ -548,6 +548,10 @@
   .stats-grid { margin-bottom: 44px !important; }
   .meta-bar { margin-bottom: 40px !important; padding: 22px 26px !important; }
   .hero-image { margin-bottom: 36px !important; }
+  /* ── Walkthrough video ── */
+  .walk-video { margin: 22px 0 56px; }
+  .walk-video video { width: 100%; display: block; border-radius: 18px; border: 2px solid #111; background: #000; box-shadow: 0 18px 40px rgba(0,0,0,.12); }
+  .walk-video figcaption { text-align: center; font-size: 13px; color: #555; margin-top: 12px; }
 </style>
 </head>
 <body>
@@ -700,6 +704,11 @@
       <p class="cs-section-heading">03. Features</p>
       <h2 class="cs-section-title">What Prruf can do.</h2>
 
+      <figure class="walk-video">
+        <video controls playsinline preload="metadata" poster="assets/prruf/walkthrough-poster.webp"><source src="assets/prruf/walkthrough.mp4" type="video/mp4"><source src="assets/prruf/walkthrough.webm" type="video/webm"></video>
+        <figcaption>Product walkthrough: the actual Prruf app</figcaption>
+      </figure>
+
       <div class="feat-rows">
 
         <div class="feat-row">
@@ -709,18 +718,17 @@
               <span class="mac-title">Preview</span>
             </div>
             <div class="mac-content">
-              <!-- replace with <img src="assets/..."> or <video src="assets/..." autoplay muted loop playsinline></video> -->
-              <span class="mac-placeholder">Image / video placeholder</span>
+              <video autoplay muted loop playsinline preload="metadata" poster="assets/prruf/shortcut-poster.webp"><source src="assets/prruf/shortcut.webm" type="video/webm"><source src="assets/prruf/shortcut.mp4" type="video/mp4"></video>
               <div class="mac-mute"><svg width="22" height="18" viewBox="0 0 22 18" fill="none"><path d="M2 6h4l5-4v14l-5-4H2z" fill="#fff"/><path d="M15 7l4 4M19 7l-4 4" stroke="#fff" stroke-width="1.6" stroke-linecap="round"/></svg></div>
             </div>
           </div></div></div>
           <div class="feat-right">
             <div class="imsg-wrap">
-              <div class="imsg-bubble sent">can it remember everything I did today?</div>
-              <div class="imsg-bubble reply">yes! it notes your work every ~2.5 min, so nothing slips.</div>
+              <div class="imsg-bubble sent">can I tell it when something matters?</div>
+              <div class="imsg-bubble reply">yep, hit the shortcut and it grabs a screenshot right then.</div>
             </div>
-            <p class="feat-info-name">it remembers for you</p>
-            <p class="feat-info-desc">your whole day, already written down. no timers, no end-of-day catch-up.</p>
+            <p class="feat-info-name">Capture on your cue</p>
+            <p class="feat-info-desc">One keyboard shortcut takes a screenshot the moment you want it. Manual control, on top of the automatic captures.</p>
           </div>
         </div>
 
@@ -731,18 +739,17 @@
               <span class="mac-title">Preview</span>
             </div>
             <div class="mac-content">
-              <!-- replace with <img src="assets/..."> or <video src="assets/..." autoplay muted loop playsinline></video> -->
-              <span class="mac-placeholder">Image / video placeholder</span>
+              <video autoplay muted loop playsinline preload="metadata" poster="assets/prruf/pause-poster.webp"><source src="assets/prruf/pause.webm" type="video/webm"><source src="assets/prruf/pause.mp4" type="video/mp4"></video>
               <div class="mac-mute"><svg width="22" height="18" viewBox="0 0 22 18" fill="none"><path d="M2 6h4l5-4v14l-5-4H2z" fill="#fff"/><path d="M15 7l4 4M19 7l-4 4" stroke="#fff" stroke-width="1.6" stroke-linecap="round"/></svg></div>
             </div>
           </div></div></div>
           <div class="feat-right">
             <div class="imsg-wrap">
-              <div class="imsg-bubble sent">can it group tasks together and understand context?</div>
-              <div class="imsg-bubble reply">yes, it connects the dots the way you would.</div>
+              <div class="imsg-bubble sent">what if I don’t want it watching?</div>
+              <div class="imsg-bubble reply">pause it. one click and prruf sees nothing.</div>
             </div>
-            <p class="feat-info-name">it understands context</p>
-            <p class="feat-info-desc">scattered moments become real tasks like "designing the homepage" instead of a wall of screenshots.</p>
+            <p class="feat-info-name">Pause anytime</p>
+            <p class="feat-info-desc">Taking a break, or working on something private? Turn Prruf off and nothing is captured until you switch it back on. No surveillance, ever.</p>
           </div>
         </div>
 
@@ -753,18 +760,15 @@
               <span class="mac-title">Preview</span>
             </div>
             <div class="mac-content">
-              <!-- replace with <img src="assets/..."> or <video src="assets/..." autoplay muted loop playsinline></video> -->
-              <span class="mac-placeholder">Image / video placeholder</span>
+              <video autoplay muted loop playsinline preload="metadata" poster="assets/prruf/break-poster.webp"><source src="assets/prruf/break.webm" type="video/webm"><source src="assets/prruf/break.mp4" type="video/mp4"></video>
               <div class="mac-mute"><svg width="22" height="18" viewBox="0 0 22 18" fill="none"><path d="M2 6h4l5-4v14l-5-4H2z" fill="#fff"/><path d="M15 7l4 4M19 7l-4 4" stroke="#fff" stroke-width="1.6" stroke-linecap="round"/></svg></div>
             </div>
           </div></div></div>
           <div class="feat-right">
             <div class="imsg-wrap">
-              <div class="imsg-bubble sent">what if it gets a task wrong?</div>
-              <div class="imsg-bubble reply">just fix it. edit, merge or split anything.</div>
+              <div class="imsg-bubble sent">what happens when I’m watching netflix?</div>
+              <div class="imsg-bubble reply">it stops. honestly, it’s just not interested.</div>
             </div>
-            <p class="feat-info-name">you stay in control</p>
-            <p class="feat-info-desc">rename a task, merge two into one, or split one apart. the record is always yours.</p>
           </div>
         </div>
 
