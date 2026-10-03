@@ -1008,7 +1008,9 @@
       if (kind === 'good') { later(() => show('done'), 3400); later(() => show('success'), 4400); later(() => show('ready'), 8200); later(() => show('submitted'), 9600); }
       else later(() => show(kind), 3400);
     }
-    document.querySelectorAll('[data-k]').forEach(b => b.addEventListener('click', () => b.dataset.k === 'reset' ? (clear(), show('place')) : run(b.dataset.k)));
+    const kb = document.querySelectorAll('[data-k]');
+    const pick = k => kb.forEach(x => x.classList.toggle('main', x.dataset.k === (k === 'reset' ? 'good' : k)));
+    kb.forEach(b => b.addEventListener('click', () => { pick(b.dataset.k); b.dataset.k === 'reset' ? (clear(), show('place')) : run(b.dataset.k); }));
     show('place');
     new IntersectionObserver((es, o) => es.forEach(e => { if (e.isIntersecting) { run('good'); o.disconnect(); } }), { threshold: .5 }).observe(scr);
   })();
