@@ -513,6 +513,24 @@
   .stats-grid { margin-bottom: 44px !important; }
   .meta-bar { margin-bottom: 40px !important; padding: 22px 26px !important; }
   .hero-image { margin-bottom: 36px !important; }
+  /* ── About: Megan-style ── */
+  .content-wrap.ab { max-width: 900px !important; }
+  .ab { font-family: 'Inter', sans-serif; color: #57534e; font-size: 16.5px; line-height: 1.75; }
+  .ab-hi { font-family: 'Newsreader', serif; font-weight: 400; font-size: clamp(38px,5vw,52px); color: #1c1917; letter-spacing: -.5px; margin: 0 0 22px; }
+  .ab p { margin: 0 0 16px; }
+  .ab ul { margin: 0 0 18px; padding-left: 22px; }
+  .ab li { margin-bottom: 6px; } .ab li::marker { color: #a8a29e; }
+  .ab-photos { display: grid; grid-template-columns: 1fr 1.9fr 1fr; gap: 26px; margin: 34px -10px 0; align-items: start; }
+  .ab-photos img { width: 100%; aspect-ratio: 3/4; object-fit: cover; border-radius: 12px; transform: rotate(var(--r)); box-shadow: 0 10px 28px rgba(0,0,0,.12); transition: transform .35s ease; }
+  .ab-photos img.wide { aspect-ratio: 4/3.05; }
+  .ab-photos img:hover { transform: rotate(0) scale(1.03); }
+  #little { margin-top: 90px; }
+  .ab-label { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 1.6px; text-transform: uppercase; color: #a8a29e; margin-bottom: 22px !important; }
+  .ab-notes { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; }
+  .ab-note { background: #f0ffcc; border: 2px solid #111; border-radius: 6px; padding: 18px 16px; font-size: 14.5px; line-height: 1.55; color: #1c1917; transform: rotate(var(--r)); transition: transform .3s ease; min-height: 130px; }
+  .ab-note.y { background: #efebe4; }
+  .ab-note:hover { transform: rotate(0) translateY(-4px); }
+  @media (max-width: 760px) { .ab-photos { grid-template-columns: 1fr 1fr; margin: 28px 0 0; } .ab-photos img.wide { grid-column: span 2; order: -1; } .ab-notes { grid-template-columns: 1fr 1fr; } }
 </style>
 </head>
 <body>
@@ -531,8 +549,7 @@
     <p class="toc-label">Table of Contents</p>
     <ul class="toc-list">
       <li><a href="#me" class="active">01. Hello <span class="toc-arrow">→</span></a></li>
-      <li><a href="#how">02. How I work <span class="toc-arrow">→</span></a></li>
-      <li><a href="#offscreen">03. Off screen <span class="toc-arrow">→</span></a></li>
+      <li><a href="#little">02. Little things <span class="toc-arrow">→</span></a></li>
     </ul>
   </div>
   <div class="sidebar-bottom">
@@ -545,49 +562,39 @@
 
 <!-- MAIN -->
 <main id="main">
-  <div class="content-wrap">
+  <div class="content-wrap ab">
 
-    <div class="tags"><span class="tag">Interaction Designer</span><span class="tag">Founder</span><span class="tag muted">Hyderabad, IN</span></div>
-    <h1 class="cs-title"><span class="cs-title-star">✳</span>Hi, I'm Thishya.</h1>
-    <p class="cs-description">I design for the moment someone gets stuck, and make sure they don't.</p>
+    <section id="me">
+      <h1 class="ab-hi">Hi, I'm Thishya!</h1>
+      <p>I grew up in Hyderabad and I'm now a second-year Interaction Design student at UID, Karnavati University. I was almost going to take up business administration, then pivoted to design. Best decision I've made so far.</p>
+      <p>I've always wanted the freedom to make whatever I want, without boxing myself into one field. Design is the one place I can take any idea and actually make it real.</p>
+      <p>When I'm not designing, you can find me:</p>
+      <ul>
+        <li>Skating (I've raced at the national level)</li>
+        <li>Playing just about any sport</li>
+        <li>Building Lego, slowly and very carefully</li>
+        <li>Somewhere by the sea</li>
+      </ul>
+      <p>Always happy to chat! I'm on the lookout for design internships and good conversations :)</p>
 
-    <div class="meta-bar">
-      <div><p class="meta-label">Studying</p><p class="meta-value">B.Des Interaction Design<br>UID, Karnavati University</p></div>
-      <div><p class="meta-label">Building</p><p class="meta-value"><strong>Prruf</strong><br>with Tanish Maheshwari</p></div>
-      <div><p class="meta-label">Toolkit</p><p class="meta-value">Figma, Illustrator<br>Photoshop, AutoCAD, Claude</p></div>
-      <div><p class="meta-label">Say hi</p><p class="meta-value"><a href="mailto:thishya14@gmail.com" style="color:#fff">thishya14@gmail.com</a></p></div>
-    </div>
-
-    <hr class="cs-divider">
-
-    <section class="cs-section" id="me">
-      <p class="cs-section-heading">01. Hello</p>
-      <h2 class="cs-section-title">Curious about people first.</h2>
-      <div class="cs-body">
-        <p>I'm a second-year Interaction Design student at Unitedworld Institute of Design, Karnavati University. I'm curious about how people think, how systems connect, and how small design decisions make everyday things easier.</p>
-        <p>The best design, for me, almost always comes out of a good conversation.</p>
+      <div class="ab-photos">
+        <img src="assets/me.webp" alt="Thishya eating noodles" style="--r:-3deg">
+        <img src="assets/horse.webp" alt="The sea" class="wide" style="--r:1.2deg">
+        <img src="assets/hero/img-10822.webp" alt="Skating" style="--r:2.5deg">
       </div>
     </section>
 
-    <section class="cs-section" id="how">
-      <p class="cs-section-heading">02. How I work</p>
-      <h2 class="cs-section-title">Every project starts with a real person.</h2>
-      <div class="cs-takeaways">
-        <div class="cs-takeaway"><div class="cs-takeaway-dot"></div><p class="cs-takeaway-text"><strong>My grandfather</strong> struggling with a fingerprint scanner became a <a href="biometric.html" style="color:#2200ff">UX study on biometric verification</a>.</p></div>
-        <div class="cs-takeaway"><div class="cs-takeaway-dot"></div><p class="cs-takeaway-text"><strong>My own habit</strong> of forgetting to log my work became <a href="prruf.html" style="color:#2200ff">Prruf</a>, which I'm now building with Tanish.</p></div>
-        <div class="cs-takeaway"><div class="cs-takeaway-dot"></div><p class="cs-takeaway-text"><strong>I listen, then build.</strong> Interviews and testing shape every decision, not the other way round.</p></div>
+    <section id="little">
+      <p class="ab-label">Little things that explain a lot</p>
+      <div class="ab-notes">
+        <div class="ab-note" style="--r:-2deg">As a kid, I'd get annoyed when I couldn't draw a perfectly straight line.</div>
+        <div class="ab-note y" style="--r:1.5deg">I can't walk past a knot of tangled wires without untangling it.</div>
+        <div class="ab-note" style="--r:-1deg">Almost a business student. Very glad I'm not.</div>
+        <div class="ab-note y" style="--r:2deg">Lego is still my favourite design tool.</div>
       </div>
-    </section>
-
-    <section class="cs-section" id="offscreen">
-      <p class="cs-section-heading">03. Off screen</p>
-      <h2 class="cs-section-title">National-level skater.</h2>
-      <div class="cs-body"><p>Skating taught me that showing up every day beats being perfect once. I bring the same discipline and patience into how I design.</p></div>
-      <div class="cs-callout">"Just here to make cool things and have a good time doing it."</div>
     </section>
 
   </div>
-</main>
 </main>
 
 <script>
