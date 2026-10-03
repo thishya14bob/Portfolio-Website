@@ -542,6 +542,17 @@
   .ab-photos { margin-top: 22px !important; }
   .ab-ph { aspect-ratio: 4/5 !important; } .ab-ph.wide { aspect-ratio: 16/11 !important; }
   .ab-list { margin: -4px 0 12px !important; } .ab-list li { margin-bottom: 2px !important; }
+  /* ── Flip cards ── */
+  .ab-flip { all: unset; cursor: pointer; display: block; perspective: 900px; transform: rotate(var(--r)); transition: transform .3s ease; min-height: 160px; }
+  .ab-flip:hover { transform: rotate(0) translateY(-4px); }
+  .ab-in { position: relative; display: block; width: 100%; height: 100%; min-height: 160px; transform-style: preserve-3d; transition: transform .6s cubic-bezier(.4,1.4,.5,1); }
+  .ab-flip:hover .ab-in, .ab-flip.on .ab-in { transform: rotateY(180deg); }
+  .ab-front, .ab-back { position: absolute; inset: 0; backface-visibility: hidden; -webkit-backface-visibility: hidden; border: 2px solid #111; border-radius: 8px; padding: 16px; display: flex; flex-direction: column; background: #f0ffcc; }
+  .ab-flip.y .ab-front, .ab-flip.y .ab-back { background: #efebe4; }
+  .ab-front { align-items: flex-start; justify-content: space-between; }
+  .ab-t { font-family: 'Newsreader', serif; font-style: italic; font-size: 19px; color: #1c1917; }
+  .ab-hint { font-family: 'JetBrains Mono', monospace; font-size: 9.5px; letter-spacing: 1.2px; text-transform: uppercase; color: #8a847a; }
+  .ab-back { transform: rotateY(180deg); background: #1c1917 !important; color: #f0ffcc; font-family: 'Inter', sans-serif; font-size: 14.5px; line-height: 1.55; justify-content: center; }
 </style>
 </head>
 <body>
@@ -598,10 +609,10 @@
     <section id="little">
       <p class="ab-label">Little things that explain a lot</p>
       <div class="ab-notes">
-        <div class="ab-note" style="--r:-2deg">As a kid, I'd get annoyed when I couldn't draw a perfectly straight line.</div>
-        <div class="ab-note y" style="--r:1.5deg">I can't walk past a knot of tangled wires without untangling it.</div>
-        <div class="ab-note" style="--r:-1deg">Chicken biryani is my favourite dish. Non-negotiable.</div>
-        <div class="ab-note y" style="--r:2deg">Lego is still my favourite design tool.</div>
+        <button class="ab-flip " style="--r:-2deg" aria-label="the straight line thing"><span class="ab-in"><span class="ab-front"><svg viewBox="0 0 64 40" width="64" height="40"><path d="M4 30 C14 8, 22 34, 32 18 S50 6, 60 22" stroke="#1c1917" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/><path d="M4 36 H60" stroke="#1c1917" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="3 4"/></svg><span class="ab-t">the straight line thing</span><span class="ab-hint">tap to flip ↻</span></span><span class="ab-back">As a kid, I'd get annoyed when I couldn't draw a perfectly straight line.</span></span></button>
+        <button class="ab-flip y" style="--r:1.5deg" aria-label="the wire thing"><span class="ab-in"><span class="ab-front"><svg viewBox="0 0 64 40" width="64" height="40"><path d="M4 20 C14 2, 24 38, 30 16 S20 4, 38 22 S50 36, 60 18" stroke="#1c1917" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/><circle cx="32" cy="20" r="9" stroke="#1c1917" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="ab-t">the wire thing</span><span class="ab-hint">tap to flip ↻</span></span><span class="ab-back">I can't walk past a knot of tangled wires without untangling it.</span></span></button>
+        <button class="ab-flip " style="--r:-1deg" aria-label="the food thing"><span class="ab-in"><span class="ab-front"><svg viewBox="0 0 64 40" width="64" height="40"><path d="M8 22 H56 C54 34, 44 38, 32 38 S10 34, 8 22Z" stroke="#1c1917" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/><path d="M24 16 c-3 -4 3 -6 0 -12 M32 16 c-3 -4 3 -6 0 -12 M40 16 c-3 -4 3 -6 0 -12" stroke="#1c1917" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="ab-t">the food thing</span><span class="ab-hint">tap to flip ↻</span></span><span class="ab-back">Chicken biryani is my favourite dish. Non-negotiable.</span></span></button>
+        <button class="ab-flip y" style="--r:2deg" aria-label="the Lego thing"><span class="ab-in"><span class="ab-front"><svg viewBox="0 0 64 40" width="64" height="40"><rect x="10" y="16" width="44" height="20" rx="2" stroke="#1c1917" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/><rect x="16" y="9" width="10" height="7" rx="1.5" stroke="#1c1917" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/><rect x="38" y="9" width="10" height="7" rx="1.5" stroke="#1c1917" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="ab-t">the Lego thing</span><span class="ab-hint">tap to flip ↻</span></span><span class="ab-back">Lego is still my favourite design tool.</span></span></button>
       </div>
     </section>
 
@@ -712,5 +723,6 @@
   }, { rootMargin: '-20% 0px -70% 0px' });
   sections.forEach(s => obs.observe(s));
 </script>
+<script>document.querySelectorAll('.ab-flip').forEach(function(b){b.addEventListener('click',function(){b.classList.toggle('on');});});</script>
 </body>
 </html>
