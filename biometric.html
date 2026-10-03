@@ -688,6 +688,14 @@
   .wf-hint { display: none; }
   .wf-screen.err { border-color: #c2412d !important; } .wf-screen.err .wf-title { border-bottom-color: #c2412d !important; }
   @media (max-width: 600px) { .wf-screen { aspect-ratio: 16/10 !important; min-height: 0 !important; } }
+  /* ── Centre screen content ── */
+  .wf-body { justify-content: center !important; padding-bottom: 8cqw !important; }
+  .wf-body > .wf-msg { margin: 0 0 2.4cqw !important; }
+  .wf-body > .wf-big { margin: 0 0 2cqw !important; }
+  .wf-help { position: absolute; left: 0; bottom: 7.5cqw; margin: 0 !important; width: 100% !important; }
+  .wf-body > .wf-btn:not(.wf-next):not(.red) { bottom: 2.4cqw !important; left: 50%; transform: translateX(-50%); }
+  .wf-small { align-self: center !important; margin-left: 0 !important; width: 24cqw; padding-right: 0; }
+  .wf-bar:has(+ .wf-small) { margin-left: 0; }
 </style>
 </head>
 <body>
