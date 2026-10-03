@@ -531,6 +531,9 @@
   .ab-note.y { background: #efebe4; }
   .ab-note:hover { transform: rotate(0) translateY(-4px); }
   @media (max-width: 760px) { .ab-photos { grid-template-columns: 1fr 1fr; margin: 28px 0 0; } .ab-photos img.wide { grid-column: span 2; order: -1; } .ab-notes { grid-template-columns: 1fr 1fr; } }
+  .ab-ph { aspect-ratio: 3/4; border-radius: 12px; border: 2px dashed #c9c3b8; background: #efebe4; display: flex; align-items: center; justify-content: center; font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 1.4px; text-transform: uppercase; color: #a8a29e; transform: rotate(var(--r)); }
+  .ab-ph.wide { aspect-ratio: 4/3.05; }
+  @media (max-width: 760px) { .ab-ph.wide { grid-column: span 2; order: -1; } }
 </style>
 </head>
 <body>
@@ -579,9 +582,9 @@
       <p>Always happy to chat! I'm on the lookout for design internships and good conversations :)</p>
 
       <div class="ab-photos">
-        <img src="assets/me.webp" alt="Thishya eating noodles" style="--r:-3deg">
-        <img src="assets/horse.webp" alt="The sea" class="wide" style="--r:1.2deg">
-        <img src="assets/hero/img-10822.webp" alt="Skating" style="--r:2.5deg">
+        <div class="ab-ph" style="--r:-3deg">Photo</div>
+        <div class="ab-ph wide" style="--r:1.2deg">Photo</div>
+        <div class="ab-ph" style="--r:2.5deg">Photo</div>
       </div>
     </section>
 
