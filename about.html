@@ -534,6 +534,13 @@
   .ab-ph { aspect-ratio: 3/4; border-radius: 12px; border: 2px dashed #c9c3b8; background: #efebe4; display: flex; align-items: center; justify-content: center; font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 1.4px; text-transform: uppercase; color: #a8a29e; transform: rotate(var(--r)); }
   .ab-ph.wide { aspect-ratio: 4/3.05; }
   @media (max-width: 760px) { .ab-ph.wide { grid-column: span 2; order: -1; } }
+  /* ── About: shorter intro ── */
+  #main:has(.ab) { padding-top: 48px !important; }
+  .ab-hi { font-size: clamp(34px,4.2vw,44px) !important; margin-bottom: 14px !important; }
+  .ab { font-size: 15.5px !important; line-height: 1.65 !important; }
+  .ab p { margin-bottom: 12px !important; }
+  .ab-photos { margin-top: 22px !important; }
+  .ab-ph { aspect-ratio: 4/5 !important; } .ab-ph.wide { aspect-ratio: 16/11 !important; }
 </style>
 </head>
 <body>
@@ -569,16 +576,8 @@
 
     <section id="me">
       <h1 class="ab-hi">Hi, I'm Thishya!</h1>
-      <p>I grew up in Hyderabad and I'm now a third-year design student.</p>
-      <p>I've always wanted the freedom to make whatever I want, without boxing myself into one field. Design is the one place I can take any idea and actually make it real.</p>
-      <p>When I'm not designing, you can find me:</p>
-      <ul>
-        <li>Skating (I've raced at the national level)</li>
-        <li>Playing just about any sport</li>
-        <li>Building Lego, slowly and very carefully</li>
-        <li>Playing board games</li>
-        <li>Somewhere by the sea</li>
-      </ul>
+      <p>I grew up in Hyderabad and I'm now a third-year design student. Design is the one place I can take any idea, from any field, and actually make it real.</p>
+      <p>When I'm not designing, you'll find me skating (I've raced at the national level), playing sports, building Lego, playing board games or somewhere by the sea.</p>
       <p>Always happy to chat! I'm on the lookout for design internships and good conversations :)</p>
 
       <div class="ab-photos">
