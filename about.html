@@ -6,7 +6,7 @@
 <title>About | Thishya Mannur</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@500;600&family=JetBrains+Mono:wght@400;600&family=Newsreader:ital,opsz,wght@0,6..72,400;1,6..72,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@500;600&family=JetBrains+Mono:wght@400;600&family=Caveat:wght@500;700&family=Newsreader:ital,opsz,wght@0,6..72,400;1,6..72,400&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   html { scroll-behavior: smooth; }
@@ -553,6 +553,20 @@
   .ab-t { font-family: 'Newsreader', serif; font-style: italic; font-size: 19px; color: #1c1917; }
   .ab-hint { font-family: 'JetBrains Mono', monospace; font-size: 9.5px; letter-spacing: 1.2px; text-transform: uppercase; color: #8a847a; }
   .ab-back { transform: rotateY(180deg); background: #1c1917 !important; color: #f0ffcc; font-family: 'Inter', sans-serif; font-size: 14.5px; line-height: 1.55; justify-content: center; }
+  /* ── Polaroid desk ── */
+  .ab-board { position: relative; height: 440px; margin-top: 6px; border-radius: 14px; background: #f3efe6 radial-gradient(#d6cfc2 1.2px, transparent 1.3px) 0 0/18px 18px; border: 1.5px solid #e2dcd2; overflow: hidden; }
+  .ab-board-hint { position: absolute; right: 16px; bottom: 10px; font-family: 'Caveat', cursive; font-size: 18px; color: #a8a29e; margin: 0 !important; }
+  .ab-pol { position: absolute; width: 190px; background: #fff; padding: 12px 12px 10px; box-shadow: 0 8px 20px rgba(0,0,0,.14), 0 1px 2px rgba(0,0,0,.1); transform: rotate(var(--r)); cursor: grab; touch-action: none; user-select: none; transition: transform .25s ease, box-shadow .25s ease; }
+  .ab-pol:hover { transform: rotate(0) scale(1.03); }
+  .ab-pol.drag { cursor: grabbing; transform: rotate(0) scale(1.07); box-shadow: 0 22px 40px rgba(0,0,0,.22); transition: none; }
+  .ab-tape { position: absolute; top: -11px; left: 50%; width: 74px; height: 22px; transform: translateX(-50%) rotate(-3deg); opacity: .9; }
+  .ab-pic { height: 120px; display: flex; align-items: center; justify-content: center; border: 1px solid rgba(0,0,0,.06); }
+  .ab-pic svg { width: 96px; height: 60px; }
+  .ab-cap { font-family: 'Caveat', cursive; font-size: 25px; line-height: 1.1; color: #1c1917; margin: 10px 0 0 !important; text-align: center; }
+  .ab-fact { font-family: 'Caveat', cursive; font-size: 19px; line-height: 1.15; color: #2f6b55; text-align: center; margin: 0 !important; max-height: 0; overflow: hidden; opacity: 0; transition: max-height .35s ease, opacity .3s ease, margin .3s; }
+  .ab-pol.open { z-index: 50 !important; }
+  .ab-pol.open .ab-fact { max-height: 120px; opacity: 1; margin-top: 6px !important; }
+  @media (max-width: 760px) { .ab-board { height: 620px; } .ab-pol { width: 150px; } .ab-pic { height: 90px; } }
 </style>
 </head>
 <body>
@@ -608,11 +622,12 @@
 
     <section id="little">
       <p class="ab-label">Little things that explain a lot</p>
-      <div class="ab-notes">
-        <button class="ab-flip " style="--r:-2deg" aria-label="On repeat"><span class="ab-in"><span class="ab-front"><svg viewBox="0 0 64 40" width="64" height="40"><rect x="10" y="10" width="44" height="26" rx="4" stroke="#1c1917" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/><path d="M24 2 L32 10 L40 2" stroke="#1c1917" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/><path d="M28 18 L38 23 L28 28Z" stroke="#1c1917" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="ab-t">On repeat</span><span class="ab-hint">tap to flip ↻</span></span><span class="ab-back">Young Sheldon is my comfort show.</span></span></button>
-        <button class="ab-flip y" style="--r:1.5deg" aria-label="A small obsession"><span class="ab-in"><span class="ab-front"><svg viewBox="0 0 64 40" width="64" height="40"><path d="M4 20 C14 2, 24 38, 30 16 S20 4, 38 22 S50 36, 60 18" stroke="#1c1917" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/><circle cx="32" cy="20" r="9" stroke="#1c1917" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="ab-t">A small obsession</span><span class="ab-hint">tap to flip ↻</span></span><span class="ab-back">I can't walk past a knot of tangled wires without untangling it.</span></span></button>
-        <button class="ab-flip " style="--r:-1deg" aria-label="Non-negotiable"><span class="ab-in"><span class="ab-front"><svg viewBox="0 0 64 40" width="64" height="40"><path d="M8 22 H56 C54 34, 44 38, 32 38 S10 34, 8 22Z" stroke="#1c1917" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/><path d="M24 16 c-3 -4 3 -6 0 -12 M32 16 c-3 -4 3 -6 0 -12 M40 16 c-3 -4 3 -6 0 -12" stroke="#1c1917" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="ab-t">Non-negotiable</span><span class="ab-hint">tap to flip ↻</span></span><span class="ab-back">Chicken biryani is my favourite dish.</span></span></button>
-        <button class="ab-flip y" style="--r:2deg" aria-label="Where it started"><span class="ab-in"><span class="ab-front"><svg viewBox="0 0 64 40" width="64" height="40"><rect x="10" y="16" width="44" height="20" rx="2" stroke="#1c1917" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/><rect x="16" y="9" width="10" height="7" rx="1.5" stroke="#1c1917" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/><rect x="38" y="9" width="10" height="7" rx="1.5" stroke="#1c1917" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="ab-t">Where it started</span><span class="ab-hint">tap to flip ↻</span></span><span class="ab-back">Lego is still my favourite design tool.</span></span></button>
+      <div class="ab-board" id="ab-board">
+        <p class="ab-board-hint">drag them around · click one to read</p>
+        <div class="ab-pol" style="left:3%;top:9%;--r:-6deg"><span class="ab-tape" style="background:#c8f000aa"></span><div class="ab-pic" style="background:#f0ffcc"><svg viewBox="0 0 64 40" ><rect x="10" y="10" width="44" height="26" rx="4" stroke="#1c1917" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/><path d="M24 2 L32 10 L40 2" stroke="#1c1917" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/><path d="M28 18 L38 23 L28 28Z" stroke="#1c1917" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div><p class="ab-cap">On repeat</p><p class="ab-fact">Young Sheldon is my comfort show.</p></div>
+        <div class="ab-pol" style="left:27%;top:20%;--r:5deg"><span class="ab-tape" style="background:#f1ea8acc"></span><div class="ab-pic" style="background:#efebe4"><svg viewBox="0 0 64 40" ><path d="M4 20 C14 2, 24 38, 30 16 S20 4, 38 22 S50 36, 60 18" stroke="#1c1917" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/><circle cx="32" cy="20" r="9" stroke="#1c1917" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div><p class="ab-cap">A small obsession</p><p class="ab-fact">I can't walk past a knot of tangled wires without untangling it.</p></div>
+        <div class="ab-pol" style="left:51%;top:7%;--r:-3deg"><span class="ab-tape" style="background:#2f6b5588"></span><div class="ab-pic" style="background:#efebe4"><svg viewBox="0 0 64 40" ><path d="M8 22 H56 C54 34, 44 38, 32 38 S10 34, 8 22Z" stroke="#1c1917" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/><path d="M24 16 c-3 -4 3 -6 0 -12 M32 16 c-3 -4 3 -6 0 -12 M40 16 c-3 -4 3 -6 0 -12" stroke="#1c1917" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div><p class="ab-cap">Non-negotiable</p><p class="ab-fact">Chicken biryani is my favourite dish.</p></div>
+        <div class="ab-pol" style="left:75%;top:18%;--r:7deg"><span class="ab-tape" style="background:#ffb4a2aa"></span><div class="ab-pic" style="background:#f0ffcc"><svg viewBox="0 0 64 40" ><rect x="10" y="16" width="44" height="20" rx="2" stroke="#1c1917" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/><rect x="16" y="9" width="10" height="7" rx="1.5" stroke="#1c1917" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/><rect x="38" y="9" width="10" height="7" rx="1.5" stroke="#1c1917" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div><p class="ab-cap">Where it started</p><p class="ab-fact">Lego is still my favourite design tool.</p></div>
       </div>
     </section>
 
@@ -724,5 +739,18 @@
   sections.forEach(s => obs.observe(s));
 </script>
 <script>document.querySelectorAll('.ab-flip').forEach(function(b){b.addEventListener('click',function(){b.classList.toggle('on');});});</script>
+<script>
+(function(){
+  var board=document.getElementById('ab-board'); if(!board) return; var z=10;
+  if(window.matchMedia('(max-width:760px)').matches){ var mp=[[4,3],[46,18],[6,50],[48,64]]; board.querySelectorAll('.ab-pol').forEach(function(p,i){p.style.left=mp[i][0]+'%';p.style.top=mp[i][1]+'%';}); }
+  board.querySelectorAll('.ab-pol').forEach(function(p){
+    var sx,sy,ox,oy,moved=false;
+    p.addEventListener('pointerdown',function(e){ p.setPointerCapture(e.pointerId); sx=e.clientX; sy=e.clientY; ox=p.offsetLeft; oy=p.offsetTop; moved=false; p.style.zIndex=++z; p.classList.add('drag'); });
+    p.addEventListener('pointermove',function(e){ if(!p.classList.contains('drag')) return; var dx=e.clientX-sx, dy=e.clientY-sy; if(Math.abs(dx)+Math.abs(dy)>4) moved=true;
+      var x=Math.max(-20,Math.min(board.clientWidth-p.offsetWidth+20,ox+dx)), y=Math.max(-10,Math.min(board.clientHeight-p.offsetHeight+10,oy+dy)); p.style.left=x+'px'; p.style.top=y+'px'; });
+    p.addEventListener('pointerup',function(){ p.classList.remove('drag'); if(!moved){ var o=p.classList.contains('open'); board.querySelectorAll('.ab-pol.open').forEach(function(q){q.classList.remove('open');}); if(!o) p.classList.add('open'); } });
+  });
+})();
+</script>
 </body>
 </html>
