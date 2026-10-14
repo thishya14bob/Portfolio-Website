@@ -1039,5 +1039,6 @@
 
   document.querySelectorAll('.ul').forEach(el => new IntersectionObserver((es, o) => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('on'); o.disconnect(); } }), { threshold: 1 }).observe(el));
 </script>
+<script src="assets/mobile-nav.js"></script>
 </body>
 </html>

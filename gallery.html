@@ -541,5 +541,6 @@ $('save').onclick = async () => {
 function updateClock(){ const el=document.getElementById('liveClock'); if(!el) return; el.textContent=new Intl.DateTimeFormat('en-IN',{timeZone:'Asia/Kolkata',hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:true}).format(new Date()); }
 updateClock(); setInterval(updateClock,1000);
 </script>
+<script src="assets/mobile-nav.js"></script>
 </body>
 </html>
