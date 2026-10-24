@@ -35,6 +35,9 @@
   .c-art { flex: 1; background: rgba(255,255,255,.95); border-radius: 10px; min-height: 120px; display: flex; align-items: center; justify-content: center; overflow: hidden; }
   .c-art img { width: 100%; height: 100%; object-fit: contain; display: block; image-rendering: -webkit-optimize-contrast; }
   .c-foot { margin-top: 12px; }
+  .c-head { margin: 6px 0 10px; }
+  .c-head .c-name { font-family: 'Newsreader', serif; font-style: italic; font-size: 22px; letter-spacing: 0; text-transform: none; line-height: 1.15; }
+  .c-wall { margin: 12px 0 0 !important; font-size: 16px !important; opacity: .75; }
   .c-name { font-family: 'JetBrains Mono', monospace; font-size: 13px; letter-spacing: 1px; text-transform: uppercase; }
   .c-msg { font-size: 13px; opacity: .9; margin-top: 3px; line-height: 1.45; }
   .empty { grid-column: 1/-1; text-align: center; color: var(--mut); padding: 60px 0; font-size: 14px; }
@@ -416,9 +419,9 @@ function render() {
   if (!cards.length) { g.innerHTML = '<p class="empty">No cards yet. Grab the pencil and start the wall.</p>'; return; }
   g.innerHTML = cards.map((c, i) => `<article class="card ${mine && mine.id === c.id ? 'mine' : ''}" style="background:${esc(c.color) || CARD_COLORS[0]};--r:${((i * 37) % 5 - 2) * 0.6}deg;animation-delay:${Math.min(i, 12) * 40}ms">
       <div class="c-top"><span>Visitor No. ${String(cards.length - i).padStart(3,'0')}</span><span>${fmt(c.created_at)}</span></div>
-      <p class="c-title">Thishya's wall</p>
+      <div class="c-head"><p class="c-name">${esc(c.name)}</p>${c.note ? `<p class="c-msg">${esc(c.note)}</p>` : ''}</div>
       <div class="c-art"><img src="${esc(c.drawing)}" alt="Doodle by ${esc(c.name)}" loading="lazy"></div>
-      <div class="c-foot"><p class="c-name">${esc(c.name)}</p>${c.note ? `<p class="c-msg">${esc(c.note)}</p>` : ''}</div>
+      <p class="c-title c-wall">Thishya's wall</p>
     </article>`).join('');
 }
 $('shuffle').onclick = () => { cards.sort(() => Math.random() - .5); render(); };
