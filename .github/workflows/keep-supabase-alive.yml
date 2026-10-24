@@ -1,0 +1,19 @@
+name: Keep Supabase awake
+
+# Supabase pauses free projects after ~7 days with no activity.
+# This pings the gallery's database every 3 days so it never pauses.
+on:
+  schedule:
+    - cron: "17 6 */3 * *"
+  workflow_dispatch:
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ping the cards table
+        run: |
+          curl -fsS "https://fbotwzsgpkyfbbluhncp.supabase.co/rest/v1/cards?select=id&limit=1" \
+            -H "apikey: sb_publishable_B3nbTbAx5_wwJrCYbwBRfw_Ii849_NX" \
+            -H "Authorization: Bearer sb_publishable_B3nbTbAx5_wwJrCYbwBRfw_Ii849_NX" \
+            -o /dev/null -w "HTTP %{http_code}\n"
