@@ -663,16 +663,6 @@
 
   .wig { position: relative; }
 
-  /* ── Sticker name ── */
-  .stk { display: inline-block; position: relative; vertical-align: middle; margin-left: .12em; touch-action: none; cursor: grab; z-index: 5; transform: translate(var(--x,0), var(--y,0)) rotate(var(--r,-4deg)); transition: transform .55s cubic-bezier(.34,1.56,.64,1); }
-  .stk.drag { cursor: grabbing; transition: none; }
-  .stk-in { position: relative; display: inline-block; padding: .06em .32em .14em; font-weight: 600; letter-spacing: -2px; color: #1c1917; background: #e6ff8f; border: .1em solid #fff; border-radius: .34em;
-    box-shadow: 0 1px 0 rgba(0,0,0,.06), 0 .1em .18em rgba(0,0,0,.18), 0 .3em .6em rgba(0,0,0,.12); transition: box-shadow .25s; }
-  .stk.drag .stk-in { box-shadow: 0 .25em .5em rgba(0,0,0,.22), 0 .7em 1.4em rgba(0,0,0,.18); }
-  .stk-peel { position: absolute; right: -.1em; bottom: -.1em; width: .5em; height: .5em; border-bottom-right-radius: .34em;
-    background: linear-gradient(135deg, transparent 49%, #f1efe9 50%, #fff 70%, #e7e4dc 100%); box-shadow: -2px -2px 4px rgba(0,0,0,.12); clip-path: polygon(100% 0, 100% 100%, 0 100%); }
-  .stk:hover:not(.drag) { --r: -2deg; }
-  .stk:hover:not(.drag) .stk-peel { width: .62em; height: .62em; }
 </style>
 </head>
 <body>
@@ -769,7 +759,7 @@
 
 
     <!-- content -->
-    <h1 class="hero-title">Hi, i'm <span class="stk" id="stk" aria-label="Thishya"><span class="stk-in">Thishya<i class="stk-peel"></i></span></span></h1>
+    <h1 class="hero-title">Hi, i'm <span class="wig" aria-label="Thishya"><span style="--i:0">T</span><span style="--i:1">h</span><span style="--i:2">i</span><span style="--i:3">s</span><span style="--i:4">h</span><span style="--i:5">y</span><span style="--i:6">a</span></span></h1>
     <p class="hero-mission">
       "Right now I'm building <a href="https://prruf.com/" target="_blank" rel="noopener" class="accent accent-link">Prruf</a> and co-founding <a href="https://wasabie.in/" target="_blank" rel="noopener" class="accent accent-link">Wasabie Studios</a>."
     </p>
@@ -1059,14 +1049,5 @@
 
 </script>
 <script src="assets/mobile-nav.js"></script>
-<script>
-(function(){
-  var st=document.getElementById('stk'); if(!st) return; var sx,sy,on=false;
-  st.addEventListener('pointerdown',function(e){ on=true; sx=e.clientX; sy=e.clientY; st.setPointerCapture(e.pointerId); st.classList.add('drag'); st.style.setProperty('--r','2deg'); });
-  st.addEventListener('pointermove',function(e){ if(!on) return; st.style.setProperty('--x',(e.clientX-sx)+'px'); st.style.setProperty('--y',(e.clientY-sy)+'px'); });
-  function up(){ if(!on) return; on=false; st.classList.remove('drag'); ['--x','--y','--r'].forEach(function(v){ st.style.removeProperty(v); }); }
-  st.addEventListener('pointerup',up); st.addEventListener('pointercancel',up);
-})();
-</script>
 </body>
 </html>
