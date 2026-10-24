@@ -33,7 +33,7 @@
   .c-top { display: flex; justify-content: space-between; align-items: flex-start; font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 1.4px; text-transform: uppercase; opacity: .8; }
   .c-title { font-family: 'Newsreader', serif; font-style: italic; font-size: 22px; margin: 4px 0 10px; }
   .c-art { flex: 1; background: rgba(255,255,255,.95); border-radius: 10px; min-height: 120px; display: flex; align-items: center; justify-content: center; overflow: hidden; }
-  .c-art img { width: 100%; height: 100%; object-fit: contain; display: block; }
+  .c-art img { width: 100%; height: 100%; object-fit: contain; display: block; image-rendering: -webkit-optimize-contrast; }
   .c-foot { margin-top: 12px; }
   .c-name { font-family: 'JetBrains Mono', monospace; font-size: 13px; letter-spacing: 1px; text-transform: uppercase; }
   .c-msg { font-size: 13px; opacity: .9; margin-top: 3px; line-height: 1.45; }
@@ -385,11 +385,11 @@ async function loadCards() {
   return get(LS_CARDS, []);
 }
 function shrink() {
-  const tries = [[480, 300, .8], [480, 300, .6], [400, 250, .55], [320, 200, .5], [320, 200, .35]];
+  const tries = [[cv.width, cv.height, .95], [cv.width, cv.height, .88], [cv.width, cv.height, .8], [480, 300, .85], [480, 300, .7], [320, 200, .5]];
   for (const [w, h, q] of tries) {
     const c = document.createElement('canvas'); c.width = w; c.height = h; c.getContext('2d').drawImage(cv, 0, 0, w, h);
     let d = c.toDataURL('image/webp', q); if (!d.startsWith('data:image/webp')) d = c.toDataURL('image/jpeg', q);
-    if (d.length < 190000) return d;
+    if (d.length < 650000) return d;
   }
   const c = document.createElement('canvas'); c.width = 240; c.height = 150; c.getContext('2d').drawImage(cv, 0, 0, 240, 150); return c.toDataURL('image/jpeg', .4);
 }

@@ -3,7 +3,7 @@ create table if not exists public.cards (
   id uuid primary key default gen_random_uuid(),
   name text not null check (char_length(name) between 1 and 30),
   note text check (char_length(note) <= 80),
-  drawing text not null check (char_length(drawing) < 200000),
+  drawing text not null check (char_length(drawing) < 700000),
   color text not null default '#1f7a47',
   edit_token uuid not null default gen_random_uuid(),
   created_at timestamptz not null default now()
