@@ -36,6 +36,19 @@ details[open] summary .pm{transform:rotate(45deg)}
 @media (max-width:1100px){.grid{grid-template-columns:repeat(3,1fr)}}
 @media (max-width:760px){.grid{grid-template-columns:1fr 1fr}}
 @media (max-width:520px){.grid{grid-template-columns:1fr} summary{font-size:17px;padding:16px 18px} .body{padding:4px 16px 20px}}
+.s2-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;padding-top:20px}
+.s2c{all:unset;cursor:pointer;display:flex;flex-direction:column;gap:10px;border:1.5px solid #1c1917;border-radius:12px;padding:12px;background:#fbfaf7;transition:transform .2s,box-shadow .2s}
+.s2c:hover{transform:translateY(-3px);box-shadow:0 10px 24px rgba(0,0,0,.1)}
+.s2-thumb{aspect-ratio:4/3;border-radius:8px;background:#efebe4 center/cover no-repeat;display:grid;place-items:center;overflow:hidden}
+.s2-ph{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:1.4px;text-transform:uppercase;color:#a8a29e}
+.s2-t{font-size:15px;font-weight:600}
+.s2-v{font-size:12px;color:#78716c}
+.lb{position:fixed;inset:0;z-index:100;background:rgba(20,18,16,.82);display:flex;align-items:center;justify-content:center;padding:24px;backdrop-filter:blur(4px)}
+.lb[hidden]{display:none}
+.lb img{max-width:min(1200px,94vw);max-height:88vh;border-radius:10px;box-shadow:0 20px 60px rgba(0,0,0,.4);background:#fff}
+.lb-ph{color:#f5f5f4;font-size:15px}
+.lb-x{position:absolute;top:16px;right:18px;width:42px;height:42px;border-radius:50%;border:0;background:#f0ffcc;color:#1c1917;font-size:24px;cursor:pointer}
+@media (max-width:760px){.s2-grid{grid-template-columns:1fr}}
 </style></head>
 <body><div class="wrap">
 <a class="back" href="index.html">← Home</a>
@@ -103,5 +116,31 @@ details[open] summary .pm{transform:rotate(45deg)}
 <a class="pdf" href="assets/sprint/sprint-1.pdf" target="_blank">Open the original PDF ↗</a>
 </div>
 </details>
+<details>
+<summary><span>Sprint 2<small>Revisiting the 2031 ecosystem · PhysicsWallah</small></span><span class="pm">+</span></summary>
+<div class="body">
+<div class="s2-grid">
+<button class="s2c" data-i="1" data-src="assets/sprint/sprint-2-1.webp"><span class="s2-thumb"><span class="s2-ph">Image 1</span></span><span class="s2-t">Revisit Stage 2 · Value Network</span><span class="s2-v">2026 → 2031 · roles, currencies, the renewal failure · View ↗</span></button>
+<button class="s2c" data-i="2" data-src="assets/sprint/sprint-2-2.webp"><span class="s2-thumb"><span class="s2-ph">Image 2</span></span><span class="s2-t">Revisit Stage 3 · Action Cards & OPPs</span><span class="s2-v">How each actor’s driver and agency change · View ↗</span></button>
+<button class="s2c" data-i="3" data-src="assets/sprint/sprint-2-3.webp"><span class="s2-thumb"><span class="s2-ph">Image 3</span></span><span class="s2-t">10 Ideas on the STEEP Horizon Scan</span><span class="s2-v">Ideas plotted by sector and grouped into 3 clusters · View ↗</span></button>
+</div>
+</div>
+</details>
 
+<div class="lb" id="lb" hidden><button class="lb-x" aria-label="Close">×</button><img id="lb-img" alt=""><p class="lb-ph" id="lb-ph">Image coming soon</p></div>
+
+
+<script>
+(function(){
+  var lb=document.getElementById('lb'),im=document.getElementById('lb-img'),ph=document.getElementById('lb-ph');
+  document.querySelectorAll('.s2c').forEach(function(c){
+    var src=c.dataset.src,t=c.querySelector('.s2-thumb'),probe=new Image();
+    probe.onload=function(){ t.style.backgroundImage='url('+src+')'; t.innerHTML=''; c.dataset.ok=1; }; probe.src=src;
+    c.addEventListener('click',function(){ if(c.dataset.ok){ im.src=src; im.hidden=false; ph.hidden=true; } else { im.hidden=true; ph.hidden=false; } lb.hidden=false; });
+  });
+  function close(){ lb.hidden=true; }
+  lb.addEventListener('click',function(e){ if(e.target!==im) close(); });
+  document.addEventListener('keydown',function(e){ if(e.key==='Escape') close(); });
+})();
+</script>
 </div></body></html>
