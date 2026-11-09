@@ -679,6 +679,19 @@
   .lw-cat { font-family: 'JetBrains Mono', monospace; font-size: 10.5px; letter-spacing: 1.4px; text-transform: uppercase; color: #a8a29e; margin-bottom: 8px; }
   .lw-desc { font-family: 'Inter', sans-serif; font-size: 15px; color: #57534e; line-height: 1.5; }
   @media (max-width: 900px) { #livework { padding: 16px 20px 30px; } .lw-grid { grid-template-columns: 1fr; gap: 28px; } }
+  /* ── Live Work branded mock previews ── */
+  .lw-mock { display: block; position: relative; overflow: hidden; border: 1px solid #e2dcd2; }
+  .lw-bar { display: flex; align-items: center; gap: 6px; padding: 9px 12px; background: #fff; border-bottom: 1px solid rgba(0,0,0,.08); }
+  .lw-bar i { width: 8px; height: 8px; border-radius: 50%; background: #d9d3c8; }
+  .lw-url { margin-left: 8px; font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: .5px; color: #a8a29e; background: #f3efe9; padding: 3px 10px; border-radius: 6px; }
+  .lw-body { height: calc(100% - 37px); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; text-align: center; padding: 16px; }
+  .lw-brand { font-family: 'DM Sans', sans-serif; font-size: 30px; font-weight: 300; letter-spacing: -.5px; }
+  .lw-brand b { font-weight: 600; }
+  .lw-tag { font-family: 'Newsreader', serif; font-style: italic; font-size: 15px; }
+  .lw-dna { background: linear-gradient(135deg, #fbf6ec 0%, #f3e6c9 100%); }
+  .lw-dna .lw-brand { color: #1c1917; } .lw-dna .lw-brand b { color: #c99a3a; } .lw-dna .lw-tag { color: #9a7b3a; }
+  .lw-oasys { background: linear-gradient(135deg, #e9f0e6 0%, #cfe0cb 100%); }
+  .lw-oasys .lw-brand { color: #223d2a; letter-spacing: 2px; font-weight: 500; font-size: 26px; } .lw-oasys .lw-tag { color: #3f6147; }
 </style>
 </head>
 <body>
@@ -842,39 +855,6 @@
 
   </section>
 
-  <!-- LIVE WORK -->
-  <section id="livework">
-    <div class="section-heading reveal">
-      <span class="section-title">Live Work</span>
-      <span class="section-subtitle">01 / Shipped &amp; Online</span>
-    </div>
-
-    <div class="lw-grid">
-
-      <a href="https://prruf.com" target="_blank" rel="noopener" class="lw-card reveal">
-        <div class="lw-shot"><img src="assets/prruf-hero.webp" alt="Prruf landing site" loading="lazy"></div>
-        <div class="lw-head"><span class="lw-title">Prruf</span><span class="lw-live">Live <span>&#8599;</span></span></div>
-        <p class="lw-cat">Own Product &middot; Landing Site</p>
-        <p class="lw-desc">The Prruf product site. Get early access.</p>
-      </a>
-
-      <a href="#" class="lw-card reveal" style="transition-delay:.05s" data-needs-link>
-        <div class="lw-shot"><span class="lw-ph">MyDNAPedia</span></div>
-        <div class="lw-head"><span class="lw-title">MyDNAPedia</span><span class="lw-live">Live <span>&#8599;</span></span></div>
-        <p class="lw-cat">DNA Wellness Testing</p>
-        <p class="lw-desc">Website &amp; growth engagement.</p>
-      </a>
-
-      <a href="#" class="lw-card reveal" style="transition-delay:.1s" data-needs-link>
-        <div class="lw-shot"><span class="lw-ph">OASYS</span></div>
-        <div class="lw-head"><span class="lw-title">OASYS</span><span class="lw-live">Live <span>&#8599;</span></span></div>
-        <p class="lw-cat">Dakar &middot; Site Rebuild</p>
-        <p class="lw-desc">Client site rebuild, EN / FR.</p>
-      </a>
-
-    </div>
-  </section>
-
   <!-- PROJECTS -->
   <section id="projects">
     <div class="section-heading reveal">
@@ -924,6 +904,46 @@
 
     </div>
   </section>
+
+  <!-- LIVE WORK -->
+  <section id="livework">
+    <div class="section-heading reveal">
+      <span class="section-title">Live Work</span>
+      <span class="section-subtitle">Shipped &amp; Online</span>
+    </div>
+
+    <div class="lw-grid">
+
+      <a href="https://prruf.com" target="_blank" rel="noopener" class="lw-card reveal">
+        <div class="lw-shot"><img src="assets/prruf-hero.webp" alt="Prruf landing site" loading="lazy"></div>
+        <div class="lw-head"><span class="lw-title">Prruf</span><span class="lw-live">Live <span>&#8599;</span></span></div>
+        <p class="lw-cat">Own Product &middot; Landing Site</p>
+        <p class="lw-desc">The Prruf product site. Get early access.</p>
+      </a>
+
+      <a href="#" class="lw-card reveal" style="transition-delay:.05s" data-needs-link>
+        <div class="lw-shot lw-mock lw-dna">
+          <div class="lw-bar"><i></i><i></i><i></i><span class="lw-url">mydnapedia.com</span></div>
+          <div class="lw-body"><span class="lw-brand">MyDNA<b>Pedia</b></span><span class="lw-tag">It's all in your genes.</span></div>
+        </div>
+        <div class="lw-head"><span class="lw-title">MyDNAPedia</span><span class="lw-live">Live <span>&#8599;</span></span></div>
+        <p class="lw-cat">DNA Wellness Testing</p>
+        <p class="lw-desc">Website &amp; growth engagement.</p>
+      </a>
+
+      <a href="#" class="lw-card reveal" style="transition-delay:.1s" data-needs-link>
+        <div class="lw-shot lw-mock lw-oasys">
+          <div class="lw-bar"><i></i><i></i><i></i><span class="lw-url">oasys.sn</span></div>
+          <div class="lw-body"><span class="lw-brand">OASYS</span><span class="lw-tag">Technical expertise, delivered.</span></div>
+        </div>
+        <div class="lw-head"><span class="lw-title">OASYS</span><span class="lw-live">Live <span>&#8599;</span></span></div>
+        <p class="lw-cat">Dakar &middot; Site Rebuild</p>
+        <p class="lw-desc">Client site rebuild, EN / FR.</p>
+      </a>
+
+    </div>
+  </section>
+
 
   <!-- FOOTER -->
   <footer id="footer">
