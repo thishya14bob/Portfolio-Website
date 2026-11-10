@@ -1,10 +1,11 @@
 name: Keep Supabase awake
 
-# Supabase pauses free projects after ~7 days with no activity.
-# This pings the gallery's database every 3 days so it never pauses.
+# Supabase pauses free projects after ~7 days with no database activity.
+# This pings the gallery's database every day (with retries) so it never
+# goes idle long enough to pause. Each run only reads one card id.
 on:
   schedule:
-    - cron: "17 6 */3 * *"
+    - cron: "17 6 * * *"   # daily, 06:17 UTC
   workflow_dispatch:
 
 jobs:
@@ -13,7 +14,16 @@ jobs:
     steps:
       - name: Ping the cards table
         run: |
-          curl -fsS "https://fbotwzsgpkyfbbluhncp.supabase.co/rest/v1/cards?select=id&limit=1" \
-            -H "apikey: sb_publishable_B3nbTbAx5_wwJrCYbwBRfw_Ii849_NX" \
-            -H "Authorization: Bearer sb_publishable_B3nbTbAx5_wwJrCYbwBRfw_Ii849_NX" \
-            -o /dev/null -w "HTTP %{http_code}\n"
+          URL="https://fbotwzsgpkyfbbluhncp.supabase.co/rest/v1/cards?select=id&limit=1"
+          KEY="sb_publishable_B3nbTbAx5_wwJrCYbwBRfw_Ii849_NX"
+          ok=0
+          for i in 1 2 3 4 5; do
+            code=$(curl -s -o /dev/null -w "%{http_code}" \
+              -H "apikey: $KEY" -H "Authorization: Bearer $KEY" "$URL" || echo 000)
+            echo "attempt $i -> HTTP $code"
+            if [ "$code" = "200" ]; then ok=1; break; fi
+            sleep 20
+          done
+          if [ "$ok" != "1" ]; then
+            echo "::warning::keep-alive could not reach the database (last code $code)"
+          fi
