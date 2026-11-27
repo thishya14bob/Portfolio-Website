@@ -572,6 +572,25 @@
   .ab-pic { position: relative; }
   .ab-pic svg.ab-wire { position: absolute; inset: 8px; width: calc(100% - 16px); height: calc(100% - 16px); }
   .ab-pic img.contain { object-fit: contain; padding: 8px; }
+  /* ── Standard main nav (replaces page TOC) ── */
+  .sidebar-name { font-family: 'DM Sans', sans-serif; font-weight: 300; font-size: 34px; line-height: 1.1; letter-spacing: -0.8px; color: #1c1917; margin: 0 0 6px; }
+  .sidebar-tagline { font-family: 'Inter', sans-serif; font-size: 10px; font-weight: 500; letter-spacing: 1.6px; text-transform: uppercase; color: #78716c; margin-bottom: 14px; }
+  .sidebar-bio { font-family: 'Inter', sans-serif; font-size: 13px; color: #57534e; line-height: 1.7; margin-bottom: 20px; }
+  .sidebar-nav { display: flex; flex-direction: column; gap: 6px; margin-top: 24px; }
+  .nav-label { font-family: 'DM Sans', sans-serif; font-weight: 500; font-size: 11px; letter-spacing: 1.1px; text-transform: uppercase; color: #78716c; padding-bottom: 6px; }
+  .nav-link { display: flex; align-items: center; justify-content: space-between; padding: 10px 14px; border-radius: 12px; text-decoration: none; transition: background .2s; }
+  .nav-link .nav-link-text { font-size: 12px; color: #1c1917; display: flex; align-items: center; gap: 6px; }
+  .nav-link .nav-arrow { font-size: 12px; color: #a8a29e; font-family: 'JetBrains Mono', monospace; }
+  .nav-link.active { background: #1c1917; }
+  .nav-link.active .nav-link-text, .nav-link.active .nav-arrow { color: #fff; }
+  .nav-link:not(.active):hover { background: rgba(0,0,0,.06); }
+  .live-dot { width: 6px; height: 6px; background: #f43f5e; border-radius: 50%; display: inline-block; }
+  .outbound { margin-top: 24px; }
+  .outbound-label { font-size: 11px; letter-spacing: 1.1px; text-transform: uppercase; color: #78716c; margin-bottom: 10px; }
+  .outbound-links { display: flex; flex-wrap: wrap; gap: 8px; }
+  .outbound-links a { font-size: 12px; color: #44403c; text-decoration: none; }
+  .outbound-links a:hover { color: #1c1917; }
+  .outbound-links a.underlined { text-decoration: underline; text-decoration-color: #a8a29e; }
 </style>
 </head>
 <body>
@@ -581,17 +600,40 @@
 <!-- SIDEBAR -->
 <nav id="sidebar">
   <div class="sidebar-top">
-    <a href="index.html" class="back-link">
-      <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-        <path d="M9 11L5 7l4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-      </svg>
-      Home
-    </a>
-    <p class="toc-label">Table of Contents</p>
-    <ul class="toc-list">
-      <li><a href="#me" class="active">01. Hello <span class="toc-arrow">→</span></a></li>
-      <li><a href="#little">02. Little things <span class="toc-arrow">→</span></a></li>
-    </ul>
+    <div class="sidebar-name">Thishya Mannur</div>
+    <div class="sidebar-tagline">"Product Designer and Builder, by accident."</div>
+    <div class="sidebar-bio">Skater. Traveler. All in or all out.</div>
+
+    <nav class="sidebar-nav">
+      <div class="nav-label">Explore</div>
+      <a href="index.html#projects" class="nav-link">
+        <span class="nav-link-text">01. Work</span>
+        <span class="nav-arrow">→</span>
+      </a>
+      <a href="about.html" class="nav-link active">
+        <span class="nav-link-text">02. About Me</span>
+        <span class="nav-arrow">→</span>
+      </a>
+      <a href="gallery.html" class="nav-link">
+        <span class="nav-link-text">03. Visitor Gallery <span class="live-dot"></span></span>
+        <span class="nav-arrow">→</span>
+      </a>
+      <!-- SPRINT LINK: delete these 4 lines to hide -->
+      <a href="sprint.html" class="nav-link">
+        <span class="nav-link-text">04. Sprint</span>
+        <span class="nav-arrow">→</span>
+      </a>
+    </nav>
+
+    <div class="outbound">
+      <div class="outbound-label">Outbound</div>
+      <div class="outbound-links">
+        <a href="mailto:thishya14@gmail.com">Email,</a>
+        <a href="https://www.linkedin.com/in/thishya-mannur" target="_blank">LinkedIn,</a>
+        <a href="https://github.com/thishya14bob" target="_blank">GitHub,</a>
+        <a href="cv/Thishya_Mannur_Resume.pdf" target="_blank" class="underlined">Resume</a>
+      </div>
+    </div>
   </div>
   <div class="sidebar-bottom">
     <div class="clock-wrap">
